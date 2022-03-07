@@ -72,6 +72,7 @@ const CategoryBox = styled.div`
     border: 1px solid #dcdcdc;
     padding: 4px;
     margin-right: 4px;
+    border-radius: 10px;
   }
   & input:checked + label {
     background-color: #ececec;
