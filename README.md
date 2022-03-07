@@ -12,7 +12,7 @@
 프로젝트 설명 (기획서에 있는 문제 인식 + 서비스 기획 내용 잘 정리해서 적기)
 
 ## URL
-사이트 : 주소
+사이트 : http://finalproject9.s3-website.ap-northeast-2.amazonaws.com/category
 YOUTUBE : 발표영상 유튜브 주소
 
 # 사용기술
