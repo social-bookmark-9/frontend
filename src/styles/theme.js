@@ -1,9 +1,15 @@
 const fontSizes = {
-  xs: "12px",
-  sm: "14px",
-  md: "16px",
-  lg: "20px",
-  xl: "24px",
+  12: "12px",
+  13: "13px",
+  14: "14px",
+  16: "16px",
+  18: "18px",
+  20: "20px",
+  22: "22px",
+  24: "24px",
+  28: "28px",
+  34: "34px",
+  50: "50px",
 };
 
 const fontWeight = {
@@ -12,9 +18,16 @@ const fontWeight = {
   regular: 400,
 };
 
+// 번호가 높을수록 진한 색
 const colors = {
   black: "#000000",
   white: "#ffffff",
+  gray06: "#353C49",
+  gray05: "#505866",
+  gray04: "#B1B8C0",
+  gray03: "#d2d6da",
+  gray02: "#f2f3f4",
+  gray01: "#f2f4f6",
 };
 
 const deviceSizes = {
