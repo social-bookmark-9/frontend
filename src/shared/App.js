@@ -1,16 +1,23 @@
 import './App.css';
 import { Route, Routes } from "react-router-dom";
+
 import Login from '../pages/Login';
 import OAuthRedirectHandler from './OAuthRedirectHandler';
 
-function App() {
+import UserNickname from "../components/UserNickname";
+import UserCategory from "../components/UserCategory";
+
+
+function App(props) {
   return (
-    <div className="App">
+    <React.Fragment>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<UserNickname />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/category" element={<UserCategory />} />
         {/* <Route path="/oauth/callback/kakao" element={OAuthRedirectHandler} /> */}
       </Routes>
-    </div>
+    </React.Fragment>
   );
 }
 
