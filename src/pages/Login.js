@@ -2,9 +2,8 @@ import { useNavigate } from "react-router";
 import Button from "../elements/Button";
 import Title from "../elements/Title";
 import styled from "styled-components";
-import { KAKAO_AUTH_URL, GOOGLE_CLIENT_ID, TEST_ID } from "../shared/OAuth";
+import { KAKAO_AUTH_URL, GOOGLE_AUTH_URL, TEST_ID } from "../shared/OAuth";
 import { GoogleLogin } from "react-google-login";
-import { Link } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -21,20 +20,27 @@ const Login = () => {
         <Title text={"문구 영역만 잡기"} />
       </Topdiv>
       <Bottomdiv>
-          <a href={KAKAO_AUTH_URL}>
+        <a href={KAKAO_AUTH_URL}>
           <Button
             name={"카카오 로그인"}
             width={"60%"}
             margin={"10px 20vw 10px 20vw"}
           />
         </a>
+        <a href={GOOGLE_AUTH_URL}>
+          <Button
+            name={"구글 로그인"}
+            width={"60%"}
+            margin={"10px 20vw 10px 20vw"}
+          />
+        </a>
         
-        <GoogleLogin
-          clientId={GOOGLE_CLIENT_ID}
+        {/* <GoogleLogin
+          clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
           render={(renderProps) => (
             <Button
               onClick={renderProps.onClick}
-              name={"구글 로그인"}
+              name={"react-google-login"}
               width={"60%"}
               margin={"10px 20vw 10px 20vw"}
             />
@@ -43,13 +49,8 @@ const Login = () => {
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
           cookiePolicy={'single_host_origin'}
-        />
-
-        <Button name={"구글 로그인"}
-          width={"60%"}
-          onClick={nextStep}
-          margin={"10px 20vw 10px 20vw"}
-        />
+        /> */}
+        
       </Bottomdiv>
     </>
   )
