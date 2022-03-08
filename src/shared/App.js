@@ -1,7 +1,8 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
 import "./App.css";
-
+import { Route, Routes } from "react-router-dom";
+import Login from "../pages/Login";
+// import OAuthRedirectHandler from './OAuthRedirectHandler';
 import UserNickname from "../components/UserNickname";
 import UserCategory from "../components/UserCategory";
 
