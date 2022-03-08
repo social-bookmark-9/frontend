@@ -1,13 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
+import Button from "../elements/Button";
 
 const UserNickname = props => {
   const navigate = useNavigate();
   return (
     <React.Fragment>
-      <Container style={{ padding: "20px", margin: "0px" }}>
-        <p style={{ margin: "0px" }}>뒤로가기</p>
+      <Container>
+        <div style={{padding: "16px"}}>
+        <p style={{ margin: "0px", fontSize: "24px" }}>&#8249;</p>
         <div>
           <h3>
             내가 가진 멋진 닉네임을
@@ -15,18 +17,18 @@ const UserNickname = props => {
             자랑해주세요
           </h3>
         </div>
-        <div style={{ width: "100%" }}>
+        <div>
           <UserInput placeholder="닉네임을 입력해주세요" />
-          <p style={{ textAlign: "right", margin: "4px 0px" }}>0/6</p>
+          <p style={{ textAlign: "right", padding: "4px 0px" }}>0/6</p>
         </div>
-        <div style={{ position: "fixed", bottom: 0 }}>
-          <UserBtn
+        </div>
+        <div style={{ position: "fixed", bottom: 0, width: "fit-content" }}>
+          <Button
             onClick={() => {
               navigate("/category");
             }}
-          >
-            다음
-          </UserBtn>
+            name="다음"
+          />
         </div>
       </Container>
     </React.Fragment>
@@ -37,15 +39,16 @@ const UserNickname = props => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   box-sizing: border-box;
   width: 100%;
+  height: 100%;
 `;
 
 const UserInput = styled.input`
   border: none;
   border-bottom: 1px solid #c7c7c7;
   padding: 16px;
+  width: max-content;
   &::placeholder {
     color: #e3e3e3;
   }
@@ -53,11 +56,7 @@ const UserInput = styled.input`
     outline: none;
   }
 `;
-const UserBtn = styled.button`
-  width: 100%;
-  box-sizing: border-box;
-  height: 40px;
-`;
+
 // default props 작성 위치
 UserNickname.defaultProps = {};
 
