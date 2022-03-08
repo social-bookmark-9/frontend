@@ -14,7 +14,11 @@ const Button = ({onClick, name}) => {
 const StyledButton = styled.button`
     background-color: black;
     color: white;
-    padding: 0.5em 1em;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    box-sizing: border-box;
+
 `;
 
 // export
