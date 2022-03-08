@@ -1,18 +1,17 @@
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 import Button from "../elements/Button";
 import Title from "../elements/Title";
 import styled from "styled-components";
-import { KAKAO_AUTH_URL, GOOGLE_AUTH_URL, TEST_ID } from "../shared/OAuth";
-import { GoogleLogin } from "react-google-login";
+import { KAKAO_AUTH_URL, GOOGLE_AUTH_URL } from "../shared/OAuth";
 
 const Login = () => {
-  const navigate = useNavigate();
-  const nextStep = () => {
-    navigate('/registerFirst')
-  }
-  const responseGoogle = (response) => {
-    console.log(response);
-  }
+  // const navigate = useNavigate();
+  // const nextStep = () => {
+  //   navigate('/registerFirst')
+  // }
+  // const responseGoogle = (response) => {
+  //   console.log(response);
+  // }
 
   return (
     <>

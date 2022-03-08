@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
-import styled from "styled-components";
+// import styled from "styled-components";
 
 const Main = props => {
   const navigate = useNavigate();

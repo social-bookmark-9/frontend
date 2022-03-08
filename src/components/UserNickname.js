@@ -10,7 +10,7 @@ const UserNickname = props => {
   const navigate = useNavigate();
   const [words, setWords] = useState(0);
   const [nickname, setNickname] = useState("");
-  const [favorites, setFavorites] = useState([]);
+  // const [favorites, setFavorites] = useState([]);
   const [isFocus, setIsFocus] = useState(false);
 
   const favorList = [
