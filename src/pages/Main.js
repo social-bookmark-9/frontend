@@ -13,7 +13,6 @@ const Main = props => {
         }}
         name="로그인 페이지 확인"
       />
-
       <Button
         _onClick={() => {
           navigate("user/nickname");

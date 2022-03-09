@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router";
 import styled from "styled-components";
 import { FlexboxColumn } from "../styles/flexbox";
 import Button from "../elements/Button";
-import UserTitle from "../elements/Box";
+import Title from "../elements/Title";
 import Favorite from "../components/Favorite";
 
 const UserFavorites = props => {
@@ -13,7 +13,12 @@ const UserFavorites = props => {
   const [isChecked, setIsChecked] = useState(false);
   const [checkedItems, setCheckedItems] = useState(new Set());
 
-  console.log(location.state);
+  const userInfo = {
+    nickname: location.state,
+    favorites: checkedItems,
+  };
+
+  console.log(userInfo);
 
   const favoritesList = [
     "커리어",
@@ -30,12 +35,9 @@ const UserFavorites = props => {
     "과학",
   ];
 
-  console.log(checkedItems);
-
   const handleChecked = e => {
     setIsChecked(!isChecked);
     handleCheckedItems(e.target.parentNode, e.target.value, e.target.checked);
-    console.log(e.target.parentNode);
   };
 
   const handleCheckedItems = (box, value, isChecked) => {
@@ -55,14 +57,19 @@ const UserFavorites = props => {
     <React.Fragment>
       <UserBox>
         <UserArea>
-          <UserTitle textAlign="center" padding="114px 0px 101px 0px">
-            <h3>
+          <Title
+            textAlign="center"
+            padding="114px 0px 101px 0px"
+            _fontSize={({ theme }) => theme.fontSizes.font24}
+            lineHeight="32px"
+          >
+            <h1>
               관심있는 분야를
               <br />
               선택해주세요
-            </h3>
+            </h1>
             <p>최대 3개까지 선택 가능해요</p>
-          </UserTitle>
+          </Title>
           <FavoritesBox>
             <Favorites onChange={handleChecked}>
               {favoritesList.map((favor, idx) => (

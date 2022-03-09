@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import UserNickname from "../pages/UserNickname";
 import UserFavorites from "../pages/UserFavorites";
 import Main from "../pages/Main";
+import ArticleList from "../pages/ArticleList";
 
 function App(props) {
   return (
@@ -14,6 +15,7 @@ function App(props) {
         <Route path="/login" element={<Login />} />
         <Route path="/user/nickname" element={<UserNickname />} />
         <Route path="/user/favorites" element={<UserFavorites />} />
+        <Route path="/articles" element={<ArticleList />} />
         {/* <Route path="/oauth/callback/kakao" element={OAuthRedirectHandler} /> */}
       </Routes>
     </React.Fragment>

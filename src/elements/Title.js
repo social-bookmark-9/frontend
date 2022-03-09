@@ -1,16 +1,43 @@
-import styled from "styled-components";
+import React from "react";
+import styled, { css } from "styled-components";
 
-const Title = ({text}) => {
-    return (
-        <H1>{text}</H1>
-    );
-}
+const Title = props => {
+  const { children, textAlign, padding, _fontSize, lineHeight } = props;
 
-// 스타일 컴포넌트 작성 위치
-const H1 = styled.h1`
-    color: black;
-    margin: auto;
-    text-align: center;
-`
+  const styles = { textAlign, padding, _fontSize, lineHeight };
+
+  return <TitleBox {...styles}>{children}</TitleBox>;
+};
+
+Title.defaultProps = {
+  textAlign: "",
+  padding: "",
+  _fontSize: "",
+  lineHeight: "",
+};
+
+const TitleBox = styled.div`
+  ${({ theme }) => {
+    const { fontWeight, fontSizes, colors } = theme;
+    return css`
+      padding: ${props => props.padding};
+      text-align: ${props => props.textAlign};
+      & h1 {
+        font-size: ${props => props._fontSize};
+        font-weight: ${fontWeight.semiBold};
+        color: ${colors.fontColor04};
+        line-height: ${props => props.lineHeight};
+        letter-spacing: 0.0038em;
+      }
+      & p {
+        font-size: ${fontSizes.font16};
+        line-height: 22px;
+        color: ${colors.fontColor02};
+        padding-top: 15px;
+        letter-spacing: -0.0024em;
+      }
+    `;
+  }}
+`;
 
 export default Title;

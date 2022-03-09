@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { FlexboxColumn } from "../styles/flexbox";
 import Button from "../elements/Button";
-import UserTitle from "../elements/Box";
+import Title from "../elements/Title";
 
 const UserNickname = props => {
   const navigate = useNavigate();
@@ -24,13 +24,16 @@ const UserNickname = props => {
     <React.Fragment>
       <UserBox>
         <UserArea>
-          <UserTitle>
-            <h3>
+          <Title
+            _fontSize={({ theme }) => theme.fontSizes.font24}
+            lineHeight="32px"
+          >
+            <h1>
               내가 가진 멋진 닉네임을
               <br />
               자랑해주세요
-            </h3>
-          </UserTitle>
+            </h1>
+          </Title>
           <InputBox>
             <UserInput
               placeholder="닉네임을 입력해주세요"
