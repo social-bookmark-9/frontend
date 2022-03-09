@@ -16,10 +16,10 @@ const Main = props => {
       </button>
       <button
         onClick={() => {
-          navigate("/information");
+          navigate("user/nickname");
         }}
       >
-        유저 정보
+        유저 닉네임
       </button>
     </React.Fragment>
   );

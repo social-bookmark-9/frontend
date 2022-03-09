@@ -4,8 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import Login from "../pages/Login";
 // import OAuthRedirectHandler from './OAuthRedirectHandler';
 import UserNickname from "../components/UserNickname";
+import UserFavorites from "../components/UserFavorites";
 import Main from "../pages/Main";
-
 
 function App(props) {
   return (
@@ -13,7 +13,8 @@ function App(props) {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/information" element={<UserNickname />} />
+        <Route path="/user/nickname" element={<UserNickname />} />
+        <Route path="/user/favorites" element={<UserFavorites />} />
         {/* <Route path="/oauth/callback/kakao" element={OAuthRedirectHandler} /> */}
       </Routes>
     </React.Fragment>
@@ -21,7 +22,6 @@ function App(props) {
 }
 
 export default App;
-
 
 // import React from "react";
 // import { Route, Routes } from "react-router-dom";
