@@ -1,15 +1,15 @@
 const fontSizes = {
-  12: "12px",
-  13: "13px",
-  14: "14px",
-  16: "16px",
-  18: "18px",
-  20: "20px",
-  22: "22px",
-  24: "24px",
-  28: "28px",
-  34: "34px",
-  50: "50px",
+  font12: "12px",
+  font13: "13px",
+  font14: "14px",
+  font16: "16px",
+  font18: "18px",
+  font20: "20px",
+  font22: "22px",
+  font24: "24px",
+  font28: "28px",
+  font34: "34px",
+  font50: "50px",
 };
 
 const fontWeight = {
