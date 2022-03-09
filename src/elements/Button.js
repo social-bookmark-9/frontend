@@ -26,7 +26,7 @@ const StyledButton = styled.button`
   margin: ${props => props.margin || "20px 0px"};
   width: ${props => props.width || "100vw"};
   height: ${props => props.height || "10vh"};
-  font-size: ${props => props._fontSize}
+  font-size: ${props => props._fontSize};
 `;
 
 // export

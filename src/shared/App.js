@@ -2,9 +2,8 @@ import React from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Login from "../pages/Login";
-// import OAuthRedirectHandler from './OAuthRedirectHandler';
-import UserNickname from "../components/UserNickname";
-import UserFavorites from "../components/UserFavorites";
+import UserNickname from "../pages/UserNickname";
+import UserFavorites from "../pages/UserFavorites";
 import Main from "../pages/Main";
 
 function App(props) {
