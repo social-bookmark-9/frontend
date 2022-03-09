@@ -24,13 +24,6 @@ const UserNickname = props => {
     <React.Fragment>
       <UserBox>
         <UserArea>
-          <BackButton
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            &#8249;
-          </BackButton>
           <UserTitle>
             <h3>
               내가 가진 멋진 닉네임을
@@ -44,17 +37,18 @@ const UserNickname = props => {
               maxLength={6}
               onKeyUp={handleKeyUp}
             />
-            <p style={{ textAlign: "right", padding: "4px 0px" }}>{words}/6</p>
+            <InputCheck>{words}/6</InputCheck>
           </InputBox>
         </UserArea>
         <ButtonBox>
           <Button
             _onClick={() => {
-              navigate("/user/favorites", {state: nickname});
+              navigate("/user/favorites", { state: nickname });
             }}
             name="다음"
             margin="0px"
-            _fontSize={({theme}) => theme.fontSizes.font20}
+            _fontSize={({ theme }) => theme.fontSizes.font20}
+            height="63px"
           />
         </ButtonBox>
       </UserBox>
@@ -71,11 +65,7 @@ const UserBox = styled.div`
 `;
 
 const UserArea = styled.div`
-  padding: 16px;
-`;
-
-const BackButton = styled.p`
-  font-size: 40px;
+  padding: 65px 24px;
 `;
 
 const InputBox = styled.div`
@@ -85,15 +75,25 @@ const InputBox = styled.div`
 const UserInput = styled.input`
   border: none;
   border-bottom: 1px solid #c7c7c7;
-  padding: 16px;
+  border-radius: 0px;
+  padding: 12px;
   width: 100%;
   &::placeholder {
-    color: #e3e3e3;
+    color: ${({ theme }) => theme.colors.grayColor03};
     font-size: ${({ theme }) => theme.fontSizes.font16};
   }
   &:focus {
     outline: none;
   }
+`;
+
+const InputCheck = styled.p`
+  text-align: right;
+  padding: 4px 0px;
+  font-size: ${({ theme }) => theme.fontSizes.font14};
+  color: ${({ theme }) => theme.colors.fontColor04};
+  line-height: 18px;
+  letter-spacing: -0.0008em;
 `;
 
 const ButtonBox = styled.div`

@@ -23,13 +23,16 @@ const TitleBox = styled.div`
       & h3 {
         font-size: ${fontSizes.font24};
         font-weight: ${fontWeight.semiBold};
-        color: ${colors.gray06};
-        line-height: 1.2;
+        color: ${colors.fontColor04};
+        line-height: 32px;
+        letter-spacing: 0.0038em;
       }
       & p {
         font-size: ${fontSizes.font16};
-        color: ${colors.gray04};
-        padding: 8px;
+        line-height: 22px;
+        color: ${colors.fontColor02};
+        padding-top: 15px;
+        letter-spacing: -0.0024em;
       }
     `;
   }}

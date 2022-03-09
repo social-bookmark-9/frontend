@@ -1,26 +1,25 @@
 import React from "react";
 import { useNavigate } from "react-router";
-// import styled from "styled-components";
+import Button from "../elements/Button";
 
 const Main = props => {
   const navigate = useNavigate();
 
   return (
     <React.Fragment>
-      <button
-        onClick={() => {
+      <Button
+        _onClick={() => {
           navigate("/login");
         }}
-      >
-        로그인
-      </button>
-      <button
-        onClick={() => {
+        name="로그인 페이지 확인"
+      />
+
+      <Button
+        _onClick={() => {
           navigate("user/nickname");
         }}
-      >
-        유저 닉네임
-      </button>
+        name="유저 닉네임 페이지 확인"
+      />
     </React.Fragment>
   );
 };
