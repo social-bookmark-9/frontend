@@ -60,8 +60,9 @@ const UserFavorites = props => {
           <Title
             textAlign="center"
             padding="114px 0px 101px 0px"
-            _fontSize={({ theme }) => theme.fontSizes.font24}
+            _titleSize={({ theme }) => theme.fontSizes.font24}
             lineHeight="32px"
+            _subtitleSize={({ theme }) => theme.fontSizes.font16}
           >
             <h1>
               관심있는 분야를

@@ -19,7 +19,7 @@ const Login = () => {
         <Title
           textAlign="center"
           padding="153px 0px"
-          _fontSize={({ theme }) => theme.fontSizes.font28}
+          _titleSize={({ theme }) => theme.fontSizes.font28}
           lineHeight="36px"
         >
           <h1>

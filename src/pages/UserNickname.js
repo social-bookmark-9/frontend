@@ -25,7 +25,7 @@ const UserNickname = props => {
       <UserBox>
         <UserArea>
           <Title
-            _fontSize={({ theme }) => theme.fontSizes.font24}
+            _titleSize={({ theme }) => theme.fontSizes.font24}
             lineHeight="32px"
           >
             <h1>
