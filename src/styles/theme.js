@@ -22,6 +22,7 @@ const fontWeight = {
 const colors = {
   black: "#000000",
   white: "#ffffff",
+  kakao: "#FEEB00",
   grayColor07: "#353C49",
   grayColor06: "#505866",
   grayColor05: "#B1B8C0",
