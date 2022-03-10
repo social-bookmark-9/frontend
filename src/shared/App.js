@@ -1,11 +1,14 @@
 import React from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Login from "../pages/Login";
-import UserNickname from "../pages/UserNickname";
-import UserFavorites from "../pages/UserFavorites";
-import Main from "../pages/Main";
-import ArticleList from "../pages/ArticleList";
+import {
+  Login,
+  UserNickname,
+  UserFavorites,
+  Main,
+  ArticleList,
+  Article,
+} from "../pages";
 
 function App(props) {
   return (
@@ -16,6 +19,7 @@ function App(props) {
         <Route path="/user/nickname" element={<UserNickname />} />
         <Route path="/user/favorites" element={<UserFavorites />} />
         <Route path="/articles" element={<ArticleList />} />
+        <Route path="/article" element={<Article />} />
         {/* <Route path="/oauth/callback/kakao" element={OAuthRedirectHandler} /> */}
       </Routes>
     </React.Fragment>
@@ -23,27 +27,3 @@ function App(props) {
 }
 
 export default App;
-
-// import React from "react";
-// import { Route, Routes } from "react-router-dom";
-// // import { ThemeProvider } from "styled-components";
-// import "./App.css";
-// // import theme from "../styles/theme";
-
-// import UserNickname from "../components/UserNickname";
-// import UserCategory from "../components/UserCategory";
-
-// function App() {
-//   return (
-//     <React.Fragment>
-//       {/* <ThemeProvider theme={theme}> */}
-//         <Routes>
-//           <Route path="/" element={<UserNickname />} />
-//           <Route path="/category" element={<UserCategory />} />
-//         </Routes>
-//       {/* </ThemeProvider> */}
-//     </React.Fragment>
-//   );
-// }
-
-// export default App;

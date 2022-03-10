@@ -19,6 +19,12 @@ const Main = props => {
         }}
         name="유저 닉네임 페이지 확인"
       />
+      <Button
+        _onClick={() => {
+          navigate("/articles");
+        }}
+        name="아티클 폴더 페이지 확인"
+      />
     </React.Fragment>
   );
 };
