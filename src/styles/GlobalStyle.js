@@ -20,6 +20,7 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.colors.black};
     background-color: ${({ theme }) => theme.colors.white};
     font-family: 'SUIT-Regular', sans-serif;
+    
   }
 
   a {

@@ -14,7 +14,11 @@ const Favorite = props => {
           value={favoriteName}
         />
         <FavoriteLabel htmlFor={idx}>
-          <img src={`/images/${idx}.png`} width={"20px"} alt={`icon${idx}`} />
+          <img
+            src={`/images/icon${idx}.png`}
+            width={"20px"}
+            alt={`icon${idx}`}
+          />
           {favoriteName}
         </FavoriteLabel>
       </InputBox>
