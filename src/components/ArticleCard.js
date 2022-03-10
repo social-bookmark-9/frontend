@@ -1,60 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
+import DesignObj from "../elements/DesignObj";
+import Label from "../elements/Label";
 
 import Title from "../elements/Title";
 
 const ArticleCard = props => {
   const navigate = useNavigate();
-  const [isImage, setIsImage] = useState(false);
-
-  if (isImage) {
-    return (
-      <React.Fragment>
-        {/* 사진이 있는 아티클 경우 - 읽기 전 */}
-        <ImageArticle
-          onClick={() => {
-            navigate("/article");
-          }}
-        >
-          <div style={{ position: "absolute", top: "28px", right: "28px" }}>
-            <img
-              src="/images/bookmarkOff.png"
-              alt="bookmark"
-              width="24px"
-              height="24px"
-            />
-          </div>
-          <div style={{}}></div>
-          <div style={{ display: "flex", position: "absolute", top: "37.5%" }}>
-            <div>커리어</div>
-            <div>IT</div>
-          </div>
-          <div style={{ width: "270px", position: "absolute", bottom: "28px" }}>
-            <Title
-              _titleSize={({ theme }) => theme.fontSizes.font18}
-              _subtitleSize={({ theme }) => theme.fontSizes.font14}
-              lineHeight="24px"
-            >
-              <h1 style={{ color: "#ffffff" }}>
-                React.memo() 현명하게 사용하기
-              </h1>
-              <p
-                style={{
-                  paddingTop: "8px",
-                  color: "#ffffff",
-                  opacity: 0.6,
-                  lineHeight: "18px",
-                }}
-              >
-                유저들은 반응이 빠른 UI를 선호한다. 100ms 미만의 UI 응답...
-              </p>
-            </Title>
-          </div>
-        </ImageArticle>
-      </React.Fragment>
-    );
-  }
 
   return (
     <React.Fragment>
@@ -150,6 +103,48 @@ const ArticleCard = props => {
           </Title>
         </div>
       </ImageArticle>
+      {/* 사진이 없는 아티클 경우 - 내 아티클 리스트 */}
+      <DefaultArticle
+        onClick={() => {
+          navigate("/article");
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <DesignObj />
+          <Label _label="big" text="안 읽은지 7일째.." />
+        </div>
+
+        <div style={{ width: "270px", position: "absolute", bottom: "28px" }}>
+          <div style={{ display: "flex", paddingBottom: "8px" }}>
+            <Label text="커리어" />
+            <Label text="디자인" />
+          </div>
+          <Title
+            _titleSize={({ theme }) => theme.fontSizes.font18}
+            _subtitleSize={({ theme }) => theme.fontSizes.font14}
+            lineHeight="24px"
+          >
+            <h1 style={{ color: "#ffffff" }}>
+              Redux Toolkit을 사용하여 간단하게 상태 관리하기 | 기억보다 기록을
+            </h1>
+            <p
+              style={{
+                color: "#ffffff",
+                opacity: 0.6,
+                lineHeight: "18px",
+                paddingTop: "8px",
+              }}
+            >
+              Redux Toolkit을 사용하여 간단하게 상태 관리하기...
+            </p>
+          </Title>
+        </div>
+      </DefaultArticle>
     </React.Fragment>
   );
 };

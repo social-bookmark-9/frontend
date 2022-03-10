@@ -8,13 +8,7 @@ const ArticleList = props => {
   return (
     <React.Fragment>
       <div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            padding: "14px 22px",
-          }}
-        >
+        <AlHeader>
           <Title
             _titleSize={({ theme }) => theme.fontSizes.font20}
             lineHeight="24px"
@@ -42,16 +36,11 @@ const ArticleList = props => {
             </div>
           </Title>
           <img src="/images/menu.png" alt="menu" width="24px" height="24px" />
-        </div>
-        <div
-          style={{
-            padding: "0px 16px",
-            color: "#ffffff",
-          }}
-        >
+        </AlHeader>
+        <AlBox>
           <ArticleCard />
-        </div>
-        <div style={{ padding: "8px 16px", textAlign: "center" }}>
+        </AlBox>
+        <AlButton>
           <Title _subtitleSize="14px">
             <p>아티클을 한번에 저장하고 싶다면?</p>
           </Title>
@@ -63,10 +52,26 @@ const ArticleList = props => {
             _fontSize="14px"
             height="45px"
           />
-        </div>
+        </AlButton>
       </div>
     </React.Fragment>
   );
 };
+
+const AlHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 22px;
+`;
+
+const AlBox = styled.div`
+  padding: 0px 16px;
+  color: ${({ theme }) => theme.colors.white};
+`;
+
+const AlButton = styled.div`
+  padding: 8px 16px;
+  text-align: center;
+`;
 
 export default ArticleList;
