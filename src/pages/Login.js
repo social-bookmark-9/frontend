@@ -2,7 +2,7 @@
 import Button from "../elements/Button";
 import Title from "../elements/Title";
 import styled from "styled-components";
-import { KAKAO_AUTH_URL, GOOGLE_AUTH_URL } from "../shared/OAuth";
+import { KAKAO_AUTH_URL } from "../shared/OAuth";
 
 const Login = () => {
   // const navigate = useNavigate();

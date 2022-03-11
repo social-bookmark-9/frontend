@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ArticleCard from "../components/ArticleCard";
+import Navbar from "../components/Navbar";
 import RecommendArticle from "../components/RecommendArticle";
 import Button from "../elements/Button";
 import Title from "../elements/Title";
@@ -16,7 +17,7 @@ const Article = props => {
         >
           <h1>아티클 폴더 이름</h1>
         </Title>
-        <img src="/images/menu.png" alt="menu" width="24px" height="24px" />
+        <Navbar />
       </AlHeader>
       <div style={{ padding: "16px" }}>
         <ArticleCard isDetail done />

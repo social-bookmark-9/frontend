@@ -12,6 +12,7 @@ const Button = props => {
     _color,
     _fontSize,
     isBorder,
+    bold,
   } = props;
   const styles = {
     borderRadius,
@@ -20,6 +21,7 @@ const Button = props => {
     _color,
     _fontSize,
     isBorder,
+    bold,
   };
 
   return (
@@ -37,24 +39,20 @@ Button.defaultProps = {
   _fontSize: "14px",
   isBorder: false,
   borderRadius: "8px",
+  bold: false,
 };
 
 // 스타일드 컴포넌트 작성 위치
 const StyledButton = styled.button`
   ${Flexbox}
-  ${({ theme }) => {
-    const { fontWeight } = theme;
-    return css`
-      width: 100%;
-      padding: ${props => props._padding};
-      background-color: ${props => props.bgColor};
-      font-size: ${props => props._fontSize};
-      font-weight: ${fontWeight.semiBold};
-      color: ${props => props._color};
-      ${props => (props.isBorder ? "border: 0.8px solid #DCDCDC" : "")}
-      border-radius: ${props => props.borderRadius};
-    `;
-  }}
+  width: 100%;
+  padding: ${props => props._padding};
+  background-color: ${props => props.bgColor};
+  font-size: ${props => props._fontSize};
+  font-weight: ${props => (props.bold ? "600" : "")};
+  color: ${props => props._color};
+  ${props => (props.isBorder ? "border: 0.8px solid #DCDCDC" : "")};
+  border-radius: ${props => props.borderRadius};
 `;
 
 // export

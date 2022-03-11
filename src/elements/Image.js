@@ -7,7 +7,7 @@ const Image = props => {
     _width,
     _height,
   };
-  return <Img src={_src} {...styles} />;
+  return <Img src={_src} {...styles} alt="icons" />;
 };
 
 Image.defaultProps = {

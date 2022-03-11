@@ -10,6 +10,7 @@ import {
   Article,
 } from "../pages";
 import MyPage from "../pages/MyPage";
+import OAuthRedirectHandler from "../shared/OAuthRedirectHandler";
 
 function App(props) {
   return (
@@ -22,7 +23,7 @@ function App(props) {
         <Route path="/articles" element={<ArticleList />} />
         <Route path="/article" element={<Article />} />
         <Route path="/mypage" element={<MyPage />} />
-        {/* <Route path="/oauth/callback/kakao" element={OAuthRedirectHandler} /> */}
+        <Route path="/api/users/login" element={<OAuthRedirectHandler />} />
       </Routes>
     </React.Fragment>
   );

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { FlexboxColumn } from "../styles/flexbox";
 import Button from "../elements/Button";
 import Title from "../elements/Title";
+import Text from "../elements/Text";
 import Favorite from "../components/Favorite";
 
 const UserFavorites = props => {
@@ -57,20 +58,19 @@ const UserFavorites = props => {
     <React.Fragment>
       <UserBox>
         <UserArea>
-          <Title
-            textAlign="center"
-            padding="114px 0px 101px 0px"
-            _titleSize={({ theme }) => theme.fontSizes.font24}
-            lineHeight="32px"
-            _subtitleSize={({ theme }) => theme.fontSizes.font16}
-          >
-            <h1>
+          <TitleBox>
+            <Title
+              textAlign="center"
+              _fontSize={({ theme }) => theme.fontSizes.font24}
+              _lineHeight="32px"
+              _padding="15px 0px"
+            >
               관심있는 분야를
               <br />
               선택해주세요
-            </h1>
-            <p>최대 3개까지 선택 가능해요</p>
-          </Title>
+            </Title>
+            <Text textAlign="center">최대 3개까지 선택 가능해요</Text>
+          </TitleBox>
           <FavoritesBox>
             <Favorites onChange={handleChecked}>
               {favoritesList.map((favor, idx) => (
@@ -82,13 +82,14 @@ const UserFavorites = props => {
         <ButtonBox>
           <Button
             _onClick={() => {
-              navigate("/");
+              navigate("/user/favorites");
             }}
-            name="선택완료"
-            margin="0px"
             _fontSize={({ theme }) => theme.fontSizes.font20}
-            height="63px"
-          />
+            borderRadius="0px"
+            _padding="18px 0px"
+          >
+            선택완료
+          </Button>
         </ButtonBox>
       </UserBox>
     </React.Fragment>
@@ -105,6 +106,10 @@ const UserBox = styled.div`
 
 const UserArea = styled.div`
   padding: 0px 36px;
+`;
+
+const TitleBox = styled.div`
+  padding: 100px 0px;
 `;
 
 const FavoritesBox = styled.div`

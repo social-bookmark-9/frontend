@@ -15,6 +15,7 @@ Title.defaultProps = {
   _lineHeight: "24px",
   _padding: "0px",
   _color: "#353C49",
+  textAlign: "left",
 };
 
 const TitleText = styled.h1`

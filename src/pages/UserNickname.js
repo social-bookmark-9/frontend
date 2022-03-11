@@ -25,14 +25,12 @@ const UserNickname = props => {
       <UserBox>
         <UserArea>
           <Title
-            _titleSize={({ theme }) => theme.fontSizes.font24}
-            lineHeight="32px"
+            _fontSize={({ theme }) => theme.fontSizes.font24}
+            _lineHeight="32px"
           >
-            <h1>
-              내가 가진 멋진 닉네임을
-              <br />
-              자랑해주세요
-            </h1>
+            내가 가진 멋진 닉네임을
+            <br />
+            자랑해주세요
           </Title>
           <InputBox>
             <UserInput
@@ -48,11 +46,12 @@ const UserNickname = props => {
             _onClick={() => {
               navigate("/user/favorites", { state: nickname });
             }}
-            name="다음"
-            margin="0px"
             _fontSize={({ theme }) => theme.fontSizes.font20}
-            height="63px"
-          />
+            borderRadius="0px"
+            _padding="18px 0px"
+          >
+            다음
+          </Button>
         </ButtonBox>
       </UserBox>
     </React.Fragment>
