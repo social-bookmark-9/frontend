@@ -2,7 +2,7 @@
 import Button from "../elements/Button";
 import Title from "../elements/Title";
 import styled from "styled-components";
-import { KAKAO_AUTH_URL, GOOGLE_AUTH_URL } from "../shared/OAuth";
+import { KAKAO_AUTH_URL } from "../shared/OAuth";
 
 const Login = () => {
   // const navigate = useNavigate();
@@ -18,30 +18,29 @@ const Login = () => {
       <Topdiv>
         <Title
           textAlign="center"
-          padding="153px 0px"
+          _padding="153px 0px"
           _titleSize={({ theme }) => theme.fontSizes.font28}
-          lineHeight="36px"
+          _lineHeight="36px"
         >
-          <h1>
-            문구 영역만
-            <br />
-            잡아주세요
-          </h1>
+          문구 영역만
+          <br />
+          잡아주세요
         </Title>
       </Topdiv>
       <Bottomdiv>
         <a href={KAKAO_AUTH_URL}>
           <Button
-            name="카카오로 로그인"
-            width="270px"
-            height="43px"
-            margin="8px auto"
+            _padding="14px 0px"
             bgColor={({ theme }) => theme.colors.kakao}
-            _color={({ theme }) => theme.colors.fontColor04}
+            _color="#381E1F"
             _fontSize={({ theme }) => theme.fontSizes.font12}
-          />
+            borderRadius="3px"
+          >
+            <img src="/images/kakao.png" width={20} height={17} alt="kakao" />
+            카카오로 로그인
+          </Button>
         </a>
-        <a href={GOOGLE_AUTH_URL}>
+        {/* <a href={GOOGLE_AUTH_URL}>
           <Button
             isBorder
             name={"구글로 로그인"}
@@ -52,7 +51,7 @@ const Login = () => {
             _color={({ theme }) => theme.colors.fontColor04}
             _fontSize={({ theme }) => theme.fontSizes.font12}
           />
-        </a>
+        </a> */}
       </Bottomdiv>
     </LoginBox>
   );
@@ -69,6 +68,7 @@ const Topdiv = styled.div`
 
 const Bottomdiv = styled.div`
   height: 40vh;
+  padding: 0px 60px;
   text-align: center;
 `;
 
