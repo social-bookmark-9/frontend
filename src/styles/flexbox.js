@@ -12,4 +12,10 @@ const FlexboxColumn = css`
   justify-content: center;
 `;
 
-export { Flexbox, FlexboxColumn };
+const FlexboxRow = css`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+export { Flexbox, FlexboxColumn, FlexboxRow };

@@ -9,6 +9,7 @@ import {
   ArticleList,
   Article,
 } from "../pages";
+import MyPage from "../pages/MyPage";
 
 function App(props) {
   return (
@@ -20,6 +21,7 @@ function App(props) {
         <Route path="/user/favorites" element={<UserFavorites />} />
         <Route path="/articles" element={<ArticleList />} />
         <Route path="/article" element={<Article />} />
+        <Route path="/mypage" element={<MyPage />} />
         {/* <Route path="/oauth/callback/kakao" element={OAuthRedirectHandler} /> */}
       </Routes>
     </React.Fragment>

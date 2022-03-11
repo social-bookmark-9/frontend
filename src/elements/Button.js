@@ -1,5 +1,6 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { Flexbox } from "../styles/flexbox";
 
 const Button = props => {
   const {
@@ -12,6 +13,7 @@ const Button = props => {
     _color,
     _fontSize,
     isBorder,
+    inArticle,
   } = props;
   const styles = {
     width,
@@ -22,6 +24,17 @@ const Button = props => {
     _fontSize,
     isBorder,
   };
+
+  if (inArticle) {
+    return (
+      <React.Fragment>
+        <ButtonBox onClick={_onClick}>
+          <p>{name}</p>
+        </ButtonBox>
+      </React.Fragment>
+    );
+  }
+
   return (
     <StyledButton onClick={_onClick} {...styles}>
       {name}
@@ -39,6 +52,26 @@ const StyledButton = styled.button`
   font-size: ${props => props._fontSize};
   ${props =>
     props.isBorder ? `border: 1px solid #dedede; border-radius: 3px;` : ""}
+`;
+
+const ButtonBox = styled.div`
+  ${Flexbox}
+  ${({ theme }) => {
+    const { colors, fontSizes, fontWeight } = theme;
+    return css`
+      margin: 0px 4px;
+      width: 100%;
+      height: 44px;
+      align-items: center;
+      background-color: ${colors.white};
+      border: 1px solid ${colors.grayColor03};
+      border-radius: 8px;
+      font-size: ${fontSizes.font14};
+      color: ${colors.fontColor04};
+      font-weight: ${fontWeight.semiBold};
+      text-align: center;
+    `;
+  }}
 `;
 
 Button.defaultProps = {
