@@ -1,27 +1,22 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Title from "../elements/Title";
-import { motion } from "framer-motion";
+import Text from "../elements/Text";
 import Button from "../elements/Button";
+import Label from "../elements/Label";
+import Image from "../elements/Image";
 
 const MyPage = props => {
-
   return (
     <React.Fragment>
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "flex-end",
           padding: "14px 22px",
         }}
       >
-        <Title
-          _titleSize={({ theme }) => theme.fontSizes.font20}
-          lineHeight="24px"
-          _subtitleSize={({ theme }) => theme.fontSizes.font14}
-        >
-        </Title>
-        <img src="/images/menu.png" alt="menu" width="24px" height="24px" />
+        <img src="/images/menu.png" alt="menu" width={24} height={24} />
       </div>
 
       {/* 프로필+이름 부분 */}
@@ -36,85 +31,78 @@ const MyPage = props => {
             left: "119.57px",
             top: "118px",
             borderRadius: "14px",
-            zIndex: "2"
+            zIndex: "2",
           }}
         ></div>
-          
-        <div style={{ width: "178px", marginTop:"14px", float:"left" }}>
+
+        <div style={{ width: "178px", marginTop: "14px", float: "left" }}>
           <ProfileImage>
-            <img src="https://bennettfeely.com/clippy/pics/pittsburgh.jpg" alt=""
+            <img
+              src="https://bennettfeely.com/clippy/pics/pittsburgh.jpg"
+              alt=""
               style={{
                 maxWidth: "100%",
-                display: "block"
+                display: "block",
               }}
             />
           </ProfileImage>
         </div>
-        <div style={{ width: "212px", paddingTop:"50px", float:"right"}}>
-          <Title
-            _titleSize={({ theme }) => theme.fontSizes.font18}
-            _subtitleSize={({ theme }) => theme.fontSizes.font14}
-            lineHeight="24px"
-          >
-            <h1 style={{ color: "#353c49" }}>
-              김철수
-            </h1>
-            <p>글쓰는 UX디자이너</p>
-          </Title>
+        <div style={{ width: "212px", paddingTop: "50px", float: "right" }}>
+          <Title>김철수</Title>
+          <Text>글쓰는 UX디자이너</Text>
         </div>
       </Profile>
 
       {/* 큐레이션 부분 */}
-      <div style={{
-        padding: "0px 16px",
-      }}>
-      <div style={{ width: "212px", paddingTop:"0px"}}>
-          <Title
-            _titleSize={({ theme }) => theme.fontSizes.font18}
-            _subtitleSize={({ theme }) => theme.fontSizes.font14}
-            lineHeight="24px"
-          >
-            <h1 style={{ color: "#000000", marginBottom:"20px" }}>
-              김철수님의 큐레이션
-            </h1>
-          </Title>
+      <div
+        style={{
+          padding: "0px 16px",
+        }}
+      >
+        <div style={{ width: "212px", paddingTop: "0px" }}>
+          <Title _padding="20px 0px">김철수님의 큐레이션</Title>
         </div>
-      
+
+        {/* element 수정 완료 - 정민 */}
         <CurationBox>
           <div style={{ position: "absolute", top: "52px", right: "28px" }}>
-            <img
-              src="/images/recommendCnt.png"
-              alt="recommendCnt"
-              width="61px"
-              height="26px"
-            />
+            <Label
+              _fontSize={({ theme }) => theme.fontSizes.font12}
+              _color={({ theme }) => theme.colors.fontGreen}
+              bgColor={({ theme }) => theme.colors.pointGreen01}
+              borderColor="rgba(78, 176, 171, 0.28)"
+              borderRadius="40px"
+            >
+              <Image _src="/images/thumbsUp.png" />
+              24
+            </Label>
           </div>
-          
+
           <div style={{ width: "270px", position: "absolute" }}>
-            <div style={{ display: "flex", paddingBottom: "8px", color: "#4eb0ab" }}>
-              <div>커리어</div>
-              <div>디자인</div>
+            <div style={{ display: "flex", paddingBottom: "8px" }}>
+              <Label
+                _color={({ theme }) => theme.colors.fontGreen}
+                bgColor={({ theme }) => theme.colors.pointGreen01}
+                borderColor="rgba(78, 176, 171, 0.28)"
+              >
+                커리어
+              </Label>
+              <Label
+                _color={({ theme }) => theme.colors.fontGreen}
+                bgColor={({ theme }) => theme.colors.pointGreen01}
+                borderColor="rgba(78, 176, 171, 0.28)"
+              >
+                디자인
+              </Label>
             </div>
             <Title
-              _titleSize={({ theme }) => theme.fontSizes.font18}
-              _subtitleSize={({ theme }) => theme.fontSizes.font14}
+              _fontSize={({ theme }) => theme.fontSizes.font18}
               lineHeight="24px"
+              _color={({ theme }) => theme.colors.fontGreen}
             >
-              <h1 style={{ color: "#4eb0ab" }}>
-                UXUI 초보를 위한 아티클
-              </h1>
-              
-              <p
-                style={{
-                  paddingTop: "50px",
-                  color: "#4eb0ab",
-                  opacity: 0.6,
-                  lineHeight: "18px",
-                }}
-              >
-                카드스와이프 들어갈 부분
-              </p>
+              UXUI 초보를 위한 아티클
             </Title>
+            <Text _padding="50px 0px">카드스와이프 들어갈 부분</Text>
           </div>
         </CurationBox>
         <CurationBox2>
@@ -126,9 +114,15 @@ const MyPage = props => {
               height="26px"
             />
           </div>
-          
+
           <div style={{ width: "270px", position: "absolute" }}>
-            <div style={{ display: "flex", paddingBottom: "8px", color: "#7881f5" }}>
+            <div
+              style={{
+                display: "flex",
+                paddingBottom: "8px",
+                color: "#7881f5",
+              }}
+            >
               <div>커리어</div>
               <div>디자인</div>
             </div>
@@ -137,10 +131,8 @@ const MyPage = props => {
               _subtitleSize={({ theme }) => theme.fontSizes.font14}
               lineHeight="24px"
             >
-              <h1 style={{ color: "#7881f5" }}>
-                UXUI 초보를 위한 아티클
-              </h1>
-              
+              <h1 style={{ color: "#7881f5" }}>UXUI 초보를 위한 아티클</h1>
+
               <p
                 style={{
                   paddingTop: "50px",
@@ -164,14 +156,14 @@ const MyPage = props => {
               <h1 style={{ color: "#ffffff" }}>
                 철수님의 큐레이션이 유용하셨나요?
               </h1>
-              
+
               <p
                 style={{
                   paddingTop: "8px",
                   color: "#ffffff",
                   opacity: 0.6,
                   lineHeight: "18px",
-                  marginBottom: "32px"
+                  marginBottom: "32px",
                 }}
               >
                 크롬 사용자라면 버튼 클릭 한번으로...
@@ -189,8 +181,6 @@ const MyPage = props => {
           </div>
         </MakeBubble>
       </div>
-
-
 
       {/* 마법의 svg */}
       <svg width="0" height="0">
@@ -234,13 +224,12 @@ const CurationBox = styled.div`
 `;
 
 const CurationBox2 = styled(CurationBox)`
-  background-color: #E7E8FA;
+  background-color: #e7e8fa;
 `;
 
 const MakeBubble = styled(CurationBox)`
   height: 194px;
   background-color: #383838;
 `;
-
 
 export default MyPage;
