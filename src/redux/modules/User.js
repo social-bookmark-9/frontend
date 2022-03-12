@@ -13,6 +13,7 @@ export const kakaoLoginAxios = createAsyncThunk(
   "user/kakaoLoginAxios",
   async ({code, navigate}, {dispatch}) => {
     const user = await UserApi.kakaoLogin({code, navigate});
+    console.log(user);
     if (user) {
       console.log("여기는 user.js의 if(user)")
       console.log(user);
@@ -43,6 +44,8 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
+      console.log("셋유저 스테이트");
+      console.log(state);
       sessionStorage.setItem("accessToken", action.payload.token.accessToken);
 
     },
@@ -60,13 +63,15 @@ export const userSlice = createSlice({
       state.is_login = action.payload.data.login;
     },
 
-    [kakaoLoginAxios.fulfilled]: (state, action) => {
-      console.log("로그인 풀필드 페이로드?");
-      console.log(state);
-      console.log(action.payload);
-      state.token = action.payload.data.token.accessToken;
-      state.is_login = action.payload.data.login;
-    },
+    // [kakaoLoginAxios.fulfilled]: (state, action) => {
+    //   console.log("로그인 풀필드 페이로드?");
+    //   console.log(state);
+    //   console.log(action);
+    //   if (state.login === true) {
+    //   state.token = action.payload.token.accessToken;
+    //   state.is_login = action.payload.data.login;
+    //   }
+    // },
   },
 });
 
