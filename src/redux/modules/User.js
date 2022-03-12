@@ -1,67 +1,74 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import userApi from "../../App/userApi";
+import userApi from "../../app/userApi";
+
 
 const UserApi = new userApi();
 
 const initialState = {
-  user: null,
+  token: null,
   is_login: false,
 };
 
 export const kakaoLoginAxios = createAsyncThunk(
   "user/kakaoLoginAxios",
-  async code => {
-    console.log(code);
-    const user = await UserApi.kakaoLogin(code);
+  async ({code, navigate}, {dispatch}) => {
+    const user = await UserApi.kakaoLogin({code, navigate});
     if (user) {
-      // return user;
+      console.log("여기는 user.js의 if(user)")
       console.log(user);
+      dispatch(setUser(user.data));
+      return user;
     }
   },
 );
 
-// const kakaoLogin = (code) => {
-//   return function (dispatch, getState, { history }) {
-//     axios({
-//       method: "GET",
-//       url:``
-//     })
-//       .then((res) => {
-//         console.log(res);
+export const registerAxios = createAsyncThunk(
+  "user/registerAxios",
+  async({ userInfo, navigate}, {dispatch}) => {
+    console.log("유저인포");
+    console.log(userInfo);
+    const user = await UserApi.register({ userInfo, navigate});
+    if (user) {
+      console.log("여기는 register의 if(user)")
+      console.log(user);
+      dispatch(setUser(user.data));
+      return user;
+    }
+  }
+);
 
-//         const ACCESS_TOKEN = res.data.accessToken;
-
-//         localStorage.setItem("token", ACCESS_TOKEN);
-
-//         history.replace("/")
-
-//       }).catch(err => {
-//           console.log("소셜로그인 에러", err);
-//           window.alert("로그인 실패");
-//           history.replace("/login");
-//         })
-//   }
-// }
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
     setUser: (state, action) => {
-      sessionStorage.setItem("token", action.payload.token);
+      sessionStorage.setItem("accessToken", action.payload.token.accessToken);
+
     },
+    // getUser: (state, action) => {
+    //   state.token = sessionStorage.getItem("accessToken");
+    //   state.is_login = true;
+    // },
+    
   },
   extraReducers: {
-    // [registerAxios.fulfilled]: (state, action) => {
-    //   return state;
-    // },
+    [registerAxios.fulfilled]: (state, action) => {
+      console.log("레지스터 풀필드 페이로드?");
+      console.log(state);
+      state.token = action.payload.data.token.accessToken;
+      state.is_login = action.payload.data.login;
+    },
 
     [kakaoLoginAxios.fulfilled]: (state, action) => {
-      // state.user = action.payload.user;
-      state.is_login = true;
+      console.log("로그인 풀필드 페이로드?");
+      console.log(state);
+      console.log(action.payload);
+      state.token = action.payload.data.token.accessToken;
+      state.is_login = action.payload.data.login;
     },
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, getUser } = userSlice.actions;
 export default userSlice.reducer;

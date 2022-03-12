@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import styled from "styled-components";
 import { FlexboxColumn } from "../styles/flexbox";
 import Button from "../elements/Button";
 import Title from "../elements/Title";
 
 const UserNickname = props => {
+  const location = useLocation();
   const navigate = useNavigate();
+
   const [words, setWords] = useState(0);
   const [nickname, setNickname] = useState("");
 
@@ -44,7 +46,7 @@ const UserNickname = props => {
         <ButtonBox>
           <Button
             _onClick={() => {
-              navigate("/user/favorites", { state: nickname });
+              navigate("/user/favorites", { state: {...location.state, nickname} });
             }}
             _fontSize={({ theme }) => theme.fontSizes.font20}
             borderRadius="0px"

@@ -6,20 +6,32 @@ import Button from "../elements/Button";
 import Title from "../elements/Title";
 import Text from "../elements/Text";
 import Favorite from "../components/Favorite";
+import { registerAxios } from "../redux/modules/User";
+import { useDispatch } from "react-redux";
 
 const UserFavorites = props => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const [isChecked, setIsChecked] = useState(false);
   const [checkedItems, setCheckedItems] = useState(new Set());
 
+  const newList = [...checkedItems];
+  console.log(newList);
+
   const userInfo = {
-    nickname: location.state,
-    favorites: checkedItems,
+    kakaoId: location.state.kakaoId,
+    email: location.state.email,
+    memberName: location.state.nickname,
+    profileImage: location.state.profileImage,
+    hashtag1: newList[0],
+    hashtag2: (newList[1]) ? newList[1] : "null",
+    hashtag3: (newList[2]) ? newList[2] : "null"
   };
 
-  console.log(userInfo);
+  console.log("여기는 마지막 확인");
+  console.log(location.state);
 
   const favoritesList = [
     "커리어",
@@ -54,6 +66,17 @@ const UserFavorites = props => {
     return checkedItems;
   };
 
+  const handleRegister = (e) => {
+    if (newList.length < 1){
+      alert("관심분야를 최소 한개는 선택해주세요")
+    }
+    else {
+    // console.log(userInfo);
+    // navigate("/");
+    dispatch(registerAxios({ userInfo, navigate }));
+    }
+  }
+
   return (
     <React.Fragment>
       <UserBox>
@@ -81,9 +104,7 @@ const UserFavorites = props => {
         </UserArea>
         <ButtonBox>
           <Button
-            _onClick={() => {
-              navigate("/user/favorites");
-            }}
+            _onClick={handleRegister}
             _fontSize={({ theme }) => theme.fontSizes.font20}
             borderRadius="0px"
             _padding="18px 0px"
