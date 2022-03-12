@@ -12,13 +12,9 @@ export default class userApi {
     };
     return axios(kakaoLoginConfig)
       .then(res => {
-        // const ACCESS_TOKEN = res.data.data.token.accessToken;
-        // console.log("카카오로그인 액세스토큰");
-        // console.log(ACCESS_TOKEN);
-        // console.log(res.data);
         if (res.data.data.login === true) {
-          console.log(res.data.data);
           navigate("/", {replace:true})
+          return (res.data);
         };
         if (res.data.data.login === false) {
           navigate(
@@ -50,13 +46,15 @@ export default class userApi {
 
     return axios(registerConfig)
       .then((res) => {
-        console.log(res);
         alert("회원가입 완료");
-        console.log(res.data.accessToken);
         navigate("/articles", { replace:true });
         return res.data;
       })
       .catch((err) => console.log(err.response));
+  }
+
+  async generalLogin({ userInfo, navigate }) {
+
   }
 
 
