@@ -1,67 +1,76 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import userApi from "../../App/userApi";
+import userApi from "../../app/userApi";
+
 
 const UserApi = new userApi();
 
 const initialState = {
-  user: null,
+  token: null,
   is_login: false,
 };
 
 export const kakaoLoginAxios = createAsyncThunk(
   "user/kakaoLoginAxios",
-  async code => {
-    console.log(code);
-    const user = await UserApi.kakaoLogin(code);
+  async ({code, navigate}, {dispatch}) => {
+    const user = await UserApi.kakaoLogin({code, navigate});
     if (user) {
-      // return user;
-      console.log(user);
+      dispatch(setUserToSession(user.data));
+      return user;
     }
   },
 );
 
-// const kakaoLogin = (code) => {
-//   return function (dispatch, getState, { history }) {
-//     axios({
-//       method: "GET",
-//       url:``
-//     })
-//       .then((res) => {
-//         console.log(res);
+export const registerAxios = createAsyncThunk(
+  "user/registerAxios",
+  async({ userInfo, navigate}, {dispatch}) => {
+    const user = await UserApi.register({ userInfo, navigate});
+    if (user) {
+      dispatch(setUserToSession(user.data));
+      return user;
+    }
+  }
+);
 
-//         const ACCESS_TOKEN = res.data.accessToken;
+export const logoutAxios = createAsyncThunk(
+  "user/logoutAxios",
+  async({ navigate }, { dispatch }) => {
+    dispatch(deleteUserFromSession());
+    navigate("/", { replace: true });
+    return true;
+  }
+)
 
-//         localStorage.setItem("token", ACCESS_TOKEN);
-
-//         history.replace("/")
-
-//       }).catch(err => {
-//           console.log("소셜로그인 에러", err);
-//           window.alert("로그인 실패");
-//           history.replace("/login");
-//         })
-//   }
-// }
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUser: (state, action) => {
-      sessionStorage.setItem("token", action.payload.token);
+    setUserToSession: (state, action) => {
+      sessionStorage.setItem("accessToken", action.payload.token.accessToken);
     },
+    deleteUserFromSession: (state, action) => {
+      sessionStorage.removeItem("accessToken");
+    },
+    
   },
   extraReducers: {
-    // [registerAxios.fulfilled]: (state, action) => {
-    //   return state;
-    // },
-
-    [kakaoLoginAxios.fulfilled]: (state, action) => {
-      // state.user = action.payload.user;
-      state.is_login = true;
+    [registerAxios.fulfilled]: (state, action) => {
+      state.token = action.payload.data.token.accessToken;
+      state.is_login = action.payload.data.login;
     },
+    [kakaoLoginAxios.fulfilled]: (state, action) => {
+      state.token = action.payload.data.token.accessToken;
+      state.is_login = action.payload.data.login;
+    },
+    [logoutAxios.fulfilled]: (state, action) => {
+      if (action.payload) {
+        state.token = initialState.token;
+        state.is_login = false;
+      }
+      alert ("로그아웃 완료");
+    }
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUserToSession, deleteUserFromSession } = userSlice.actions;
 export default userSlice.reducer;
