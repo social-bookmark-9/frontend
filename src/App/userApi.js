@@ -53,9 +53,7 @@ export default class userApi {
       .catch((err) => console.log(err.response));
   }
 
-  async generalLogin({ userInfo, navigate }) {
 
-  }
 
 
 }
