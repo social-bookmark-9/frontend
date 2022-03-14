@@ -79,6 +79,7 @@ const DropdownList = styled.ul`
   height: 147px;
   overflow: scroll;
   padding: 0;
+  border-radius: 0 0 5px 5px;
 `;
 
 const DropdownItem = styled.li`
@@ -90,9 +91,7 @@ const DropdownItem = styled.li`
   list-style: none;
   background: white;
   margin-top: -1px;
-  ${({ key }) => ((key === 0) ? `
-    border-radius: 0 0 5px 5px;
-  ` : `border-radius: 0;` )}
+
 `;
 
 const LinkField = styled.div`
