@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+
 import styled from "styled-components";
-import Button from "../elements/Button";
-import Image from "../elements/Image";
 import { FlexboxColumn } from "../styles/flexbox";
+import { Button, Image } from "../elements";
+
 import NavProfile from "./NavProfile";
 import { Logo } from "../elements/ImageObj";
 
@@ -16,8 +17,10 @@ const Navbar = props => {
   const menuOpen = () => {
     if (isOpen === false) {
       setIsOpen(true);
+      document.body.style.cssText = `overflow: hidden; touch-action: none;`;
     } else {
       setIsOpen(false);
+      document.body.style.cssText = `overflow:auto;`;
     }
   };
 
