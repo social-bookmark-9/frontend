@@ -1,8 +1,19 @@
-import Login from "../pages/Login";
-import UserNickname from "../pages/UserNickname";
-import UserFavorites from "../pages/UserFavorites";
-import Main from "../pages/Main";
-import ArticleList from "../pages/ArticleList";
-import Article from "../pages/Article";
+import Login from "./Login";
+import UserNickname from "./UserNickname";
+import UserFavorites from "./UserFavorites";
+import Main from "./Main";
+import ArticleList from "./ArticleList";
+import Article from "./Article";
+import Reviews from "./Reviews";
+import Setting from "./Setting";
 
-export { Login, UserNickname, UserFavorites, Main, ArticleList, Article };
+export {
+  Login,
+  UserNickname,
+  UserFavorites,
+  Main,
+  ArticleList,
+  Article,
+  Reviews,
+  Setting,
+};

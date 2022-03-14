@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userApi from "../../app/userApi";
 
-
 const UserApi = new userApi();
 
 const initialState = {
@@ -11,8 +10,8 @@ const initialState = {
 
 export const kakaoLoginAxios = createAsyncThunk(
   "user/kakaoLoginAxios",
-  async ({code, navigate}, {dispatch}) => {
-    const user = await UserApi.kakaoLogin({code, navigate});
+  async ({ code, navigate }, { dispatch }) => {
+    const user = await UserApi.kakaoLogin({ code, navigate });
     if (user) {
       dispatch(setUserToSession(user.data));
       return user;
@@ -22,24 +21,23 @@ export const kakaoLoginAxios = createAsyncThunk(
 
 export const registerAxios = createAsyncThunk(
   "user/registerAxios",
-  async({ userInfo, navigate}, {dispatch}) => {
-    const user = await UserApi.register({ userInfo, navigate});
+  async ({ userInfo, navigate }, { dispatch }) => {
+    const user = await UserApi.register({ userInfo, navigate });
     if (user) {
       dispatch(setUserToSession(user.data));
       return user;
     }
-  }
+  },
 );
 
 export const logoutAxios = createAsyncThunk(
   "user/logoutAxios",
-  async({ navigate }, { dispatch }) => {
+  async ({ navigate }, { dispatch }) => {
     dispatch(deleteUserFromSession());
     navigate("/", { replace: true });
     return true;
-  }
-)
-
+  },
+);
 
 export const userSlice = createSlice({
   name: "user",
@@ -51,7 +49,6 @@ export const userSlice = createSlice({
     deleteUserFromSession: (state, action) => {
       sessionStorage.removeItem("accessToken");
     },
-    
   },
   extraReducers: {
     [registerAxios.fulfilled]: (state, action) => {
@@ -67,8 +64,8 @@ export const userSlice = createSlice({
         state.token = initialState.token;
         state.is_login = false;
       }
-      alert ("로그아웃 완료");
-    }
+      alert("로그아웃 완료");
+    },
   },
 });
 

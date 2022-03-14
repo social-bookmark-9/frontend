@@ -1,41 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import ArticleCard from "../components/ArticleCard";
+import Navbar from "../components/Navbar";
 import Title from "../elements/Title";
 import Button from "../elements/Button";
 
 const ArticleList = props => {
   return (
     <React.Fragment>
-      <AlHeader>
-        <Title
-          _titleSize={({ theme }) => theme.fontSizes.font20}
-          lineHeight="24px"
-          _subtitleSize={({ theme }) => theme.fontSizes.font14}
-        >
-          <h1>아티클 폴더 이름</h1>
-          <p style={{ paddingTop: "14px" }}>24명이 도움을 받았어요</p>
-
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              padding: "8px 16px",
-              border: "0.8px solid #D2D6DA",
-              borderRadius: "8px",
-            }}
-          >
-            <img
-              src="/images/recommend.png"
-              alt="menu"
-              width="19px"
-              height="19px"
-            />
-            <p style={{ padding: 0, color: "#383838" }}>유용해요 24</p>
-          </div>
-        </Title>
-        <img src="/images/menu.png" alt="menu" width="24px" height="24px" />
-      </AlHeader>
+      <Navbar />
       <AlBox>
         <ArticleCard />
         <ArticleCard isRead done />
@@ -58,11 +31,6 @@ const ArticleList = props => {
     </React.Fragment>
   );
 };
-const AlHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 14px 22px;
-`;
 
 const AlBox = styled.div`
   padding: 0px 16px;

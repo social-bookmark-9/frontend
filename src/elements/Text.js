@@ -2,11 +2,16 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 const Text = props => {
-  const { _fontSize, _lineHeight, _padding, children, textAlign } = props;
+  const { _fontSize, _lineHeight, _padding, children, textAlign, _onClick } =
+    props;
 
   const styles = { _fontSize, _lineHeight, _padding, textAlign };
 
-  return <P {...styles}>{children}</P>;
+  return (
+    <P onClick={_onClick} {...styles}>
+      {children}
+    </P>
+  );
 };
 
 Text.defaultProps = {
@@ -14,6 +19,7 @@ Text.defaultProps = {
   _lineHeight: "22px",
   _padding: "0px",
   textAlign: "left",
+  _onClick: () => {},
 };
 
 const P = styled.p`
