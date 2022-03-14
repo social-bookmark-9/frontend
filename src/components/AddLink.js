@@ -27,10 +27,16 @@ const AddLink = (props) => {
 
   return (
     <>
+    <div style={{height:"270"}}>
       <Text>컬렉션 선택</Text>
       <Dropdown>
         <DropdownHeader state={isOpen} onClick={toggleDropdown}>
+        <div style={{display:"flex", width:"50%", justifyContent:"start"}}>
           그려
+        </div>
+        <div style={{display:"flex", width:"50%", justifyContent:"end"}}>
+          {">"}
+        </div>
         </DropdownHeader>
         {isOpen && (
           <DropdownList
@@ -51,6 +57,7 @@ const AddLink = (props) => {
       <Reminder>
         <button onClick={modalChange}>모달창 바꾸기</button>
       </Reminder>
+      </div>
     </>
   );
 }
@@ -67,6 +74,7 @@ const DropdownHeader = styled.div`
   margin-bottom: 0;
   padding: 16px 16px 16px 24px;
   border: 1px solid #F2F4F6;
+  display: flex;
   ${({ state }) => (state ? `
     border-radius: 5px 5px 0 0;
   ` : `border-radius: 5px;` )}
@@ -107,6 +115,7 @@ const Input = styled.input`
   height: 50px;
   border: 1px solid #F2F4F6;
   border-radius: 5px;
+  padding: 24px;
 `;
 
 const Hr = styled.hr`

@@ -51,7 +51,7 @@ const AddFolder = (props) => {
 }
 
 const Header = styled.div`
-  margin-top: 45px;
+  padding-top: 45px;
 `;
 
 const LinkField = styled.div`

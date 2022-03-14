@@ -89,10 +89,7 @@ const Main = styled.div`
 `;
 
 const Footer = styled.div`
-  width: 95%;
-  position: fixed;
-  margin-right: 28px;
-  bottom: 24;
+
 `
 
 
