@@ -1,18 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Text from "../elements/Text";
 import styled from "styled-components";
 import Favorite from "../components/Favorite";
 import Button from "../elements/Button";
 
-const AddLinkTag = (props) => {
+const AddLinkTag = props => {
   // 뒤로가기
   const goBack = () => {
     props.setAddStage(true);
-  }
+  };
 
   const [isChecked, setIsChecked] = useState(false);
   const [checkedItems, setCheckedItems] = useState(new Set());
-
 
   const favoritesList = [
     "커리어",
@@ -52,7 +51,7 @@ const AddLinkTag = (props) => {
       {/* <div style={{marginTop:"-18px"}}>
         <button onClick={goBack}>{"<"}</button>
       </div> */}
-      <div style={{height:"270"}}>
+      <div style={{ height: "270" }}>
         <Text>태그 선택</Text>
         <FavoritesBox>
           <Favorites onChange={handleChecked}>
@@ -62,17 +61,21 @@ const AddLinkTag = (props) => {
           </Favorites>
         </FavoritesBox>
       </div>
-      <div style={{
-          width:"100%",
-          paddingRight:"56px",
-          position:"fixed",
-          bottom:"24px"
-        }}>
-          <Button _onClick={goBack} _padding="18px">완료</Button>
+      <div
+        style={{
+          width: "100%",
+          paddingRight: "56px",
+          position: "fixed",
+          bottom: "24px",
+        }}
+      >
+        <Button _onClick={goBack} _padding="18px">
+          완료
+        </Button>
       </div>
     </>
-  )
-}
+  );
+};
 
 const FavoritesBox = styled.div`
   width: 100%;

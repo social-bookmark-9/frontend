@@ -3,23 +3,22 @@ import { useState } from "react";
 import Button from "../elements/Button";
 import AddFolder from "./AddFolder";
 import AddLink from "./AddLink";
-import AddLinkTag from "./AddLinkTag";
 
-const Modal = (props) => {
+const Modal = props => {
   // 모달 열고 닫기
   const [modalOpen, setModalOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const openModal = () => {setModalOpen(true);}
+  const openModal = () => {
+    setModalOpen(true);
+  };
   const closeModal = () => {
     setModalOpen(false);
     setModalTitle("");
     setShowModal(false);
-  }
-  
+  };
 
   const [modalBackspace, setModalBackspace] = useState("");
   const [modalTitle, setModalTitle] = useState("");
-
 
   return (
     <>
@@ -28,17 +27,29 @@ const Modal = (props) => {
       {modalOpen ? (
         <Section>
           <MainModal>
-            <div style={{display:"flex", alignItems:"center"}}>
-              <div style={{display:"flex", width:"20%", justifyContent:"start"}}>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <div
+                style={{
+                  display: "flex",
+                  width: "20%",
+                  justifyContent: "start",
+                }}
+              >
                 {modalBackspace}
               </div>
-              <div style={{width:"60%", justifyContent:"center", textAlign:"center  "}}>
+              <div
+                style={{
+                  width: "60%",
+                  justifyContent: "center",
+                  textAlign: "center  ",
+                }}
+              >
                 {modalTitle}
               </div>
-              <div style={{display:"flex", width:"20%", justifyContent:"end"}}>
-                <button onClick={closeModal}>
-                  &times;
-                </button>
+              <div
+                style={{ display: "flex", width: "20%", justifyContent: "end" }}
+              >
+                <button onClick={closeModal}>&times;</button>
               </div>
             </div>
             <Main>
@@ -61,7 +72,7 @@ const Modal = (props) => {
       ) : null}
     </>
   );
-}
+};
 
 const Section = styled.div`
   position: fixed;
@@ -88,7 +99,5 @@ const Main = styled.div`
   height: 270px;
   margin-top: 2px;
 `;
-
-
 
 export default Modal;
