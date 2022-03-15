@@ -26,9 +26,9 @@ const ArticleFolder = ({ folderColor, folder, isMe }) => {
           onClick={() => {
             navigate("/article");
           }}
-          isMe={folder.isMe}
+          isMe={isMe}
         >
-          {folderColor === "default" && folder.isMe ? (
+          {folderColor === "default" && isMe ? (
             <LabelBox>
               <Label _color={propsColor} bgColor="none">
                 완독률 15%

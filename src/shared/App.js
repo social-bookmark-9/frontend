@@ -14,18 +14,18 @@ import {
 } from "../pages";
 import MyPage from "../pages/MyPage";
 import OAuthRedirectHandler from "../shared/OAuthRedirectHandler";
-import { getArticleAxios } from "../redux/modules/Article";
+// import { getArticleAxios } from "../redux/modules/Article";
 
 function App(props) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const isLogin = useSelector(state => state.user.is_login);
   // const isToken = sessionStorage.getItem("token") ? true : false;
   // 폴더 리스트 받아오는 부분
 
   // 아티클 리스트 받아오는 부분
-  useEffect(() => {
-    dispatch(getArticleAxios());
-  });
+  // useEffect(() => {
+  //   dispatch(getArticleAxios());
+  // });
 
   return (
     <React.Fragment>
