@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { DesignObj, Circle } from "../elements/ImageObj";
@@ -120,4 +120,4 @@ const ArticleCardBox = styled.div`
       : "height: 240px"};
 `;
 
-export default memo(ArticleCard);
+export default ArticleCard;
