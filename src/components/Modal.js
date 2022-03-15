@@ -3,19 +3,23 @@ import { useState } from "react";
 import Button from "../elements/Button";
 import AddFolder from "./AddFolder";
 import AddLink from "./AddLink";
+import AddLinkTag from "./AddLinkTag";
 
 const Modal = (props) => {
+  // 모달 열고 닫기
   const [modalOpen, setModalOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const openModal = () => {setModalOpen(true);}
   const closeModal = () => {
     setModalOpen(false);
     setModalTitle("");
     setShowModal(false);
   }
-  const [showModal, setShowModal] = useState(false);
+  
 
   const [modalBackspace, setModalBackspace] = useState("");
   const [modalTitle, setModalTitle] = useState("");
+
 
   return (
     <>
@@ -47,14 +51,11 @@ const Modal = (props) => {
               ) : (
                 <AddLink
                   setShowModal={setShowModal}
+                  setModalBackspace={setModalBackspace}
+                  setModalTitle={setModalTitle}
                 />
               )}
             </Main>
-            <Footer>
-              <Button onClick={closeModal} _padding="18px 0px">
-                close
-              </Button>
-            </Footer>
           </MainModal>
         </Section>
       ) : null}
@@ -87,10 +88,6 @@ const Main = styled.div`
   height: 270px;
   margin-top: 2px;
 `;
-
-const Footer = styled.div`
-
-`
 
 
 

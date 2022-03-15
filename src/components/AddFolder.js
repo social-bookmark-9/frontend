@@ -16,10 +16,17 @@ const AddFolder = (props) => {
     )
   }
 
+  // 뒤로가기
   const modalChange = () => {
     props.setShowModal((current) => !current);
     props.setModalTitle("");
     props.setModalBackspace("");
+  }
+
+  // 컬렉션 추가 완료 버튼 (컬렉션 추가 + 뒤로가기)
+  const addFolderDone = () => {
+    modalChange();
+    console.log("쨔쟌");
   }
 
   const [show, setShow] = useState(true);
@@ -46,6 +53,14 @@ const AddFolder = (props) => {
           </ShowSetting>
         </Settingwrap>
       </LinkField>
+      <div style={{
+        width:"100%",
+        paddingRight:"56px",
+        position:"fixed",
+        bottom:"24px"
+      }}>
+        <Button _onClick={addFolderDone} _padding="18px">완료</Button>
+      </div>
     </>
   );
 }
@@ -62,6 +77,7 @@ const LinkField = styled.div`
 const Input = styled.input`
   width: 100%;
   height: 50px;
+  padding: 24px;
   border: 1px solid #F2F4F6;
   border-radius: 5px;
 `;
