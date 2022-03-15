@@ -1,38 +1,53 @@
 {
-  "message": "폴더 조회: 성공",
+  "message": "폴더리스트 조회: 성공",
   "data": [
     {
-      "articleId": "0",
-      "url": "https://pythondocs.net/selenium/%EC%85%80%EB%A0%88%EB%8B%88%EC%9B%80-%ED%81%AC%EB%A1%A4%EB%9F%AC-%EA%B8%B0%EB%B3%B8-%EC%82%AC%EC%9A%A9%EB%B2%95/",
-      "titleOg": "타이틀1",
-      "contentOg": "React는 상호작용이 많은 UI를 만들 때 생기는 어려움을 줄여줍니다. 애플리케이션의 각 상태에 대한 간단한 뷰만 설계하세요. 그럼 React는 데이터가 변경됨에 따라 적절한 컴포넌트만 효율적으로 갱신하고 렌더링합니다.",
-      "imgOg": "https://cdn.pixabay.com/photo/2020/03/25/16/01/children-4967808_960_720.jpg",
-      "hashTag": ["커리어", " 과학", "IT"],
-      "isMe": true,
-      "isRead": true,
-      "isSaved": true
-    },
-    {
-      "articleId": "1",
-      "url": "https://kyounghwan01.github.io/blog/React/redux/redux-toolkit/#redux-action",
-      "titleOg": "타이틀2",
-      "contentOg": "두번째 게시글 입니다",
-      "imgOg": "",
-      "hashTag": ["디자인"],
-      "isMe": false,
-      "isRead": false,
-      "isSaved": false
-    },
-    {
-      "articleId": "2",
-      "url": "https://blog.webdevsimplified.com/2021-05/cors/",
-      "titleOg": "타이틀3",
-      "contentOg": "세번째 게시글 입니다",
-      "imgOg": "https://cdn.pixabay.com/photo/2020/03/25/16/01/children-4967808_960_720.jpg",
-      "hashTag": ["인간관계", "IT"],
-      "isMe": false,
-      "isRead": true,
-      "isSaved": true
+      "folderId": 0,
+      "hashTag1": "",
+      "hashTag2": "",
+      "hashTag3": "",
+      "likeCnt": 0,
+      "articleList": [
+        {
+          "articleId": "0",
+          "url": "https://pythondocs.net/selenium/%EC%85%80%EB%A0%88%EB%8B%88%EC%9B%80-%ED%81%AC%EB%A1%A4%EB%9F%AC-%EA%B8%B0%EB%B3%B8-%EC%82%AC%EC%9A%A9%EB%B2%95/",
+          "titleOg": "타이틀1",
+          "contentOg": "React는 상호작용이 많은 UI를 만들 때 생기는 어려움을 줄여줍니다. 애플리케이션의 각 상태에 대한 간단한 뷰만 설계하세요. 그럼 React는 데이터가 변경됨에 따라 적절한 컴포넌트만 효율적으로 갱신하고 렌더링합니다.",
+          "imgOg": "https://cdn.pixabay.com/photo/2020/03/25/16/01/children-4967808_960_720.jpg",
+          "hashTag1": "커리어",
+          "hashTag2": "과학",
+          "hashTag3": "IT",
+          "isMe": true,
+          "isRead": true,
+          "isSaved": true
+        },
+        {
+          "articleId": "1",
+          "url": "https://kyounghwan01.github.io/blog/React/redux/redux-toolkit/#redux-action",
+          "titleOg": "타이틀2",
+          "contentOg": "두번째 게시글 입니다",
+          "imgOg": "",
+          "hashTag1": "디자인",
+          "hashTag2": "",
+          "hashTag3": "",
+          "isMe": false,
+          "isRead": false,
+          "isSaved": false
+        },
+        {
+          "articleId": "2",
+          "url": "https://blog.webdevsimplified.com/2021-05/cors/",
+          "ogTitle": "타이틀3",
+          "ogCcontent": "세번째 게시글 입니다",
+          "imgUrl": "https://cdn.pixabay.com/photo/2020/03/25/16/01/children-4967808_960_720.jpg",
+          "hashTag1": "인간관계",
+          "hashTag2": "IT",
+          "hashTag3": "",
+          "isMe": false,
+          "isRead": true,
+          "isSaved": true
+        }
+      ]
     }
   ]
 }

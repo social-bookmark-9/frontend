@@ -1,9 +1,9 @@
-import React from "react";
+import React, { memo } from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { Label, Image, Text, Title } from "../elements";
 
-const ArticleFolder = ({ folderColor, isMe }) => {
+const ArticleFolder = ({ folderColor, folder, isMe }) => {
   const navigate = useNavigate();
   const propsColor = () => {
     switch (folderColor) {
@@ -24,11 +24,11 @@ const ArticleFolder = ({ folderColor, isMe }) => {
         <CurationBox
           folderColor={folderColor}
           onClick={() => {
-            navigate("/articles");
+            navigate("/article");
           }}
-          isMe={isMe}
+          isMe={folder.isMe}
         >
-          {folderColor === "default" && isMe ? (
+          {folderColor === "default" && folder.isMe ? (
             <LabelBox>
               <Label _color={propsColor} bgColor="none">
                 완독률 15%
@@ -119,4 +119,4 @@ const TitleBox = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
-export default ArticleFolder;
+export default memo(ArticleFolder);

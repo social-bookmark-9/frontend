@@ -5,7 +5,7 @@ const UserApi = new userApi();
 
 const initialState = {
   token: null,
-  is_login: false,
+  is_login: true,
 };
 
 export const kakaoLoginAxios = createAsyncThunk(
