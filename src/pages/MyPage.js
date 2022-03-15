@@ -1,235 +1,130 @@
 import React from "react";
-import styled from "styled-components";
-import Title from "../elements/Title";
-import Text from "../elements/Text";
-import Button from "../elements/Button";
-import Label from "../elements/Label";
-import Image from "../elements/Image";
+import { useNavigate } from "react-router";
+import styled, { css } from "styled-components";
+
+import { Navbar, Profile, ArticleFolder, RemindCard } from "../components";
+import { Label, Title, Image, Text } from "../elements";
+import { Flexbox } from "../styles/flexbox";
 
 const MyPage = props => {
+  const { isLogin } = props;
+  const navigate = useNavigate();
+
+  const folderList = [0, 1, 2, 3];
+  const completeRates = [15, 100, 30, 45];
+
+  const completeRate = Math.round(
+    completeRates.reduce((a, b) => a + b) / completeRates.length,
+  );
+
   return (
     <React.Fragment>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          padding: "14px 22px",
-        }}
-      >
-        <img src="/images/menu.png" alt="menu" width={24} height={24} />
-      </div>
-
+      <Navbar isLogin={isLogin} />
       {/* 프로필+이름 부분 */}
-      <Profile>
-        {/*  그거... 동그라미 */}
-        <div
-          style={{
-            width: "28px",
-            height: "28px",
-            backgroundColor: "#000000",
-            position: "absolute",
-            left: "119.57px",
-            top: "118px",
-            borderRadius: "14px",
-            zIndex: "2",
-          }}
-        ></div>
-
-        <div style={{ width: "178px", marginTop: "14px", float: "left" }}>
-          <ProfileImage>
-            <img
-              src="https://bennettfeely.com/clippy/pics/pittsburgh.jpg"
-              alt=""
-              style={{
-                maxWidth: "100%",
-                display: "block",
-              }}
-            />
-          </ProfileImage>
-        </div>
-        <div style={{ width: "212px", paddingTop: "50px", float: "right" }}>
-          <Title>김철수</Title>
-          <Text>글쓰는 UX디자이너</Text>
-        </div>
-      </Profile>
-
+      <Profile />
+      {/* 리마인드 부분 */}
+      <RemindCard
+        _title="저장한 글, 다시 읽고 계신가요?"
+        _text={
+          "3번은 읽어야 완전한 내 것이 될 수 있어요.\n저장한 글을 리마인드 해드릴게요"
+        }
+        _button="리마인드 받기"
+      />
       {/* 큐레이션 부분 */}
-      <div
-        style={{
-          padding: "0px 16px",
+      <Qheader>
+        <Title _padding="20px">김철수님의 큐레이션</Title>
+        <LabelBox>
+          <Label
+            _color={({ theme }) => theme.colors.fontColor07}
+            bgColor="#ffffff"
+            _padding="7px 21px"
+          >
+            전체 완독률 {completeRate}%
+          </Label>
+        </LabelBox>
+      </Qheader>
+      {/* 디폴트 폴더 */}
+      <ArticleFolder
+        _onClick={() => {
+          navigate("/articles");
         }}
-      >
-        <div style={{ width: "212px", paddingTop: "0px" }}>
-          <Title _padding="20px 0px">김철수님의 큐레이션</Title>
-        </div>
-
-        {/* element 수정 완료 - 정민 */}
-        <CurationBox>
-          <div style={{ position: "absolute", top: "52px", right: "28px" }}>
-            <Label
-              _fontSize={({ theme }) => theme.fontSizes.font12}
-              _color={({ theme }) => theme.colors.fontGreen}
-              bgColor={({ theme }) => theme.colors.pointGreen01}
-              borderColor="rgba(78, 176, 171, 0.28)"
-              borderRadius="40px"
-            >
-              <Image _src="/images/thumbsUp.png" />
-              24
-            </Label>
+        folderColor="default"
+        isMe={true}
+      />
+      {/* 아티클 리마인드 */}
+      <AlertBox>
+        <RemindAlert>
+          <div>
+            <Image _src="/images/remind.png" _width="20px" _height="19px" />
           </div>
-
-          <div style={{ width: "270px", position: "absolute" }}>
-            <div style={{ display: "flex", paddingBottom: "8px" }}>
-              <Label
-                _color={({ theme }) => theme.colors.fontGreen}
-                bgColor={({ theme }) => theme.colors.pointGreen01}
-                borderColor="rgba(78, 176, 171, 0.28)"
-              >
-                커리어
-              </Label>
-              <Label
-                _color={({ theme }) => theme.colors.fontGreen}
-                bgColor={({ theme }) => theme.colors.pointGreen01}
-                borderColor="rgba(78, 176, 171, 0.28)"
-              >
-                디자인
-              </Label>
-            </div>
+          <div>
             <Title
-              _fontSize={({ theme }) => theme.fontSizes.font18}
-              lineHeight="24px"
-              _color={({ theme }) => theme.colors.fontGreen}
+              _fontSize={({ theme }) => theme.fontSizes.font16}
+              _lineHeight="22px"
             >
-              UXUI 초보를 위한 아티클
+              아티클 리마인드
             </Title>
-            <Text _padding="50px 0px">카드스와이프 들어갈 부분</Text>
-          </div>
-        </CurationBox>
-        <CurationBox2>
-          <div style={{ position: "absolute", top: "52px", right: "28px" }}>
-            <img
-              src="/images/recommendCnt.png"
-              alt="recommendCnt"
-              width="61px"
-              height="26px"
-            />
-          </div>
-
-          <div style={{ width: "270px", position: "absolute" }}>
-            <div
-              style={{
-                display: "flex",
-                paddingBottom: "8px",
-                color: "#7881f5",
-              }}
+            <Text
+              _fontSize={({ theme }) => theme.fontSizes.font13}
+              _lineHeight="18px"
             >
-              <div>커리어</div>
-              <div>디자인</div>
-            </div>
-            <Title
-              _titleSize={({ theme }) => theme.fontSizes.font18}
-              _subtitleSize={({ theme }) => theme.fontSizes.font14}
-              lineHeight="24px"
-            >
-              <h1 style={{ color: "#7881f5" }}>UXUI 초보를 위한 아티클</h1>
-
-              <p
-                style={{
-                  paddingTop: "50px",
-                  color: "#7881f5",
-                  opacity: 0.6,
-                  lineHeight: "18px",
-                }}
-              >
-                카드스와이프 들어갈 부분
-              </p>
-            </Title>
+              아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
+            </Text>
           </div>
-        </CurationBox2>
-        <MakeBubble>
-          <div style={{ width: "270px", position: "absolute" }}>
-            <Title
-              _titleSize={({ theme }) => theme.fontSizes.font18}
-              _subtitleSize={({ theme }) => theme.fontSizes.font14}
-              lineHeight="24px"
-            >
-              <h1 style={{ color: "#ffffff" }}>
-                철수님의 큐레이션이 유용하셨나요?
-              </h1>
+        </RemindAlert>
+      </AlertBox>
 
-              <p
-                style={{
-                  paddingTop: "8px",
-                  color: "#ffffff",
-                  opacity: 0.6,
-                  lineHeight: "18px",
-                  marginBottom: "32px",
-                }}
-              >
-                크롬 사용자라면 버튼 클릭 한번으로...
-              </p>
-            </Title>
-            <Button
-              isBorder
-              width="105.05px"
-              height="32px"
-              bgColor="#ffffff"
-              _color="#383838"
-              _fontSize="11.84px"
-              name="내 버블드 만들기"
-            />
-          </div>
-        </MakeBubble>
-      </div>
-
-      {/* 마법의 svg */}
-      <svg width="0" height="0">
-        <defs>
-          <clipPath id="myClip">
-            <ellipse cx="44.78" cy="106" rx="44.78" ry="44" />
-            <ellipse cx="111.56" cy="106" rx="44.78" ry="44" />
-            <ellipse cx="44.78" cy="44" rx="44.78" ry="44" />
-            <ellipse cx="111.56" cy="44" rx="44.78" ry="44" />
-          </clipPath>
-        </defs>
-      </svg>
+      {/* 폴더리스트 시작 */}
+      {folderList.map((folderId, idx) => (
+        <ArticleFolder
+          key={idx}
+          _onClick={() => {
+            navigate("/articles");
+          }}
+          folderColor={
+            folderId % 3 === 0
+              ? "green"
+              : folderId % 3 === 1
+              ? "purple"
+              : "blue"
+          }
+        />
+      ))}
     </React.Fragment>
   );
 };
 
-const Profile = styled.div`
-  width: 100%;
-  height: 150px;
-  margin-bottom: 36px;
-  position: relative;
+const Qheader = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
-const ProfileImage = styled.div`
-  height: 150px;
-  width: 156.34px;
-  left: -19px;
-  top: -18px;
-  clip-path: url(#myClip);
-  position: relative;
+const LabelBox = styled.div`
+  ${Flexbox};
+  padding-right: 20px;
+`;
+const AlertBox = styled.div`
+  padding: 16px;
 `;
 
-const CurationBox = styled.div`
-  width: 100%;
-  height: 290px;
-  background-color: #daf8f1;
-  border-radius: 20px;
-  padding: 28px;
-  margin-bottom: 16px;
-  position: relative;
+const RemindAlert = styled.div`
+  display: flex;
+  height: 82px;
+  border: 1px solid #f2f3f4;
+  border-radius: 16px;
+  padding: 19px 22px;
 `;
 
-const CurationBox2 = styled(CurationBox)`
-  background-color: #e7e8fa;
-`;
-
-const MakeBubble = styled(CurationBox)`
-  height: 194px;
-  background-color: #383838;
+const TextPoint = styled.div`
+  ${({ theme }) => {
+    const { colors, fontWeight } = theme;
+    return css`
+      display: inline-block;
+      color: ${colors.fontPurple};
+      font-weight: ${fontWeight.semiBold};
+    `;
+  }}
 `;
 
 export default MyPage;

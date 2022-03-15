@@ -4,6 +4,7 @@ import { Flexbox } from "../styles/flexbox";
 
 const Button = props => {
   const {
+    _width,
     children,
     _onClick,
     borderRadius,
@@ -15,6 +16,7 @@ const Button = props => {
     bold,
   } = props;
   const styles = {
+    _width,
     borderRadius,
     _padding,
     bgColor,
@@ -33,6 +35,7 @@ const Button = props => {
 
 Button.defaultProps = {
   _onClick: () => {},
+  _width: "100%",
   _padding: "0px",
   bgColor: "#353C49",
   _color: "#ffffff",
@@ -44,8 +47,8 @@ Button.defaultProps = {
 
 // 스타일드 컴포넌트 작성 위치
 const StyledButton = styled.button`
-  ${Flexbox}
-  width: 100%;
+  ${Flexbox};
+  width: ${props => props._width || "100%"};
   padding: ${props => props._padding};
   background-color: ${props => props.bgColor};
   font-size: ${props => props._fontSize};

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
+
 import styled from "styled-components";
 import { FlexboxColumn } from "../styles/flexbox";
-import Button from "../elements/Button";
-import Title from "../elements/Title";
+import { Button, Title } from "../elements";
+
+import Swal from "sweetalert2";
 
 const UserNickname = props => {
   const location = useLocation();
@@ -11,6 +13,21 @@ const UserNickname = props => {
 
   const [words, setWords] = useState(0);
   const [nickname, setNickname] = useState("");
+
+  const onFavorite = () => {
+    if (nickname) {
+      navigate("/user/favorites", {
+        state: { ...location.state, nickname },
+      });
+    } else {
+      Swal.fire({
+        text: "닉네임을 입력해주세요",
+        icon: "warning",
+        confirmButtonText: "확인",
+        confirmButtonColor: "#353C49",
+      });
+    }
+  };
 
   const handleKeyUp = e => {
     if (e.target.value.length <= 6) {
@@ -28,11 +45,11 @@ const UserNickname = props => {
         <UserArea>
           <Title
             _fontSize={({ theme }) => theme.fontSizes.font24}
-            _lineHeight="32px"
+            _lineHeight="38px"
           >
-            내가 가진 멋진 닉네임을
+            버블드에서 사용할
             <br />
-            자랑해주세요
+            닉네임을 적어주세요
           </Title>
           <InputBox>
             <UserInput
@@ -45,9 +62,7 @@ const UserNickname = props => {
         </UserArea>
         <ButtonBox>
           <Button
-            _onClick={() => {
-              navigate("/user/favorites", { state: {...location.state, nickname} });
-            }}
+            _onClick={onFavorite}
             _fontSize={({ theme }) => theme.fontSizes.font20}
             borderRadius="0px"
             _padding="18px 0px"

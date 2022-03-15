@@ -28,7 +28,8 @@ const TitleText = styled.h1`
       color: ${props => props._color};
       line-height: ${props => props._lineHeight};
       letter-spacing: 0.0038em;
-      text-align: ${props => props.textAlign}; ;
+      text-align: ${props => props.textAlign};
+      align-self: center;
     `;
   }}
 `;
