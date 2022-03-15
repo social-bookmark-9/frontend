@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import articleApi from "../../app/articleApi";
+import articleApi from "../app/articleApi";
 
 const ArticleApi = new articleApi();
 
