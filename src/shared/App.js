@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import {
   Login,
@@ -8,17 +8,21 @@ import {
   UserFavorites,
   Main,
   ArticleList,
-  Article,
+  ArticleDetail,
   Reviews,
   Setting,
 } from "../pages";
 import MyPage from "../pages/MyPage";
 import OAuthRedirectHandler from "../shared/OAuthRedirectHandler";
+import { getArticleAxios } from "../redux/modules/Article";
 
 function App(props) {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const isLogin = useSelector(state => state.user.is_login);
   // const isToken = sessionStorage.getItem("token") ? true : false;
+  useEffect(() => {
+    dispatch(getArticleAxios());
+  });
 
   return (
     <React.Fragment>
@@ -34,7 +38,7 @@ function App(props) {
           element={<UserFavorites isLogin={isLogin} />}
         />
         <Route path="/articles" element={<ArticleList isLogin={isLogin} />} />
-        <Route path="/article" element={<Article isLogin={isLogin} />} />
+        <Route path="/article" element={<ArticleDetail isLogin={isLogin} />} />
         <Route path="/mypage" element={<MyPage isLogin={isLogin} />} />
         <Route path="/setting" element={<Setting isLogin={isLogin} />} />
         <Route path="/reviews" element={<Reviews isLogin={isLogin} />} />

@@ -7,12 +7,12 @@ import Button from "../elements/Button";
 import Title from "../elements/Title";
 import { FlexboxColumn, FlexboxRow } from "../styles/flexbox";
 
-const Article = props => {
+const ArticleDetail = props => {
   return (
     <React.Fragment>
       <Navbar />
       <div style={{ padding: "16px" }}>
-        <ArticleCard isDetail done />
+        <ArticleCard />
         <label
           style={{
             fontSize: "10px",
@@ -98,4 +98,4 @@ const Line = styled.hr`
   background-color: ${({ theme }) => theme.colors.grayColor01};
 `;
 
-export default Article;
+export default ArticleDetail;

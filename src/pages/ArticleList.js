@@ -1,32 +1,39 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import ArticleCard from "../components/ArticleCard";
-import Navbar from "../components/Navbar";
-import Title from "../elements/Title";
-import Button from "../elements/Button";
+import { ArticleCard, Navbar } from "../components";
+import { Text, Button } from "../elements";
+import { FlexboxColumn } from "../styles/flexbox";
 
 const ArticleList = props => {
+  const data = useSelector(state => state.article.data);
+
   return (
     <React.Fragment>
       <Navbar />
+      {}
       <AlBox>
-        <ArticleCard />
-        <ArticleCard isRead done />
-        <ArticleCard isMe done />
-        <ArticleCard isDetail done />
+        {data.map((article, idx) => {
+          return <ArticleCard key={idx} article={article} />;
+        })}
       </AlBox>
       <AlButton>
-        <Title _subtitleSize="14px">
-          <p>아티클을 한번에 저장하고 싶다면?</p>
-        </Title>
+        <Text
+          _padding="16px 0px"
+          _fontSize={({ theme }) => theme.fontSizes.font14}
+          _lineHeight="18px"
+        >
+          아티클을 한번에 저장하고 싶다면?
+        </Text>
         <Button
+          _padding="12px"
+          bgColor={({ theme }) => theme.colors.white}
+          _color={({ theme }) => theme.colors.fontColor05}
           isBorder
-          name="모두 저장하기"
-          bgColor="#ffffff"
-          _color="#383838"
-          _fontSize="14px"
-          height="45px"
-        />
+          bold
+        >
+          모두 저장하기
+        </Button>
       </AlButton>
     </React.Fragment>
   );
@@ -38,8 +45,9 @@ const AlBox = styled.div`
 `;
 
 const AlButton = styled.div`
+  ${FlexboxColumn}
+  align-items: center;
   padding: 8px 16px;
-  text-align: center;
 `;
 
 export default ArticleList;
