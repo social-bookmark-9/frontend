@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { ArticleCard, Navbar } from "../components";
 import { Text, Button } from "../elements";
-import { FlexboxColumn } from "../styles/flexbox";
+import { Flexbox, FlexboxColumn } from "../styles/flexbox";
 
 const ArticleList = props => {
   const data = useSelector(state => state.article.data);
@@ -21,7 +21,7 @@ const ArticleList = props => {
         <Text
           _padding="16px 0px"
           _fontSize={({ theme }) => theme.fontSizes.font14}
-          _lineHeight="18px"
+          _lineHeight="22px"
         >
           아티클을 한번에 저장하고 싶다면?
         </Text>
