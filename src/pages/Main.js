@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import Modal from "../components/Modal";
 import Button from "../elements/Button";
 import { logoutAxios } from "../redux/modules/User";
 
@@ -38,6 +39,7 @@ const Main = props => {
       >
         로그아웃 확인
       </Button>
+      <Modal />
     </React.Fragment>
   );
 };

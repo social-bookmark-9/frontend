@@ -18,7 +18,6 @@ const UserFavorites = props => {
   const [checkedItems, setCheckedItems] = useState(new Set());
 
   const newList = [...checkedItems];
-  console.log(newList);
 
   const userInfo = {
     kakaoId: location.state.kakaoId,
@@ -29,9 +28,6 @@ const UserFavorites = props => {
     hashtag2: (newList[1]) ? newList[1] : "null",
     hashtag3: (newList[2]) ? newList[2] : "null"
   };
-
-  console.log("여기는 마지막 확인");
-  console.log(location.state);
 
   const favoritesList = [
     "커리어",
