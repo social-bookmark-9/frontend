@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import styled, { css } from "styled-components";
 
@@ -10,7 +10,7 @@ import { Flexbox } from "../styles/flexbox";
 const MyPage = props => {
   const { isLogin } = props;
   const navigate = useNavigate();
-  const folderData = useSelector(state => state.folder.data);
+  const folderData = [0, 1, 2, 3];
   const isMe = true;
   const completeRates = [15, 100, 30, 45];
 

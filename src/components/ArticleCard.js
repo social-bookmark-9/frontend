@@ -16,7 +16,7 @@ const ArticleCard = ({ article }) => {
     <React.Fragment>
       <ArticleCardBox
         onClick={() => {
-          navigate("/article");
+          navigate("/articles");
         }}
         imgOg={imgOg}
         isRead={isRead}
@@ -39,6 +39,7 @@ const ArticleCard = ({ article }) => {
               _src={`/images/${isSaved ? "bookmark" : "unbookmark"}.png`}
               _width="25px"
               _height="24px"
+              _marginR="none"
             />
           </ImageBox>
         )}
