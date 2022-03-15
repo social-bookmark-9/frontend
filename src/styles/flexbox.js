@@ -18,4 +18,9 @@ const FlexboxRow = css`
   justify-content: center;
 `;
 
-export { Flexbox, FlexboxColumn, FlexboxRow };
+const FlexboxSpace = css`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export { Flexbox, FlexboxColumn, FlexboxRow, FlexboxSpace };

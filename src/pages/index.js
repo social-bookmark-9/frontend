@@ -3,7 +3,7 @@ import UserNickname from "./UserNickname";
 import UserFavorites from "./UserFavorites";
 import Main from "./Main";
 import ArticleList from "./ArticleList";
-import Article from "./Article";
+import ArticleDetail from "./ArticleDetail";
 import Reviews from "./Reviews";
 import Setting from "./Setting";
 
@@ -13,7 +13,7 @@ export {
   UserFavorites,
   Main,
   ArticleList,
-  Article,
+  ArticleDetail,
   Reviews,
   Setting,
 };
