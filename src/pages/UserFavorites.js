@@ -1,25 +1,36 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router";
+
+import { registerAxios } from "../redux/modules/User";
+
+import Favorite from "../components/Favorite";
+
 import styled from "styled-components";
 import { FlexboxColumn } from "../styles/flexbox";
-import Button from "../elements/Button";
-import Title from "../elements/Title";
-import Text from "../elements/Text";
-import Favorite from "../components/Favorite";
+import { Button, Title, Text } from "../elements";
+
+import Swal from "sweetalert2";
 
 const UserFavorites = props => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const [isChecked, setIsChecked] = useState(false);
   const [checkedItems, setCheckedItems] = useState(new Set());
 
-  const userInfo = {
-    nickname: location.state,
-    favorites: checkedItems,
-  };
+  const newList = [...checkedItems];
 
-  console.log(userInfo);
+  const userInfo = {
+    kakaoId: location.state.kakaoId,
+    email: location.state.email,
+    memberName: location.state.nickname,
+    profileImage: location.state.profileImage,
+    hashtag1: newList[0],
+    hashtag2: newList[1] ? newList[1] : "null",
+    hashtag3: newList[2] ? newList[2] : "null",
+  };
 
   const favoritesList = [
     "커리어",
@@ -54,6 +65,19 @@ const UserFavorites = props => {
     return checkedItems;
   };
 
+  const handleRegister = e => {
+    if (newList.length < 1) {
+      Swal.fire({
+        text: "관심분야를 최소 한개는 선택해주세요",
+        icon: "warning",
+        confirmButtonText: "확인",
+        confirmButtonColor: "#353C49",
+      });
+    } else {
+      dispatch(registerAxios({ userInfo, navigate }));
+    }
+  };
+
   return (
     <React.Fragment>
       <UserBox>
@@ -62,7 +86,7 @@ const UserFavorites = props => {
             <Title
               textAlign="center"
               _fontSize={({ theme }) => theme.fontSizes.font24}
-              _lineHeight="32px"
+              _lineHeight="38px"
               _padding="15px 0px"
             >
               관심있는 분야를
@@ -81,9 +105,7 @@ const UserFavorites = props => {
         </UserArea>
         <ButtonBox>
           <Button
-            _onClick={() => {
-              navigate("/user/favorites");
-            }}
+            _onClick={handleRegister}
             _fontSize={({ theme }) => theme.fontSizes.font20}
             borderRadius="0px"
             _padding="18px 0px"

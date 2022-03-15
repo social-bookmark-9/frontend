@@ -1,46 +1,48 @@
-// import { useNavigate } from "react-router";
-import Button from "../elements/Button";
-import Title from "../elements/Title";
-import styled from "styled-components";
+import React from "react";
 import { KAKAO_AUTH_URL } from "../shared/OAuth";
 
-const Login = () => {
-  // const navigate = useNavigate();
-  // const nextStep = () => {
-  //   navigate('/registerFirst')
-  // }
-  // const responseGoogle = (response) => {
-  //   console.log(response);
-  // }
+import styled from "styled-components";
+import { FlexboxColumn } from "../styles/flexbox";
+import { Button, Title, Text, Image } from "../elements";
 
+const Login = () => {
   return (
-    <LoginBox>
-      <Topdiv>
-        <Title
-          textAlign="center"
-          _padding="153px 0px"
-          _titleSize={({ theme }) => theme.fontSizes.font28}
-          _lineHeight="36px"
-        >
-          문구 영역만
-          <br />
-          잡아주세요
-        </Title>
-      </Topdiv>
-      <Bottomdiv>
-        <a href={KAKAO_AUTH_URL}>
-          <Button
-            _padding="14px 0px"
-            bgColor={({ theme }) => theme.colors.kakao}
-            _color="#381E1F"
-            _fontSize={({ theme }) => theme.fontSizes.font12}
-            borderRadius="3px"
-          >
-            <img src="/images/kakao.png" width={20} height={17} alt="kakao" />
-            카카오로 로그인
-          </Button>
-        </a>
-        {/* <a href={GOOGLE_AUTH_URL}>
+    <React.Fragment>
+      <LoginBox>
+        <Topdiv>
+          <Image _src="/images/bubbled.png" _width="65.37px" _height="52.4px" />
+          <TitleBox>
+            <Title
+              textAlign="center"
+              _titleSize={({ theme }) => theme.fontSizes.font28}
+              _lineHeight="36px"
+            >
+              Express yourself <br />
+              with what you read
+            </Title>
+            <Text
+              textAlign="center"
+              _padding="22px 0px"
+              _fontSize={({ theme }) => theme.fontSizes.font14}
+            >
+              내가 읽은 것들로 나를 표현하는 공간. 버블드
+            </Text>
+          </TitleBox>
+        </Topdiv>
+        <Bottomdiv>
+          <a href={KAKAO_AUTH_URL}>
+            <Button
+              _padding="14px 0px"
+              bgColor={({ theme }) => theme.colors.kakao}
+              _color="#381E1F"
+              _fontSize={({ theme }) => theme.fontSizes.font12}
+              borderRadius="3px"
+            >
+              <img src="/images/kakao.png" width={20} height={17} alt="kakao" />
+              카카오로 로그인
+            </Button>
+          </a>
+          {/* <a href={GOOGLE_AUTH_URL}>
           <Button
             isBorder
             name={"구글로 로그인"}
@@ -52,8 +54,9 @@ const Login = () => {
             _fontSize={({ theme }) => theme.fontSizes.font12}
           />
         </a> */}
-      </Bottomdiv>
-    </LoginBox>
+        </Bottomdiv>
+      </LoginBox>
+    </React.Fragment>
   );
 };
 
@@ -63,11 +66,17 @@ const LoginBox = styled.div`
 `;
 
 const Topdiv = styled.div`
-  height: 60vh;
+  ${FlexboxColumn}
+  align-items: center;
+  height: 75vh;
+`;
+
+const TitleBox = styled.div`
+  padding: 28px 0px;
 `;
 
 const Bottomdiv = styled.div`
-  height: 40vh;
+  height: 25vh;
   padding: 0px 60px;
   text-align: center;
 `;

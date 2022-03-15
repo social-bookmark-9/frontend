@@ -10,15 +10,7 @@ import { FlexboxColumn, FlexboxRow } from "../styles/flexbox";
 const Article = props => {
   return (
     <React.Fragment>
-      <AlHeader>
-        <Title
-          _titleSize={({ theme }) => theme.fontSizes.font20}
-          lineHeight="24px"
-        >
-          <h1>아티클 폴더 이름</h1>
-        </Title>
-        <Navbar />
-      </AlHeader>
+      <Navbar />
       <div style={{ padding: "16px" }}>
         <ArticleCard isDetail done />
         <label
@@ -66,12 +58,6 @@ const Article = props => {
     </React.Fragment>
   );
 };
-
-const AlHeader = styled.div`
-  ${FlexboxRow}
-  justify-content: space-between;
-  padding: 14px 22px;
-`;
 
 const Buttons = styled.div`
   ${FlexboxRow}
