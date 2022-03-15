@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { ArticleCard, Navbar } from "../components";
 import { Text, Button } from "../elements";
-import { Flexbox, FlexboxColumn } from "../styles/flexbox";
+import { FlexboxColumn } from "../styles/flexbox";
 
 const ArticleList = props => {
   const data = useSelector(state => state.article.data);
