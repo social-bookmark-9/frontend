@@ -5,9 +5,10 @@ import Favorite from "../components/Favorite";
 import Button from "../elements/Button";
 
 const AddLinkTag = (props) => {
-  // 뒤로가기
-  const goBack = () => {
-    props.setAddStage(true);
+  // 완료
+  const addLinkFinish = () => {
+    props.closeModal();
+    console.log("됐나?");
   }
 
   const [isChecked, setIsChecked] = useState(false);
@@ -49,9 +50,7 @@ const AddLinkTag = (props) => {
 
   return (
     <>
-      {/* <div style={{marginTop:"-18px"}}>
-        <button onClick={goBack}>{"<"}</button>
-      </div> */}
+      
       <div style={{height:"270"}}>
         <Text>태그 선택</Text>
         <FavoritesBox>
@@ -68,7 +67,7 @@ const AddLinkTag = (props) => {
           position:"fixed",
           bottom:"24px"
         }}>
-          <Button _onClick={goBack} _padding="18px">완료</Button>
+          <Button _onClick={addLinkFinish} _padding="18px">완료</Button>
       </div>
     </>
   )

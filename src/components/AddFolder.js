@@ -3,24 +3,14 @@ import { useEffect, useState } from "react";
 import Text from "../elements/Text";
 import styled from "styled-components";
 import Button from "../elements/Button";
+import { Title } from "../elements";
 
 const AddFolder = (props) => {
-  useEffect(() => {
-    props.setModalTitle("새 컬렉션 추가");
-    props.setModalBackspace(backButton);
-  }, []);
 
-  const backButton = () => {
-    return(
-      <button onClick={modalChange}>{"<"}</button>
-    )
-  }
 
   // 뒤로가기
   const modalChange = () => {
-    props.setShowModal((current) => !current);
-    props.setModalTitle("");
-    props.setModalBackspace("");
+    props.setAddFolderList((current) => !current);
   }
 
   // 컬렉션 추가 완료 버튼 (컬렉션 추가 + 뒤로가기)
@@ -38,12 +28,35 @@ const AddFolder = (props) => {
 
   return (
     <>
+      <div style={{marginTop:"-18px", display:"flex", alignItems:"center"}}>
+        <div>
+          <button
+            style={{
+              display: "flex",
+              width: "20%",
+              justifyContent: "start"
+            }}
+            onClick={modalChange}
+          >
+            {"<"}
+          </button>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            width: "80%",
+            justifyContent: "center"
+          }}
+        >
+          <Title>새 컬렉션 추가</Title>
+        </div>
+      </div>
       <Header>
-        <Text>새 컬렉션 이름</Text>
+        <Text _fontSize="14px">새 컬렉션 이름</Text>
         <Input></Input>
       </Header>
       <LinkField>
-        <Text>공개여부</Text>
+        <Text _fontSize="14px">공개여부</Text>
         <Settingwrap>
           <ShowSetting state={show} onClick={toggleShow}>
             공개
@@ -78,13 +91,9 @@ const Input = styled.input`
   width: 100%;
   height: 50px;
   padding: 24px;
+  font-size: 13px;
   border: 1px solid #F2F4F6;
   border-radius: 5px;
-`;
-
-const Reminder = styled.div`
-  position: fixed;
-  bottom: 112px;
 `;
 
 const Settingwrap = styled.div`
@@ -96,6 +105,7 @@ const Settingwrap = styled.div`
 const ShowSetting = styled.div`
   margin-top: 8px;
   text-align: center;
+  font-size: 14px;
   line-height: 50px;
   width: 50%;
   height: 50px;

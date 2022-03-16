@@ -8,18 +8,17 @@ import AddLinkTag from "./AddLinkTag";
 const Modal = (props) => {
   // 모달 열고 닫기
   const [modalOpen, setModalOpen] = useState(false);
+  // 어떤 모달창 보여줄지 (링크 추가 단계)
   const [showModal, setShowModal] = useState(false);
+  // 모달 열고 닫기 펑션
   const openModal = () => {setModalOpen(true);}
   const closeModal = () => {
     setModalOpen(false);
-    setModalTitle("");
     setShowModal(false);
   }
   
-
   const [modalBackspace, setModalBackspace] = useState("");
   const [modalTitle, setModalTitle] = useState("");
-
 
   return (
     <>
@@ -29,12 +28,7 @@ const Modal = (props) => {
         <Section>
           <MainModal>
             <div style={{display:"flex", alignItems:"center"}}>
-              <div style={{display:"flex", width:"20%", justifyContent:"start"}}>
-                {modalBackspace}
-              </div>
-              <div style={{width:"60%", justifyContent:"center", textAlign:"center  "}}>
-                {modalTitle}
-              </div>
+              <div style={{display:"flex", width:"80%", justifyContent:"start"}} />
               <div style={{display:"flex", width:"20%", justifyContent:"end"}}>
                 <button onClick={closeModal}>
                   &times;
@@ -43,16 +37,12 @@ const Modal = (props) => {
             </div>
             <Main>
               {showModal ? (
-                <AddFolder
-                  setShowModal={setShowModal}
-                  setModalBackspace={setModalBackspace}
-                  setModalTitle={setModalTitle}
+                <AddLinkTag 
+                closeModal={closeModal}
                 />
               ) : (
                 <AddLink
                   setShowModal={setShowModal}
-                  setModalBackspace={setModalBackspace}
-                  setModalTitle={setModalTitle}
                 />
               )}
             </Main>
