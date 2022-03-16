@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 import Title from "../elements/Title";
@@ -8,7 +9,16 @@ import EditProfileLink from "../components/EditProfileLink";
 
 
 const EditProfile = () => {
+  const [words, setWords] = useState(0);
 
+  const handleKeyUp = e => {
+    if (e.target.value.length <= 34) {
+      setWords(e.target.value.length);
+    }
+    if (e.target.value.length > 34) {
+      e.target.value = e.target.value.slice(0, 34);
+    }
+  };
 
   return (
     <>
@@ -43,7 +53,10 @@ const EditProfile = () => {
           <TextAreaField
             placeholder="자기소개를 작성해 주세요."
             rows={5}
+            maxLength={34}
+            onKeyUp={handleKeyUp}
           />
+          <InputCheck>{words}/34</InputCheck>
         </MemoBox>      
       </Container>
       <EditProfileLink />
@@ -101,18 +114,23 @@ const CircleBox = styled.div`
 `;
 
 const MemoBox = styled.div`
-  ${FlexboxColumn}
+  width: 100%;
   padding: 36px;
-  margin-top: 80px;
-  margin-bottom: 40px;
+  margin-top: 100px;
+  margin-bottom: 42px;
 `;
 
 const TextAreaField = styled.textarea`
+  width: 100%;
   height: 90px;
-  padding: 20px;
+  padding: 28px 65px 28px 65px;
   border-radius: 8px;
   background-color: white;
+  color: ${({ theme }) => theme.colors.fontColor05};
   text-align: center;
+  font-size: ${({ theme }) => theme.fontSizes.font13};
+  letter-spacing: -0.0008em;
+  line-height: 18px;
   &:focus {
     outline: none;
   }
@@ -121,9 +139,17 @@ const TextAreaField = styled.textarea`
     text-align: center;
     font-size: ${({ theme }) => theme.fontSizes.font13};
     letter-spacing: -0.0008em;
-    line-height: 46px;
+    line-height: 18px;
   }
 `;
 
+const InputCheck = styled.p`
+  text-align: right;
+  padding: 4px 0px;
+  font-size: ${({ theme }) => theme.fontSizes.font14};
+  color: ${({ theme }) => theme.colors.fontColor04};
+  line-height: 18px;
+  letter-spacing: -0.0008em;
+`;
 
 export default EditProfile;
