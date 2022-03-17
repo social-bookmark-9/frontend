@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
 import Button from "../elements/Button";
-import AddFolder from "./AddFolder";
 import AddLink from "./AddLink";
 import AddLinkTag from "./AddLinkTag";
 
