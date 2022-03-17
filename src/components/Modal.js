@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { useState } from "react";
 import Button from "../elements/Button";
 import AddLink from "./AddLink";
-import AddLinkTag from "./AddLinkTag";
 
 const Modal = () => {
   // 모달 열고 닫기
@@ -50,7 +49,7 @@ const Modal = () => {
       ) : null}
     </>
   );
-}
+};
 
 const Section = styled.div`
   position: fixed;
@@ -77,6 +76,5 @@ const Main = styled.div`
   height: 270px;
   margin-top: 2px;
 `;
-
 
 export default Modal;

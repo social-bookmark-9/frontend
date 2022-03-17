@@ -14,7 +14,6 @@ const AddLinkTag = (props) => {
   const [isChecked, setIsChecked] = useState(false);
   const [checkedItems, setCheckedItems] = useState(new Set());
 
-
   const favoritesList = [
     "커리어",
     "업무스킬",
@@ -70,8 +69,8 @@ const AddLinkTag = (props) => {
           <Button _onClick={addLinkFinish} _padding="18px">완료</Button>
       </div>
     </>
-  )
-}
+  );
+};
 
 const FavoritesBox = styled.div`
   width: 100%;

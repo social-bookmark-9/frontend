@@ -20,8 +20,8 @@ const AddLink = (props) => {
     { key: 1, value: "미분류 컬렉션" },
     { key: 2, value: "컬렉션명2" },
     { key: 3, value: "컬렉션명3" },
-    { key: 4, value: "컬렉션명4" }
-  ]
+    { key: 4, value: "컬렉션명4" },
+  ];
 
   const options = [...dummyOption, {
     key: 0,
@@ -34,7 +34,7 @@ const AddLink = (props) => {
   }]
 
   const [folder, setFolder] = useState(options[0].value);
-  const handleChangeFolder = (e) => {
+  const handleChangeFolder = e => {
     setFolder(e.target.value);
   };
 
@@ -85,7 +85,7 @@ const AddLink = (props) => {
             <div style={{display:"flex", width:"30%", justifyContent:"start"}}>
               <Text _fontSize="14px">리마인드</Text>
             </div>
-            <div style={{display:"flex", justifyContent:"end"}}>
+            <div style={{ display: "flex", justifyContent: "end" }}>
               <Label
                 _color={({ theme }) => theme.colors.fontColor02}
                 bgColor={({ theme }) => theme.colors.white}
@@ -141,7 +141,7 @@ const AddLink = (props) => {
       }
     </>
   );
-}
+};
 
 const Dropdown = styled.div`
   position: relative;
@@ -157,11 +157,13 @@ const DropdownHeader = styled.div`
   border: 1px solid #F2F4F6;
   font-size: 13px;
   display: flex;
-  ${({ state }) => (state ? `
+  ${({ state }) =>
+    state
+      ? `
     border-radius: 5px 5px 0 0;
-  ` : `border-radius: 5px;` )}
+  `
+      : `border-radius: 5px;`}
 `;
-
 
 const DropdownList = styled.ul`
   position: relative;
@@ -177,7 +179,7 @@ const DropdownItem = styled.li`
   height: 50px;
   padding: 16px 16px 16px 24px;
   margin: 0;
-  border: 1px solid #F2F4F6;
+  border: 1px solid #f2f4f6;
   list-style: none;
   background: white;
   margin-top: -1px;
@@ -195,7 +197,7 @@ const LinkField = styled.div`
 const Input = styled.input`
   width: 100%;
   height: 50px;
-  border: 1px solid #F2F4F6;
+  border: 1px solid #f2f4f6;
   border-radius: 5px;
   padding: 24px;
   font-size: 13px;
@@ -207,7 +209,7 @@ const Hr = styled.hr`
   height: 1px;
   left: 0;
   border: 0;
-  border-top: 1px solid #F2F4F6;
+  border-top: 1px solid #f2f4f6;
   bottom: 145px;
 `;
 
