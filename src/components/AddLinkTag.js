@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Text from "../elements/Text";
 import styled from "styled-components";
 import Favorite from "../components/Favorite";

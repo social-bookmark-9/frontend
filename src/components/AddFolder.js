@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Text from "../elements/Text";
 import styled from "styled-components";
 import Button from "../elements/Button";
@@ -7,10 +7,10 @@ import { Title } from "../elements";
 
 const AddFolder = (props) => {
 
-
   // 뒤로가기
   const modalChange = () => {
     props.setAddFolderList((current) => !current);
+    props.setShowFolder("");
   }
 
   // 컬렉션 추가 완료 버튼 (컬렉션 추가 + 뒤로가기)

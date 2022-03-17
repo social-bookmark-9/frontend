@@ -27,9 +27,9 @@ const AddLink = (props) => {
     key: 0,
     value:
       <div style={{
-        width:"100%", height:"100%"
+        width:"100%", height:"100%", margin: "-16px -16px -16px -24px"
       }} onClick={toggleAddFolderList}>
-        추가
+        <div style={{padding: "16px 16px 16px 24px"}}>추가</div>
       </div>
   }]
 
@@ -136,6 +136,7 @@ const AddLink = (props) => {
       ) : 
         <AddFolder
           setAddFolderList={setAddFolderList}
+          setShowFolder={setShowFolder}
         />
       }
     </>

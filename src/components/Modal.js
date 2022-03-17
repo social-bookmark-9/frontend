@@ -4,7 +4,7 @@ import Button from "../elements/Button";
 import AddLink from "./AddLink";
 import AddLinkTag from "./AddLinkTag";
 
-const Modal = (props) => {
+const Modal = () => {
   // 모달 열고 닫기
   const [modalOpen, setModalOpen] = useState(false);
   // 어떤 모달창 보여줄지 (링크 추가 단계)
@@ -77,7 +77,6 @@ const Main = styled.div`
   height: 270px;
   margin-top: 2px;
 `;
-
 
 
 export default Modal;
