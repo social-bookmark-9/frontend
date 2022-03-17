@@ -170,6 +170,7 @@ const EditProfileLink = () => {
 
 const InnerDiv = styled.div`
   position: absolute;
+  width: 390px;
   top:470px;
   z-index:1;
   background-color: white;

@@ -23,6 +23,7 @@ const EditProfile = () => {
   return (
     <>
       <Container>
+        <AreaWrap>
         <ProfileBox>
           {/*  그거... 동그라미 */}
           <CircleBox>
@@ -36,10 +37,10 @@ const EditProfile = () => {
             />
           </ProfileImage>
           <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
-            <div style={{display:"flex", justifyContent:"start"}}>
-              <Title _padding="23px 15px 30px 0">@김철수</Title>
+            <div style={{display:"flex", justifyContent:"start", alignItems:"center"}}>
+              <Title _padding="23px 15px 30px 23px">@김철수</Title>
             </div>
-            <div style={{display:"flex", justifyContent:"end"}}>
+            <div style={{display:"flex", justifyContent:"end", alignItems:"center"}}>
               <img
                 src={`/images/edit.png`}
                 width={"20px"}
@@ -57,7 +58,8 @@ const EditProfile = () => {
             onKeyUp={handleKeyUp}
           />
           <InputCheck>{words}/34</InputCheck>
-        </MemoBox>      
+        </MemoBox>
+        </AreaWrap>      
       </Container>
       <EditProfileLink />
       
@@ -85,18 +87,21 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.grayColor01};
 `;
 
+const AreaWrap = styled.div`
+  width: 390px;
+`;
+
 const ProfileBox = styled.div`
   width: 100%;
-  height: 150px;
+  height: 278px;
   position: relative;
-  padding: 51px 200px;
+  padding: 51px 112px;
 `;
 
 const ProfileImage = styled.div`
   display: inline-block;
   height: 150px;
   width: 156.34px;
-  left: -19px;
   clip-path: url(#myClip);
   position: relative;
   background-color: #c4c4c4;
@@ -109,14 +114,13 @@ const ProfileImage = styled.div`
 
 const CircleBox = styled.div`
   position: absolute;
-  bottom: -52px;
-  left: 316px;
+  top: 172px;
+  right: 112px;
 `;
 
 const MemoBox = styled.div`
   width: 100%;
-  padding: 36px;
-  margin-top: 100px;
+  padding: 0 17px 0 17px;
   margin-bottom: 42px;
 `;
 
