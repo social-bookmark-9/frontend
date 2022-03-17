@@ -1,41 +1,46 @@
 import React from "react";
+
 import styled from "styled-components";
-import ArticleCard from "../components/ArticleCard";
-import Navbar from "../components/Navbar";
-import RecommendArticle from "../components/RecommendArticle";
-import Button from "../elements/Button";
-import Title from "../elements/Title";
 import { FlexboxColumn, FlexboxRow } from "../styles/flexbox";
 
+import { ArticleCard, Navbar, RecommendCard } from "../components";
+import { Button, Image, Title } from "../elements";
+import { useLocation } from "react-router";
+
 const ArticleDetail = props => {
+  const location = useLocation();
+  const articleData = location.state;
+  const isMe = location.state.isMe;
+  const recommendList = [0, 1, 2];
+
   return (
     <React.Fragment>
       <Navbar />
       <div style={{ padding: "16px" }}>
         <ArticleCard />
-        <label
-          style={{
-            fontSize: "10px",
-            padding: "8px 16px",
-            border: "1px solid #000000",
-          }}
-        >
-          커리어
-        </label>
-        <Buttons>
-          <Button inArticle name="링크 복사" margin="0px 4px" />
-          <Button inArticle name="이미지 저장" margin="0px 4px" />
-        </Buttons>
-        <Button inArticle name="내 컬렉션에 저장" margin="4px 0px" />
+        {isMe ? (
+          ""
+        ) : (
+          <Button
+            _padding="12px"
+            bgColor={({ theme }) => theme.colors.white}
+            _color={({ theme }) => theme.colors.fontColor05}
+            isBorder
+            bold
+          >
+            내 컬렉션에 저장
+          </Button>
+        )}
+
         <MemoBox>
           <MemoHead>
             <Title
-              _titleSize={({ theme }) => theme.fontSizes.font20}
-              lineHeight="24px"
+              _fontSize={({ theme }) => theme.fontSizes.font20}
+              _lineHeight="24px"
             >
-              <h1>김철수의 메모</h1>
+              닉네임의 메모
             </Title>
-            <img src="/images/hide.png" alt="menu" width="20px" height="20px" />
+            <Image _src="/images/hide.png" _width="20px" _height="20px" />
           </MemoHead>
           <TextAreaField
             placeholder="여기를 눌러 메모를 남겨보세요."
@@ -46,22 +51,20 @@ const ArticleDetail = props => {
       <Line />
       <div style={{ padding: "24px 20px" }}>
         <Title
-          _titleSize={({ theme }) => theme.fontSizes.font20}
-          lineHeight="24px"
+          _fontSize={({ theme }) => theme.fontSizes.font20}
+          _lineHeight="24px"
         >
-          <h1>함께 보면 좋은 글</h1>
+          함께 보면 좋은 글
         </Title>
-        <div style={{ padding: "28px 0px" }}>
-          <RecommendArticle />
-        </div>
+        <ReCardBox>
+          {recommendList.map((recommend, idx) => (
+            <RecommendCard />
+          ))}
+        </ReCardBox>
       </div>
     </React.Fragment>
   );
 };
-
-const Buttons = styled.div`
-  ${FlexboxRow}
-`;
 
 const MemoBox = styled.div`
   ${FlexboxColumn}
@@ -96,6 +99,10 @@ const Line = styled.hr`
   border: none;
   height: 10px;
   background-color: ${({ theme }) => theme.colors.grayColor01};
+`;
+
+const ReCardBox = styled.div`
+  padding: 28px 0px;
 `;
 
 export default ArticleDetail;

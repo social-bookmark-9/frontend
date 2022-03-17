@@ -1,12 +1,16 @@
 import React from "react";
-import styled from "styled-components";
-import Title from "../elements/Title";
-import Text from "../elements/Text";
-import { Circle } from "../elements/ImageObj";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
+import styled from "styled-components";
+import { Title, Text } from "../elements";
+import { Circle } from "../elements/ImageObj";
+
 const NavProfile = props => {
-  const { isLogin } = props;
+  const isLogin = useSelector(state => state.user.isLogin);
+  const myInfo = useSelector(state => state.user.myInfo);
+  // const profileImage = myInfo.profileImage;
+
   const navigate = useNavigate();
 
   const onMypage = () => {
@@ -25,23 +29,24 @@ const NavProfile = props => {
           <Circle _width="15px" _height="15px" bgColor="black" />
         </CircleBox>
         <ProfileHead>
-          <ProfileImage />
-          <PropfileInfo>
-            {isLogin ? (
-              <Title>김철수</Title>
+          <ProfileImage>
+            {/* {isLogin && profileImage ? (
+              <img src={profileImage} alt="profile" />
             ) : (
-              <Title
-                _fontSize={({ theme }) => theme.fontSizes.font18}
-                _padding="2.5px 0px"
-              >
-                로그인해주세요
-              </Title>
-            )}
+              ""
+            )} */}
+          </ProfileImage>
+          <PropfileInfo onClick={onMypage}>
+            <Title
+              _fontSize={({ theme }) => theme.fontSizes.font18}
+              _padding="2.5px 0px"
+            >
+              {isLogin ? myInfo.nickname : "로그인해주세요"}
+            </Title>
             <Text
               _fontSize={({ theme }) => theme.fontSizes.font14}
               _lineHeight="18px"
               _padding="2.5px 0px"
-              _onClick={onMypage}
             >
               내 버블드 가기 &#62;
             </Text>
@@ -91,8 +96,11 @@ const ProfileImage = styled.div`
 
 const PropfileInfo = styled.div`
   padding-left: 28px;
-  & p:hover {
+  &:hover {
     cursor: pointer;
+  }
+  & p:hover {
+    text-decoration: underline;
   }
 `;
 

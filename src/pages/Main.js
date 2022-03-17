@@ -3,12 +3,15 @@ import Navbar from "../components/Navbar";
 import Modal from "../components/Modal";
 import { Button } from "../elements";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { logoutAxios } from "../redux/modules/User";
 
 const Main = props => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   return (
     <React.Fragment>
-      <Navbar isLogin={props.isLogin} />
+      <Navbar />
       <div style={{ paddingBottom: "8px" }}></div>
       <Button
         _onClick={() => {
@@ -30,7 +33,7 @@ const Main = props => {
       <div style={{ paddingBottom: "8px" }}></div>
       <Button
         _onClick={() => {
-          navigate("/mypage");
+          navigate("/mypage/");
         }}
         _padding="8px"
       >
@@ -57,13 +60,13 @@ const Main = props => {
       </Button>
       <div style={{ paddingBottom: "8px" }}></div>
 
-      {/* <Button
+      <Button
         _onClick={() => {
           dispatch(logoutAxios({ navigate }));
         }}
       >
         로그아웃 확인
-      </Button> */}
+      </Button>
 
       <Modal />
     </React.Fragment>

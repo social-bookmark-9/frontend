@@ -17,11 +17,12 @@ const UserFavorites = props => {
   const location = useLocation();
   const dispatch = useDispatch();
 
+  // 다중 체크 아이템
   const [isChecked, setIsChecked] = useState(false);
   const [checkedItems, setCheckedItems] = useState(new Set());
 
   const newList = [...checkedItems];
-
+  console.log(newList);
   const userInfo = {
     kakaoId: location.state.kakaoId,
     email: location.state.email,

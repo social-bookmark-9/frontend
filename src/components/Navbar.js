@@ -4,14 +4,18 @@ import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 import { FlexboxColumn } from "../styles/flexbox";
-import { Button, Image } from "../elements";
+import { Button, Image, Title } from "../elements";
 
 import NavProfile from "./NavProfile";
 import { Logo } from "../elements/ImageObj";
+import { useSelector } from "react-redux";
 
 const Navbar = props => {
-  const { isLogin } = props;
+  const { folderName } = props;
+
   const navigate = useNavigate();
+  const isLogin = useSelector(state => state.user.isLogin);
+
   const [isOpen, setIsOpen] = useState(false);
 
   const menuOpen = () => {
@@ -27,27 +31,26 @@ const Navbar = props => {
   return (
     <React.Fragment>
       <NavBox>
-        <Logo />
-        <Link to="#" onClick={menuOpen}>
+        {folderName ? <Title>{folderName}</Title> : <Logo />}
+        <NavMenu onClick={menuOpen}>
           <Image _src="/images/menu.png" _width="24px" _height="24px" />
-        </Link>
+        </NavMenu>
       </NavBox>
       <NavContainer className={isOpen ? "active" : ""}>
         <Nav className={isOpen ? "active" : ""} onClick={menuOpen}>
           <div>
-            <div style={{ display: "flow-root" }}>
-              <Link to="#" onClick={menuOpen} style={{ float: "right" }}>
-                <Image _src="/images/close.png" _width="24px" _height="24px" />
-              </Link>
-            </div>
-            <NavProfile isLogin={isLogin} />
+            <NavMenu onClick={menuOpen}>
+              <Image _src="/images/close.png" _width="24px" _height="24px" />
+            </NavMenu>
+            {/* ----- 네비게이션바 프로필 ----- */}
+            <NavProfile />
             <Line />
             <MenuBox>
               <Link to="/">
                 <li>추천 아티클</li>
               </Link>
-              <Link to="/reviews">
-                <li>내가 쓴 리뷰 전체보기</li>
+              <Link to={isLogin ? "/memos" : "/login"}>
+                <li>내가 작성한 메모</li>
               </Link>
             </MenuBox>
           </div>
@@ -57,7 +60,7 @@ const Navbar = props => {
             bgColor={({ theme }) => theme.colors.white}
             _color={({ theme }) => theme.colors.fontColor02}
             _onClick={() => {
-              navigate("/setting");
+              isLogin ? navigate("/setting") : navigate("/login");
             }}
           >
             설정
@@ -88,6 +91,11 @@ const NavContainer = styled.div`
     transition: 350ms;
     z-index: 1;
   }
+`;
+
+const NavMenu = styled.div`
+  float: right;
+  display: flow-root;
 `;
 
 const Nav = styled.div`

@@ -1,12 +1,34 @@
-import React, { memo } from "react";
+import React from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { Label, Image, Text, Title } from "../elements";
 
-const ArticleFolder = ({ folderColor, folder, isMe }) => {
+const ArticleFolder = props => {
+  const {
+    folderColor,
+    folderId,
+    folderName,
+    completeRate,
+    likeCnt,
+    isMe,
+    isDefault,
+    articleList,
+  } = props;
+
   const navigate = useNavigate();
+  // 해시태스 리스트
+  const hashTag = [props.hashTag1, props.hashTag2, props.hashTag3];
+  // 아티클 리스트 데이터
+  const folderData = {
+    articleList: articleList,
+    folderName: folderName,
+    isMe: isMe,
+    likeCnt: likeCnt,
+    isDefault: isDefault,
+  };
+  // 폴더 별 색상 (폰트, 라벨, 해시태그)
   const propsColor = () => {
-    switch (folderColor) {
+    switch (props.folderColor) {
       case "purple":
         return "#7881F5";
       case "blue":
@@ -23,25 +45,37 @@ const ArticleFolder = ({ folderColor, folder, isMe }) => {
       <Container>
         <CurationBox
           folderColor={folderColor}
-          onClick={() => {
-            navigate("/article");
-          }}
           isMe={isMe}
+          isDefault={isDefault}
+          onClick={() => {
+            console.log(folderData);
+            navigate(`/articles/${folderId}`, {
+              state: folderData,
+            });
+          }}
         >
-          {folderColor === "default" && isMe ? (
+          {isMe || isDefault ? (
             <LabelBox>
-              <Label _color={propsColor} bgColor="none">
-                완독률 15%
+              <Label
+                _color={propsColor}
+                borderColor={propsColor}
+                bgColor="none"
+              >
+                완독률 {completeRate}%
               </Label>
             </LabelBox>
           ) : (
             <LabelBox>
-              <Label _color={propsColor} bgColor="none">
-                커리어
-              </Label>
-              <Label _color={propsColor} bgColor="none">
-                디자인
-              </Label>
+              {hashTag.map((tag, idx) => (
+                <Label
+                  _color={propsColor}
+                  borderColor={propsColor}
+                  bgColor="none"
+                  key={idx}
+                >
+                  {tag}
+                </Label>
+              ))}
             </LabelBox>
           )}
 
@@ -51,11 +85,9 @@ const ArticleFolder = ({ folderColor, folder, isMe }) => {
               _lineHeight="24px"
               _color={propsColor}
             >
-              {folderColor === "default"
-                ? "미분류 컬렉션"
-                : "UXUI 초보를 위한 아티클"}
+              {isDefault ? "미분류 컬렉션" : folderName}
             </Title>
-            {isMe ? (
+            {isMe || isDefault ? (
               <Label bgColor="white" _padding="7px" borderColor="white">
                 <Image
                   _src="/images/hide.png"
@@ -83,7 +115,7 @@ const ArticleFolder = ({ folderColor, folder, isMe }) => {
                   _width="11px"
                   _height="11px"
                 />
-                24
+                {likeCnt}
               </Label>
             )}
           </TitleBox>
@@ -119,4 +151,4 @@ const TitleBox = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
-export default memo(ArticleFolder);
+export default ArticleFolder;

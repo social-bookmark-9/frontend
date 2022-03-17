@@ -42,18 +42,6 @@ const Login = () => {
               카카오로 로그인
             </Button>
           </a>
-          {/* <a href={GOOGLE_AUTH_URL}>
-          <Button
-            isBorder
-            name={"구글로 로그인"}
-            width="270px"
-            height="43px"
-            margin="8px auto"
-            bgColor={({ theme }) => theme.colors.white}
-            _color={({ theme }) => theme.colors.fontColor04}
-            _fontSize={({ theme }) => theme.fontSizes.font12}
-          />
-        </a> */}
         </Bottomdiv>
       </LoginBox>
     </React.Fragment>

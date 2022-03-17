@@ -10,8 +10,8 @@ const initialState = {
   // is_loading: false,
 };
 
-export const getArticleAxios = createAsyncThunk(
-  "article/getArticleAxios",
+export const getArticlesAxios = createAsyncThunk(
+  "article/getArticles",
   async (articleData, { dispatch }) => {
     const resp = await ArticleApi.getArticles();
     dispatch(setArticle(resp.data));
@@ -29,7 +29,7 @@ export const articleSlice = createSlice({
     },
   },
   extraReducers: {
-    [getArticleAxios.fulfilled]: (state, action) => {
+    [getArticlesAxios.fulfilled]: (state, action) => {
       state.is_loading = false;
     },
   },

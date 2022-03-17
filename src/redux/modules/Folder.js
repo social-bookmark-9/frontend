@@ -5,11 +5,11 @@ const FolderApi = new folderApi();
 
 const initialState = {
   message: "",
-  data: [],
+  folder_list: [],
 };
 
-export const getFolderAxios = createAsyncThunk(
-  "folder/getFolderAxios",
+export const getFoldersAxios = createAsyncThunk(
+  "folder/getFolders",
   async (folderData, { dispatch }) => {
     const resp = await FolderApi.getFolders();
     dispatch(setFolder(resp.data));
@@ -23,7 +23,7 @@ export const folderSlice = createSlice({
   reducers: {
     setFolder: (state, action) => {
       const folderList = action.payload;
-      state.data = folderList;
+      state.folder_list = folderList;
     },
   },
 });
