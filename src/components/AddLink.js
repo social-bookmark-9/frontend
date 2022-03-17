@@ -3,7 +3,6 @@ import Text from "../elements/Text";
 import styled from "styled-components";
 import Button from "../elements/Button";
 import Label from "../elements/Label";
-import AddLinkTag from "./AddLinkTag";
 import AddFolder from "./AddFolder";
 
 const AddLink = (props) => {
