@@ -36,7 +36,7 @@ const Modal = (props) => {
             </div>
             <Main>
               {showModal ? (
-                <AddLinkTag 
+                <AddLinkTag
                 closeModal={closeModal}
                 />
               ) : (
