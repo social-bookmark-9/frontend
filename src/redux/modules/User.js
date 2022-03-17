@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import userApi from "../../app/userApi";
+import userApi from "../app/userApi";
 
 const UserApi = new userApi();
 
 const initialState = {
   token: null,
-  is_login: false,
+  is_login: true,
 };
 
 export const kakaoLoginAxios = createAsyncThunk(

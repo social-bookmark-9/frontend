@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Text from "../elements/Text";
 import styled from "styled-components";
 import Favorite from "../components/Favorite";
@@ -13,7 +13,6 @@ const AddLinkTag = (props) => {
 
   const [isChecked, setIsChecked] = useState(false);
   const [checkedItems, setCheckedItems] = useState(new Set());
-
 
   const favoritesList = [
     "커리어",
@@ -50,7 +49,6 @@ const AddLinkTag = (props) => {
 
   return (
     <>
-      
       <div style={{height:"270"}}>
         <Text>태그 선택</Text>
         <FavoritesBox>
@@ -70,8 +68,8 @@ const AddLinkTag = (props) => {
           <Button _onClick={addLinkFinish} _padding="18px">완료</Button>
       </div>
     </>
-  )
-}
+  );
+};
 
 const FavoritesBox = styled.div`
   width: 100%;

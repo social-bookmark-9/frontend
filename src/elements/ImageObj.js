@@ -57,9 +57,9 @@ const ObjBox = styled.div`
 `;
 
 const CircleObj = styled.div`
-  width: ${props => props._width};
-  height: ${props => props._height};
-  background-color: ${props => props.bgColor};
+  width: ${props => props._width || "22px"};
+  height: ${props => props._height || "22px"};
+  background-color: ${props => props.bgColor || "#353C49"};
   border-radius: 50%;
 `;
 

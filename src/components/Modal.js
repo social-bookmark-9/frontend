@@ -2,9 +2,8 @@ import styled from "styled-components";
 import { useState } from "react";
 import Button from "../elements/Button";
 import AddLink from "./AddLink";
-import AddLinkTag from "./AddLinkTag";
 
-const Modal = (props) => {
+const Modal = props => {
   // 모달 열고 닫기
   const [modalOpen, setModalOpen] = useState(false);
   // 어떤 모달창 보여줄지 (링크 추가 단계)
@@ -50,7 +49,7 @@ const Modal = (props) => {
       ) : null}
     </>
   );
-}
+};
 
 const Section = styled.div`
   position: fixed;
@@ -77,7 +76,5 @@ const Main = styled.div`
   height: 270px;
   margin-top: 2px;
 `;
-
-
 
 export default Modal;
