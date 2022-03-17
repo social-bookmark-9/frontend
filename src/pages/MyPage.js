@@ -8,25 +8,25 @@ import { Flexbox } from "../styles/flexbox";
 
 import { Navbar, Profile, ArticleFolder, RemindCard } from "../components";
 import { Label, Title, Image, Text } from "../elements";
+import { useLocation } from "react-router";
 
 const MyPage = props => {
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  console.log(location);
 
   useEffect(() => {
     dispatch(getFoldersAxios());
   }, [dispatch]);
 
   // ----- 폴더 리스트 ----- //
-  const folderList = useSelector(state => state.folder.folder_list);
+  const folderList = useSelector(state => state.folder.folderList);
   const defaultFolder = folderList[0];
   const userFolder = folderList.slice(1);
 
   // ----- 유저 정보 ----- //
-  const username = useSelector(state => state.user.myInfo.nickname);
-  const userDesc = useSelector(state => state.user.myInfo.userDesc);
-  const isMe = useSelector(state => state.user.user_info.isMe);
-
-  const profileInfo = { username, userDesc };
+  const userInfo = useSelector(state => state.folder.userInfo);
 
   // ----- 디폴트 폴더 ----- //
 
@@ -41,22 +41,22 @@ const MyPage = props => {
       <Container>
         <Navbar />
         {/* ----- 프로필+이름 부분 ----- */}
-        <Profile {...profileInfo} />
+        <Profile {...userInfo} />
         {/* ----- 리마인드 부분 ----- */}
-        {isMe ? (
-          <RemindCard
-            _title="저장한 글, 다시 읽고 계신가요?"
-            _text={
-              "3번은 읽어야 완전한 내 것이 될 수 있어요.\n저장한 글을 리마인드 해드릴게요"
-            }
-            _button="리마인드 받기"
-          />
-        ) : (
-          ""
-        )}
+        {/* {isMe ? ( */}
+        <RemindCard
+          _title="저장한 글, 다시 읽고 계신가요?"
+          _text={
+            "3번은 읽어야 완전한 내 것이 될 수 있어요.\n저장한 글을 리마인드 해드릴게요"
+          }
+          _button="리마인드 받기"
+        />
+        {/* ) : ( */}
+        ""
+        {/* )} */}
         {/* ----- 큐레이션 부분 ----- */}
         <Qheader>
-          <Title _padding="20px">{username}님의 큐레이션</Title>
+          <Title _padding="20px">{"username"}님의 큐레이션</Title>
           <LabelBox>
             <Label
               _color={({ theme }) => theme.colors.fontColor07}
@@ -68,44 +68,40 @@ const MyPage = props => {
           </LabelBox>
         </Qheader>
         {/* ----- 디폴트 폴더 ----- */}
-        {isMe ? (
-          <>
-            <ArticleFolder
-              folderColor="default"
-              isDefault={true}
-              {...defaultFolder}
-            />
+        {/* {isMe ? ( */}
+        <>
+          <ArticleFolder
+            folderColor="default"
+            isDefault={true}
+            {...defaultFolder}
+          />
 
-            {/* 아티클 리마인드 */}
-            <AlertBox>
-              <RemindAlert>
-                <div>
-                  <Image
-                    _src="/images/remind.png"
-                    _width="20px"
-                    _height="19px"
-                  />
-                </div>
-                <div>
-                  <Title
-                    _fontSize={({ theme }) => theme.fontSizes.font16}
-                    _lineHeight="22px"
-                  >
-                    아티클 리마인드
-                  </Title>
-                  <Text
-                    _fontSize={({ theme }) => theme.fontSizes.font13}
-                    _lineHeight="18px"
-                  >
-                    아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
-                  </Text>
-                </div>
-              </RemindAlert>
-            </AlertBox>
-          </>
-        ) : (
-          ""
-        )}
+          {/* 아티클 리마인드 */}
+          <AlertBox>
+            <RemindAlert>
+              <div>
+                <Image _src="/images/remind.png" _width="20px" _height="19px" />
+              </div>
+              <div>
+                <Title
+                  _fontSize={({ theme }) => theme.fontSizes.font16}
+                  _lineHeight="22px"
+                >
+                  아티클 리마인드
+                </Title>
+                <Text
+                  _fontSize={({ theme }) => theme.fontSizes.font13}
+                  _lineHeight="18px"
+                >
+                  아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
+                </Text>
+              </div>
+            </RemindAlert>
+          </AlertBox>
+        </>
+        {/* ) : ( */}
+        ""
+        {/* )} */}
         {/* 폴더리스트 시작 */}
         {userFolder.map((folder, idx) => (
           <ArticleFolder
@@ -116,18 +112,18 @@ const MyPage = props => {
             }
           />
         ))}
-        {isMe ? (
-          ""
-        ) : (
-          <RemindCard
-            _title={`${"username"}님의 큐레이션이 유용하셨나요?`}
-            _text={
-              "크롬 사용자라면 버튼 클릭 한번으로 링크를 저장해\n나만의 큐레이션을 만들고 공유할 수 있어요"
-            }
-            _button="내 버블드 만들기"
-            isMe={false}
-          />
-        )}
+        {/* {isMe ? ( */}
+        ""
+        {/* ) : ( */}
+        <RemindCard
+          _title={`${"username"}님의 큐레이션이 유용하셨나요?`}
+          _text={
+            "크롬 사용자라면 버튼 클릭 한번으로 링크를 저장해\n나만의 큐레이션을 만들고 공유할 수 있어요"
+          }
+          _button="내 버블드 만들기"
+          isMe={false}
+        />
+        {/* )} */}
       </Container>
     </React.Fragment>
   );

@@ -33,7 +33,7 @@ const Main = props => {
       <div style={{ paddingBottom: "8px" }}></div>
       <Button
         _onClick={() => {
-          navigate("/mypage/");
+          navigate("/mypage/0");
         }}
         _padding="8px"
       >
