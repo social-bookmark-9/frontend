@@ -28,12 +28,11 @@ export default class userApi {
               replace:true
             }
           )
+          return (false);
         };
       })
       .catch(err => console.log(err.response));
   }
-
- 
 
   async register({ userInfo, navigate }) {
     console.log(userInfo);
@@ -52,8 +51,4 @@ export default class userApi {
       })
       .catch((err) => console.log(err.response));
   }
-
-
-
-
 }

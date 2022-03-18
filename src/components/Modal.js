@@ -21,8 +21,14 @@ const Modal = () => {
 
   return (
     <>
-      {/* 아직 버튼 모양은 안 잡아서 기본으로! */}
-      <Button _onClick={openModal}>모달팝업</Button>
+      <Button 
+        _width="62px"
+        _padding="22px 0 22px 0"
+        borderRadius="16px"
+        _onClick={openModal}
+      >
+        +
+      </Button>
       {modalOpen ? (
         <Section>
           <MainModal>

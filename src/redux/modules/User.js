@@ -55,7 +55,7 @@ export const userSlice = createSlice({
       state.token = action.payload.data.token.accessToken;
       state.is_login = action.payload.data.login;
     },
-    [kakaoLoginAxios.fulfilled]: (state, action) => {
+    [kakaoLoginAxios.fulfilled && kakaoLoginAxios.user === true]: (state, action) => {
       state.token = action.payload.data.token.accessToken;
       state.is_login = action.payload.data.login;
     },
