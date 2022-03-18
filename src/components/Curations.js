@@ -44,17 +44,5 @@ const Curations = () => {
 
 }
 
-const CardWrap = styled.div`
-  width: 100%;
-  height: 288px;
-  padding: 24px 0 28px 0;
-  border-radius: 20px;
-`;
-
-const CardWrap1 = styled(CardWrap)`
-  background-color: #daf8f1;
-  color: #4eb0ab;
-`;
-
 
 export default Curations;
