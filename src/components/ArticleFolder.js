@@ -1,7 +1,8 @@
 import React, { memo } from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
-import { Label, Image, Text, Title } from "../elements";
+import { Label, Image, Title } from "../elements";
+import Carousel from "../elements/Carousel";
 
 const ArticleFolder = ({ folderColor, folder, isMe }) => {
   const navigate = useNavigate();
@@ -87,14 +88,16 @@ const ArticleFolder = ({ folderColor, folder, isMe }) => {
               </Label>
             )}
           </TitleBox>
-          <Text _padding="50px 0px">카드스와이프 들어갈 부분</Text>
+            <div style={{paddingTop:"36px", margin:"0 -20px 0 -100px"}}>
+              <Carousel />
+            </div>
         </CurationBox>
       </Container>
     </React.Fragment>
   );
 };
 const Container = styled.div`
-  padding: 8px 16px;
+  padding: 9px 16px;
 `;
 
 const CurationBox = styled.div`
@@ -103,6 +106,7 @@ const CurationBox = styled.div`
   height: 290px;
   border-radius: 20px;
   padding: 28px 20px;
+  overflow: hidden;
   ${props => props.folderColor === "green" && "background-color: #F2FDFA"};
   ${props => props.folderColor === "purple" && "background-color: #F7F7FD"};
   ${props => props.folderColor === "blue" && "background-color: #F0F7FB"};

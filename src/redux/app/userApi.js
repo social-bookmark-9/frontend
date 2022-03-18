@@ -23,14 +23,14 @@ export default class userApi {
               state: {
                 kakaoId: res.data.data.kakaoMemberInfo.kakaoId,
                 email: res.data.data.kakaoMemberInfo.email,
-                profileImage: res.data.data.kakaoMemberInfo.profileImage,
-              },
-            },
-            {
-              replace: true,
-            },
-          );
-        }
+                profileImage: res.data.data.kakaoMemberInfo.profileImage
+              }
+            }, {
+              replace:true
+            }
+          )
+          return (false);
+        };
       })
       .catch(err => console.log(err.response));
   }

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import Button from "../elements/Button";
 import AddLink from "./AddLink";
+import AddLink2 from "./AddLink2";
 
 const Modal = () => {
   // 모달 열고 닫기
@@ -14,14 +15,17 @@ const Modal = () => {
     setModalOpen(false);
     setShowModal(false);
   }
-  
-  const [modalBackspace, setModalBackspace] = useState("");
-  const [modalTitle, setModalTitle] = useState("");
 
   return (
     <>
-      {/* 아직 버튼 모양은 안 잡아서 기본으로! */}
-      <Button _onClick={openModal}>모달팝업</Button>
+      <Button 
+        _width="62px"
+        _padding="22px 0 22px 0"
+        borderRadius="16px"
+        _onClick={openModal}
+      >
+        +
+      </Button>
       {modalOpen ? (
         <Section>
           <MainModal>
@@ -35,7 +39,7 @@ const Modal = () => {
             </div>
             <Main>
               {showModal ? (
-                <AddLinkTag
+                <AddLink2
                 closeModal={closeModal}
                 />
               ) : (

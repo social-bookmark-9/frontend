@@ -4,15 +4,15 @@ import styled from "styled-components";
 import Favorite from "../components/Favorite";
 import Button from "../elements/Button";
 
-const AddLinkTag = (props) => {
+const AddLink2 = (props) => {
   // 완료
   const addLinkFinish = () => {
     props.closeModal();
-    console.log("됐나?");
   }
 
   const [isChecked, setIsChecked] = useState(false);
   const [checkedItems, setCheckedItems] = useState(new Set());
+
 
   const favoritesList = [
     "커리어",
@@ -69,8 +69,8 @@ const AddLinkTag = (props) => {
           <Button _onClick={addLinkFinish} _padding="18px">완료</Button>
       </div>
     </>
-  );
-};
+  )
+}
 
 const FavoritesBox = styled.div`
   width: 100%;
@@ -84,4 +84,4 @@ const Favorites = styled.div`
   text-align: center;
 `;
 
-export default AddLinkTag;
+export default AddLink2;
