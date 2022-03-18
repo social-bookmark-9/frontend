@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Text from "../elements/Text";
 import styled from "styled-components";
@@ -17,14 +16,14 @@ const AddFolder = (props) => {
   const addFolderDone = () => {
     modalChange();
     console.log("쨔쟌");
-  }
+  };
 
   const [show, setShow] = useState(true);
   const [unshow, setUnshow] = useState(false);
   const toggleShow = () => {
-    setShow((current) => !current);
-    setUnshow((current) => !current);
-  }
+    setShow(current => !current);
+    setUnshow(current => !current);
+  };
 
   return (
     <>
@@ -66,17 +65,21 @@ const AddFolder = (props) => {
           </ShowSetting>
         </Settingwrap>
       </LinkField>
-      <div style={{
-        width:"100%",
-        paddingRight:"56px",
-        position:"fixed",
-        bottom:"24px"
-      }}>
-        <Button _onClick={addFolderDone} _padding="18px">완료</Button>
+      <div
+        style={{
+          width: "100%",
+          paddingRight: "56px",
+          position: "fixed",
+          bottom: "24px",
+        }}
+      >
+        <Button _onClick={addFolderDone} _padding="18px">
+          완료
+        </Button>
       </div>
     </>
   );
-}
+};
 
 const Header = styled.div`
   padding-top: 45px;
@@ -109,12 +112,14 @@ const ShowSetting = styled.div`
   line-height: 50px;
   width: 50%;
   height: 50px;
-  border: 1px solid #E5E8EC;
+  border: 1px solid #e5e8ec;
   border-radius: 5px;
-  ${({ state }) => (state ? `
+  ${({ state }) =>
+    state
+      ? `
     background-color: rgba(0, 0, 0, 0.3);
-  ` : `background-color: white` )}
+  `
+      : `background-color: white`}
 `;
-
 
 export default AddFolder;

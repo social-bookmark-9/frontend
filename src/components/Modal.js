@@ -53,7 +53,7 @@ const Modal = () => {
       ) : null}
     </>
   );
-}
+};
 
 const Section = styled.div`
   position: fixed;
@@ -80,6 +80,5 @@ const Main = styled.div`
   height: 270px;
   margin-top: 2px;
 `;
-
 
 export default Modal;

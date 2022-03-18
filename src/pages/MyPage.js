@@ -1,4 +1,5 @@
 import React from "react";
+// import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import styled, { css } from "styled-components";
 
@@ -9,8 +10,8 @@ import { Flexbox } from "../styles/flexbox";
 const MyPage = props => {
   const { isLogin } = props;
   const navigate = useNavigate();
-
-  const folderList = [0, 1, 2, 3];
+  const folderData = [0, 1, 2, 3];
+  const isMe = true;
   const completeRates = [15, 100, 30, 45];
 
   const completeRate = Math.round(
@@ -75,19 +76,17 @@ const MyPage = props => {
       </AlertBox>
 
       {/* 폴더리스트 시작 */}
-      {folderList.map((folderId, idx) => (
+      {folderData.map((folder, idx) => (
         <ArticleFolder
           key={idx}
+          folder={folder}
           _onClick={() => {
             navigate("/articles");
           }}
           folderColor={
-            folderId % 3 === 0
-              ? "green"
-              : folderId % 3 === 1
-              ? "purple"
-              : "blue"
+            idx % 3 === 0 ? "green" : idx % 3 === 1 ? "purple" : "blue"
           }
+          isMe={isMe}
         />
       ))}
     </React.Fragment>

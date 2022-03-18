@@ -1,9 +1,11 @@
-import React from "react";
+import React, { memo } from "react";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { Label, Image, Title } from "../elements";
 import Carousel from "../elements/Carousel";
 
-const ArticleFolder = ({ folderColor, _onClick, isMe }) => {
+const ArticleFolder = ({ folderColor, folder, isMe }) => {
+  const navigate = useNavigate();
   const propsColor = () => {
     switch (folderColor) {
       case "purple":
@@ -20,7 +22,13 @@ const ArticleFolder = ({ folderColor, _onClick, isMe }) => {
   return (
     <React.Fragment>
       <Container>
-        <CurationBox folderColor={folderColor} onClick={_onClick} isMe={isMe}>
+        <CurationBox
+          folderColor={folderColor}
+          onClick={() => {
+            navigate("/article");
+          }}
+          isMe={isMe}
+        >
           {folderColor === "default" && isMe ? (
             <LabelBox>
               <Label _color={propsColor} bgColor="none">
@@ -115,4 +123,4 @@ const TitleBox = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
-export default ArticleFolder;
+export default memo(ArticleFolder);

@@ -51,7 +51,6 @@ const Main = props => {
 
       {/* 추천 유저 */}
       <RecommendUser />
-
       <Modal />
     </React.Fragment>
   );
