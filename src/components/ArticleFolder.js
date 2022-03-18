@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Label, Image, Text, Title } from "../elements";
+import { Label, Image, Title } from "../elements";
 import Carousel from "../elements/Carousel";
 
 const ArticleFolder = ({ folderColor, _onClick, isMe }) => {
@@ -80,7 +80,7 @@ const ArticleFolder = ({ folderColor, _onClick, isMe }) => {
               </Label>
             )}
           </TitleBox>
-            <div style={{paddingTop:"36px", margin:"0 -20px 0 -46px"}}>
+            <div style={{paddingTop:"36px", margin:"0 -20px 0 -100px"}}>
               <Carousel />
             </div>
         </CurationBox>

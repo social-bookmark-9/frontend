@@ -17,7 +17,8 @@ const Carousel = () => {
     slidesToScroll: 1,
     centerMode: true,
     centerPadding: "50px",
-    focusOnSelect: true
+    focusOnSelect: true,
+    variableWidth: true
   };
 
   return (
@@ -40,6 +41,10 @@ const Carousel = () => {
           </div>
         )
       })}
+      <SeeMoreCard>
+        <div>13개</div>
+        더보기
+      </SeeMoreCard>
     </Slider>
   )
 
@@ -48,7 +53,7 @@ const Carousel = () => {
 
 const Card = styled.div`
   height: 146px;
-  width: 95%;
+  width: 243px;
   padding: 20px;
   margin-left: 8px;
   border: 1px solid #f2f4f6;
@@ -60,6 +65,18 @@ const Card = styled.div`
     height: 100%;
     pointer-events: none;
   }
+`;
+
+const SeeMoreCard = styled.div`
+  height: 146px;
+  width: 61px;
+  padding: 57px 14px;
+  margin-left: 8px;
+  font-size: 12px;
+  text-align: center;
+  border: 1px solid #f2f4f6;
+  border-radius: 10px;
+  overflow: hidden;
 `;
 
 export default Carousel;
