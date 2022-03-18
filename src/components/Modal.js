@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import Button from "../elements/Button";
 import AddLink from "./AddLink";
-import AddLinkTag from "./AddLinkTag";
+import AddLink2 from "./AddLink2";
 
 const Modal = () => {
   // 모달 열고 닫기
@@ -15,9 +15,6 @@ const Modal = () => {
     setModalOpen(false);
     setShowModal(false);
   }
-  
-  const [modalBackspace, setModalBackspace] = useState("");
-  const [modalTitle, setModalTitle] = useState("");
 
   return (
     <>
@@ -42,7 +39,7 @@ const Modal = () => {
             </div>
             <Main>
               {showModal ? (
-                <AddLinkTag
+                <AddLink2
                 closeModal={closeModal}
                 />
               ) : (
