@@ -4,8 +4,12 @@ import styled from "styled-components";
 import { Title, Text, Button } from "../elements";
 
 const RemindCard = props => {
-  const { _title, _text, _button } = props;
+  const { _title, _text, _button, isMe } = props;
   const navigate = useNavigate();
+
+  const onNavigate = () => {
+    isMe ? navigate("/setting/reminder") : navigate("/login");
+  };
 
   return (
     <React.Fragment>
@@ -28,14 +32,11 @@ const RemindCard = props => {
           </Text>
           <ButtonBox>
             <Button
-              _width="95px"
               _padding="7px 14px"
               _fontSize={({ theme }) => theme.fontSizes.font12}
               bgColor="white"
               _color={({ theme }) => theme.colors.fontColor07}
-              _onClick={() => {
-                navigate("/setting/reminder");
-              }}
+              _onClick={onNavigate}
             >
               {_button}
             </Button>
@@ -61,6 +62,7 @@ const ReCard = styled.div`
 
 const ButtonBox = styled.div`
   padding: 16px 0px;
+  display: inline-block;
 `;
 
 export default RemindCard;

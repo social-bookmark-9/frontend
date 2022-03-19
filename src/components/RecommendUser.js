@@ -5,14 +5,13 @@ import styled from "styled-components";
 import Slider from "react-slick";
 
 const RecommendUser = () => {
-
   const images = [
-    {id:0, image:"/images/icon100.png"},
-    {id:1, image:"/images/icon101.png"},
-    {id:2, image:"/images/icon102.png"},
-    {id:3, image:"/images/icon103.png"},
-    {id:4, image:"/images/icon104.png"}
-  ]
+    { id: 0, image: "/images/icon100.png" },
+    { id: 1, image: "/images/icon101.png" },
+    { id: 2, image: "/images/icon102.png" },
+    { id: 3, image: "/images/icon103.png" },
+    { id: 4, image: "/images/icon104.png" },
+  ];
 
   const settings = {
     infinite: false,
@@ -22,39 +21,46 @@ const RecommendUser = () => {
     initialSlide: 1,
     centerMode: true,
     centerPadding: "50px",
-    focusOnSelect: true
+    focusOnSelect: true,
+    swipeToSlide: true,
+    arrows: false,
   };
 
   return (
-    <div style={{
-      width: "100%",
-      padding: "32px 0 40px 18px",
-    }}>
+    <div
+      style={{
+        width: "100%",
+        padding: "32px 0 40px 18px",
+      }}
+    >
       <Title _padding="0 0 20px 4px">추천 유저</Title>
-      <div style={{
-        marginLeft: "-58px"
-      }}>
+      <div
+        style={{
+          marginLeft: "-58px",
+        }}
+      >
         <Slider {...settings}>
-          {images.map((item) => {
-            return(
+          {images.map(item => {
+            return (
               <div key={item.id}>
                 <Card>
                   <ProfileBox>
                     {/*  그거... 동그라미 */}
                     <CircleBox>
-                      <Circle _width="15.7px" _height="15.7px" bgColor="black" />
+                      <Circle
+                        _width="15.7px"
+                        _height="15.7px"
+                        bgColor="black"
+                      />
                     </CircleBox>
                     <ProfileImage>
                       <img
                         src={item.image}
                         alt="profile"
-                        style={{zIndex:"3"}}
+                        style={{ zIndex: "3" }}
                       />
                     </ProfileImage>
-                    <Title
-                      _padding="23px 15px 2px 15px"
-                      textAlign="center"
-                    >
+                    <Title _padding="23px 15px 2px 15px" textAlign="center">
                       김철수
                     </Title>
                     <Text
@@ -65,19 +71,15 @@ const RecommendUser = () => {
                     >
                       글쓰는 UX디자이너
                     </Text>
-                    <div style={{display:"inline-block"}}>
-                      <Button
-                        _width="76px"
-                        _padding="6px"
-                        borderRadius="45px"
-                      >
+                    <div style={{ display: "inline-block" }}>
+                      <Button _width="76px" _padding="6px" borderRadius="45px">
                         구경하기
                       </Button>
                     </div>
                   </ProfileBox>
                 </Card>
               </div>
-            )
+            );
           })}
         </Slider>
       </div>
@@ -92,9 +94,8 @@ const RecommendUser = () => {
         </defs>
       </svg>
     </div>
-  )
-
-}
+  );
+};
 
 const Card = styled.div`
   height: 240px;
@@ -106,7 +107,7 @@ const Card = styled.div`
   overflow: hidden;
   background-color: #f2f4f6;
   text-align: center;
-  & img{
+  & img {
     width: 100%;
     height: 100%;
     pointer-events: none;

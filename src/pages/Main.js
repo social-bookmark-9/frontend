@@ -7,25 +7,25 @@ import RecommendList from "../components/RecommendList";
 import RecommendUser from "../components/RecommendUser";
 
 const Main = props => {
-
   return (
     <React.Fragment>
       <Navbar isLogin={props.isLogin} />
-
       {/* 맨 위 영역 */}
-      <div style={{padding:"0 26px 44px 26px"}}>
+      <div style={{ padding: "0 26px 44px 26px" }}>
         <Title _fontSize="24px" _padding="20px 0 12px 0">
           <p>
             Express yourself
-            <span style={{verticalAlign:"middle"}}>
+            <span style={{ verticalAlign: "middle" }}>
               <Image _src="/images/emoji1.png" _width="41px" _height="41px" />
             </span>
           </p>
-          <p>with what you 
-          <span style={{verticalAlign:"middle"}}>
-            <Image _src="/images/emoji2.png" _width="40px" _height="40px" />
-          </span>
-          read.</p>
+          <p>
+            with what you
+            <span style={{ verticalAlign: "middle" }}>
+              <Image _src="/images/emoji2.png" _width="40px" _height="40px" />
+            </span>
+            read.
+          </p>
         </Title>
         <Text _color="#505866" _fontSize="14px" _padding="0 0 24px 0">
           내가 읽은 것들로 나를 표현하는 공간, 버블드

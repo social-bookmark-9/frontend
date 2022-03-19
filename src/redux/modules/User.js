@@ -1,37 +1,51 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userApi from "../app/userApi";
+import Swal from "sweetalert2";
 
 const UserApi = new userApi();
 
 const initialState = {
-  token: null,
-  is_login: true,
+  userInfo: null,
+  myInfo: null,
+  isLogin: false,
+  isMe: false,
 };
 
 export const kakaoLoginAxios = createAsyncThunk(
-  "user/kakaoLoginAxios",
+  "user/kakaoLogin",
   async ({ code, navigate }, { dispatch }) => {
     const user = await UserApi.kakaoLogin({ code, navigate });
     if (user) {
-      dispatch(setUserToSession(user.data));
+      dispatch(setMyInfo(user.data));
       return user;
     }
   },
 );
 
 export const registerAxios = createAsyncThunk(
-  "user/registerAxios",
+  "user/register",
   async ({ userInfo, navigate }, { dispatch }) => {
     const user = await UserApi.register({ userInfo, navigate });
     if (user) {
-      dispatch(setUserToSession(user.data));
+      dispatch(setMyInfo(user.data));
+      return user;
+    }
+  },
+);
+
+export const checkMyInfo = createAsyncThunk(
+  "user/checkMyInfo",
+  async ({ token, navigate }, { dispatch }) => {
+    const user = await UserApi.checkUser({ token, navigate });
+    if (user) {
+      dispatch(setUser(user.data));
       return user;
     }
   },
 );
 
 export const logoutAxios = createAsyncThunk(
-  "user/logoutAxios",
+  "user/logout",
   async ({ navigate }, { dispatch }) => {
     dispatch(deleteUserFromSession());
     navigate("/", { replace: true });
@@ -43,31 +57,54 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUserToSession: (state, action) => {
+    setMyInfo: (state, action) => {
       sessionStorage.setItem("accessToken", action.payload.token.accessToken);
+      sessionStorage.setItem("refreshToken", action.payload.token.refreshToken);
+      const myInfo = action.payload.myInfo;
+      state.myInfo = { ...myInfo };
     },
     deleteUserFromSession: (state, action) => {
       sessionStorage.removeItem("accessToken");
+      sessionStorage.removeItem("refreshToken");
+    },
+    setUser: (state, action) => {
+      const myInfo = action.payload.myInfo;
+      state.myInfo = { ...myInfo };
     },
   },
   extraReducers: {
     [registerAxios.fulfilled]: (state, action) => {
-      state.token = action.payload.data.token.accessToken;
-      state.is_login = action.payload.data.login;
+      state.myInfo = action.payload.data.myInfo;
+      state.isLogin = action.payload.data.login;
+      state.isMe = true;
     },
-    [kakaoLoginAxios.fulfilled && kakaoLoginAxios.user === true]: (state, action) => {
-      state.token = action.payload.data.token.accessToken;
-      state.is_login = action.payload.data.login;
+    [kakaoLoginAxios.fulfilled && kakaoLoginAxios.user === true]: (
+      state,
+      action,
+    ) => {
+      state.myInfo = action.payload.data.myInfo;
+      state.isLogin = action.payload.data.login;
+      state.isMe = true;
     },
     [logoutAxios.fulfilled]: (state, action) => {
       if (action.payload) {
         state.token = initialState.token;
-        state.is_login = false;
+        state.isLogin = false;
       }
-      alert("로그아웃 완료");
+      Swal.fire({
+        text: "로그아웃 완료",
+        icon: "success",
+        confirmButtonText: "확인",
+        confirmButtonColor: "#353C49",
+      });
+    },
+    [checkMyInfo.fulfilled]: (state, action) => {
+      state.myInfo = action.payload.data.myInfo;
+      state.isLogin = true;
+      state.isMe = true;
     },
   },
 });
 
-export const { setUserToSession, deleteUserFromSession } = userSlice.actions;
+export const { setMyInfo, deleteUserFromSession, setUser } = userSlice.actions;
 export default userSlice.reducer;

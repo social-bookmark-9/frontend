@@ -1,19 +1,17 @@
 import { useState } from "react";
-import Text from "../elements/Text";
 import styled from "styled-components";
-import Favorite from "../components/Favorite";
-import Button from "../elements/Button";
+import Favorite from "./Favorite";
+import { Title, Button } from "../elements";
 
-const AddLink2 = (props) => {
+const AddLinkTag = props => {
+  const { setAddLink, checkedItems, setCheckedItems } = props;
   // 완료
   const addLinkFinish = () => {
-    props.closeModal();
-  }
+    props.setShowModal(current => !current);
+    setAddLink(true);
+  };
 
   const [isChecked, setIsChecked] = useState(false);
-  const [checkedItems, setCheckedItems] = useState(new Set());
-
-
   const favoritesList = [
     "커리어",
     "업무스킬",
@@ -29,13 +27,17 @@ const AddLink2 = (props) => {
     "과학",
   ];
 
+  const modalChange = () => {
+    props.setShowModal(current => !current);
+  };
+
   const handleChecked = e => {
     setIsChecked(!isChecked);
     handleCheckedItems(e.target.parentNode, e.target.value, e.target.checked);
   };
 
   const handleCheckedItems = (box, value, isChecked) => {
-    if (isChecked && checkedItems.size < 2) {
+    if (isChecked && checkedItems.size < 3) {
       checkedItems.add(value);
       setCheckedItems(checkedItems);
       box.style.backgroundColor = "#d2d6da";
@@ -49,9 +51,14 @@ const AddLink2 = (props) => {
 
   return (
     <>
-      
-      <div style={{height:"270"}}>
-        <Text>태그 선택</Text>
+      <div style={{ height: "270" }}>
+        <TitleBox>
+          <BackButton onClick={modalChange}>{"<"}</BackButton>
+          <Title _fontSize={({ theme }) => theme.fontSizes.font16}>
+            태그 선택
+          </Title>
+          <div />
+        </TitleBox>
         <FavoritesBox>
           <Favorites onChange={handleChecked}>
             {favoritesList.map((favor, idx) => (
@@ -60,17 +67,32 @@ const AddLink2 = (props) => {
           </Favorites>
         </FavoritesBox>
       </div>
-      <div style={{
-          width:"100%",
-          paddingRight:"56px",
-          position:"fixed",
-          bottom:"24px"
-        }}>
-          <Button _onClick={addLinkFinish} _padding="18px">완료</Button>
+      <div
+        style={{
+          width: "100%",
+          paddingRight: "56px",
+          position: "fixed",
+          bottom: "24px",
+        }}
+      >
+        <Button _onClick={addLinkFinish} _padding="18px">
+          완료
+        </Button>
       </div>
     </>
-  )
-}
+  );
+};
+
+const TitleBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -22px;
+`;
+
+const BackButton = styled.div`
+  display: inline-block;
+`;
 
 const FavoritesBox = styled.div`
   width: 100%;
@@ -84,4 +106,4 @@ const Favorites = styled.div`
   text-align: center;
 `;
 
-export default AddLink2;
+export default AddLinkTag;

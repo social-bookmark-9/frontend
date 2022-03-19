@@ -1,25 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./shared/App";
+
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "styled-components";
 import theme from "./styles/theme";
 import GlobalStyles from "./styles/GlobalStyle";
-import { BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
 import { store } from "./redux/configureStore";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ThemeProvider>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ThemeProvider>
+  </Provider>,
   document.getElementById("root"),
 );
 

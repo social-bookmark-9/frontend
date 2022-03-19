@@ -55,10 +55,9 @@ const deviceSizes = {
 //참고 : https://wonit.tistory.com/367
 // 참고: https://www.styled-components.com/docs/advanced#media-templates
 const mediaQuery = {
-  mobile: `screen and (max-width: ${deviceSizes.pc - 1}px)`,
-  // mobile: `screen and (max-width: ${deviceSizes.mobile})`,
-  // tablet: `screen and (max-width: ${deviceSizes.tablet})`,
-  // pc: `screen and (max-width: ${deviceSizes.laptop})`,
+  mobile: `screen and (max-width: ${deviceSizes.mobile})`,
+  tablet: `screen and (max-width: ${deviceSizes.tablet})`,
+  pc: `screen and (max-width: ${deviceSizes.laptop})`,
 };
 
 const theme = {

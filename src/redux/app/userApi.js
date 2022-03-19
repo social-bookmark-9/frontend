@@ -5,6 +5,8 @@ export default class userApi {
     this.base = process.env.REACT_APP_SERVER;
   }
 
+  getToken = () => sessionStorage.getItem("accessToken");
+
   async kakaoLogin({ code, navigate }) {
     const kakaoLoginConfig = {
       method: "GET",
@@ -23,16 +25,19 @@ export default class userApi {
               state: {
                 kakaoId: res.data.data.kakaoMemberInfo.kakaoId,
                 email: res.data.data.kakaoMemberInfo.email,
-                profileImage: res.data.data.kakaoMemberInfo.profileImage
-              }
-            }, {
-              replace:true
-            }
-          )
-          return (false);
-        };
+                profileImage: res.data.data.kakaoMemberInfo.profileImage,
+              },
+            },
+            {
+              replace: true,
+            },
+          );
+          return false;
+        }
       })
-      .catch(err => console.log(err.response));
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   async register({ userInfo, navigate }) {
@@ -42,13 +47,29 @@ export default class userApi {
       headers: { "content-type": "application/json" },
       data: JSON.stringify(userInfo),
     };
-
     return axios(registerConfig)
       .then(res => {
-        alert("회원가입 완료");
-        navigate("/articles", { replace: true });
+        navigate("/", { replace: true });
         return res.data;
       })
-      .catch(err => console.log(err.response));
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  async checkUser() {
+    const checkUserConfig = {
+      method: "GET",
+      url: `${this.base}/api/users/check`,
+      headers: { "X-AUTH-TOKEN": this.getToken() },
+    };
+    return axios(checkUserConfig)
+      .then(res => {
+        console.log(res);
+        return res.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 }
