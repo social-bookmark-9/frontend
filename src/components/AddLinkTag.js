@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import Favorite from "../components/Favorite";
+import Favorite from "./Favorite";
 import { Title, Button } from "../elements";
 
 const AddLinkTag = props => {
@@ -9,12 +9,9 @@ const AddLinkTag = props => {
   const addLinkFinish = () => {
     props.setShowModal(current => !current);
     setAddLink(true);
-    // props.closeModal();
   };
 
   const [isChecked, setIsChecked] = useState(false);
-  // const [checkedItems, setCheckedItems] = useState(new Set());
-  // console.log(checkedItems);
   const favoritesList = [
     "커리어",
     "업무스킬",
@@ -30,26 +27,23 @@ const AddLinkTag = props => {
     "과학",
   ];
 
-  console.log("tag:", props.articleData);
-
   const modalChange = () => {
     props.setShowModal(current => !current);
-    // props.setAddFolderList(current => !current);
   };
 
   const handleChecked = e => {
     setIsChecked(!isChecked);
     handleCheckedItems(e.target.parentNode, e.target.value, e.target.checked);
-    console.log("tag:", props.articleData);
-    setCheckedItems(checkedItems);
   };
 
   const handleCheckedItems = (box, value, isChecked) => {
     if (isChecked && checkedItems.size < 3) {
       checkedItems.add(value);
+      setCheckedItems(checkedItems);
       box.style.backgroundColor = "#d2d6da";
     } else if (!isChecked && checkedItems.has(value)) {
       checkedItems.delete(value);
+      setCheckedItems(checkedItems);
       box.style.backgroundColor = "#ffffff";
     }
     return checkedItems;

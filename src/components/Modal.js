@@ -53,7 +53,7 @@ const Modal = () => {
   const [checkedItems, setCheckedItems] = useState(new Set());
   const [addLink, setAddLink] = useState(false);
   const tagData = [...checkedItems];
-  console.log(checkedItems);
+
   const articleData = {
     url: url,
     readCount: 0,
@@ -67,9 +67,6 @@ const Modal = () => {
     articleFolderName: folder,
     folderHide: folderHide,
   };
-
-  console.log("modal:", articleData);
-  console.log("modal:", folderData);
 
   const getUrl = e => {
     setUrl(e.target.value);

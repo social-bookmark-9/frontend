@@ -13,7 +13,7 @@ export default class folderApi {
 
     return axios(getFolderConfig)
       .then(res => {
-        // console.log(res);
+        console.log(res);
         return res.data;
       })
       .catch(err => {

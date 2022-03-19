@@ -14,8 +14,6 @@ const MyPage = props => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  console.log(location);
-
   useEffect(() => {
     dispatch(getFoldersAxios());
   }, [dispatch]);

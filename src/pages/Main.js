@@ -1,83 +1,56 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Modal from "../components/Modal";
-import { Button } from "../elements";
-import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
-import { logoutAxios } from "../redux/modules/User";
-import { getArticleAxios } from "../redux/modules/Article";
+import { Button, Image, Text, Title } from "../elements";
+import Curations from "../components/Curations";
+import RecommendList from "../components/RecommendList";
+import RecommendUser from "../components/RecommendUser";
 
 const Main = props => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   return (
     <React.Fragment>
-      <Navbar />
-      <div style={{ paddingBottom: "8px" }}></div>
-      <Button
-        _onClick={() => {
-          navigate("/login");
-        }}
-        _padding="8px"
-      >
-        로그인
-      </Button>
-      <div style={{ paddingBottom: "8px" }}></div>
-      <Button
-        _onClick={() => {
-          navigate("/user/nickname");
-        }}
-        _padding="8px"
-      >
-        회원 정보
-      </Button>
-      <div style={{ paddingBottom: "8px" }}></div>
-      <Button
-        _onClick={() => {
-          navigate("/mypage/0");
-        }}
-        _padding="8px"
-      >
-        마이페이지
-      </Button>
-      <div style={{ paddingBottom: "8px" }}></div>
+      <Navbar isLogin={props.isLogin} />
+      {/* 맨 위 영역 */}
+      <div style={{ padding: "0 26px 44px 26px" }}>
+        <Title _fontSize="24px" _padding="20px 0 12px 0">
+          <p>
+            Express yourself
+            <span style={{ verticalAlign: "middle" }}>
+              <Image _src="/images/emoji1.png" _width="41px" _height="41px" />
+            </span>
+          </p>
+          <p>
+            with what you
+            <span style={{ verticalAlign: "middle" }}>
+              <Image _src="/images/emoji2.png" _width="40px" _height="40px" />
+            </span>
+            read.
+          </p>
+        </Title>
+        <Text _color="#505866" _fontSize="14px" _padding="0 0 24px 0">
+          내가 읽은 것들로 나를 표현하는 공간, 버블드
+        </Text>
+        <Button
+          _width="102px"
+          _padding="7px 10px"
+          _fontSize="12px"
+          bgColor=""
+          _color="#383838"
+          isBorder="true"
+          borderRadius="5px"
+        >
+          내 버블드 만들기
+        </Button>
+      </div>
 
-      <Button
-        _onClick={() => {
-          navigate("/articles");
-        }}
-        _padding="8px"
-      >
-        폴더리스트 페이지
-      </Button>
-      <div style={{ paddingBottom: "8px" }}></div>
-      <Button
-        _onClick={() => {
-          navigate("/article");
-        }}
-        _padding="8px"
-      >
-        상세페이지
-      </Button>
-      <div style={{ paddingBottom: "8px" }}></div>
+      {/* 추천아티클 */}
+      <RecommendList />
 
-      <Button
-        _onClick={() => {
-          navigate("/article/1");
-        }}
-        _padding="8px"
-      >
-        아티클 상세 페이지
-      </Button>
-      <div style={{ paddingBottom: "8px" }}></div>
-      <Button
-        _onClick={() => {
-          dispatch(logoutAxios({ navigate }));
-        }}
-      >
-        로그아웃 확인
-      </Button>
+      {/* 추천 큐레이션 */}
+      <Curations />
 
+      {/* 추천 유저 */}
+      <RecommendUser />
       <Modal />
     </React.Fragment>
   );
