@@ -29,8 +29,8 @@ const UserFavorites = props => {
     memberName: location.state.nickname,
     profileImage: location.state.profileImage,
     hashtag1: newList[0],
-    hashtag2: newList[1] ? newList[1] : "null",
-    hashtag3: newList[2] ? newList[2] : "null",
+    hashtag2: newList[1] ? newList[1] : null,
+    hashtag3: newList[2] ? newList[2] : null,
   };
 
   const favoritesList = [

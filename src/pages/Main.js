@@ -5,6 +5,7 @@ import { Button } from "../elements";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { logoutAxios } from "../redux/modules/User";
+import { getArticleAxios } from "../redux/modules/Article";
 
 const Main = props => {
   const navigate = useNavigate();
@@ -60,6 +61,15 @@ const Main = props => {
       </Button>
       <div style={{ paddingBottom: "8px" }}></div>
 
+      <Button
+        _onClick={() => {
+          navigate("/article/1");
+        }}
+        _padding="8px"
+      >
+        아티클 상세 페이지
+      </Button>
+      <div style={{ paddingBottom: "8px" }}></div>
       <Button
         _onClick={() => {
           dispatch(logoutAxios({ navigate }));

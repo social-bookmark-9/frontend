@@ -27,9 +27,9 @@ const RecommendCard = props => {
 
         <ReCardContent>
           <LabelBox>
-            {hashTag.map((tag, idx) => (
-              <Label key={idx}>{tag}</Label>
-            ))}
+            {/* {hashTag.map((tag, idx) => ( */}
+            <Label key={"idx"}>{"tag"}</Label>
+            {/* ))} */}
           </LabelBox>
           <Title
             _fontsize={({ theme }) => theme.fontSizes.font18}

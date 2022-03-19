@@ -5,32 +5,47 @@ import { FlexboxColumn, FlexboxRow } from "../styles/flexbox";
 
 import { ArticleCard, Navbar, RecommendCard } from "../components";
 import { Button, Image, Title } from "../elements";
-import { useLocation } from "react-router";
+import { useDispatch } from "react-redux";
+import { getArticleAxios } from "../redux/modules/Article";
+import { useNavigate } from "react-router";
+// import { useLocation } from "react-router";
 
 const ArticleDetail = props => {
-  const location = useLocation();
-  const articleData = location.state;
-  const isMe = location.state.isMe;
+  console.log(props);
+  // const id = props.match.params.id;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // const location = useLocation();
+  // const articleData = location.state;
+  // const isMe = location.state.isMe;
   const recommendList = [0, 1, 2];
+
+  // React.useEffect(() => {
+  //   // if (article) {
+  //   //   return;
+  //   // }
+  //   dispatch(getArticleAxios({ id, navigate }));
+  // }, []);
 
   return (
     <React.Fragment>
       <Navbar />
       <div style={{ padding: "16px" }}>
         <ArticleCard />
-        {isMe ? (
+        {/* {isMe ? (
           ""
-        ) : (
-          <Button
-            _padding="12px"
-            bgColor={({ theme }) => theme.colors.white}
-            _color={({ theme }) => theme.colors.fontColor05}
-            isBorder
-            bold
-          >
-            내 컬렉션에 저장
-          </Button>
-        )}
+        ) : ( */}
+        <Button
+          _padding="12px"
+          bgColor={({ theme }) => theme.colors.white}
+          _color={({ theme }) => theme.colors.fontColor05}
+          isBorder
+          bold
+        >
+          내 컬렉션에 저장
+        </Button>
+        {/* )} */}
 
         <MemoBox>
           <MemoHead>
@@ -58,7 +73,7 @@ const ArticleDetail = props => {
         </Title>
         <ReCardBox>
           {recommendList.map((recommend, idx) => (
-            <RecommendCard />
+            <RecommendCard key={idx} />
           ))}
         </ReCardBox>
       </div>

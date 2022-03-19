@@ -37,7 +37,7 @@ function App(props) {
         <Route path="/user/nickname" element={<UserNickname />} />
         <Route path="/user/favorites" element={<UserFavorites />} />
         <Route path="/articles/:id" element={<ArticleList />} />
-        <Route path="/article/:id" element={<ArticleDetail />} />
+        <Route path="/article" element={<ArticleDetail />} />
         <Route path="/mypage/:id" element={<MyPage />} />
         <Route path="/setting" element={<Setting />} />
         <Route path="/memos" element={<Reviews />} />

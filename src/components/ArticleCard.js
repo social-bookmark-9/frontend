@@ -22,7 +22,7 @@ const ArticleCard = props => {
   };
   const navigate = useNavigate();
 
-  const contents = content.slice(0, 50);
+  // const contents = content.slice(0, 50);
   // 안읽은 날짜 구하기
   const sdt = new Date(createdAt);
   const edt = new Date();
@@ -98,7 +98,7 @@ const ArticleCard = props => {
             _lineHeight="18px"
             _color={({ theme }) => theme.colors.white}
           >
-            {contents}...
+            {content}...
           </Text>
         </ArticleCardContent>
       </ArticleCardBox>
