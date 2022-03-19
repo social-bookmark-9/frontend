@@ -35,7 +35,9 @@ export default class userApi {
           return false;
         }
       })
-      .catch(err => console.log(err.response));
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   async register({ userInfo, navigate }) {
@@ -47,11 +49,12 @@ export default class userApi {
     };
     return axios(registerConfig)
       .then(res => {
-        console.log("회원가입 완료", res.data);
         navigate("/", { replace: true });
         return res.data;
       })
-      .catch(err => console.log(err.response));
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   async checkUser() {

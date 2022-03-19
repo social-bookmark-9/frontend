@@ -22,7 +22,7 @@ const UserFavorites = props => {
   const [checkedItems, setCheckedItems] = useState(new Set());
 
   const newList = [...checkedItems];
-  console.log(newList);
+
   const userInfo = {
     kakaoId: location.state.kakaoId,
     email: location.state.email,

@@ -11,8 +11,6 @@ const UserNickname = props => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  console.log(location.state);
-
   const [words, setWords] = useState(0);
   const [nickname, setNickname] = useState("");
 

@@ -11,7 +11,6 @@ import { useNavigate } from "react-router";
 // import { useLocation } from "react-router";
 
 const ArticleDetail = props => {
-  console.log(props);
   // const id = props.match.params.id;
   const dispatch = useDispatch();
   const navigate = useNavigate();
