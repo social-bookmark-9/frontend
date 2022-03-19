@@ -6,6 +6,7 @@ import ArticleList from "./ArticleList";
 import ArticleDetail from "./ArticleDetail";
 import Reviews from "./Reviews";
 import Setting from "./Setting";
+import MyPage from "./MyPage";
 
 export {
   Login,
@@ -16,4 +17,5 @@ export {
   ArticleDetail,
   Reviews,
   Setting,
+  MyPage,
 };

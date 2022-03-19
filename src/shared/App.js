@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import "./App.css";
+
 import {
   Login,
   UserNickname,
@@ -11,40 +13,34 @@ import {
   ArticleDetail,
   Reviews,
   Setting,
+  MyPage,
 } from "../pages";
-import MyPage from "../pages/MyPage";
 import OAuthRedirectHandler from "../shared/OAuthRedirectHandler";
-import { getArticleAxios } from "../redux/modules/Article";
+
+import { checkMyInfo } from "../redux/modules/User";
 
 function App(props) {
   const dispatch = useDispatch();
-  const isLogin = useSelector(state => state.user.is_login);
-  // const isToken = sessionStorage.getItem("token") ? true : false;
-  // 폴더 리스트 받아오는 부분
+  const token = sessionStorage.getItem("accessToken");
 
-  // 아티클 리스트 받아오는 부분
   useEffect(() => {
-    dispatch(getArticleAxios());
-  });
+    if (token) {
+      dispatch(checkMyInfo(token));
+    }
+  }, [dispatch, token]);
 
   return (
     <React.Fragment>
       <Routes>
-        <Route path="/" element={<Main isLogin={isLogin} />} />
-        <Route path="/login" element={<Login isLogin={isLogin} />} />
-        <Route
-          path="/user/nickname"
-          element={<UserNickname isLogin={isLogin} />}
-        />
-        <Route
-          path="/user/favorites"
-          element={<UserFavorites isLogin={isLogin} />}
-        />
-        <Route path="/articles" element={<ArticleList isLogin={isLogin} />} />
-        <Route path="/article" element={<ArticleDetail isLogin={isLogin} />} />
-        <Route path="/mypage" element={<MyPage isLogin={isLogin} />} />
-        <Route path="/setting" element={<Setting isLogin={isLogin} />} />
-        <Route path="/reviews" element={<Reviews isLogin={isLogin} />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/user/nickname" element={<UserNickname />} />
+        <Route path="/user/favorites" element={<UserFavorites />} />
+        <Route path="/articles/:id" element={<ArticleList />} />
+        <Route path="/article" element={<ArticleDetail />} />
+        <Route path="/mypage/:id" element={<MyPage />} />
+        <Route path="/setting" element={<Setting />} />
+        <Route path="/memos" element={<Reviews />} />
         <Route path="/api/users/login" element={<OAuthRedirectHandler />} />
       </Routes>
     </React.Fragment>

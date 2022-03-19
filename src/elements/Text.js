@@ -15,9 +15,9 @@ const Text = props => {
   const styles = { _color, _fontSize, _lineHeight, _padding, textAlign };
 
   return (
-    <P onClick={_onClick} {...styles}>
+    <TextP onClick={_onClick} {...styles}>
       {children}
-    </P>
+    </TextP>
   );
 };
 
@@ -30,7 +30,7 @@ Text.defaultProps = {
   _onClick: () => {},
 };
 
-const P = styled.p`
+const TextP = styled.p`
   ${({ theme }) => {
     const { fontWeight, colors } = theme;
     return css`

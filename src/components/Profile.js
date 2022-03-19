@@ -1,28 +1,25 @@
 import React from "react";
 import styled from "styled-components";
-import Title from "../elements/Title";
-import Text from "../elements/Text";
+
+import { Title, Text } from "../elements";
 import { Circle } from "../elements/ImageObj";
 
 const Profile = props => {
+  const { nickname, userDesc, profileImage } = props;
   return (
     <React.Fragment>
       <ProfileBox>
-        {/*  그거... 동그라미 */}
-        <CircleBox>
-          <Circle _width="28px" _height="28px" bgColor="black" />
-        </CircleBox>
         <ProfileHead>
           <ProfileImage>
-            <img
-              src="https://bennettfeely.com/clippy/pics/pittsburgh.jpg"
-              alt="profile"
-            />
+            <img src={profileImage} alt="profile" />
           </ProfileImage>
+          <CircleBox>
+            <Circle _width="28px" _height="28px" bgColor="black" />
+          </CircleBox>
           <PropfileInfo>
-            <Title>김철수</Title>
+            <Title>{nickname}</Title>
             <Text _fontSize="13px" _padding="8px 0px">
-              글쓰는 UX디자이너
+              {userDesc}
             </Text>
           </PropfileInfo>
         </ProfileHead>

@@ -4,16 +4,28 @@ import articleApi from "../app/articleApi";
 const ArticleApi = new articleApi();
 
 const initialState = {
+  status: null,
   message: "",
-  data: [],
+  data: {},
   // paging: { load: true, next: null, size: 3 },
   // is_loading: false,
 };
 
+export const postArticleAxios = createAsyncThunk(
+  "article/postArticle",
+  async ({ articleData, navigate }, { dispatch }) => {
+    console.log(articleData);
+    const resp = await ArticleApi.postArticle({ articleData, navigate });
+    console.log(resp);
+    // return resp;
+  },
+);
+
 export const getArticleAxios = createAsyncThunk(
-  "article/getArticleAxios",
-  async (articleData, { dispatch }) => {
-    const resp = await ArticleApi.getArticles();
+  "article/getArticle",
+  async ({ articleId, navigate }, { dispatch }) => {
+    console.log(articleId);
+    const resp = await ArticleApi.getArticles({ articleId, navigate });
     dispatch(setArticle(resp.data));
     return resp;
   },
@@ -28,11 +40,7 @@ export const articleSlice = createSlice({
       state.data = articleList;
     },
   },
-  extraReducers: {
-    [getArticleAxios.fulfilled]: (state, action) => {
-      state.is_loading = false;
-    },
-  },
+  extraReducers: {},
 });
 
 export const { setArticle } = articleSlice.actions;

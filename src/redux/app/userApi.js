@@ -5,6 +5,8 @@ export default class userApi {
     this.base = process.env.REACT_APP_SERVER;
   }
 
+  getToken = () => sessionStorage.getItem("accessToken");
+
   async kakaoLogin({ code, navigate }) {
     const kakaoLoginConfig = {
       method: "GET",
@@ -30,6 +32,7 @@ export default class userApi {
               replace: true,
             },
           );
+          return false;
         }
       })
       .catch(err => console.log(err.response));
@@ -42,13 +45,28 @@ export default class userApi {
       headers: { "content-type": "application/json" },
       data: JSON.stringify(userInfo),
     };
-
     return axios(registerConfig)
       .then(res => {
-        alert("회원가입 완료");
-        navigate("/articles", { replace: true });
+        console.log("회원가입 완료", res.data);
+        navigate("/", { replace: true });
         return res.data;
       })
       .catch(err => console.log(err.response));
+  }
+
+  async checkUser() {
+    const checkUserConfig = {
+      method: "GET",
+      url: `${this.base}/api/users/check`,
+      headers: { "X-AUTH-TOKEN": this.getToken() },
+    };
+    return axios(checkUserConfig)
+      .then(res => {
+        console.log(res);
+        return res.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 }

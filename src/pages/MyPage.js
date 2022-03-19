@@ -1,97 +1,136 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import React, { useEffect } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+import { getFoldersAxios } from "../redux/modules/Folder";
+
 import styled, { css } from "styled-components";
+import { Flexbox } from "../styles/flexbox";
 
 import { Navbar, Profile, ArticleFolder, RemindCard } from "../components";
 import { Label, Title, Image, Text } from "../elements";
-import { Flexbox } from "../styles/flexbox";
+import { useLocation } from "react-router";
 
 const MyPage = props => {
-  const { isLogin } = props;
-  const navigate = useNavigate();
-  const folderData = useSelector(state => state.folder.data);
-  const isMe = true;
-  const completeRates = [15, 100, 30, 45];
+  const dispatch = useDispatch();
+  const location = useLocation();
 
+  console.log(location);
+
+  useEffect(() => {
+    dispatch(getFoldersAxios());
+  }, [dispatch]);
+
+  // ----- 폴더 리스트 ----- //
+  const folderList = useSelector(state => state.folder.folderList);
+  const defaultFolder = folderList[0];
+  const userFolder = folderList.slice(1);
+
+  // ----- 유저 정보 ----- //
+  const userInfo = useSelector(state => state.folder.userInfo);
+
+  // ----- 디폴트 폴더 ----- //
+
+  // ----- 전체구독률 ----- //
+  const completeRates = [100, 49, 29, 0, 35];
   const completeRate = Math.round(
     completeRates.reduce((a, b) => a + b) / completeRates.length,
   );
 
   return (
     <React.Fragment>
-      <Navbar isLogin={isLogin} />
-      {/* 프로필+이름 부분 */}
-      <Profile />
-      {/* 리마인드 부분 */}
-      <RemindCard
-        _title="저장한 글, 다시 읽고 계신가요?"
-        _text={
-          "3번은 읽어야 완전한 내 것이 될 수 있어요.\n저장한 글을 리마인드 해드릴게요"
-        }
-        _button="리마인드 받기"
-      />
-      {/* 큐레이션 부분 */}
-      <Qheader>
-        <Title _padding="20px">김철수님의 큐레이션</Title>
-        <LabelBox>
-          <Label
-            _color={({ theme }) => theme.colors.fontColor07}
-            bgColor="#ffffff"
-            _padding="7px 21px"
-          >
-            전체 완독률 {completeRate}%
-          </Label>
-        </LabelBox>
-      </Qheader>
-      {/* 디폴트 폴더 */}
-      <ArticleFolder
-        _onClick={() => {
-          navigate("/articles");
-        }}
-        folderColor="default"
-        isMe={true}
-      />
-      {/* 아티클 리마인드 */}
-      <AlertBox>
-        <RemindAlert>
-          <div>
-            <Image _src="/images/remind.png" _width="20px" _height="19px" />
-          </div>
-          <div>
-            <Title
-              _fontSize={({ theme }) => theme.fontSizes.font16}
-              _lineHeight="22px"
-            >
-              아티클 리마인드
-            </Title>
-            <Text
-              _fontSize={({ theme }) => theme.fontSizes.font13}
-              _lineHeight="18px"
-            >
-              아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
-            </Text>
-          </div>
-        </RemindAlert>
-      </AlertBox>
-
-      {/* 폴더리스트 시작 */}
-      {folderData.map((folder, idx) => (
-        <ArticleFolder
-          key={idx}
-          folder={folder}
-          _onClick={() => {
-            navigate("/articles");
-          }}
-          folderColor={
-            idx % 3 === 0 ? "green" : idx % 3 === 1 ? "purple" : "blue"
+      <Container>
+        <Navbar />
+        {/* ----- 프로필+이름 부분 ----- */}
+        <Profile {...userInfo} />
+        {/* ----- 리마인드 부분 ----- */}
+        {/* {isMe ? ( */}
+        <RemindCard
+          _title="저장한 글, 다시 읽고 계신가요?"
+          _text={
+            "3번은 읽어야 완전한 내 것이 될 수 있어요.\n저장한 글을 리마인드 해드릴게요"
           }
-          isMe={isMe}
+          _button="리마인드 받기"
         />
-      ))}
+        {/* ) : ( */}
+        ""
+        {/* )} */}
+        {/* ----- 큐레이션 부분 ----- */}
+        <Qheader>
+          <Title _padding="20px">{"username"}님의 큐레이션</Title>
+          <LabelBox>
+            <Label
+              _color={({ theme }) => theme.colors.fontColor07}
+              bgColor="#ffffff"
+              _padding="7px 21px"
+            >
+              전체 완독률 {completeRate}%
+            </Label>
+          </LabelBox>
+        </Qheader>
+        {/* ----- 디폴트 폴더 ----- */}
+        {/* {isMe ? ( */}
+        <>
+          <ArticleFolder
+            folderColor="default"
+            isDefault={true}
+            {...defaultFolder}
+          />
+
+          {/* 아티클 리마인드 */}
+          <AlertBox>
+            <RemindAlert>
+              <div>
+                <Image _src="/images/remind.png" _width="20px" _height="19px" />
+              </div>
+              <div>
+                <Title
+                  _fontSize={({ theme }) => theme.fontSizes.font16}
+                  _lineHeight="22px"
+                >
+                  아티클 리마인드
+                </Title>
+                <Text
+                  _fontSize={({ theme }) => theme.fontSizes.font13}
+                  _lineHeight="18px"
+                >
+                  아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
+                </Text>
+              </div>
+            </RemindAlert>
+          </AlertBox>
+        </>
+        {/* ) : ( */}
+        ""
+        {/* )} */}
+        {/* 폴더리스트 시작 */}
+        {userFolder.map((folder, idx) => (
+          <ArticleFolder
+            {...folder}
+            key={idx}
+            folderColor={
+              idx % 3 === 0 ? "green" : idx % 3 === 1 ? "purple" : "blue"
+            }
+          />
+        ))}
+        {/* {isMe ? ( */}
+        ""
+        {/* ) : ( */}
+        <RemindCard
+          _title={`${"username"}님의 큐레이션이 유용하셨나요?`}
+          _text={
+            "크롬 사용자라면 버튼 클릭 한번으로 링크를 저장해\n나만의 큐레이션을 만들고 공유할 수 있어요"
+          }
+          _button="내 버블드 만들기"
+          isMe={false}
+        />
+        {/* )} */}
+      </Container>
     </React.Fragment>
   );
 };
+const Container = styled.div`
+  margin-bottom: 85px;
+`;
 
 const Qheader = styled.div`
   display: flex;
@@ -115,7 +154,7 @@ const RemindAlert = styled.div`
   padding: 19px 22px;
 `;
 
-const TextPoint = styled.div`
+const TextPoint = styled.span`
   ${({ theme }) => {
     const { colors, fontWeight } = theme;
     return css`

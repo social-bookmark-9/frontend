@@ -1,18 +1,20 @@
 import { useState } from "react";
-import Text from "../elements/Text";
 import styled from "styled-components";
 import Favorite from "../components/Favorite";
-import Button from "../elements/Button";
+import { Title, Button } from "../elements";
 
 const AddLinkTag = props => {
-  // 뒤로가기
-  const goBack = () => {
-    props.setAddStage(true);
+  const { setAddLink, checkedItems, setCheckedItems } = props;
+  // 완료
+  const addLinkFinish = () => {
+    props.setShowModal(current => !current);
+    setAddLink(true);
+    // props.closeModal();
   };
 
   const [isChecked, setIsChecked] = useState(false);
-  const [checkedItems, setCheckedItems] = useState(new Set());
-
+  // const [checkedItems, setCheckedItems] = useState(new Set());
+  // console.log(checkedItems);
   const favoritesList = [
     "커리어",
     "업무스킬",
@@ -28,19 +30,26 @@ const AddLinkTag = props => {
     "과학",
   ];
 
+  console.log("tag:", props.articleData);
+
+  const modalChange = () => {
+    props.setShowModal(current => !current);
+    // props.setAddFolderList(current => !current);
+  };
+
   const handleChecked = e => {
     setIsChecked(!isChecked);
     handleCheckedItems(e.target.parentNode, e.target.value, e.target.checked);
+    console.log("tag:", props.articleData);
+    setCheckedItems(checkedItems);
   };
 
   const handleCheckedItems = (box, value, isChecked) => {
-    if (isChecked && checkedItems.size < 2) {
+    if (isChecked && checkedItems.size < 3) {
       checkedItems.add(value);
-      setCheckedItems(checkedItems);
       box.style.backgroundColor = "#d2d6da";
     } else if (!isChecked && checkedItems.has(value)) {
       checkedItems.delete(value);
-      setCheckedItems(checkedItems);
       box.style.backgroundColor = "#ffffff";
     }
     return checkedItems;
@@ -48,11 +57,14 @@ const AddLinkTag = props => {
 
   return (
     <>
-      {/* <div style={{marginTop:"-18px"}}>
-        <button onClick={goBack}>{"<"}</button>
-      </div> */}
       <div style={{ height: "270" }}>
-        <Text>태그 선택</Text>
+        <TitleBox>
+          <BackButton onClick={modalChange}>{"<"}</BackButton>
+          <Title _fontSize={({ theme }) => theme.fontSizes.font16}>
+            태그 선택
+          </Title>
+          <div />
+        </TitleBox>
         <FavoritesBox>
           <Favorites onChange={handleChecked}>
             {favoritesList.map((favor, idx) => (
@@ -69,13 +81,24 @@ const AddLinkTag = props => {
           bottom: "24px",
         }}
       >
-        <Button _onClick={goBack} _padding="18px">
+        <Button _onClick={addLinkFinish} _padding="18px">
           완료
         </Button>
       </div>
     </>
   );
 };
+
+const TitleBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -22px;
+`;
+
+const BackButton = styled.div`
+  display: inline-block;
+`;
 
 const FavoritesBox = styled.div`
   width: 100%;

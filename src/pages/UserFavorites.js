@@ -17,19 +17,20 @@ const UserFavorites = props => {
   const location = useLocation();
   const dispatch = useDispatch();
 
+  // 다중 체크 아이템
   const [isChecked, setIsChecked] = useState(false);
   const [checkedItems, setCheckedItems] = useState(new Set());
 
   const newList = [...checkedItems];
-
+  console.log(newList);
   const userInfo = {
     kakaoId: location.state.kakaoId,
     email: location.state.email,
     memberName: location.state.nickname,
     profileImage: location.state.profileImage,
     hashtag1: newList[0],
-    hashtag2: newList[1] ? newList[1] : "null",
-    hashtag3: newList[2] ? newList[2] : "null",
+    hashtag2: newList[1] ? newList[1] : null,
+    hashtag3: newList[2] ? newList[2] : null,
   };
 
   const favoritesList = [
