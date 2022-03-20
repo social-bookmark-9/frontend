@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import { Desktop, Tablet, Mobile } from "../styles/mediaquery";
 import { Title, Text } from "../elements";
 import { Circle } from "../elements/ImageObj";
 
@@ -8,25 +8,62 @@ const Profile = props => {
   const { nickname, userDesc, profileImage } = props;
   return (
     <React.Fragment>
-      <ProfileBox>
-        <ProfileHead>
-          <ProfileImage>
-            <img src={profileImage} alt="profile" />
-          </ProfileImage>
-          <CircleBox>
-            <Circle _width="28px" _height="28px" bgColor="black" />
-          </CircleBox>
-          <PropfileInfo>
-            <Title>{nickname}</Title>
-            <Text _fontSize="13px" _padding="8px 0px">
-              {userDesc}
-            </Text>
-          </PropfileInfo>
-        </ProfileHead>
-      </ProfileBox>
+      <Desktop>
+        <DProfileBox>
+          <ProfileHead>
+            <DProfileImage>
+              <img src={profileImage} alt="profile" />
+            </DProfileImage>
+            <DCircleBox>
+              <Circle _width="28px" _height="28px" bgColor="black" />
+            </DCircleBox>
+            <DPropfileInfo>
+              <Title>{nickname}</Title>
+              <Text _fontSize="13px" _padding="8px 0px">
+                {userDesc}
+              </Text>
+            </DPropfileInfo>
+          </ProfileHead>
+        </DProfileBox>
+      </Desktop>
+      <Tablet>
+        <ProfileBox>
+          <ProfileHead>
+            <ProfileImage>
+              <img src={profileImage} alt="profile" />
+            </ProfileImage>
+            <CircleBox>
+              <Circle _width="28px" _height="28px" bgColor="black" />
+            </CircleBox>
+            <PropfileInfo>
+              <Title>{nickname}</Title>
+              <Text _fontSize="13px" _padding="8px 0px">
+                {userDesc}
+              </Text>
+            </PropfileInfo>
+          </ProfileHead>
+        </ProfileBox>
+      </Tablet>
+      <Mobile>
+        <ProfileBox>
+          <ProfileHead>
+            <ProfileImage>
+              <img src={profileImage} alt="profile" />
+            </ProfileImage>
+            <CircleBox>
+              <Circle _width="28px" _height="28px" bgColor="black" />
+            </CircleBox>
+            <PropfileInfo>
+              <Title>{nickname}</Title>
+              <Text _fontSize="13px" _padding="8px 0px">
+                {userDesc}
+              </Text>
+            </PropfileInfo>
+          </ProfileHead>
+        </ProfileBox>
+      </Mobile>
 
       {/* 마법의 svg */}
-
       <svg width="0" height="0">
         <defs>
           <clipPath id="myClip">
@@ -41,16 +78,45 @@ const Profile = props => {
   );
 };
 
+const DProfileBox = styled.div`
+  padding-bottom: 28px;
+
+  position: relative;
+`;
+
+const DProfileImage = styled.div`
+  height: 150px;
+  width: 156.34px;
+  clip-path: url(#myClip);
+  position: relative;
+  background-color: #c4c4c4;
+  z-index: -1;
+  & img {
+    position: absolute;
+    width: 100%;
+  }
+`;
+
+const DCircleBox = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 134px;
+`;
+
+const DPropfileInfo = styled.div`
+  padding: 50px;
+`;
+
 const ProfileBox = styled.div`
   width: 100vw;
   height: 150px;
-  position: relative;
 `;
 
 const ProfileHead = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  position: relative;
 `;
 
 const ProfileImage = styled.div`

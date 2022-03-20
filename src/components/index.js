@@ -4,6 +4,10 @@ import Navbar from "./Navbar";
 import RemindCard from "./RemindCard";
 import ArticleCard from "./ArticleCard";
 import RecommendCard from "./RecommendCard";
+import Modal from "./Modal";
+import Curations from "./Curations";
+import RecommendList from "./RecommendList";
+import RecommendUser from "./RecommendUser";
 
 export {
   Profile,
@@ -12,4 +16,8 @@ export {
   RemindCard,
   ArticleCard,
   RecommendCard,
+  Modal,
+  Curations,
+  RecommendList,
+  RecommendUser,
 };

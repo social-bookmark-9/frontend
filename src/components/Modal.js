@@ -120,11 +120,11 @@ const Modal = () => {
             <Main>
               {showModal ? (
                 <AddLinkTag
-                  setAddLink={setAddLink}
                   closeModal={closeModal}
+                  setAddLink={setAddLink}
                   setShowModal={setShowModal}
-                  checkedItems={checkedItems}
                   setCheckedItems={setCheckedItems}
+                  checkedItems={checkedItems}
                   articleData={articleData}
                 />
               ) : (
