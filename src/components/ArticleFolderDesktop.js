@@ -2,9 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { Label, Image, Title } from "../elements";
-import Carousel from "../elements/Carousel";
 
-const ArticleFolder = props => {
+const ArticleFolderDesktop = props => {
   const {
     folderColor,
     folderId,
@@ -43,17 +42,17 @@ const ArticleFolder = props => {
 
   return (
     <React.Fragment>
-      <Container>
-        <CurationBox
-          folderColor={folderColor}
-          isMe={isMe}
-          isDefault={isDefault}
-          onClick={() => {
-            navigate(`/articles/${folderId}`, {
-              state: folderData,
-            });
-          }}
-        >
+      <CurationBox
+        folderColor={folderColor}
+        isMe={isMe}
+        isDefault={isDefault}
+        onClick={() => {
+          navigate(`/articles/${folderId}`, {
+            state: folderData,
+          });
+        }}
+      >
+        <Container>
           {isMe || isDefault ? (
             <LabelBox>
               <Label
@@ -119,24 +118,35 @@ const ArticleFolder = props => {
               </Label>
             )}
           </TitleBox>
-          <div style={{ paddingTop: "36px", margin: "0 -20px 0 -100px" }}>
-            <Carousel />
-          </div>
-        </CurationBox>
-      </Container>
+        </Container>
+        <div style={{display:"inline-block", marginLeft:"8px"}}>
+          <ArticleCard>
+            애자일이란 무엇인가
+          </ArticleCard>
+          <ArticleCard>
+            애자일이란 무엇인가
+          </ArticleCard>
+          <ArticleCard>
+            애자일이란 무엇인가
+          </ArticleCard>
+          <ArticleCard>
+            애자일이란 무엇인가
+          </ArticleCard>
+        </div>
+      </CurationBox>
     </React.Fragment>
   );
 };
 const Container = styled.div`
-  
+  padding: 24px 32px 36px 22px;
 `;
 
 const CurationBox = styled.div`
   position: relative;
-  width: 100%;
-  height: 290px;
+  width: 736px;
+  height: 450px;
   border-radius: 20px;
-  padding: 28px 20px;
+  margin-bottom: 20px;
   overflow: hidden;
   ${props => props.folderColor === "green" && "background-color: #F2FDFA"};
   ${props => props.folderColor === "purple" && "background-color: #F7F7FD"};
@@ -154,4 +164,16 @@ const TitleBox = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
-export default ArticleFolder;
+
+const ArticleCard = styled.div`
+  display: inline-block;
+  width: 336px;
+  height: 146px;
+  padding: 20px 24px 0 22px;
+  margin: 0 0 12px 12px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #f2f4f6;
+`;
+
+export default ArticleFolderDesktop;

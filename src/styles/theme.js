@@ -48,8 +48,8 @@ const colors = {
 
 const deviceSizes = {
   mobile: 390, //컨텐츠가 들어갈 사이즈는 360
-  tablet: 798, //컨텐츠가 들어갈 사이즈는 768
-  pc: 1080, //컨텐츠가 들어갈 사이즈는 1050
+  tablet: 1194, //컨텐츠가 들어갈 사이즈는 768
+  pc: 1920, //컨텐츠가 들어갈 사이즈는 1115
 };
 
 //참고 : https://wonit.tistory.com/367
@@ -57,7 +57,7 @@ const deviceSizes = {
 const mediaQuery = {
   mobile: `screen and (max-width: ${deviceSizes.mobile})`,
   tablet: `screen and (max-width: ${deviceSizes.tablet})`,
-  pc: `screen and (max-width: ${deviceSizes.laptop})`,
+  pc: `screen and (max-width: ${deviceSizes.pc})`,
 };
 
 const theme = {
