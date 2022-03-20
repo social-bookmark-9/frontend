@@ -47,9 +47,9 @@ const colors = {
 };
 
 const deviceSizes = {
-  mobile: 390,
-  tablet: 1194,
-  pc: 1920, // 컨텐츠 사이즈 1115
+  mobile: 390, //컨텐츠가 들어갈 사이즈는 360
+  tablet: 1194, //컨텐츠가 들어갈 사이즈는 1115
+  pc: 1920, //컨텐츠가 들어갈 사이즈는 1115
 };
 
 //참고 : https://wonit.tistory.com/367

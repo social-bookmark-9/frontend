@@ -10,6 +10,7 @@ import { Desktop, Tablet, Mobile } from "../styles/mediaquery";
 import { Navbar, Profile, ArticleFolder, RemindCard } from "../components";
 import { Label, Title, Image, Text } from "../elements";
 import { useLocation } from "react-router";
+import ArticleFolderDesktop from "../components/ArticleFolderDesktop";
 
 const MyPage = props => {
   const dispatch = useDispatch();
@@ -161,7 +162,7 @@ const MyPage = props => {
           {/* ----- 디폴트 폴더 ----- */}
           {/* {isMe ? ( */}
           <>
-            <ArticleFolder
+            <ArticleFolderDesktop
               folderColor="default"
               isDefault={true}
               {...defaultFolder}

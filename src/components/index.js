@@ -8,6 +8,7 @@ import Modal from "./Modal";
 import Curations from "./Curations";
 import RecommendList from "./RecommendList";
 import RecommendUser from "./RecommendUser";
+import MainTop from "./MainTop";
 
 export {
   Profile,
@@ -20,4 +21,5 @@ export {
   Curations,
   RecommendList,
   RecommendUser,
+  MainTop,
 };
