@@ -1,14 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { Desktop, Tablet, Mobile } from "../styles/mediaquery";
 import { Title, Text } from "../elements";
 import { Circle } from "../elements/ImageObj";
 
 const Profile = props => {
-  const { nickname, userDesc, profileImage } = props;
+  const { memberName, memberComment, profileImage } = props;
   return (
     <React.Fragment>
-      <Desktop>
+      {/* <Desktop>
         <DProfileBox>
           <ProfileHead>
             <DProfileImage>
@@ -43,25 +42,23 @@ const Profile = props => {
             </PropfileInfo>
           </ProfileHead>
         </ProfileBox>
-      </Tablet>
-      <Mobile>
-        <ProfileBox>
-          <ProfileHead>
-            <ProfileImage>
-              <img src={profileImage} alt="profile" />
-            </ProfileImage>
-            <CircleBox>
-              <Circle _width="28px" _height="28px" bgColor="black" />
-            </CircleBox>
-            <PropfileInfo>
-              <Title>{nickname}</Title>
-              <Text _fontSize="13px" _padding="8px 0px">
-                {userDesc}
-              </Text>
-            </PropfileInfo>
-          </ProfileHead>
-        </ProfileBox>
-      </Mobile>
+      </Tablet> */}
+      <ProfileBox>
+        <ProfileHead>
+          <ProfileImage>
+            <img src={profileImage} alt="profile" />
+          </ProfileImage>
+          <CircleBox>
+            <Circle _width="28px" _height="28px" bgColor="black" />
+          </CircleBox>
+          <PropfileInfo>
+            <Title>{memberName}</Title>
+            <Text _fontSize="13px" _padding="8px 0px">
+              {memberComment}
+            </Text>
+          </PropfileInfo>
+        </ProfileHead>
+      </ProfileBox>
 
       {/* 마법의 svg */}
       <svg width="0" height="0">

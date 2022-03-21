@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Desktop, Tablet, Mobile } from "../styles/mediaquery";
 import styled from "styled-components";
 import { FlexboxColumn } from "../styles/flexbox";
-import { Button, Image, Text, Title } from "../elements";
+import { Button, Image, Title } from "../elements";
 
 import NavProfile from "./NavProfile";
 import { Logo } from "../elements/ImageObj";
@@ -31,146 +30,47 @@ const Navbar = props => {
   return (
     <React.Fragment>
       <NavbarContainer>
-        <Desktop>
-          <DNavContainer>
-            <DNavBox>
-              <DLogoBox>
-                <Title _fontSize="24px" _lineHeight="31px">
-                  bubbled
-                </Title>
-                <Image
-                  _src="/images/bubbled.png"
-                  _width="26px"
-                  _height="21px"
-                />
-              </DLogoBox>
-              <DMenuBox>
-                <Text
-                  _fontSize="18px"
-                  _color={({ theme }) => theme.colors.fontColor05}
-                >
-                  홈 피드
-                </Text>
-                <DLine />
-                <ImageBox
-                  onClick={() => {
-                    navigate("/remind");
-                  }}
-                >
-                  <Image _src="/images/memo.png" _width="24px" _height="24px" />
-                </ImageBox>
-                <ImageBox
-                  onClick={() => {
-                    navigate("/setting");
-                  }}
-                >
+        <NavBox>
+          {title ? <Title>{title}</Title> : <Logo />}
+          <NavMenu onClick={menuOpen}>
+            <Image _src="/images/menu.png" _width="24px" _height="24px" />
+          </NavMenu>
+          <NavContainer className={isOpen ? "active" : ""}>
+            <Nav className={isOpen ? "active" : ""} onClick={menuOpen}>
+              <div>
+                <NavMenu onClick={menuOpen}>
                   <Image
-                    _src="/images/setting.png"
+                    _src="/images/close.png"
                     _width="24px"
                     _height="24px"
                   />
-                </ImageBox>
-                <ImageBox
-                  onClick={() => {
-                    navigate("/mypage");
-                  }}
-                >
-                  <Image
-                    _src="/images/iconMe.png"
-                    _width="30px"
-                    _height="30px"
-                  />
-                </ImageBox>
-              </DMenuBox>
-            </DNavBox>
-          </DNavContainer>
-        </Desktop>
-        <Tablet>
-          <NavBox>
-            {title ? <Title>{title}</Title> : <Logo />}
-            <NavMenu onClick={menuOpen}>
-              <Image _src="/images/menu.png" _width="24px" _height="24px" />
-            </NavMenu>
-            <NavContainer className={isOpen ? "active" : ""}>
-              <Nav className={isOpen ? "active" : ""} onClick={menuOpen}>
-                <div>
-                  <NavMenu onClick={menuOpen}>
-                    <Image
-                      _src="/images/close.png"
-                      _width="24px"
-                      _height="24px"
-                    />
-                  </NavMenu>
-                  {/* ----- 네비게이션바 프로필 ----- */}
-                  <NavProfile />
-                  <Line />
-                  <MenuBox>
-                    <Link to="/">
-                      <li>추천 아티클</li>
-                    </Link>
-                    <Link to={isLogin ? "/memos" : "/login"}>
-                      <li>내가 작성한 메모</li>
-                    </Link>
-                  </MenuBox>
-                </div>
-                <Button
-                  isBorder
-                  _padding="15px 0px"
-                  bgColor={({ theme }) => theme.colors.white}
-                  _color={({ theme }) => theme.colors.fontColor02}
-                  _onClick={() => {
-                    isLogin ? navigate("/setting") : navigate("/login");
-                  }}
-                >
-                  설정
-                </Button>
-              </Nav>
-            </NavContainer>
-          </NavBox>
-        </Tablet>
-        <Mobile>
-          <NavBox>
-            {title ? <Title>{title}</Title> : <Logo />}
-            <NavMenu onClick={menuOpen}>
-              <Image _src="/images/menu.png" _width="24px" _height="24px" />
-            </NavMenu>
-            <NavContainer className={isOpen ? "active" : ""}>
-              <Nav className={isOpen ? "active" : ""} onClick={menuOpen}>
-                <div>
-                  <NavMenu onClick={menuOpen}>
-                    <Image
-                      _src="/images/close.png"
-                      _width="24px"
-                      _height="24px"
-                    />
-                  </NavMenu>
-                  {/* ----- 네비게이션바 프로필 ----- */}
-                  <NavProfile {...props} />
-                  <Line />
-                  <MenuBox>
-                    <Link to="/">
-                      <li>추천 아티클</li>
-                    </Link>
-                    <Link to={isLogin ? "/memos" : "/login"}>
-                      <li>내가 작성한 메모</li>
-                    </Link>
-                  </MenuBox>
-                </div>
-                <Button
-                  isBorder
-                  _padding="15px 0px"
-                  bgColor={({ theme }) => theme.colors.white}
-                  _color={({ theme }) => theme.colors.fontColor02}
-                  _onClick={() => {
-                    isLogin ? navigate("/setting") : navigate("/login");
-                  }}
-                >
-                  설정
-                </Button>
-              </Nav>
-            </NavContainer>
-          </NavBox>
-        </Mobile>
+                </NavMenu>
+                {/* ----- 네비게이션바 프로필 ----- */}
+                <NavProfile {...props} />
+                <Line />
+                <MenuBox>
+                  <Link to="/">
+                    <li>추천 아티클</li>
+                  </Link>
+                  <Link to={isLogin ? "/memos" : "/login"}>
+                    <li>내가 작성한 메모</li>
+                  </Link>
+                </MenuBox>
+              </div>
+              <Button
+                isBorder
+                _padding="15px 0px"
+                bgColor={({ theme }) => theme.colors.white}
+                _color={({ theme }) => theme.colors.fontColor02}
+                _onClick={() => {
+                  isLogin ? navigate("/setting") : navigate("/login");
+                }}
+              >
+                설정
+              </Button>
+            </Nav>
+          </NavContainer>
+        </NavBox>
       </NavbarContainer>
     </React.Fragment>
   );
