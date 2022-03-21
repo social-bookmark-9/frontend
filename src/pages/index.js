@@ -7,6 +7,9 @@ import ArticleDetail from "./ArticleDetail";
 import Reviews from "./Reviews";
 import Setting from "./Setting";
 import MyPage from "./MyPage";
+import NotFound from "./NotFound";
+import Reminder from "./Reminder";
+import MyPageD from "./MyPageD";
 
 export {
   Login,
@@ -18,4 +21,7 @@ export {
   Reviews,
   Setting,
   MyPage,
+  NotFound,
+  Reminder,
+  MyPageD,
 };

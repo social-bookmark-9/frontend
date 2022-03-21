@@ -7,7 +7,6 @@ import { FlexboxColumn } from "../styles/flexbox";
 import { Circle } from "../elements/ImageObj";
 import EditProfileLink from "../components/EditProfileLink";
 
-
 const EditProfile = () => {
   const [words, setWords] = useState(0);
 
@@ -24,45 +23,59 @@ const EditProfile = () => {
     <>
       <Container>
         <AreaWrap>
-        <ProfileBox>
-          {/*  그거... 동그라미 */}
-          <CircleBox>
-            <Circle _width="28px" _height="28px" bgColor="black" />
-          </CircleBox>
-          <ProfileImage>
-            <img
-              src="https://bennettfeely.com/clippy/pics/pittsburgh.jpg"
-              alt="profile"
-              style={{zIndex:"3"}}
-            />
-          </ProfileImage>
-          <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
-            <div style={{display:"flex", justifyContent:"start", alignItems:"center"}}>
-              <Title _padding="23px 15px 30px 23px">@김철수</Title>
-            </div>
-            <div style={{display:"flex", justifyContent:"end", alignItems:"center"}}>
+          <ProfileBox>
+            {/*  그거... 동그라미 */}
+            <CircleBox>
+              <Circle _width="28px" _height="28px" bgColor="black" />
+            </CircleBox>
+            <ProfileImage>
               <img
-                src={`/images/edit.png`}
-                width={"20px"}
-                height={"20px"}
+                src="https://bennettfeely.com/clippy/pics/pittsburgh.jpg"
+                alt="profile"
+                style={{ zIndex: "3" }}
               />
+            </ProfileImage>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "start",
+                  alignItems: "center",
+                }}
+              >
+                <Title _padding="23px 15px 30px 23px">@김철수</Title>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "end",
+                  alignItems: "center",
+                }}
+              >
+                <img src={`/images/edit.png`} width={"20px"} height={"20px"} />
+              </div>
             </div>
-          </div>
-        </ProfileBox>
+          </ProfileBox>
 
-        <MemoBox>
-          <TextAreaField
-            placeholder="자기소개를 작성해 주세요."
-            rows={5}
-            maxLength={34}
-            onKeyUp={handleKeyUp}
-          />
-          <InputCheck>{words}/34</InputCheck>
-        </MemoBox>
-        </AreaWrap>      
+          <MemoBox>
+            <TextAreaField
+              placeholder="자기소개를 작성해 주세요."
+              rows={5}
+              maxLength={34}
+              onKeyUp={handleKeyUp}
+            />
+            <InputCheck>{words}/34</InputCheck>
+          </MemoBox>
+        </AreaWrap>
       </Container>
       <EditProfileLink />
-      
+
       {/* 마법의 svg */}
       <svg width="0" height="0">
         <defs>
@@ -74,7 +87,6 @@ const EditProfile = () => {
           </clipPath>
         </defs>
       </svg>
-
     </>
   );
 };
@@ -84,7 +96,7 @@ const Container = styled.div`
   top: 0;
   left: 0;
   z-index: 0;
-  background-color: ${({ theme }) => theme.colors.grayColor01};
+  background-color: ${({ theme }) => theme.colors.gray01};
 `;
 
 const AreaWrap = styled.div`

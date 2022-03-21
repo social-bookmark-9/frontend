@@ -11,7 +11,7 @@ import NavProfile from "./NavProfile";
 import { Logo } from "../elements/ImageObj";
 
 const Navbar = props => {
-  const { folderName } = props;
+  const { title } = props;
 
   const navigate = useNavigate();
   const isLogin = useSelector(state => state.user.isLogin);
@@ -51,7 +51,7 @@ const Navbar = props => {
                 >
                   홈 피드
                 </Text>
-                <Line />
+                <DLine />
                 <ImageBox
                   onClick={() => {
                     navigate("/remind");
@@ -87,7 +87,7 @@ const Navbar = props => {
         </Desktop>
         <Tablet>
           <NavBox>
-            {folderName ? <Title>{folderName}</Title> : <Logo />}
+            {title ? <Title>{title}</Title> : <Logo />}
             <NavMenu onClick={menuOpen}>
               <Image _src="/images/menu.png" _width="24px" _height="24px" />
             </NavMenu>
@@ -130,7 +130,7 @@ const Navbar = props => {
         </Tablet>
         <Mobile>
           <NavBox>
-            {folderName ? <Title>{folderName}</Title> : <Logo />}
+            {title ? <Title>{title}</Title> : <Logo />}
             <NavMenu onClick={menuOpen}>
               <Image _src="/images/menu.png" _width="24px" _height="24px" />
             </NavMenu>
@@ -145,7 +145,7 @@ const Navbar = props => {
                     />
                   </NavMenu>
                   {/* ----- 네비게이션바 프로필 ----- */}
-                  <NavProfile />
+                  <NavProfile {...props} />
                   <Line />
                   <MenuBox>
                     <Link to="/">
@@ -209,6 +209,13 @@ const DMenuBox = styled.div`
   }
 `;
 
+const DLine = styled.hr`
+  width: 1px;
+  height: 27px;
+  border: none;
+  background-color: ${({ theme }) => theme.colors.gray04};
+`;
+
 const ImageBox = styled.div`
   & img {
     margin-left: 30px;
@@ -216,10 +223,9 @@ const ImageBox = styled.div`
 `;
 
 const Line = styled.hr`
-  width: 1px;
-  height: 27px;
+  height: 1px;
   border: none;
-  background-color: ${({ theme }) => theme.colors.grayColor04};
+  background-color: ${({ theme }) => theme.colors.gray04};
 `;
 
 const NavbarContainer = styled.div`

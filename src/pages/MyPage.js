@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getFoldersAxios } from "../redux/modules/Folder";
 
 import styled, { css } from "styled-components";
 import { Flexbox } from "../styles/flexbox";
@@ -9,15 +8,21 @@ import { Desktop, Tablet, Mobile } from "../styles/mediaquery";
 
 import { Navbar, Profile, ArticleFolder, RemindCard } from "../components";
 import { Label, Title, Image, Text } from "../elements";
-import { useLocation } from "react-router";
+import { useLocation, useParams } from "react-router";
 import ArticleFolderDesktop from "../components/ArticleFolderDesktop";
+import { getProfileAxios } from "../redux/modules/Profile";
 
 const MyPage = props => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const params = useParams();
+  const memberId = params.id;
+  const isMe = useSelector(state => state.user.isMe);
 
   useEffect(() => {
-    dispatch(getFoldersAxios());
+    if (isMe) {
+      dispatch(getProfileAxios(memberId));
+    }
   }, [dispatch]);
 
   // ----- 폴더 리스트 ----- //
@@ -42,17 +47,17 @@ const MyPage = props => {
           {/* ----- 프로필+이름 부분 ----- */}
           <Profile {...userInfo} />
           {/* ----- 리마인드 부분 ----- */}
-          {/* {isMe ? ( */}
-          <RemindCard
-            _title="저장한 글, 다시 읽고 계신가요?"
-            _text={
-              "3번은 읽어야 완전한 내 것이 될 수 있어요.\n저장한 글을 리마인드 해드릴게요"
-            }
-            _button="리마인드 받기"
-          />
-          {/* ) : ( */}
-          ""
-          {/* )} */}
+          {isMe ? (
+            <RemindCard
+              _title="저장한 글, 다시 읽고 계신가요?"
+              _text={
+                "3번은 읽어야 완전한 내 것이 될 수 있어요.\n저장한 글을 리마인드 해드릴게요"
+              }
+              _button="리마인드 받기"
+            />
+          ) : (
+            ""
+          )}
           {/* ----- 큐레이션 부분 ----- */}
           <Qheader>
             <Title _padding="20px">{"username"}님의 큐레이션</Title>
@@ -67,47 +72,47 @@ const MyPage = props => {
             </LabelBox>
           </Qheader>
           {/* ----- 디폴트 폴더 ----- */}
-          {/* {isMe ? ( */}
-          <>
-            <ArticleFolder
-              folderColor="default"
-              isDefault={true}
-              {...defaultFolder}
-            />
+          {isMe ? (
+            <>
+              <ArticleFolderDesktop
+                folderColor="default"
+                isDefault={true}
+                {...defaultFolder}
+              />
 
-            {/* 아티클 리마인드 */}
-            <AlertBox>
-              <RemindAlert>
-                <div>
-                  <Image
-                    _src="/images/remind.png"
-                    _width="20px"
-                    _height="19px"
-                  />
-                </div>
-                <div>
-                  <Title
-                    _fontSize={({ theme }) => theme.fontSizes.font16}
-                    _lineHeight="22px"
-                  >
-                    아티클 리마인드
-                  </Title>
-                  <Text
-                    _fontSize={({ theme }) => theme.fontSizes.font13}
-                    _lineHeight="18px"
-                  >
-                    아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
-                  </Text>
-                </div>
-              </RemindAlert>
-            </AlertBox>
-          </>
-          {/* ) : ( */}
-          ""
-          {/* )} */}
+              {/* 아티클 리마인드 */}
+              <AlertBox>
+                <RemindAlert>
+                  <div>
+                    <Image
+                      _src="/images/remind.png"
+                      _width="20px"
+                      _height="19px"
+                    />
+                  </div>
+                  <div>
+                    <Title
+                      _fontSize={({ theme }) => theme.fontSizes.font16}
+                      _lineHeight="22px"
+                    >
+                      아티클 리마인드
+                    </Title>
+                    <Text
+                      _fontSize={({ theme }) => theme.fontSizes.font13}
+                      _lineHeight="18px"
+                    >
+                      아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
+                    </Text>
+                  </div>
+                </RemindAlert>
+              </AlertBox>
+            </>
+          ) : (
+            ""
+          )}
           {/* 폴더리스트 시작 */}
           {userFolder.map((folder, idx) => (
-            <ArticleFolder
+            <ArticleFolderDesktop
               {...folder}
               key={idx}
               folderColor={
@@ -115,18 +120,18 @@ const MyPage = props => {
               }
             />
           ))}
-          {/* {isMe ? ( */}
-          ""
-          {/* ) : ( */}
-          <RemindCard
-            _title={`${"username"}님의 큐레이션이 유용하셨나요?`}
-            _text={
-              "크롬 사용자라면 버튼 클릭 한번으로 링크를 저장해\n나만의 큐레이션을 만들고 공유할 수 있어요"
-            }
-            _button="내 버블드 만들기"
-            isMe={false}
-          />
-          {/* )} */}
+          {isMe ? (
+            ""
+          ) : (
+            <RemindCard
+              _title={`${"username"}님의 큐레이션이 유용하셨나요?`}
+              _text={
+                "크롬 사용자라면 버튼 클릭 한번으로 링크를 저장해\n나만의 큐레이션을 만들고 공유할 수 있어요"
+              }
+              _button="내 버블드 만들기"
+              isMe={false}
+            />
+          )}
         </DContainer>
       </Desktop>
       <Tablet>
@@ -135,17 +140,17 @@ const MyPage = props => {
           {/* ----- 프로필+이름 부분 ----- */}
           <Profile {...userInfo} />
           {/* ----- 리마인드 부분 ----- */}
-          {/* {isMe ? ( */}
-          <RemindCard
-            _title="저장한 글, 다시 읽고 계신가요?"
-            _text={
-              "3번은 읽어야 완전한 내 것이 될 수 있어요.\n저장한 글을 리마인드 해드릴게요"
-            }
-            _button="리마인드 받기"
-          />
-          {/* ) : ( */}
-          ""
-          {/* )} */}
+          {isMe ? (
+            <RemindCard
+              _title="저장한 글, 다시 읽고 계신가요?"
+              _text={
+                "3번은 읽어야 완전한 내 것이 될 수 있어요.\n저장한 글을 리마인드 해드릴게요"
+              }
+              _button="리마인드 받기"
+            />
+          ) : (
+            ""
+          )}
           {/* ----- 큐레이션 부분 ----- */}
           <Qheader>
             <Title _padding="20px">{"username"}님의 큐레이션</Title>
@@ -160,44 +165,44 @@ const MyPage = props => {
             </LabelBox>
           </Qheader>
           {/* ----- 디폴트 폴더 ----- */}
-          {/* {isMe ? ( */}
-          <>
-            <ArticleFolderDesktop
-              folderColor="default"
-              isDefault={true}
-              {...defaultFolder}
-            />
+          {isMe ? (
+            <>
+              <ArticleFolder
+                folderColor="default"
+                isDefault={true}
+                {...defaultFolder}
+              />
 
-            {/* 아티클 리마인드 */}
-            <AlertBox>
-              <RemindAlert>
-                <div>
-                  <Image
-                    _src="/images/remind.png"
-                    _width="20px"
-                    _height="19px"
-                  />
-                </div>
-                <div>
-                  <Title
-                    _fontSize={({ theme }) => theme.fontSizes.font16}
-                    _lineHeight="22px"
-                  >
-                    아티클 리마인드
-                  </Title>
-                  <Text
-                    _fontSize={({ theme }) => theme.fontSizes.font13}
-                    _lineHeight="18px"
-                  >
-                    아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
-                  </Text>
-                </div>
-              </RemindAlert>
-            </AlertBox>
-          </>
-          {/* ) : ( */}
-          ""
-          {/* )} */}
+              {/* 아티클 리마인드 */}
+              <AlertBox>
+                <RemindAlert>
+                  <div>
+                    <Image
+                      _src="/images/remind.png"
+                      _width="20px"
+                      _height="19px"
+                    />
+                  </div>
+                  <div>
+                    <Title
+                      _fontSize={({ theme }) => theme.fontSizes.font16}
+                      _lineHeight="22px"
+                    >
+                      아티클 리마인드
+                    </Title>
+                    <Text
+                      _fontSize={({ theme }) => theme.fontSizes.font13}
+                      _lineHeight="18px"
+                    >
+                      아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
+                    </Text>
+                  </div>
+                </RemindAlert>
+              </AlertBox>
+            </>
+          ) : (
+            ""
+          )}
           {/* 폴더리스트 시작 */}
           {userFolder.map((folder, idx) => (
             <ArticleFolder
@@ -208,18 +213,18 @@ const MyPage = props => {
               }
             />
           ))}
-          {/* {isMe ? ( */}
-          ""
-          {/* ) : ( */}
-          <RemindCard
-            _title={`${"username"}님의 큐레이션이 유용하셨나요?`}
-            _text={
-              "크롬 사용자라면 버튼 클릭 한번으로 링크를 저장해\n나만의 큐레이션을 만들고 공유할 수 있어요"
-            }
-            _button="내 버블드 만들기"
-            isMe={false}
-          />
-          {/* )} */}
+          {isMe ? (
+            ""
+          ) : (
+            <RemindCard
+              _title={`${"username"}님의 큐레이션이 유용하셨나요?`}
+              _text={
+                "크롬 사용자라면 버튼 클릭 한번으로 링크를 저장해\n나만의 큐레이션을 만들고 공유할 수 있어요"
+              }
+              _button="내 버블드 만들기"
+              isMe={false}
+            />
+          )}
         </Container>
       </Tablet>
       <Mobile>
@@ -228,17 +233,17 @@ const MyPage = props => {
           {/* ----- 프로필+이름 부분 ----- */}
           <Profile {...userInfo} />
           {/* ----- 리마인드 부분 ----- */}
-          {/* {isMe ? ( */}
-          <RemindCard
-            _title="저장한 글, 다시 읽고 계신가요?"
-            _text={
-              "3번은 읽어야 완전한 내 것이 될 수 있어요.\n저장한 글을 리마인드 해드릴게요"
-            }
-            _button="리마인드 받기"
-          />
-          {/* ) : ( */}
-          ""
-          {/* )} */}
+          {isMe ? (
+            <RemindCard
+              _title="저장한 글, 다시 읽고 계신가요?"
+              _text={
+                "3번은 읽어야 완전한 내 것이 될 수 있어요.\n저장한 글을 리마인드 해드릴게요"
+              }
+              _button="리마인드 받기"
+            />
+          ) : (
+            ""
+          )}
           {/* ----- 큐레이션 부분 ----- */}
           <Qheader>
             <Title _padding="20px">{"username"}님의 큐레이션</Title>
@@ -253,44 +258,44 @@ const MyPage = props => {
             </LabelBox>
           </Qheader>
           {/* ----- 디폴트 폴더 ----- */}
-          {/* {isMe ? ( */}
-          <>
-            <ArticleFolder
-              folderColor="default"
-              isDefault={true}
-              {...defaultFolder}
-            />
+          {isMe ? (
+            <>
+              <ArticleFolder
+                folderColor="default"
+                isDefault={true}
+                {...defaultFolder}
+              />
 
-            {/* 아티클 리마인드 */}
-            <AlertBox>
-              <RemindAlert>
-                <div>
-                  <Image
-                    _src="/images/remind.png"
-                    _width="20px"
-                    _height="19px"
-                  />
-                </div>
-                <div>
-                  <Title
-                    _fontSize={({ theme }) => theme.fontSizes.font16}
-                    _lineHeight="22px"
-                  >
-                    아티클 리마인드
-                  </Title>
-                  <Text
-                    _fontSize={({ theme }) => theme.fontSizes.font13}
-                    _lineHeight="18px"
-                  >
-                    아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
-                  </Text>
-                </div>
-              </RemindAlert>
-            </AlertBox>
-          </>
-          {/* ) : ( */}
-          ""
-          {/* )} */}
+              {/* 아티클 리마인드 */}
+              <AlertBox>
+                <RemindAlert>
+                  <div>
+                    <Image
+                      _src="/images/remind.png"
+                      _width="20px"
+                      _height="19px"
+                    />
+                  </div>
+                  <div>
+                    <Title
+                      _fontSize={({ theme }) => theme.fontSizes.font16}
+                      _lineHeight="22px"
+                    >
+                      아티클 리마인드
+                    </Title>
+                    <Text
+                      _fontSize={({ theme }) => theme.fontSizes.font13}
+                      _lineHeight="18px"
+                    >
+                      아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
+                    </Text>
+                  </div>
+                </RemindAlert>
+              </AlertBox>
+            </>
+          ) : (
+            ""
+          )}
           {/* 폴더리스트 시작 */}
           {userFolder.map((folder, idx) => (
             <ArticleFolder
@@ -301,18 +306,18 @@ const MyPage = props => {
               }
             />
           ))}
-          {/* {isMe ? ( */}
-          ""
-          {/* ) : ( */}
-          <RemindCard
-            _title={`${"username"}님의 큐레이션이 유용하셨나요?`}
-            _text={
-              "크롬 사용자라면 버튼 클릭 한번으로 링크를 저장해\n나만의 큐레이션을 만들고 공유할 수 있어요"
-            }
-            _button="내 버블드 만들기"
-            isMe={false}
-          />
-          {/* )} */}
+          {isMe ? (
+            ""
+          ) : (
+            <RemindCard
+              _title={`${"username"}님의 큐레이션이 유용하셨나요?`}
+              _text={
+                "크롬 사용자라면 버튼 클릭 한번으로 링크를 저장해\n나만의 큐레이션을 만들고 공유할 수 있어요"
+              }
+              _button="내 버블드 만들기"
+              isMe={false}
+            />
+          )}
         </Container>
       </Mobile>
     </React.Fragment>

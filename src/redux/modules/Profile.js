@@ -1,5 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import ProfileApi from "../app/ProfileApi";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import profileApi from "../app/profileApi";
+
+const ProfileApi = new profileApi();
+
 const initialState = {
   memberInfo: {
     memberId: "",
@@ -13,40 +16,50 @@ const initialState = {
     blogUrl: null,
     websiteUrl: null,
   },
-  articleFolderList: [{
-    folderId: 0,
-    folderName: "",
-    hashTag1: "",
-    hashTag2: "",
-    hashTag3: "",
-    likeCnt: 0,
-    completeRate: 0,
-    isHide: true,
-    articleList: [{
-      title: "",
-      content: "",
-        }]
-  }]
-}
+  articleFolderList: [
+    {
+      folderId: 0,
+      folderName: "",
+      hashTag1: "",
+      hashTag2: "",
+      hashTag3: "",
+      likeCnt: 0,
+      completeRate: 0,
+      isHide: true,
+      articleList: [
+        {
+          title: "",
+          content: "",
+        },
+      ],
+    },
+  ],
+};
+
 export const getProfileAxios = createAsyncThunk(
-  'profile/getProfileAxios',
-  async (_, {dispatch, getState}) => {
-    const { memberId } = getState().profile.memberId;
-    const resp = await ProfileApi.getProfileAxios({ memberId });
+  "profile/getProfileAxios",
+  async (memberId, { dispatch }) => {
+    const resp = await ProfileApi.getProfile(memberId);
+    console.log("여기", resp);
     dispatch(setProfile(resp.data));
     return resp;
-  }
-)
+  },
+);
+
 export const profileSlice = createSlice({
   name: "profile",
   initialState,
-  reducers:{
+  reducers: {
     setProfile: (state, action) => {
-    }
+      const memberInfo = action.payload.memberInfo;
+      const articleFolderList = action.payload.articleFolderList;
+      state.memberInfo = { ...memberInfo };
+      state.articleFolderList = articleFolderList;
+    },
   },
   extraReducers: {
-    [getProfileAxios.fulfilled] : (state, action) => {
-    }
-  }
-})
+    [getProfileAxios.fulfilled]: (state, action) => {},
+  },
+});
+export const { setProfile } = profileSlice.actions;
 export default profileSlice.reducer;

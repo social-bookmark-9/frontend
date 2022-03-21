@@ -9,7 +9,7 @@ import { Text, Button, Image } from "../elements";
 
 const ArticleList = props => {
   const location = useLocation();
-  const folderName = location.state.folderName;
+  const title = location.state.folderName;
   const isMe = location.state.isMe;
   const isDefault = location.state.isDefault;
   const likeCnt = location.state.likeCnt;
@@ -18,7 +18,7 @@ const ArticleList = props => {
 
   return (
     <React.Fragment>
-      <Navbar folderName={folderName} />
+      <Navbar title={title} />
 
       <LikeBox isMe={isMe}>
         {isMe || isDefault ? (

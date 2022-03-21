@@ -96,7 +96,7 @@ const TextAreaField = styled.textarea`
   height: 100px;
   padding: 26px;
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.grayColor01};
+  background-color: ${({ theme }) => theme.colors.gray01};
   &:focus {
     outline: none;
   }
@@ -112,7 +112,7 @@ const TextAreaField = styled.textarea`
 const Line = styled.hr`
   border: none;
   height: 10px;
-  background-color: ${({ theme }) => theme.colors.grayColor01};
+  background-color: ${({ theme }) => theme.colors.gray01};
 `;
 
 const ReCardBox = styled.div`

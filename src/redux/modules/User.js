@@ -37,6 +37,7 @@ export const checkMyInfo = createAsyncThunk(
   "user/checkMyInfo",
   async ({ token, navigate }, { dispatch }) => {
     const user = await UserApi.checkUser({ token, navigate });
+    console.log(user);
     if (user) {
       dispatch(setUser(user.data));
       return user;
@@ -62,6 +63,8 @@ export const userSlice = createSlice({
       sessionStorage.setItem("refreshToken", action.payload.token.refreshToken);
       const myInfo = action.payload.myInfo;
       state.myInfo = { ...myInfo };
+      state.isLogin = action.payload.login;
+      state.isMe = action.payload.login;
     },
     deleteUserFromSession: (state, action) => {
       sessionStorage.removeItem("accessToken");
@@ -75,7 +78,7 @@ export const userSlice = createSlice({
   extraReducers: {
     [registerAxios.fulfilled]: (state, action) => {
       state.myInfo = action.payload.data.myInfo;
-      state.isLogin = action.payload.data.login;
+      state.isLogin = true;
       state.isMe = true;
     },
     [kakaoLoginAxios.fulfilled && kakaoLoginAxios.user === true]: (
@@ -83,7 +86,7 @@ export const userSlice = createSlice({
       action,
     ) => {
       state.myInfo = action.payload.data.myInfo;
-      state.isLogin = action.payload.data.login;
+      state.isLogin = true;
       state.isMe = true;
     },
     [logoutAxios.fulfilled]: (state, action) => {

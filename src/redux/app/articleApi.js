@@ -8,7 +8,7 @@ export default class articleApi {
 
   getToken = () => sessionStorage.getItem("accessToken");
 
-  async postArticle({ articleData, navigate }) {
+  async postArticle({ articleData, setModalOpen }) {
     const postArticleConfig = {
       method: "POST",
       url: `${this.base}/api/articles`,
@@ -20,6 +20,7 @@ export default class articleApi {
     };
     return axios(postArticleConfig)
       .then(res => {
+        setModalOpen(true);
         return res;
       })
       .catch(err => {
@@ -36,7 +37,6 @@ export default class articleApi {
         "X-AUTH-TOKEN": this.getToken(),
       },
     };
-
     return axios(getArticleConfig)
       .then(res => {
         console.log(res);
@@ -46,4 +46,24 @@ export default class articleApi {
         console.log(err);
       });
   }
+
+  async updateReview({ articleId, review, navigate }) {
+    const updateReviewConfig = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": this.getToken(),
+      },
+      data: JSON.stringify(review),
+    };
+    return axios(updateReviewConfig)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  // async reviewHide({articleId, navigate})
 }

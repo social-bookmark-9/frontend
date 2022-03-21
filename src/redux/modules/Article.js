@@ -29,18 +29,42 @@ export const getArticleAxios = createAsyncThunk(
   },
 );
 
+export const updateReviewAxios = createAsyncThunk(
+  "article/updateReview",
+  async ({ articleId, review, navigate }, { dispatch }) => {
+    const resp = await ArticleApi.updateReview({ articleId, review, navigate });
+    dispatch(setReview(resp.data));
+    return resp;
+  },
+);
+
+export const reviewHideAxios = createAsyncThunk(
+  "article/reviewHide",
+  async ({ articleId, navigate }, { dispatch }) => {
+    const resp = await ArticleApi.reviewHide({ articleId, navigate });
+    return resp;
+  },
+);
+
 export const articleSlice = createSlice({
   name: "article",
   initialState,
   reducers: {
     setArticle: (state, action) => {
-      const articleList = action.payload;
-      state.data = articleList;
+      state.data = action.payload.article;
+    },
+    setReview: (state, action) => {
+      state.data = action.payload.review;
+    },
+    setReviewHide: (state, action) => {},
+  },
+  extraReducers: {
+    [updateReviewAxios.fulfilled]: (state, action) => {
+      state.review = action.payload.data.review;
     },
   },
-  extraReducers: {},
 });
 
-export const { setArticle } = articleSlice.actions;
+export const { setArticle, setReview } = articleSlice.actions;
 
 export default articleSlice.reducer;

@@ -13,7 +13,7 @@ const Main = props => {
   return (
     <React.Fragment>
       <MainContainer>
-        <Navbar isLogin={props.isLogin} />
+        <Navbar {...props} />
         {/* 맨 위 영역 */}
         <MainTop />
 

@@ -89,7 +89,7 @@ const Modal = () => {
   };
 
   const handleAddLink = () => {
-    dispatch(postArticleAxios({ articleData, navigate }));
+    dispatch(postArticleAxios({ articleData, setModalOpen }));
   };
 
   return (
