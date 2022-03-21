@@ -5,6 +5,7 @@ import Curations from "../components/Curations";
 import RecommendList from "../components/RecommendList";
 import RecommendUser from "../components/RecommendUser";
 import MainTop from "../components/MainTop";
+import { Desktop } from "../styles/mediaquery";
 
 const Main = props => {
   return (
@@ -22,6 +23,13 @@ const Main = props => {
 
         {/* 추천 유저 */}
         <RecommendUser />
+
+        <Desktop>
+          ㅇㄹ
+          <div style={{width:"100%", height:"446px", backgroundColor:"#E7E8FA"}} />
+          <div style={{width:"100%", height:"446px", backgroundColor:"#353C49"}} />
+        </Desktop>
+        
         <Modal />
 
     </React.Fragment>

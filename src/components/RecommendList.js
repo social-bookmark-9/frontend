@@ -74,7 +74,7 @@ const RecommendList = () => {
           justifyContent: "start" }}>
           <Title _fontSize="34px" _lineHeight="41px" _padding="0 0 20px 0">
             <div style={{ marginTop:"-46px" }}>
-              <img src="/images/DesktopMain1.png" width={"44px"} />
+              <img src="/images/DesktopMain1.png" width={"44px"} alt="" />
             </div>
             <div>이번달 버블러들이</div>
             <div>모은 글</div>
@@ -83,7 +83,7 @@ const RecommendList = () => {
             <FavoritesBox>
               <Favorites onChange={handleChecked}>
                 {favoritesList.map((favor, idx) => (
-                  <InputBox>
+                  <InputBox key={idx}>
                     <FavoriteInput
                       type="checkbox"
                       id={idx}
@@ -124,7 +124,6 @@ const RecommendList = () => {
 
     <Tablet>
       <div style={{
-        // margin: "0 -90px 0 -20px",
         padding: "32px 0 40px 0",
         backgroundColor: "#f2f3f4",
       }}>

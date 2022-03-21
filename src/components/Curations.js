@@ -31,7 +31,7 @@ const Curations = () => {
         </div>
       </div>
       <div style={{ display:"inline-block", flexDirection:"column", justifyContent: "end" }}>
-        {folderList.map((folderId, idx) => (
+        {folderList.slice(0, 3).map((folderId, idx) => (
           <ArticleFolderDesktop
             key={idx}
             _onClick={() => {
@@ -67,7 +67,7 @@ const Curations = () => {
     <div style={{ margin:"0 auto 0 auto", maxWidth:"1194px", padding:"28px 40px 0 40px" }}>
       <Title _padding="0 0 20px 0">추천 큐레이션</Title>
       {folderList.map((folderId, idx) => (
-        <div style={{width:"359px", margin:"0 19px 16px 0", display:"inline-block"}}>
+        <div key={idx} style={{width:"359px", margin:"0 19px 16px 0", display:"inline-block"}}>
         <ArticleFolder
           key={idx}
           _onClick={() => {
@@ -107,7 +107,7 @@ const Curations = () => {
       <div style={{padding:"28px 19px 0 20px"}}>
         <Title _padding="0 0 19px 0">추천 큐레이션</Title>
         {folderList.map((folderId, idx) => (
-          <div style={{marginBottom: "16px"}}>
+          <div key={idx} style={{marginBottom: "16px"}}>
             <ArticleFolder
               key={idx}
               _onClick={() => {
