@@ -27,7 +27,7 @@ function App(props) {
     if (token) {
       dispatch(checkMyInfo(token));
     }
-  }, [dispatch, token]);
+  }, []);
 
   return (
     <React.Fragment>

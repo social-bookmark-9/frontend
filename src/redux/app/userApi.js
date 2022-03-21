@@ -1,12 +1,9 @@
 import axios from "axios";
-
 export default class userApi {
   constructor() {
     this.base = process.env.REACT_APP_SERVER;
   }
-
   getToken = () => sessionStorage.getItem("accessToken");
-
   async kakaoLogin({ code, navigate }) {
     const kakaoLoginConfig = {
       method: "GET",
@@ -39,7 +36,6 @@ export default class userApi {
         console.log(err);
       });
   }
-
   async register({ userInfo, navigate }) {
     const registerConfig = {
       method: "POST",
@@ -56,7 +52,6 @@ export default class userApi {
         console.log(err);
       });
   }
-
   async checkUser() {
     const checkUserConfig = {
       method: "GET",

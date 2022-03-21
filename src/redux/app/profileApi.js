@@ -1,25 +1,30 @@
 import axios from "axios";
+import { getToken } from "../../shared/utils";
+
 export default class ProfileApi {
   constructor() {
     this.base = process.env.REACT_APP_SERVER;
   }
-  getToken = () => sessionStorage.getItem("token");
+
   async getProfile({memberId}) {
     const getProfileConfig = {
       method: "GET",
       url: `${this.base}/api/mypage/${memberId}`,
       headers: {
-        'Content-Type': 'application/json',
-        'X-AUTH-TOKEN': this.getToken(),
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
       },
+      data: JSON.stringify(memberId),
     }
     return axios(getProfileConfig)
       .then(res => {
         console.log(res);
+        console.log("되나?");
         return res.data;
       })
-      .catch(err => console.log(err.response));
+      .catch(err => console.log(err));
   }
+
   async editProfileStatus({ }) {
     const editProfileStatusConfig = {
       method: "PATCH",
@@ -28,7 +33,7 @@ export default class ProfileApi {
         'Content-Type': 'application/json',
         'X-AUTH-TOKEN': this.getToken(),
       },
-      data: JSON.stringify(userDesc)
+      // data: JSON.stringify(userDesc)
     }
     return axios(editProfileStatusConfig)
       .then(res => {

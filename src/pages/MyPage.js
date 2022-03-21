@@ -2,29 +2,40 @@ import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getFoldersAxios } from "../redux/modules/Folder";
+import { getProfileAxios } from "../redux/modules/Profile";
 
 import styled, { css } from "styled-components";
 import { Flexbox } from "../styles/flexbox";
 
 import { Navbar, Profile, ArticleFolder, RemindCard } from "../components";
 import { Label, Title, Image, Text } from "../elements";
-import { useLocation } from "react-router";
+import { useLocation, useParams } from "react-router";
 
 const MyPage = props => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const params = useParams();
+  const memberId = params.id;
+  console.log(params.id);
 
   useEffect(() => {
-    dispatch(getFoldersAxios());
+    // dispatch(getFoldersAxios());
+    dispatch(getProfileAxios(memberId));
   }, [dispatch]);
 
+  const isMe = useSelector(state => state.user)
+  console.log(isMe);
+
   // ----- 폴더 리스트 ----- //
-  const folderList = useSelector(state => state.folder.folderList);
-  const defaultFolder = folderList[0];
-  const userFolder = folderList.slice(1);
+  const folderList = useSelector(state => state.profile.ArticleFolderList);
+  // const defaultFolder = folderList[0];
+  // const userFolder = folderList.slice(1);
+  console.log(useSelector(state => state));
+  const defaultFolder = folderList;
+  const userFolder = folderList;
 
   // ----- 유저 정보 ----- //
-  const userInfo = useSelector(state => state.folder.userInfo);
+  const userInfo = useSelector(state => state.profile.memberInfo);
 
   // ----- 디폴트 폴더 ----- //
 
@@ -101,7 +112,7 @@ const MyPage = props => {
         ""
         {/* )} */}
         {/* 폴더리스트 시작 */}
-        {userFolder.map((folder, idx) => (
+        {/* {userFolder.map((folder, idx) => (
           <ArticleFolder
             {...folder}
             key={idx}
@@ -109,7 +120,7 @@ const MyPage = props => {
               idx % 3 === 0 ? "green" : idx % 3 === 1 ? "purple" : "blue"
             }
           />
-        ))}
+        ))} */}
         {/* {isMe ? ( */}
         ""
         {/* ) : ( */}
