@@ -20,7 +20,7 @@ import {
 } from "../pages";
 import OAuthRedirectHandler from "../shared/OAuthRedirectHandler";
 
-import { checkMyInfo } from "../redux/modules/User";
+import { checkUserAxios } from "../redux/modules/User";
 import { getToken } from "./utils";
 
 function App(props) {
@@ -29,7 +29,7 @@ function App(props) {
 
   useEffect(() => {
     if (getToken()) {
-      dispatch(checkMyInfo(getToken()));
+      dispatch(checkUserAxios(getToken()));
     }
   }, [dispatch]);
 

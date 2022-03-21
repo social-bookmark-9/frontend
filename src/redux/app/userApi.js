@@ -1,13 +1,12 @@
 import axios from "axios";
-
+import { getToken, getTokens } from "../../shared/utils";
+import { refreshTokensAxios } from "../modules/User";
 export default class userApi {
   constructor() {
     this.base = process.env.REACT_APP_SERVER;
   }
 
-  getToken = () => sessionStorage.getItem("accessToken");
-
-  async kakaoLogin({ code, navigate }) {
+  async kakaoLogin({ code, navigate, dispatch }) {
     const kakaoLoginConfig = {
       method: "GET",
       url: `${this.base}${process.env.REACT_APP_KAKAO_URI}?code=${code}`,
@@ -37,6 +36,9 @@ export default class userApi {
       })
       .catch(err => {
         console.log(err);
+        if (err.message === "expired") {
+          dispatch(refreshTokensAxios(getTokens));
+        }
       });
   }
 
@@ -61,12 +63,33 @@ export default class userApi {
     const checkUserConfig = {
       method: "GET",
       url: `${this.base}/api/users/check`,
-      headers: { "X-AUTH-TOKEN": this.getToken() },
+      headers: {
+        "content-type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
     };
     return axios(checkUserConfig)
       .then(res => {
         console.log(res);
         return res.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  async refreshTokens({ tokens, navigate }) {
+    const refreshTokensConfig = {
+      method: "POST",
+      url: `${this.base}/api/users/token`,
+      headers: {
+        "content-type": "application/json",
+      },
+      data: JSON.stringify(tokens),
+    };
+    return axios(refreshTokensConfig)
+      .then(res => {
+        console.log(res);
       })
       .catch(err => {
         console.log(err);

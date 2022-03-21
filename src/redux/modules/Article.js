@@ -46,6 +46,14 @@ export const reviewHideAxios = createAsyncThunk(
   },
 );
 
+export const saveArticleAxios = createAsyncThunk(
+  "article/saveArticle",
+  async ({ articleId, navigate }, { dispatch }) => {
+    const resp = await ArticleApi.saveArticle({ articleId, navigate });
+    return resp;
+  },
+);
+
 export const articleSlice = createSlice({
   name: "article",
   initialState,

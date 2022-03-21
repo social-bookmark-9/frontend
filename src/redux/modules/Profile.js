@@ -40,7 +40,6 @@ export const getProfileAxios = createAsyncThunk(
   "profile/getProfileAxios",
   async (memberId, { dispatch }) => {
     const resp = await ProfileApi.getProfile(memberId);
-    console.log("여기", resp);
     dispatch(setProfile(resp.data));
     return resp;
   },
@@ -51,10 +50,10 @@ export const profileSlice = createSlice({
   initialState,
   reducers: {
     setProfile: (state, action) => {
-      const memberInfo = action.payload.memberInfo;
-      const articleFolderList = action.payload.articleFolderList;
+      const memberInfo = action.payload.memberInfoResponseDto;
+      const articleFolderList = action.payload.articleFolderListResponseDto;
       state.memberInfo = { ...memberInfo };
-      state.articleFolderList = articleFolderList;
+      state.articleFolderList = { ...articleFolderList };
     },
   },
   extraReducers: {

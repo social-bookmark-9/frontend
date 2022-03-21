@@ -18,12 +18,11 @@ export default class ProfileApi {
     };
     return axios(getProfileConfig)
       .then(res => {
-        console.log(res);
-        console.log("되나?");
-        // return res.data;
+        return res.data;
       })
       .catch(err => console.log(err));
   }
+
   async editProfileStatus({}) {
     const editProfileStatusConfig = {
       method: "PATCH",
@@ -41,6 +40,7 @@ export default class ProfileApi {
       })
       .catch(err => console.log(err.response));
   }
+
   async editProfileSns({ urlList }) {
     const editProfileSnsConfig = {
       method: "PATCH",
@@ -59,6 +59,7 @@ export default class ProfileApi {
         console.log(err.response);
       });
   }
+
   async editProfileImage({ profileImage }) {
     const editProfileImageConfig = {
       method: "POST",
@@ -77,6 +78,7 @@ export default class ProfileApi {
         console.log(err.response);
       });
   }
+
   async editProfileNickname({ nickname }) {
     const editProfileNicknameConfig = {
       method: "PATCH",
@@ -95,6 +97,7 @@ export default class ProfileApi {
         console.log(err.response);
       });
   }
+
   async editProfileHashtag({ hashtag }) {
     const editProfileHashtagConfig = {
       method: "PATCH",

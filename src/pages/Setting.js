@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import styled, { css } from "styled-components";
 import Navbar from "../components/Navbar";
@@ -7,6 +8,7 @@ import { FlexboxColumn } from "../styles/flexbox";
 
 const Setting = props => {
   const navigate = useNavigate();
+  const isLogin = useSelector(state => state.user.isLogin);
 
   return (
     <React.Fragment>

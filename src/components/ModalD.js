@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { postArticleAxios } from "../redux/modules/Article";
 import { useNavigate } from "react-router";
 
-const Modal = () => {
+const ModalD = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // 모달 열고 닫기
@@ -247,8 +247,8 @@ const Main = styled.div`
 const LinkButtonBox = styled.div`
   display: inline-flex;
   position: fixed;
-  bottom: 16px;
-  right: 16px;
+  bottom: 60px;
+  right: 60px;
   & button {
     width: 62px;
     height: 64px;
@@ -369,4 +369,4 @@ const ButtonBox = styled.div`
   bottom: 24px;
 `;
 
-export default Modal;
+export default ModalD;

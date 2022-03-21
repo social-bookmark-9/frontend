@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getToken } from "../../shared/utils";
 
 export default class articleApi {
   constructor() {
@@ -6,15 +7,13 @@ export default class articleApi {
     this.base = process.env.REACT_APP_SERVER;
   }
 
-  getToken = () => sessionStorage.getItem("accessToken");
-
   async postArticle({ articleData, setModalOpen }) {
     const postArticleConfig = {
       method: "POST",
       url: `${this.base}/api/articles`,
       headers: {
         "Content-Type": "application/json",
-        "X-AUTH-TOKEN": this.getToken(),
+        "X-AUTH-TOKEN": getToken(),
       },
       data: JSON.stringify(articleData),
     };
@@ -34,7 +33,7 @@ export default class articleApi {
       url: `${this.base}/api/articles/${articleId}`,
       headers: {
         "Content-Type": "application/json",
-        "X-AUTH-TOKEN": this.getToken(),
+        "X-AUTH-TOKEN": getToken(),
       },
     };
     return axios(getArticleConfig)
@@ -52,7 +51,7 @@ export default class articleApi {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        "X-AUTH-TOKEN": this.getToken(),
+        "X-AUTH-TOKEN": getToken(),
       },
       data: JSON.stringify(review),
     };
@@ -65,5 +64,21 @@ export default class articleApi {
       });
   }
 
-  // async reviewHide({articleId, navigate})
+  async reviewHide({ articleId, navigate }) {
+    const reviewHideConfig = {
+      method: "PATCH",
+      url: `/api/articles/${articleId}/review/hide`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
+    };
+    return axios(reviewHideConfig)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 }

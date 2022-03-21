@@ -5,7 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import { Flexbox } from "../styles/flexbox";
 
-import { Navbar, Profile, ArticleFolder, RemindCard } from "../components";
+import {
+  Navbar,
+  Profile,
+  ArticleFolder,
+  RemindCard,
+  ModalD,
+} from "../components";
 import { Label, Title, Image, Text } from "../elements";
 import { useLocation, useParams } from "react-router";
 import { getProfileAxios } from "../redux/modules/Profile";
@@ -118,7 +124,7 @@ const MyPageD = props => {
           />
         ))}
         {isMe ? (
-          ""
+          <ModalD />
         ) : (
           <RemindCard
             _title={`${"username"}님의 큐레이션이 유용하셨나요?`}
