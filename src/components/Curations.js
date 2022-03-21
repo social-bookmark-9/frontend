@@ -31,7 +31,7 @@ const Curations = () => {
         </div>
       </div>
       <div style={{ display:"inline-block", flexDirection:"column", justifyContent: "end" }}>
-        {folderList.map((folderId, idx) => (
+        {folderList.slice(0, 3).map((folderId, idx) => (
           <ArticleFolderDesktop
             key={idx}
             _onClick={() => {
