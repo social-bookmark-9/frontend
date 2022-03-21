@@ -22,10 +22,8 @@ export const folderSlice = createSlice({
   initialState,
   reducers: {
     setFolder: (state, action) => {
-      const userInfo = action.payload.memberInfo;
-      const folderList = action.payload.articlefolderList;
-      state.userInfo = { ...userInfo };
-      state.folderList = folderList;
+      const articleFolderList = action.payload.articleFolderListResponseDto;
+      state.articleFolderList = articleFolderList;
     },
   },
 });

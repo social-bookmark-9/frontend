@@ -4,20 +4,20 @@ import styled from "styled-components";
 import { Title, Text } from "../elements";
 import { Circle } from "../elements/ImageObj";
 
-const Profile = props => {
-  const { nickname, userDesc, profileImage } = props;
+const UserProfile = props => {
+  const { nickName, userDesc, profileImageUrl } = props;
   return (
     <React.Fragment>
       <ProfileBox>
         <ProfileHead>
           <ProfileImage>
-            <img src={profileImage} alt="profile" />
+            <img src={profileImageUrl} alt="profile" />
           </ProfileImage>
           <CircleBox>
             <Circle _width="28px" _height="28px" bgColor="black" />
           </CircleBox>
           <PropfileInfo>
-            <Title>{nickname}</Title>
+            <Title>{nickName}</Title>
             <Text _fontSize="13px" _padding="8px 0px">
               {userDesc}
             </Text>
@@ -77,4 +77,4 @@ const CircleBox = styled.div`
   left: 115px;
 `;
 
-export default Profile;
+export default UserProfile;

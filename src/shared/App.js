@@ -19,6 +19,7 @@ import OAuthRedirectHandler from "../shared/OAuthRedirectHandler";
 
 import { checkMyInfo } from "../redux/modules/User";
 import MyReview from "../pages/MyReview";
+import EditProfile from "../pages/EditProfile";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ function App(props) {
         <Route path="/memos" element={<Reviews />} />
         <Route path="/api/users/login" element={<OAuthRedirectHandler />} />
         <Route path="/myreview" element={<MyReview />} />
+        <Route path="/editprofile" element={<EditProfile />} />
       </Routes>
     </React.Fragment>
   );

@@ -11,7 +11,7 @@ import { Logo } from "../elements/ImageObj";
 import { useSelector } from "react-redux";
 
 const Navbar = props => {
-  const { folderName } = props;
+  const { title } = props;
 
   const navigate = useNavigate();
   const isLogin = useSelector(state => state.user.isLogin);
@@ -31,7 +31,7 @@ const Navbar = props => {
   return (
     <React.Fragment>
       <NavBox>
-        {folderName ? <Title>{folderName}</Title> : <Logo />}
+        {title ? <Title>{title}</Title> : <Logo />}
         <NavMenu onClick={menuOpen}>
           <Image _src="/images/menu.png" _width="24px" _height="24px" />
         </NavMenu>
