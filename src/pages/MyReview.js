@@ -13,7 +13,7 @@ const MyReview = () => {
   ]
   return (
     <React.Fragment>
-      <Navbar folderName="내가 작성한 메모" />
+      <Navbar title="내가 작성한 메모" />
       {mymemo.map((memo) => (
         <>
         <Container>
