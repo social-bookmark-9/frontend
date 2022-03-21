@@ -4,15 +4,15 @@ export default class ProfileApi {
     this.base = process.env.REACT_APP_SERVER;
   }
   getToken = () => sessionStorage.getItem("token");
-  async getProfile({ memberId }) {
+  async getProfile({memberId}) {
     const getProfileConfig = {
       method: "GET",
       url: `${this.base}/api/mypage/${memberId}`,
       headers: {
-        "Content-Type": "application/json",
-        "X-AUTH-TOKEN": this.getToken(),
+        'Content-Type': 'application/json',
+        'X-AUTH-TOKEN': this.getToken(),
       },
-    };
+    }
     return axios(getProfileConfig)
       .then(res => {
         console.log(res);
@@ -20,25 +20,25 @@ export default class ProfileApi {
       })
       .catch(err => console.log(err.response));
   }
-  async editProfileStatus({ userDesc }) {
+  async editProfileStatus({ }) {
     const editProfileStatusConfig = {
       method: "PATCH",
       url: `${this.base}/api/mypage/statusmessage`,
       headers: {
-        "Content-Type": "application/json",
-        "X-AUTH-TOKEN": this.getToken(),
+        'Content-Type': 'application/json',
+        'X-AUTH-TOKEN': this.getToken(),
       },
-      data: JSON.stringify(userDesc),
-    };
+      data: JSON.stringify(userDesc)
+    }
     return axios(editProfileStatusConfig)
       .then(res => {
         console.log(res);
-        return res.data;
+        return(res.data);
       })
       .catch(err => console.log(err.response));
   }
-  async editProfileSns({ urlList }) {
-    const editSnsUrlConfig = {
+  async editProfileSns({urlList}) {
+    const editProfileSnsConfig = {
       method: "PATCH",
       url: `${this.base}/api/mypage/snsurl`,
       headers: {
@@ -47,9 +47,63 @@ export default class ProfileApi {
       },
       data: JSON.stringify(urlList),
     };
-    return axios(editSnsUrlConfig)
+    return axios(editProfileSnsConfig)
       .then(res => {
-        console.log(res);
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
+  }
+  async editProfileImage({profileImage}) {
+    const editProfileImageConfig = {
+      method: "POST",
+      url: `${this.base}/api/mypage/profileimage`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": this.getToken,
+      },
+      data: JSON.stringify(profileImage),
+    };
+    return axios(editProfileImageConfig)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
+  }
+  async editProfileNickname({nickname}) {
+    const editProfileNicknameConfig = {
+      method: "PATCH",
+      url: `${this.base}/api/mypage/nickname`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": this.getToken,
+      },
+      data: JSON.stringify(nickname),
+    };
+    return axios(editProfileNicknameConfig)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
+  }
+  async editProfileHashtag({hashtag}) {
+    const editProfileHashtagConfig = {
+      method: "PATCH",
+      url: `${this.base}/api/mypage/hashtag`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": this.getToken,
+      },
+      data: JSON.stringify(hashtag),
+    };
+    return axios(editProfileHashtagConfig)
+      .then(res => {
+        console.log(res)
       })
       .catch(err => {
         console.log(err.response);
