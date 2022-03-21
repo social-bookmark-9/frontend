@@ -83,7 +83,7 @@ const RecommendList = () => {
             <FavoritesBox>
               <Favorites onChange={handleChecked}>
                 {favoritesList.map((favor, idx) => (
-                  <InputBox>
+                  <InputBox key={idx}>
                     <FavoriteInput
                       type="checkbox"
                       id={idx}
