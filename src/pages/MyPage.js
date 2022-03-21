@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getFoldersAxios } from "../redux/modules/Folder";
-// import { getProfileAxios } from "../redux/modules/Profile";
+import { getProfileAxios } from "../redux/modules/Profile";
 
 import styled, { css } from "styled-components";
 import { Flexbox } from "../styles/flexbox";
 
-import { Navbar, Profile, ArticleFolder, RemindCard } from "../components";
+import { Navbar, UserProfile, ArticleFolder, RemindCard } from "../components";
 import { Label, Title, Image, Text } from "../elements";
 import { useLocation, useParams } from "react-router";
 
@@ -16,43 +15,36 @@ const MyPage = props => {
   const location = useLocation();
   const params = useParams();
   const memberId = params.id;
-  console.log(params.id);
+
 
   useEffect(() => {
-    dispatch(getFoldersAxios());
-    // dispatch(getProfileAxios(memberId));
+    // dispatch(getFoldersAxios());
+    dispatch(getProfileAxios(memberId));
   }, [dispatch]);
 
-  const isMe = useSelector(state => state.user)
-  console.log(isMe);
 
   // ----- 폴더 리스트 ----- //
-  // const folderList = useSelector(state => state.profile.ArticleFolderList);
-  const folderList = useSelector(state => state.folder.folderList);
-  const defaultFolder = folderList[0];
+  const folderList = useSelector(state => state.folder.articleFolderList);
+  const defaultFolder = folderList["0"];
   const userFolder = folderList.slice(1);
+  console.log(useSelector(state => state.user.myInfo));
   console.log(useSelector(state => state));
-  // const defaultFolder = folderList;
-  // const userFolder = folderList;
 
   // ----- 유저 정보 ----- //
-  // const userInfo = useSelector(state => state.profile.memberInfo);
-  const userInfo = useSelector(state => state.profile.useerInfo);
+  const userInfo = useSelector(state => state.user.myInfo);
 
   // ----- 디폴트 폴더 ----- //
 
   // ----- 전체구독률 ----- //
-  const completeRates = [100, 49, 29, 0, 35];
-  const completeRate = Math.round(
-    completeRates.reduce((a, b) => a + b) / completeRates.length,
-  );
+  const completeRate = defaultFolder.completeRate;
+
 
   return (
     <React.Fragment>
       <Container>
         <Navbar />
         {/* ----- 프로필+이름 부분 ----- */}
-        <Profile {...userInfo} />
+        <UserProfile {...userInfo} />
         {/* ----- 리마인드 부분 ----- */}
         {/* {isMe ? ( */}
         <RemindCard
@@ -63,15 +55,15 @@ const MyPage = props => {
           _button="리마인드 받기"
         />
         {/* ) : ( */}
-        ""
+        
         {/* )} */}
         {/* ----- 큐레이션 부분 ----- */}
         <Qheader>
-          <Title _padding="20px">{"username"}님의 큐레이션</Title>
+          <Title _padding="20px">{userInfo.nickName}님의 큐레이션</Title>
           <LabelBox>
             <Label
               _color={({ theme }) => theme.colors.fontColor07}
-              bgColor="#ffffff"
+              bgColor="#FFFFFF"
               _padding="7px 21px"
             >
               전체 완독률 {completeRate}%
@@ -111,7 +103,7 @@ const MyPage = props => {
           </AlertBox>
         </>
         {/* ) : ( */}
-        ""
+
         {/* )} */}
         {/* 폴더리스트 시작 */}
         {userFolder.map((folder, idx) => (
@@ -124,10 +116,10 @@ const MyPage = props => {
           />
         ))}
         {/* {isMe ? ( */}
-        ""
+
         {/* ) : ( */}
         <RemindCard
-          _title={`${"username"}님의 큐레이션이 유용하셨나요?`}
+          _title={`${userInfo.nickName}님의 큐레이션이 유용하셨나요?`}
           _text={
             "크롬 사용자라면 버튼 클릭 한번으로 링크를 저장해\n나만의 큐레이션을 만들고 공유할 수 있어요"
           }
@@ -160,7 +152,7 @@ const AlertBox = styled.div`
 const RemindAlert = styled.div`
   display: flex;
   height: 82px;
-  border: 1px solid #f2f3f4;
+  border: 1px solid #F2F3F4;
   border-radius: 16px;
   padding: 19px 22px;
 `;

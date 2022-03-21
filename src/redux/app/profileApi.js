@@ -6,7 +6,8 @@ export default class ProfileApi {
     this.base = process.env.REACT_APP_SERVER;
   }
 
-  async getProfile({memberId}) {
+  async getProfile(memberId) {
+    console.log(memberId);
     const getProfileConfig = {
       method: "GET",
       url: `${this.base}/api/mypage/${memberId}`,
@@ -14,17 +15,16 @@ export default class ProfileApi {
         "Content-Type": "application/json",
         "X-AUTH-TOKEN": getToken(),
       },
-      data: JSON.stringify(memberId),
     }
     return axios(getProfileConfig)
       .then(res => {
-        console.log(res);
+        console.log(res.data.data);
         console.log("되나?");
-        return res.data;
+        return res.data.data;
       })
       .catch(err => console.log(err));
   }
-
+  
   async editProfileStatus({ }) {
     const editProfileStatusConfig = {
       method: "PATCH",
@@ -42,6 +42,7 @@ export default class ProfileApi {
       })
       .catch(err => console.log(err.response));
   }
+
   async editProfileSns({urlList}) {
     const editProfileSnsConfig = {
       method: "PATCH",
@@ -60,6 +61,7 @@ export default class ProfileApi {
         console.log(err.response);
       });
   }
+
   async editProfileImage({profileImage}) {
     const editProfileImageConfig = {
       method: "POST",
@@ -78,6 +80,7 @@ export default class ProfileApi {
         console.log(err.response);
       });
   }
+
   async editProfileNickname({nickname}) {
     const editProfileNicknameConfig = {
       method: "PATCH",
@@ -96,6 +99,7 @@ export default class ProfileApi {
         console.log(err.response);
       });
   }
+
   async editProfileHashtag({hashtag}) {
     const editProfileHashtagConfig = {
       method: "PATCH",
