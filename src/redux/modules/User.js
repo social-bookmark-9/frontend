@@ -1,16 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userApi from "../app/userApi";
 import Swal from "sweetalert2";
-
 const UserApi = new userApi();
-
 const initialState = {
   userInfo: null,
   myInfo: null,
   isLogin: false,
   isMe: false,
 };
-
 export const kakaoLoginAxios = createAsyncThunk(
   "user/kakaoLogin",
   async ({ code, navigate }, { dispatch }) => {
@@ -21,7 +18,6 @@ export const kakaoLoginAxios = createAsyncThunk(
     }
   },
 );
-
 export const registerAxios = createAsyncThunk(
   "user/register",
   async ({ userInfo, navigate }, { dispatch }) => {
@@ -32,18 +28,17 @@ export const registerAxios = createAsyncThunk(
     }
   },
 );
-
 export const checkMyInfo = createAsyncThunk(
   "user/checkMyInfo",
   async ({ token, navigate }, { dispatch }) => {
     const user = await UserApi.checkUser({ token, navigate });
+    console.log(user);
     if (user) {
       dispatch(setUser(user.data));
       return user;
     }
   },
 );
-
 export const logoutAxios = createAsyncThunk(
   "user/logout",
   async ({ navigate }, { dispatch }) => {
@@ -52,7 +47,6 @@ export const logoutAxios = createAsyncThunk(
     return true;
   },
 );
-
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -62,6 +56,8 @@ export const userSlice = createSlice({
       sessionStorage.setItem("refreshToken", action.payload.token.refreshToken);
       const myInfo = action.payload.myInfo;
       state.myInfo = { ...myInfo };
+      state.isLogin = action.payload.login;
+      state.isMe = action.payload.login;
     },
     deleteUserFromSession: (state, action) => {
       sessionStorage.removeItem("accessToken");
@@ -75,7 +71,7 @@ export const userSlice = createSlice({
   extraReducers: {
     [registerAxios.fulfilled]: (state, action) => {
       state.myInfo = action.payload.data.myInfo;
-      state.isLogin = action.payload.data.login;
+      state.isLogin = true;
       state.isMe = true;
     },
     [kakaoLoginAxios.fulfilled && kakaoLoginAxios.user === true]: (
@@ -83,7 +79,7 @@ export const userSlice = createSlice({
       action,
     ) => {
       state.myInfo = action.payload.data.myInfo;
-      state.isLogin = action.payload.data.login;
+      state.isLogin = true;
       state.isMe = true;
     },
     [logoutAxios.fulfilled]: (state, action) => {
@@ -105,6 +101,5 @@ export const userSlice = createSlice({
     },
   },
 });
-
 export const { setMyInfo, deleteUserFromSession, setUser } = userSlice.actions;
 export default userSlice.reducer;

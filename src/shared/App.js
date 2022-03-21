@@ -18,6 +18,7 @@ import {
 import OAuthRedirectHandler from "../shared/OAuthRedirectHandler";
 
 import { checkMyInfo } from "../redux/modules/User";
+import MyReview from "../pages/MyReview";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ function App(props) {
     if (token) {
       dispatch(checkMyInfo(token));
     }
-  }, [dispatch, token]);
+  }, []);
 
   return (
     <React.Fragment>
@@ -43,6 +44,7 @@ function App(props) {
         <Route path="/setting" element={<Setting />} />
         <Route path="/memos" element={<Reviews />} />
         <Route path="/api/users/login" element={<OAuthRedirectHandler />} />
+        <Route path="/myreview" element={<MyReview />} />
       </Routes>
     </React.Fragment>
   );

@@ -1,47 +1,35 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import ProfileApi from "../app/ProfileApi";
+import profileApi from "../app/profileApi";
+
+const ProfileApi = new profileApi();
+
 const initialState = {
-  memberInfo: {
-    memberId: "",
-    nickname: "",
-    email: "",
-    profileImage: null,
-    userDesc: "",
-    instagramUrl: null,
-    githubUrl: null,
-    brunchUrl: null,
-    blogUrl: null,
-    websiteUrl: null,
-  },
-  articleFolderList: [{
-    folderId: 0,
-    folderName: "",
-    hashTag1: "",
-    hashTag2: "",
-    hashTag3: "",
-    likeCnt: 0,
-    completeRate: 0,
-    isHide: true,
-    articleList: [{
-      title: "",
-      content: "",
-        }]
-  }]
-}
+  memberInfo: {},
+  articleFolderList: []
+};
+
 export const getProfileAxios = createAsyncThunk(
   'profile/getProfileAxios',
-  async (_, {dispatch, getState}) => {
-    const { memberId } = getState().profile.memberId;
-    const resp = await ProfileApi.getProfileAxios({ memberId });
+  async (memberId, {dispatch, getState}) => {
+    console.log(getState());
+    const resp = await ProfileApi.getProfile({memberId});
+    console.log("여기", resp)
     dispatch(setProfile(resp.data));
     return resp;
   }
 )
+
 export const profileSlice = createSlice({
   name: "profile",
   initialState,
   reducers:{
     setProfile: (state, action) => {
+      const memberInfo = action.payload.memberInfo;
+      console.log(action.payload);
+      const articleFolderList = action.payload.articleFolderList;
+      console.log(action.payload);
+      state.memberInfo = {...memberInfo};
+      state.articleFolderList = articleFolderList;
     }
   },
   extraReducers: {
@@ -49,4 +37,7 @@ export const profileSlice = createSlice({
     }
   }
 })
+
+
+export const { setProfile } = profileSlice.actions;
 export default profileSlice.reducer;
