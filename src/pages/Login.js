@@ -5,7 +5,11 @@ import styled from "styled-components";
 import { FlexboxColumn } from "../styles/flexbox";
 import { Button, Title, Text, Image } from "../elements";
 
+import { useSelector } from "react-redux";
+
 const Login = () => {
+  console.log("로그인정보 확인", useSelector(state => state.user));
+
   return (
     <React.Fragment>
       <LoginBox>

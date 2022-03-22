@@ -1,4 +1,4 @@
-import Profile from "./Profile";
+import UserProfile from "./UserProfile";
 import ArticleFolder from "./ArticleFolder";
 import Navbar from "./Navbar";
 import RemindCard from "./RemindCard";
@@ -12,7 +12,7 @@ import MainTop from "./MainTop";
 import ModalD from "./ModalD";
 
 export {
-  Profile,
+  UserProfile,
   ArticleFolder,
   Navbar,
   RemindCard,

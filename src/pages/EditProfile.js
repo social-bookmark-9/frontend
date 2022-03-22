@@ -1,15 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
-
 import Title from "../elements/Title";
-
-import { FlexboxColumn } from "../styles/flexbox";
 import { Circle } from "../elements/ImageObj";
 import EditProfileLink from "../components/EditProfileLink";
+import EditNickname from "../components/EditNickname";
 
 const EditProfile = () => {
   const [words, setWords] = useState(0);
-
   const handleKeyUp = e => {
     if (e.target.value.length <= 34) {
       setWords(e.target.value.length);
@@ -18,64 +15,77 @@ const EditProfile = () => {
       e.target.value = e.target.value.slice(0, 34);
     }
   };
-
+  const [isEdit, setIsEdit] = useState(false);
+  const toggleEdit = () => {
+    setIsEdit(!isEdit);
+  };
   return (
     <>
-      <Container>
-        <AreaWrap>
-          <ProfileBox>
-            {/*  그거... 동그라미 */}
-            <CircleBox>
-              <Circle _width="28px" _height="28px" bgColor="black" />
-            </CircleBox>
-            <ProfileImage>
-              <img
-                src="https://bennettfeely.com/clippy/pics/pittsburgh.jpg"
-                alt="profile"
-                style={{ zIndex: "3" }}
-              />
-            </ProfileImage>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "start",
-                  alignItems: "center",
-                }}
-              >
-                <Title _padding="23px 15px 30px 23px">@김철수</Title>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "end",
-                  alignItems: "center",
-                }}
-              >
-                <img src={`/images/edit.png`} width={"20px"} height={"20px"} />
-              </div>
-            </div>
-          </ProfileBox>
-
-          <MemoBox>
-            <TextAreaField
-              placeholder="자기소개를 작성해 주세요."
-              rows={5}
-              maxLength={34}
-              onKeyUp={handleKeyUp}
-            />
-            <InputCheck>{words}/34</InputCheck>
-          </MemoBox>
-        </AreaWrap>
-      </Container>
-      <EditProfileLink />
-
+      {!isEdit ? (
+        <>
+          <Container>
+            <AreaWrap>
+              <ProfileBox>
+                {/*  그거... 동그라미 */}
+                <CircleBox>
+                  <Circle _width="28px" _height="28px" bgColor="black" />
+                </CircleBox>
+                <ProfileImage>
+                  <img
+                    src="https://bennettfeely.com/clippy/pics/pittsburgh.jpg"
+                    alt="profile"
+                    style={{ zIndex: "3" }}
+                  />
+                </ProfileImage>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "start",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Title _padding="23px 15px 30px 23px">@김철수</Title>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "end",
+                      alignItems: "center",
+                    }}
+                  >
+                    <img
+                      src={`/images/edit.png`}
+                      width={"20px"}
+                      height={"20px"}
+                      onClick={toggleEdit}
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </ProfileBox>
+              <MemoBox>
+                <TextAreaField
+                  placeholder="자기소개를 작성해 주세요."
+                  rows={5}
+                  maxLength={34}
+                  onKeyUp={handleKeyUp}
+                />
+                <InputCheck>{words}/34</InputCheck>
+              </MemoBox>
+            </AreaWrap>
+          </Container>
+          <EditProfileLink />
+        </>
+      ) : (
+        <EditNickname setIsEdit={setIsEdit} />
+      )}
       {/* 마법의 svg */}
       <svg width="0" height="0">
         <defs>
@@ -90,7 +100,6 @@ const EditProfile = () => {
     </>
   );
 };
-
 const Container = styled.div`
   position: absolute;
   top: 0;
@@ -98,18 +107,15 @@ const Container = styled.div`
   z-index: 0;
   background-color: ${({ theme }) => theme.colors.gray01};
 `;
-
 const AreaWrap = styled.div`
   width: 390px;
 `;
-
 const ProfileBox = styled.div`
   width: 100%;
   height: 278px;
   position: relative;
   padding: 51px 112px;
 `;
-
 const ProfileImage = styled.div`
   display: inline-block;
   height: 150px;
@@ -123,13 +129,11 @@ const ProfileImage = styled.div`
     width: 100%;
   }
 `;
-
 const CircleBox = styled.div`
   position: absolute;
   top: 172px;
   right: 112px;
 `;
-
 const MemoBox = styled.div`
   width: 100%;
   padding: 0 17px 0 17px;

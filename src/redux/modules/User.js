@@ -1,16 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userApi from "../app/userApi";
 import Swal from "sweetalert2";
-
 const UserApi = new userApi();
-
 const initialState = {
   userInfo: null,
   myInfo: null,
   isLogin: false,
   isMe: false,
 };
-
 export const kakaoLoginAxios = createAsyncThunk(
   "user/kakaoLogin",
   async ({ code, navigate }, { dispatch }) => {
@@ -21,7 +18,6 @@ export const kakaoLoginAxios = createAsyncThunk(
     }
   },
 );
-
 export const registerAxios = createAsyncThunk(
   "user/register",
   async ({ userInfo, navigate }, { dispatch }) => {
@@ -65,7 +61,6 @@ export const logoutAxios = createAsyncThunk(
     return true;
   },
 );
-
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -120,6 +115,5 @@ export const userSlice = createSlice({
     },
   },
 });
-
 export const { setMyInfo, deleteUserFromSession, setUser } = userSlice.actions;
 export default userSlice.reducer;

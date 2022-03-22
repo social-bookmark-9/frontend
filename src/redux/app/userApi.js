@@ -41,7 +41,6 @@ export default class userApi {
         }
       });
   }
-
   async register({ userInfo, navigate }) {
     const registerConfig = {
       method: "POST",
@@ -58,7 +57,6 @@ export default class userApi {
         console.log(err);
       });
   }
-
   async checkUser() {
     const checkUserConfig = {
       method: "GET",

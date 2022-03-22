@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import { Flexbox } from "../styles/flexbox";
 
-import { Navbar, Profile, ArticleFolder, RemindCard } from "../components";
+import { Navbar, UserProfile, ArticleFolder, RemindCard } from "../components";
 import { Label, Title, Image, Text } from "../elements";
 import { useLocation, useParams } from "react-router";
 import { getProfileAxios } from "../redux/modules/Profile";
@@ -31,10 +31,7 @@ const MyPage = props => {
   const userInfo = useSelector(state => state.profile.memberInfo);
 
   // ----- 전체구독률 ----- //
-  const completeRates = [100, 49, 29, 0, 35];
-  const completeRate = Math.round(
-    completeRates.reduce((a, b) => a + b) / completeRates.length,
-  );
+  const completeRate = defaultFolder.completeRate;
 
   // 모달 열고 닫기
   const [modalOpen, setModalOpen] = useState(false);
@@ -50,7 +47,7 @@ const MyPage = props => {
       <Container>
         <Navbar />
         {/* ----- 프로필+이름 부분 ----- */}
-        <Profile {...userInfo} />
+        <UserProfile {...userInfo} />
         {/* ----- 리마인드 부분 ----- */}
         {isMe ? (
           <RemindCard
@@ -65,11 +62,11 @@ const MyPage = props => {
         )}
         {/* ----- 큐레이션 부분 ----- */}
         <Qheader>
-          <Title _padding="20px">{"username"}님의 큐레이션</Title>
+          <Title _padding="20px">{userInfo.nickName}님의 큐레이션</Title>
           <LabelBox>
             <Label
               _color={({ theme }) => theme.colors.fontColor07}
-              bgColor="#ffffff"
+              bgColor="#FFFFFF"
               _padding="7px 21px"
             >
               전체 완독률 {completeRate}%
