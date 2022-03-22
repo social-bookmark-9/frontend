@@ -9,14 +9,8 @@ import {
   MainTop,
 } from "../components";
 import { Desktop } from "../styles/mediaquery";
-import { useSelector } from "react-redux";
 
-const Main = props => {
-  console.log(
-    "로그인정보 확인",
-    useSelector(state => state.user),
-  );
-
+const MainPage = props => {
   return (
     <React.Fragment>
       <MainContainer>
@@ -56,8 +50,8 @@ const Main = props => {
   );
 };
 
-Main.defaultProps = {};
+MainPage.defaultProps = {};
 
 const MainContainer = styled.div``;
 
-export default Main;
+export default MainPage;

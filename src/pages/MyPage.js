@@ -7,7 +7,7 @@ import { Flexbox } from "../styles/flexbox";
 
 import { Navbar, ArticleFolder, RemindCard, UserProfile } from "../components";
 import { Label, Title, Image, Text } from "../elements";
-import { useLocation, useParams } from "react-router";
+import { useParams } from "react-router";
 import { getProfileAxios } from "../redux/modules/Profile";
 import AddCollection from "../components/AddCollection";
 
@@ -19,13 +19,12 @@ const MyPage = props => {
 
   useEffect(() => {
     dispatch(getProfileAxios(memberId));
-  }, [dispatch]);
+  }, [dispatch, memberId]);
 
   // ----- 폴더 리스트 ----- //
   const folderList = useSelector(state => state.folder.articleFolderList);
   const defaultFolder = folderList[0];
   const userFolder = folderList.slice(1);
-  console.log(userFolder);
 
   // ----- 유저 정보 ----- //
   const userInfo = useSelector(state => state.profile.memberInfo);
@@ -38,8 +37,6 @@ const MyPage = props => {
 
   // 모달 열고 닫기
   const [modalOpen, setModalOpen] = useState(false);
-  // 어떤 모달창 보여줄지 (링크 추가 단계)
-  const [showModal, setShowModal] = useState(false);
   // 모달 열고 닫기 펑션
   const openModal = () => {
     setModalOpen(true);
@@ -151,14 +148,7 @@ const MyPage = props => {
             isMe={false}
           />
         )}
-        {modalOpen ? (
-          <AddCollection
-            setModalOpen={setModalOpen}
-            setShowModal={setShowModal}
-          />
-        ) : (
-          ""
-        )}
+        {modalOpen ? <AddCollection setModalOpen={setModalOpen} /> : ""}
       </Container>
     </React.Fragment>
   );

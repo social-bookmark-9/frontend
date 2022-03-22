@@ -3,21 +3,21 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Title, Button, Text } from "../elements";
 
+import { useDispatch, useSelector } from "react-redux";
 import { createFolderAxios } from "../redux/modules/Folder";
 import { postArticleAxios } from "../redux/modules/Article";
 
 import Favorite from "./Favorite";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 const AddLinkTag = props => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const folderName = useSelector(
-    state => state.article.linkData.articleFolderName,
+    state => state.localData.linkData.articleFolderName,
   );
-  const linkData = useSelector(state => state.article.linkData);
-  const folderData = useSelector(state => state.article.folderData);
+  const linkData = useSelector(state => state.localData.linkData);
+  const folderData = useSelector(state => state.localData.folderData);
 
   const [isChecked, setIsChecked] = useState(false);
   const [checkedItems, setCheckedItems] = useState(new Set());

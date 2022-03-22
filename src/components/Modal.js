@@ -84,7 +84,7 @@ const Modal = () => {
 
   return (
     <>
-      {/* 모달버튼 */}
+      {/* 아직 버튼 모양은 안 잡아서 기본으로! */}
       <LinkButtonBox>
         <Button borderRadius="16px" _fontSize="28px" _onClick={openModal}>
           +

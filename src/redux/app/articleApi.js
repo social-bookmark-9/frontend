@@ -64,6 +64,23 @@ export default class articleApi {
       });
   }
 
+  async saveMyArticle({ articleId, navigate }) {
+    const saveArticleConfig = {
+      methos: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
+    };
+    return axios(saveArticleConfig)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   async reviewHide({ articleId, navigate }) {
     const reviewHideConfig = {
       method: "PATCH",

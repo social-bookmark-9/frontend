@@ -1,14 +1,18 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { logoutAxios } from "../redux/modules/User";
+
 import { useNavigate } from "react-router";
+
 import styled, { css } from "styled-components";
-import Navbar from "../components/Navbar";
 import { Button, Image } from "../elements";
 import { FlexboxColumn } from "../styles/flexbox";
 
+import Navbar from "../components/Navbar";
+
 const Setting = props => {
   const navigate = useNavigate();
-  const isLogin = useSelector(state => state.user.isLogin);
+  const dispatch = useDispatch();
 
   return (
     <React.Fragment>
@@ -17,13 +21,17 @@ const Setting = props => {
         <Ul>
           <Li
             onClick={() => {
-              navigate("/reminder");
+              navigate("setting/reminder");
             }}
           >
             <Image _src="/images/email.png" _width="22px" _height="22px" />
             리마인드 메일 변경
           </Li>
-          <Li>
+          <Li
+            onClick={() => {
+              navigate("/setting/favorites");
+            }}
+          >
             <Image _src="/images/favorite.png" _width="22px" _height="22px" />
             관심 카테고리 변경
           </Li>
@@ -43,7 +51,11 @@ const Setting = props => {
               문의하기
             </Li>
           </Ul>
-          <ButtonBox>
+          <ButtonBox
+            onClick={() => {
+              dispatch(logoutAxios(navigate));
+            }}
+          >
             <Button
               bgColor={({ theme }) => theme.colors.gray03}
               _color={({ theme }) => theme.colors.fontColor04}

@@ -75,34 +75,34 @@ const UserProfile = props => {
   );
 };
 
-const DProfileBox = styled.div`
-  padding-bottom: 28px;
+// const DProfileBox = styled.div`
+//   padding-bottom: 28px;
 
-  position: relative;
-`;
+//   position: relative;
+// `;
 
-const DProfileImage = styled.div`
-  height: 150px;
-  width: 156.34px;
-  clip-path: url(#myClip);
-  position: relative;
-  background-color: #c4c4c4;
-  z-index: -1;
-  & img {
-    position: absolute;
-    width: 100%;
-  }
-`;
+// const DProfileImage = styled.div`
+//   height: 150px;
+//   width: 156.34px;
+//   clip-path: url(#myClip);
+//   position: relative;
+//   background-color: #c4c4c4;
+//   z-index: -1;
+//   & img {
+//     position: absolute;
+//     width: 100%;
+//   }
+// `;
 
-const DCircleBox = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 134px;
-`;
+// const DCircleBox = styled.div`
+//   position: absolute;
+//   bottom: 0;
+//   left: 134px;
+// `;
 
-const DPropfileInfo = styled.div`
-  padding: 50px;
-`;
+// const DPropfileInfo = styled.div`
+//   padding: 50px;
+// `;
 
 const ProfileBox = styled.div`
   width: 100vw;

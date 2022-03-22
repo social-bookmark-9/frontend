@@ -55,12 +55,13 @@ export const refreshTokensAxios = createAsyncThunk(
 
 export const logoutAxios = createAsyncThunk(
   "user/logout",
-  async ({ navigate }, { dispatch }) => {
+  async (navigate, { dispatch }) => {
     dispatch(deleteUserFromSession());
     navigate("/", { replace: true });
     return true;
   },
 );
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -96,9 +97,9 @@ export const userSlice = createSlice({
       state.isLogin = true;
       state.isMe = true;
     },
+
     [logoutAxios.fulfilled]: (state, action) => {
       if (action.payload) {
-        state.token = initialState.token;
         state.isLogin = false;
       }
       Swal.fire({
@@ -108,6 +109,7 @@ export const userSlice = createSlice({
         confirmButtonColor: "#353C49",
       });
     },
+
     [checkUserAxios.fulfilled]: (state, action) => {
       state.myInfo = action.payload.data.myInfo;
       state.isLogin = true;

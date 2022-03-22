@@ -6,7 +6,7 @@ import { Button, Text, Title } from "../elements";
 import { createFolderAxios } from "../redux/modules/Folder";
 
 const AddCollection = props => {
-  const { setModalOpen, setShowModal } = props;
+  const { setModalOpen } = props;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,7 +21,6 @@ const AddCollection = props => {
 
   const closeModal = () => {
     setModalOpen(false);
-    setShowModal(false);
   };
 
   const getFolderName = e => {
@@ -121,11 +120,6 @@ const TitleBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
-
-const BackButton = styled.div`
-  display: inline-block;
-  color: ${({ theme }) => theme.colors.fontColor03};
 `;
 
 const CloseButton = styled.button`

@@ -46,10 +46,10 @@ export const reviewHideAxios = createAsyncThunk(
   },
 );
 
-export const saveArticleAxios = createAsyncThunk(
+export const saveMyArticleAxios = createAsyncThunk(
   "article/saveArticle",
   async ({ articleId, navigate }, { dispatch }) => {
-    const resp = await ArticleApi.saveArticle({ articleId, navigate });
+    const resp = await ArticleApi.saveMyArticle({ articleId, navigate });
     return resp;
   },
 );

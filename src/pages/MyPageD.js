@@ -7,20 +7,19 @@ import { Flexbox } from "../styles/flexbox";
 
 import { Navbar, ArticleFolder, RemindCard, ModalD } from "../components";
 import { Label, Title, Image, Text } from "../elements";
-import { useLocation, useParams } from "react-router";
+import { useParams } from "react-router";
 import { getProfileAxios } from "../redux/modules/Profile";
 import UserProfile from "../components/UserProfile";
 
 const MyPageD = props => {
   const dispatch = useDispatch();
-  const location = useLocation();
   const params = useParams();
   const memberId = params.id;
   const isMe = useSelector(state => state.user.isMe);
 
   useEffect(() => {
     dispatch(getProfileAxios(memberId));
-  }, [dispatch]);
+  }, [dispatch, memberId]);
 
   // ----- 폴더 리스트 ----- //
   const folderList = useSelector(state => state.folder.folderList);

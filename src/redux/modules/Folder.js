@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import folderApi from "../app/folderApi";
-import { postArticleAxios } from "./Article";
+// import { postArticleAxios } from "./Article";
 
 const FolderApi = new folderApi();
 
