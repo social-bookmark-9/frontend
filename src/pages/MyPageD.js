@@ -5,16 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import { Flexbox } from "../styles/flexbox";
 
-import {
-  Navbar,
-  Profile,
-  ArticleFolder,
-  RemindCard,
-  ModalD,
-} from "../components";
+import { Navbar, ArticleFolder, RemindCard, ModalD } from "../components";
 import { Label, Title, Image, Text } from "../elements";
 import { useLocation, useParams } from "react-router";
 import { getProfileAxios } from "../redux/modules/Profile";
+import UserProfile from "../components/UserProfile";
 
 const MyPageD = props => {
   const dispatch = useDispatch();
@@ -46,7 +41,7 @@ const MyPageD = props => {
       <Navbar />
       <DContainer>
         {/* ----- 프로필+이름 부분 ----- */}
-        <Profile {...userInfo} />
+        <UserProfile {...userInfo} />
         {/* ----- 리마인드 부분 ----- */}
         {isMe ? (
           <RemindCard
