@@ -1,11 +1,43 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Title from "../elements/Title";
 import { Circle } from "../elements/ImageObj";
 import EditProfileLink from "../components/EditProfileLink";
 import EditNickname from "../components/EditNickname";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router";
+import { editProfileUserDescAxios, getProfileAxios } from "../redux/modules/Profile";
 
-const EditProfile = () => {
+const EditProfile = (props) => {
+  const userDescRef = useRef();
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  useEffect(() => {
+    dispatch(getProfileAxios(location.state.memberId));
+    if (initialUserDesc !== null) {
+      userDescRef.current.value = initialUserDesc;
+    }
+  }, [dispatch])
+
+  const myInfo = useSelector(state => state.user.myInfo);
+  const initialUserImage = props.profileImageUrl;
+  const initialUserName = props.nickName;
+  const initialUserDesc = props.userDesc;
+
+  // const [userDescColor, setUserDescColor] = useState(true);
+
+  // const setInitialUserDesc = () => {
+  //   if (initialUserDesc === null) {
+  //     setUserDescColor(false);
+  //     return "자기소개를 작성해 주세요."
+  //   } else if (initialUserDesc !== null) {
+  //     setUserDescColor(true);
+  //     return initialUserDesc;
+  // }}
+
+  const [newNickname, setNewNickname] = useState(initialUserName);
+
   const [words, setWords] = useState(0);
   const handleKeyUp = e => {
     if (e.target.value.length <= 34) {
@@ -19,6 +51,13 @@ const EditProfile = () => {
   const toggleEdit = () => {
     setIsEdit(!isEdit);
   };
+
+  const editUserDesc = () => {
+    const userMessage = userDescRef.current.value;
+    dispatch(editProfileUserDescAxios({userDesc:userMessage}));
+  }
+
+
   return (
     <>
       {!isEdit ? (
@@ -26,17 +65,21 @@ const EditProfile = () => {
           <Container>
             <AreaWrap>
               <ProfileBox>
-                {/*  그거... 동그라미 */}
+                {/* 프로필사진 옆 검은 동그라미 */}
                 <CircleBox>
                   <Circle _width="28px" _height="28px" bgColor="black" />
                 </CircleBox>
+
+                {/* 프로필 이미지 */}
                 <ProfileImage>
                   <img
-                    src="https://bennettfeely.com/clippy/pics/pittsburgh.jpg"
+                    src={initialUserImage}
                     alt="profile"
                     style={{ zIndex: "3" }}
                   />
                 </ProfileImage>
+
+                {/* 이름 부분 */}
                 <div
                   style={{
                     display: "flex",
@@ -51,7 +94,9 @@ const EditProfile = () => {
                       alignItems: "center",
                     }}
                   >
-                    <Title _padding="23px 15px 30px 23px">@김철수</Title>
+                    <Title _padding="23px 15px 30px 23px">
+                      @{initialUserName}
+                    </Title>
                   </div>
                   <div
                     style={{
@@ -70,21 +115,32 @@ const EditProfile = () => {
                   </div>
                 </div>
               </ProfileBox>
+
+              {/* 자기소개 부분 */}
               <MemoBox>
                 <TextAreaField
+                  ref={userDescRef}
+                  name="userDesc"
+                  // placeholder={setInitialUserDesc}
                   placeholder="자기소개를 작성해 주세요."
                   rows={5}
                   maxLength={34}
                   onKeyUp={handleKeyUp}
+                  onBlur={editUserDesc}
+                  // state={userDescColor}
                 />
                 <InputCheck>{words}/34</InputCheck>
               </MemoBox>
+
             </AreaWrap>
           </Container>
-          <EditProfileLink />
+          <EditProfileLink {...myInfo} />
         </>
       ) : (
-        <EditNickname setIsEdit={setIsEdit} />
+        <EditNickname
+          setIsEdit={setIsEdit}
+          setNewNickname={setNewNickname}  
+        />
       )}
       {/* 마법의 svg */}
       <svg width="0" height="0">
@@ -100,6 +156,7 @@ const EditProfile = () => {
     </>
   );
 };
+
 const Container = styled.div`
   position: absolute;
   top: 0;
@@ -155,11 +212,17 @@ const TextAreaField = styled.textarea`
     outline: none;
   }
   &::placeholder {
-    color: ${({ theme }) => theme.colors.fontColor02};
+    letter-spacing: -0.0008em;
+    line-height: 18px;
     text-align: center;
     font-size: ${({ theme }) => theme.fontSizes.font13};
     letter-spacing: -0.0008em;
     line-height: 18px;
+    color: ${({ theme }) => theme.colors.fontColor02};
+    /* ${({ state }) => state ?
+    `color: ${({ theme }) => theme.colors.fontColor02};`
+    : `color: ${({ theme }) => theme.colors.fontColor05}`
+    } */
   }
 `;
 
