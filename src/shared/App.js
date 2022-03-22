@@ -57,7 +57,7 @@ function App(props) {
           <Route path="/reminder" element={<Reminder />} />
           <Route path="/api/users/login" element={<OAuthRedirectHandler />} />
           <Route path="/myreview" element={<MyReview />} />
-          <Route path="/editprofile" element={<EditProfile />} />
+          <Route path="/editprofile" element={<EditProfile {...myInfo} />} />
           <Route element={<NotFound />} />
         </Routes>
       </Mobile>

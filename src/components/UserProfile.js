@@ -21,7 +21,7 @@ const UserProfile = props => {
   }, [memberId]);
 
   const goEditProfile = () => {
-    navigate("/editprofile");
+    navigate("/editprofile", {state: {memberId}});
   }
   
   return (
