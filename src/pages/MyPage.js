@@ -6,10 +6,13 @@ import styled, { css } from "styled-components";
 import { Flexbox } from "../styles/flexbox";
 
 import { Navbar, ArticleFolder, RemindCard, UserProfile } from "../components";
-import { Label, Title, Image, Text } from "../elements";
+import { Title, Image, Text } from "../elements";
 import { useLocation, useParams } from "react-router";
 import { getProfileAxios } from "../redux/modules/Profile";
+
 import AddCollection from "../components/AddCollection";
+import MyPageRemind from "../components/MyPageRemind";
+import MyPageSuggest from "../components/MyPageSuggest";
 
 const MyPage = props => {
   const dispatch = useDispatch();
@@ -28,13 +31,7 @@ const MyPage = props => {
   console.log(userFolder);
 
   // ----- 유저 정보 ----- //
-  const userInfo = useSelector(state => state.profile.memberInfo);
-
-  // ----- 전체구독률 ----- //
-  const completeRates = [100, 49, 29, 0, 35];
-  const completeRate = Math.round(
-    completeRates.reduce((a, b) => a + b) / completeRates.length,
-  );
+  const userInfo = useSelector(state => state.user.myInfo);
 
   // 모달 열고 닫기
   const [modalOpen, setModalOpen] = useState(false);
@@ -51,83 +48,17 @@ const MyPage = props => {
         <Navbar />
         {/* ----- 프로필+이름 부분 ----- */}
         <UserProfile {...userInfo} />
-        {/* ----- 리마인드 부분 ----- */}
-        {isMe ? (
-          <RemindCard
-            _title="저장한 글, 다시 읽고 계신가요?"
-            _text={
-              "3번은 읽어야 완전한 내 것이 될 수 있어요.\n저장한 글을 리마인드 해드릴게요"
-            }
-            _button="리마인드 받기"
-          />
-        ) : (
-          ""
-        )}
-        {/* ----- 큐레이션 부분 ----- */}
-        <Qheader>
-          <Title _padding="20px">{"username"}님의 큐레이션</Title>
-          <LabelBox>
-            <Label
-              _color={({ theme }) => theme.colors.fontColor07}
-              bgColor="#ffffff"
-              _padding="7px 21px"
-            >
-              전체 완독률 {completeRate}%
-            </Label>
-          </LabelBox>
-        </Qheader>
-        {/* ----- 디폴트 폴더 ----- */}
-        {isMe ? (
-          <ArticleFolder folderColor="default" isDefault {...defaultFolder} />
-        ) : (
-          ""
-        )}
+        {/* ----- 리마인드, 디폴트 폴더 ----- */}
+        <MyPageRemind
+          defaultFolder = {defaultFolder}
+          userFolder = {userFolder}
+          openModal = {openModal}
+          {...defaultFolder}
+          {...userInfo}
+        />
+        
         {/* 아티클 리마인드 또는 새 컬렉션 만들기 */}
-        {isMe && userFolder.length > 0 ? (
-          <AlertBox>
-            <RemindAlert>
-              <div>
-                <Image _src="/images/remind.png" _width="20px" _height="19px" />
-              </div>
-              <div>
-                <Title
-                  _fontSize={({ theme }) => theme.fontSizes.font16}
-                  _lineHeight="22px"
-                >
-                  아티클 리마인드
-                </Title>
-                <Text
-                  _fontSize={({ theme }) => theme.fontSizes.font13}
-                  _lineHeight="18px"
-                >
-                  아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
-                </Text>
-              </div>
-            </RemindAlert>
-          </AlertBox>
-        ) : (
-          <AlertBox onClick={openModal}>
-            <RemindAlert>
-              <div>
-                <Image _src="/images/add.png" _width="16px" _height="16px" />
-              </div>
-              <div>
-                <Title
-                  _fontSize={({ theme }) => theme.fontSizes.font16}
-                  _lineHeight="22px"
-                >
-                  새 컬렉션 만들기
-                </Title>
-                <Text
-                  _fontSize={({ theme }) => theme.fontSizes.font13}
-                  _lineHeight="18px"
-                >
-                  컬렉션을 만들어 링크를 분류해 보세요
-                </Text>
-              </div>
-            </RemindAlert>
-          </AlertBox>
-        )}
+        
 
         {/* 폴더리스트 시작 */}
         {userFolder.map((folder, idx) => (
@@ -139,25 +70,15 @@ const MyPage = props => {
             }
           />
         ))}
-        {isMe ? (
-          ""
-        ) : (
-          <RemindCard
-            _title={`${"username"}님의 큐레이션이 유용하셨나요?`}
-            _text={
-              "크롬 사용자라면 버튼 클릭 한번으로 링크를 저장해\n나만의 큐레이션을 만들고 공유할 수 있어요"
-            }
-            _button="내 버블드 만들기"
-            isMe={false}
-          />
-        )}
+
+        <MyPageSuggest {...userInfo} />
         {modalOpen ? (
           <AddCollection
             setModalOpen={setModalOpen}
             setShowModal={setShowModal}
           />
         ) : (
-          ""
+          null
         )}
       </Container>
     </React.Fragment>
