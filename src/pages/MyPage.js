@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import styled, { css } from "styled-components";
-import { Flexbox } from "../styles/flexbox";
+import styled from "styled-components";
 
-import { Navbar, ArticleFolder, RemindCard, UserProfile } from "../components";
-import { Title, Image, Text } from "../elements";
-import { useLocation, useParams } from "react-router";
+import { Navbar, ArticleFolder, UserProfile } from "../components";
+import { useParams } from "react-router";
 import { getProfileAxios } from "../redux/modules/Profile";
 
 import AddCollection from "../components/AddCollection";
@@ -18,7 +16,6 @@ const MyPage = props => {
   const dispatch = useDispatch();
   const params = useParams();
   const memberId = params.id;
-  const isMe = useSelector(state => state.user.isMe);
 
   useEffect(() => {
     dispatch(getProfileAxios(memberId));
@@ -28,10 +25,10 @@ const MyPage = props => {
   const folderList = useSelector(state => state.folder.articleFolderList);
   const defaultFolder = folderList[0];
   const userFolder = folderList.slice(1);
-  console.log(userFolder);
 
   // ----- 유저 정보 ----- //
-  const userInfo = useSelector(state => state.user.myInfo);
+  const userInfo = useSelector(state => state.profile.memberInfo);
+  const myInfo = useSelector(state => state.user.myInfo);
 
   // 모달 열고 닫기
   const [modalOpen, setModalOpen] = useState(false);
@@ -47,14 +44,18 @@ const MyPage = props => {
       <Container>
         <Navbar />
         {/* ----- 프로필+이름 부분 ----- */}
-        <UserProfile {...userInfo} />
+        <UserProfile
+          userInfo = {userInfo}
+          {...myInfo}
+        />
         {/* ----- 리마인드, 디폴트 폴더 ----- */}
         <MyPageRemind
           defaultFolder = {defaultFolder}
           userFolder = {userFolder}
           openModal = {openModal}
+          userInfo = {userInfo}
           {...defaultFolder}
-          {...userInfo}
+          {...myInfo}
         />
         
         {/* 아티클 리마인드 또는 새 컬렉션 만들기 */}
@@ -71,7 +72,10 @@ const MyPage = props => {
           />
         ))}
 
-        <MyPageSuggest {...userInfo} />
+        <MyPageSuggest
+          userInfo = {userInfo}
+          {...myInfo}
+        />
         {modalOpen ? (
           <AddCollection
             setModalOpen={setModalOpen}
@@ -87,39 +91,6 @@ const MyPage = props => {
 
 const Container = styled.div`
   margin-bottom: 85px;
-`;
-
-const Qheader = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const LabelBox = styled.div`
-  ${Flexbox};
-  padding-right: 20px;
-`;
-const AlertBox = styled.div`
-  padding: 16px;
-`;
-
-const RemindAlert = styled.div`
-  display: flex;
-  height: 82px;
-  border: 1px solid #f2f3f4;
-  border-radius: 16px;
-  padding: 19px 22px;
-`;
-
-const TextPoint = styled.span`
-  ${({ theme }) => {
-    const { colors, fontWeight } = theme;
-    return css`
-      display: inline-block;
-      color: ${colors.fontPurple};
-      font-weight: ${fontWeight.semiBold};
-    `;
-  }}
 `;
 
 export default MyPage;

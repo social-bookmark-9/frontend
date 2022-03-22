@@ -12,11 +12,12 @@ const MyPageRemind = props => {
   const {
     defaultFolder,
     userFolder,
-    nickName,
+    userInfo,
     completeRate,
     memberId,
     openModal
   } = props
+
   const [myOwnPage, setMyOwnPage] = useState(false);
   const params = useParams();
 
@@ -44,7 +45,7 @@ const MyPageRemind = props => {
         />
 
         <Qheader>
-          <Title _padding="20px">{nickName}님의 큐레이션</Title>
+          <Title _padding="20px">{userInfo.memberName}님의 큐레이션</Title>
           <LabelBox>
             <Label
               _color={({ theme }) => theme.colors.fontColor07}
@@ -55,11 +56,15 @@ const MyPageRemind = props => {
             </Label>
           </LabelBox>
         </Qheader>
-        <ArticleFolder
-          folderColor="default"
-          isDefault={true}
-          {...defaultFolder}
-        />
+
+        <div style={{padding:"0 16px"}}>
+          <ArticleFolder
+            folderColor="default"
+            isDefault={true}
+            {...defaultFolder}
+          />
+        </div>
+
         {userFolder.length > 0 ? (
           <AlertBox>
             <RemindAlert>
