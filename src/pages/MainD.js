@@ -2,15 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import {
   Navbar,
-  Modal,
-  Curations,
-  RecommendList,
+  ModalD,
+  CurationsD,
+  RecommendListD,
   RecommendUser,
-  MainTop,
+  MainTopD,
 } from "../components";
 import { useSelector } from "react-redux";
 
-const Main = props => {
+const MainD = props => {
   console.log(
     "로그인정보 확인",
     useSelector(state => state.user),
@@ -21,18 +21,33 @@ const Main = props => {
       <MainContainer>
         <Navbar {...props} />
         {/* 맨 위 영역 */}
-        <MainTop />
+        <MainTopD />
 
         {/* 추천아티클 */}
-        <RecommendList />
+        <RecommendListD />
 
         {/* 추천 큐레이션 */}
-        <Curations />
+        <CurationsD />
 
         {/* 추천 유저 */}
         <RecommendUser />
 
-        <Modal />
+        <div
+          style={{
+            width: "100%",
+            height: "446px",
+            backgroundColor: "#E7E8FA",
+          }}
+        />
+        <div
+          style={{
+            width: "100%",
+            height: "446px",
+            backgroundColor: "#353C49",
+          }}
+        />
+
+        <ModalD />
       </MainContainer>
     </React.Fragment>
   );
@@ -42,4 +57,4 @@ Main.defaultProps = {};
 
 const MainContainer = styled.div``;
 
-export default Main;
+export default MainD;
