@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
 import styled, { css } from "styled-components";
 import { Flexbox } from "../styles/flexbox";
 
-import { Navbar, ArticleFolder, RemindCard, UserProfile } from "../components";
+import { Navbar, ArticleFolder, RemindCard, ModalD } from "../components";
 import { Label, Title, Image, Text } from "../elements";
 import { useLocation, useParams } from "react-router";
 import { getProfileAxios } from "../redux/modules/Profile";
-import AddCollection from "../components/AddCollection";
+import UserProfile from "../components/UserProfile";
 
-const MyPage = props => {
+const MyPageD = props => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const params = useParams();
   const memberId = params.id;
   const isMe = useSelector(state => state.user.isMe);
@@ -22,13 +23,12 @@ const MyPage = props => {
   }, [dispatch]);
 
   // ----- 폴더 리스트 ----- //
-  const folderList = useSelector(state => state.folder.articleFolderList);
+  const folderList = useSelector(state => state.folder.folderList);
   const defaultFolder = folderList[0];
   const userFolder = folderList.slice(1);
-  console.log(userFolder);
 
   // ----- 유저 정보 ----- //
-  const userInfo = useSelector(state => state.profile.memberInfo);
+  const userInfo = useSelector(state => state.folder.userInfo);
 
   // ----- 전체구독률 ----- //
   const completeRates = [100, 49, 29, 0, 35];
@@ -36,19 +36,10 @@ const MyPage = props => {
     completeRates.reduce((a, b) => a + b) / completeRates.length,
   );
 
-  // 모달 열고 닫기
-  const [modalOpen, setModalOpen] = useState(false);
-  // 어떤 모달창 보여줄지 (링크 추가 단계)
-  const [showModal, setShowModal] = useState(false);
-  // 모달 열고 닫기 펑션
-  const openModal = () => {
-    setModalOpen(true);
-  };
-
   return (
     <React.Fragment>
-      <Container>
-        <Navbar />
+      <Navbar />
+      <DContainer>
         {/* ----- 프로필+이름 부분 ----- */}
         <UserProfile {...userInfo} />
         {/* ----- 리마인드 부분 ----- */}
@@ -78,57 +69,43 @@ const MyPage = props => {
         </Qheader>
         {/* ----- 디폴트 폴더 ----- */}
         {isMe ? (
-          <ArticleFolder folderColor="default" isDefault {...defaultFolder} />
+          <>
+            <ArticleFolder
+              folderColor="default"
+              isDefault={true}
+              {...defaultFolder}
+            />
+
+            {/* 아티클 리마인드 */}
+            <AlertBox>
+              <RemindAlert>
+                <div>
+                  <Image
+                    _src="/images/remind.png"
+                    _width="20px"
+                    _height="19px"
+                  />
+                </div>
+                <div>
+                  <Title
+                    _fontSize={({ theme }) => theme.fontSizes.font16}
+                    _lineHeight="22px"
+                  >
+                    아티클 리마인드
+                  </Title>
+                  <Text
+                    _fontSize={({ theme }) => theme.fontSizes.font13}
+                    _lineHeight="18px"
+                  >
+                    아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
+                  </Text>
+                </div>
+              </RemindAlert>
+            </AlertBox>
+          </>
         ) : (
           ""
         )}
-        {/* 아티클 리마인드 또는 새 컬렉션 만들기 */}
-        {isMe && userFolder.length > 0 ? (
-          <AlertBox>
-            <RemindAlert>
-              <div>
-                <Image _src="/images/remind.png" _width="20px" _height="19px" />
-              </div>
-              <div>
-                <Title
-                  _fontSize={({ theme }) => theme.fontSizes.font16}
-                  _lineHeight="22px"
-                >
-                  아티클 리마인드
-                </Title>
-                <Text
-                  _fontSize={({ theme }) => theme.fontSizes.font13}
-                  _lineHeight="18px"
-                >
-                  아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
-                </Text>
-              </div>
-            </RemindAlert>
-          </AlertBox>
-        ) : (
-          <AlertBox onClick={openModal}>
-            <RemindAlert>
-              <div>
-                <Image _src="/images/add.png" _width="16px" _height="16px" />
-              </div>
-              <div>
-                <Title
-                  _fontSize={({ theme }) => theme.fontSizes.font16}
-                  _lineHeight="22px"
-                >
-                  새 컬렉션 만들기
-                </Title>
-                <Text
-                  _fontSize={({ theme }) => theme.fontSizes.font13}
-                  _lineHeight="18px"
-                >
-                  컬렉션을 만들어 링크를 분류해 보세요
-                </Text>
-              </div>
-            </RemindAlert>
-          </AlertBox>
-        )}
-
         {/* 폴더리스트 시작 */}
         {userFolder.map((folder, idx) => (
           <ArticleFolder
@@ -140,7 +117,7 @@ const MyPage = props => {
           />
         ))}
         {isMe ? (
-          ""
+          <ModalD />
         ) : (
           <RemindCard
             _title={`${"username"}님의 큐레이션이 유용하셨나요?`}
@@ -151,21 +128,14 @@ const MyPage = props => {
             isMe={false}
           />
         )}
-        {modalOpen ? (
-          <AddCollection
-            setModalOpen={setModalOpen}
-            setShowModal={setShowModal}
-          />
-        ) : (
-          ""
-        )}
-      </Container>
+      </DContainer>
     </React.Fragment>
   );
 };
 
-const Container = styled.div`
-  margin-bottom: 85px;
+const DContainer = styled.div`
+  width: 1115px;
+  margin: auto;
 `;
 
 const Qheader = styled.div`
@@ -201,4 +171,4 @@ const TextPoint = styled.span`
   }}
 `;
 
-export default MyPage;
+export default MyPageD;

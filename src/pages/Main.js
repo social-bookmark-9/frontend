@@ -1,21 +1,26 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import Modal from "../components/Modal";
-import Curations from "../components/Curations";
-import RecommendList from "../components/RecommendList";
-import RecommendUser from "../components/RecommendUser";
-import MainTop from "../components/MainTop";
+import styled from "styled-components";
+import {
+  Navbar,
+  Modal,
+  Curations,
+  RecommendList,
+  RecommendUser,
+  MainTop,
+} from "../components";
 import { Desktop } from "../styles/mediaquery";
 import { useSelector } from "react-redux";
 
 const Main = props => {
-
-  console.log("로그인정보 확인", useSelector(state => state.user));
+  console.log(
+    "로그인정보 확인",
+    useSelector(state => state.user),
+  );
 
   return (
     <React.Fragment>
-
-        <Navbar isLogin={props.isLogin} />
+      <MainContainer>
+        <Navbar {...props} />
         {/* 맨 위 영역 */}
         <MainTop />
 
@@ -29,17 +34,30 @@ const Main = props => {
         <RecommendUser />
 
         <Desktop>
-          <div style={{width:"100%", height:"446px", backgroundColor:"#E7E8FA"}} />
-          <div style={{width:"100%", height:"446px", backgroundColor:"#353C49"}} />
+          <div
+            style={{
+              width: "100%",
+              height: "446px",
+              backgroundColor: "#E7E8FA",
+            }}
+          />
+          <div
+            style={{
+              width: "100%",
+              height: "446px",
+              backgroundColor: "#353C49",
+            }}
+          />
         </Desktop>
-        
+
         <Modal />
-
-
+      </MainContainer>
     </React.Fragment>
   );
 };
 
 Main.defaultProps = {};
+
+const MainContainer = styled.div``;
 
 export default Main;

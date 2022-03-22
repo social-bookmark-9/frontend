@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { sendToHashtags } from "../redux/modules/Data";
 
 import styled from "styled-components";
 import { Button, Text } from "../elements";
@@ -9,9 +7,13 @@ import { FlexboxRow, FlexboxSpace } from "../styles/flexbox";
 import AddLinkTag from "./AddLinkTag";
 import AddFolder from "./AddFolder";
 import CheckRemind from "./CheckRemind";
+import { useDispatch } from "react-redux";
+import { postArticleAxios } from "../redux/modules/Article";
+import { useNavigate } from "react-router";
 
-const Modal = () => {
+const ModalD = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // 모달 열고 닫기
   const [modalOpen, setModalOpen] = useState(false);
   // 어떤 모달창 보여줄지 (링크 추가 단계)
@@ -48,13 +50,18 @@ const Modal = () => {
   const [url, setUrl] = useState("");
   const [checkedRemind, setCheckedRemind] = useState(0);
   const [folderHide, setFolderHide] = useState(false);
-  // const [addLink, setAddLink] = useState(false);
+  const [checkedItems, setCheckedItems] = useState(new Set());
+  const [addLink, setAddLink] = useState(false);
+  const tagData = [...checkedItems];
 
-  const linkData = {
+  const articleData = {
     url: url,
     readCount: 0,
     reminderDate: +checkedRemind,
     articleFolderName: folder,
+    hashtag1: tagData[0],
+    hashtag2: tagData[1] ? tagData[1] : null,
+    hashtag3: tagData[2] ? tagData[2] : null,
   };
   const folderData = {
     articleFolderName: folder,
@@ -71,7 +78,6 @@ const Modal = () => {
 
   const modalChange = () => {
     setShowModal(current => !current);
-    dispatch(sendToHashtags({ linkData, folderData }));
   };
 
   const toggleDropdown = () => {
@@ -82,9 +88,13 @@ const Modal = () => {
     setFolder(e.target);
   };
 
+  const handleAddLink = () => {
+    dispatch(postArticleAxios({ articleData, setModalOpen }));
+  };
+
   return (
     <>
-      {/* 모달버튼 */}
+      {/* 아직 버튼 모양은 안 잡아서 기본으로! */}
       <LinkButtonBox>
         <Button borderRadius="16px" _fontSize="28px" _onClick={openModal}>
           +
@@ -111,7 +121,11 @@ const Modal = () => {
               {showModal ? (
                 <AddLinkTag
                   closeModal={closeModal}
+                  setAddLink={setAddLink}
                   setShowModal={setShowModal}
+                  setCheckedItems={setCheckedItems}
+                  checkedItems={checkedItems}
+                  articleData={articleData}
                 />
               ) : (
                 <>
@@ -165,13 +179,24 @@ const Modal = () => {
                         </RemindSelection>
                       </Reminder>
                       <ButtonBox>
-                        <Button
-                          _onClick={modalChange}
-                          _padding="18px"
-                          _fontSize="14px"
-                        >
-                          선택 완료
-                        </Button>
+                        {addLink ? (
+                          <Button
+                            _onClick={handleAddLink}
+                            _padding="18px"
+                            _fontSize="14px"
+                          >
+                            링크 추가
+                          </Button>
+                        ) : (
+                          <Button
+                            _onClick={modalChange}
+                            _padding="18px"
+                            _fontSize="14px"
+                            articleData={articleData}
+                          >
+                            선택 완료
+                          </Button>
+                        )}
                       </ButtonBox>
                     </LinkBox>
                   ) : (
@@ -222,8 +247,8 @@ const Main = styled.div`
 const LinkButtonBox = styled.div`
   display: inline-flex;
   position: fixed;
-  bottom: 16px;
-  right: 16px;
+  bottom: 60px;
+  right: 60px;
   & button {
     width: 62px;
     height: 64px;
@@ -344,4 +369,4 @@ const ButtonBox = styled.div`
   bottom: 24px;
 `;
 
-export default Modal;
+export default ModalD;

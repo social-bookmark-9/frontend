@@ -98,7 +98,7 @@ const UserInput = styled.input`
   padding: 12px;
   width: 100%;
   &::placeholder {
-    color: ${({ theme }) => theme.colors.grayColor03};
+    color: ${({ theme }) => theme.colors.gray03};
     font-size: ${({ theme }) => theme.fontSizes.font16};
   }
   &:focus {

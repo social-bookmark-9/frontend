@@ -5,7 +5,6 @@ import { Circle } from "../elements/ImageObj";
 import EditProfileLink from "../components/EditProfileLink";
 import EditNickname from "../components/EditNickname";
 
-
 const EditProfile = () => {
   const [words, setWords] = useState(0);
   const handleKeyUp = e => {
@@ -19,57 +18,73 @@ const EditProfile = () => {
   const [isEdit, setIsEdit] = useState(false);
   const toggleEdit = () => {
     setIsEdit(!isEdit);
-  }
+  };
   return (
     <>
       {!isEdit ? (
         <>
-        <Container>
-          <AreaWrap>
-          <ProfileBox>
-            {/*  그거... 동그라미 */}
-            <CircleBox>
-              <Circle _width="28px" _height="28px" bgColor="black" />
-            </CircleBox>
-            <ProfileImage>
-              <img
-                src="https://bennettfeely.com/clippy/pics/pittsburgh.jpg"
-                alt="profile"
-                style={{zIndex:"3"}}
-              />
-            </ProfileImage>
-            <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
-              <div style={{display:"flex", justifyContent:"start", alignItems:"center"}}>
-                <Title _padding="23px 15px 30px 23px">@김철수</Title>
-              </div>
-              <div style={{display:"flex", justifyContent:"end", alignItems:"center"}}>
-                <img
-                  src={`/images/edit.png`}
-                  width={"20px"}
-                  height={"20px"}
-                  onClick={toggleEdit}
-                  alt=""
+          <Container>
+            <AreaWrap>
+              <ProfileBox>
+                {/*  그거... 동그라미 */}
+                <CircleBox>
+                  <Circle _width="28px" _height="28px" bgColor="black" />
+                </CircleBox>
+                <ProfileImage>
+                  <img
+                    src="https://bennettfeely.com/clippy/pics/pittsburgh.jpg"
+                    alt="profile"
+                    style={{ zIndex: "3" }}
+                  />
+                </ProfileImage>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "start",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Title _padding="23px 15px 30px 23px">@김철수</Title>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "end",
+                      alignItems: "center",
+                    }}
+                  >
+                    <img
+                      src={`/images/edit.png`}
+                      width={"20px"}
+                      height={"20px"}
+                      onClick={toggleEdit}
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </ProfileBox>
+              <MemoBox>
+                <TextAreaField
+                  placeholder="자기소개를 작성해 주세요."
+                  rows={5}
+                  maxLength={34}
+                  onKeyUp={handleKeyUp}
                 />
-              </div>
-            </div>
-          </ProfileBox>
-          <MemoBox>
-            <TextAreaField
-              placeholder="자기소개를 작성해 주세요."
-              rows={5}
-              maxLength={34}
-              onKeyUp={handleKeyUp}
-            />
-            <InputCheck>{words}/34</InputCheck>
-          </MemoBox>
-          </AreaWrap>
-        </Container>
-        <EditProfileLink />
+                <InputCheck>{words}/34</InputCheck>
+              </MemoBox>
+            </AreaWrap>
+          </Container>
+          <EditProfileLink />
         </>
       ) : (
-        <EditNickname
-          setIsEdit={setIsEdit}
-        />
+        <EditNickname setIsEdit={setIsEdit} />
       )}
       {/* 마법의 svg */}
       <svg width="0" height="0">
@@ -90,7 +105,7 @@ const Container = styled.div`
   top: 0;
   left: 0;
   z-index: 0;
-  background-color: ${({ theme }) => theme.colors.grayColor01};
+  background-color: ${({ theme }) => theme.colors.gray01};
 `;
 const AreaWrap = styled.div`
   width: 390px;
@@ -107,7 +122,7 @@ const ProfileImage = styled.div`
   width: 156.34px;
   clip-path: url(#myClip);
   position: relative;
-  background-color: #C4C4C4;
+  background-color: #c4c4c4;
   z-index: -1;
   & img {
     position: absolute;
@@ -156,6 +171,5 @@ const InputCheck = styled.p`
   line-height: 18px;
   letter-spacing: -0.0008em;
 `;
-
 
 export default EditProfile;

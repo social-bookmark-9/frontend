@@ -11,7 +11,7 @@ const initialState = {
 export const kakaoLoginAxios = createAsyncThunk(
   "user/kakaoLogin",
   async ({ code, navigate }, { dispatch }) => {
-    const user = await UserApi.kakaoLogin({ code, navigate });
+    const user = await UserApi.kakaoLogin({ code, navigate, dispatch });
     if (user) {
       dispatch(setMyInfo(user.data));
       return user;
@@ -28,8 +28,9 @@ export const registerAxios = createAsyncThunk(
     }
   },
 );
-export const checkMyInfo = createAsyncThunk(
-  "user/checkMyInfo",
+
+export const checkUserAxios = createAsyncThunk(
+  "user/checkUser",
   async ({ token, navigate }, { dispatch }) => {
     const user = await UserApi.checkUser({ token, navigate });
     console.log(user);
@@ -39,6 +40,19 @@ export const checkMyInfo = createAsyncThunk(
     }
   },
 );
+
+export const refreshTokensAxios = createAsyncThunk(
+  "user/refreshTokens",
+  async ({ tokens, navigate }, { dispatch }) => {
+    const user = await UserApi.refreshTokens({ tokens, navigate });
+    console.log(user);
+    if (user) {
+      dispatch(setMyInfo(user.data));
+      return user;
+    }
+  },
+);
+
 export const logoutAxios = createAsyncThunk(
   "user/logout",
   async ({ navigate }, { dispatch }) => {
@@ -94,7 +108,7 @@ export const userSlice = createSlice({
         confirmButtonColor: "#353C49",
       });
     },
-    [checkMyInfo.fulfilled]: (state, action) => {
+    [checkUserAxios.fulfilled]: (state, action) => {
       state.myInfo = action.payload.data.myInfo;
       state.isLogin = true;
       state.isMe = true;

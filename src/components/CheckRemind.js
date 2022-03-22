@@ -60,7 +60,7 @@ const RemindRadio = styled.input.attrs({ type: "radio" })`
     ${({ theme }) => {
       const { colors } = theme;
       return css`
-        background-color: ${colors.grayColor05};
+        background-color: ${colors.gray05};
         border-color: ${colors.whilte};
         color: ${colors.white};
       `;

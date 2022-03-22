@@ -7,15 +7,14 @@ import { Title, Text } from "../elements";
 import { Circle } from "../elements/ImageObj";
 
 const NavProfile = props => {
+  const { memberId, nickName, profileImageUrl } = props;
   const isLogin = useSelector(state => state.user.isLogin);
-  const myInfo = useSelector(state => state.user.myInfo);
-  // const profileImage = myInfo.profileImage;
 
   const navigate = useNavigate();
 
   const onMypage = () => {
     if (isLogin) {
-      navigate("/mypage");
+      navigate(`/mypage/${memberId}`);
     } else {
       navigate("/login");
     }
@@ -30,18 +29,18 @@ const NavProfile = props => {
         </CircleBox>
         <ProfileHead>
           <ProfileImage>
-            {/* {isLogin && profileImage ? (
-              <img src={profileImage} alt="profile" />
+            {isLogin && profileImageUrl ? (
+              <img src={profileImageUrl} alt="profile" />
             ) : (
               ""
-            )} */}
+            )}
           </ProfileImage>
           <PropfileInfo onClick={onMypage}>
             <Title
               _fontSize={({ theme }) => theme.fontSizes.font18}
               _padding="2.5px 0px"
             >
-              {isLogin ? myInfo.nickname : "로그인해주세요"}
+              {isLogin ? nickName : "로그인해주세요"}
             </Title>
             <Text
               _fontSize={({ theme }) => theme.fontSizes.font14}
@@ -89,8 +88,10 @@ const ProfileImage = styled.div`
   background-color: #c4c4c4;
   z-index: -1;
   & img {
+    width: 90px;
     position: absolute;
-    width: 100%;
+    top: 0;
+    left: 0;
   }
 `;
 

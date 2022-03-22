@@ -5,6 +5,7 @@ import userReducer from "./modules/User";
 import articleReducer from "./modules/Article";
 import folderReducer from "./modules/Folder";
 import profileReducer from "./modules/Profile";
+import localDataReducer from "./modules/Data";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     article: articleReducer,
     folder: folderReducer,
     profile: profileReducer,
+    localData: localDataReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
