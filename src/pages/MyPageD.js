@@ -24,9 +24,7 @@ const MyPageD = props => {
   const isMe = useSelector(state => state.user.isMe);
 
   useEffect(() => {
-    if (isMe) {
-      dispatch(getProfileAxios(memberId));
-    }
+    dispatch(getProfileAxios(memberId));
   }, [dispatch]);
 
   // ----- 폴더 리스트 ----- //

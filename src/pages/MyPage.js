@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -9,6 +9,7 @@ import { Navbar, Profile, ArticleFolder, RemindCard } from "../components";
 import { Label, Title, Image, Text } from "../elements";
 import { useLocation, useParams } from "react-router";
 import { getProfileAxios } from "../redux/modules/Profile";
+import AddCollection from "../components/AddCollection";
 
 const MyPage = props => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const MyPage = props => {
   const folderList = useSelector(state => state.folder.articleFolderList);
   const defaultFolder = folderList[0];
   const userFolder = folderList.slice(1);
+  console.log(userFolder);
 
   // ----- 유저 정보 ----- //
   const userInfo = useSelector(state => state.profile.memberInfo);
@@ -33,6 +35,15 @@ const MyPage = props => {
   const completeRate = Math.round(
     completeRates.reduce((a, b) => a + b) / completeRates.length,
   );
+
+  // 모달 열고 닫기
+  const [modalOpen, setModalOpen] = useState(false);
+  // 어떤 모달창 보여줄지 (링크 추가 단계)
+  const [showModal, setShowModal] = useState(false);
+  // 모달 열고 닫기 펑션
+  const openModal = () => {
+    setModalOpen(true);
+  };
 
   return (
     <React.Fragment>
@@ -67,39 +78,57 @@ const MyPage = props => {
         </Qheader>
         {/* ----- 디폴트 폴더 ----- */}
         {isMe ? (
-          <>
-            <ArticleFolder folderColor="default" isDefault {...defaultFolder} />
-
-            {/* 아티클 리마인드 */}
-            <AlertBox>
-              <RemindAlert>
-                <div>
-                  <Image
-                    _src="/images/remind.png"
-                    _width="20px"
-                    _height="19px"
-                  />
-                </div>
-                <div>
-                  <Title
-                    _fontSize={({ theme }) => theme.fontSizes.font16}
-                    _lineHeight="22px"
-                  >
-                    아티클 리마인드
-                  </Title>
-                  <Text
-                    _fontSize={({ theme }) => theme.fontSizes.font13}
-                    _lineHeight="18px"
-                  >
-                    아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
-                  </Text>
-                </div>
-              </RemindAlert>
-            </AlertBox>
-          </>
+          <ArticleFolder folderColor="default" isDefault {...defaultFolder} />
         ) : (
           ""
         )}
+        {/* 아티클 리마인드 또는 새 컬렉션 만들기 */}
+        {isMe && userFolder.length > 0 ? (
+          <AlertBox>
+            <RemindAlert>
+              <div>
+                <Image _src="/images/remind.png" _width="20px" _height="19px" />
+              </div>
+              <div>
+                <Title
+                  _fontSize={({ theme }) => theme.fontSizes.font16}
+                  _lineHeight="22px"
+                >
+                  아티클 리마인드
+                </Title>
+                <Text
+                  _fontSize={({ theme }) => theme.fontSizes.font13}
+                  _lineHeight="18px"
+                >
+                  아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
+                </Text>
+              </div>
+            </RemindAlert>
+          </AlertBox>
+        ) : (
+          <AlertBox onClick={openModal}>
+            <RemindAlert>
+              <div>
+                <Image _src="/images/add.png" _width="16px" _height="16px" />
+              </div>
+              <div>
+                <Title
+                  _fontSize={({ theme }) => theme.fontSizes.font16}
+                  _lineHeight="22px"
+                >
+                  새 컬렉션 만들기
+                </Title>
+                <Text
+                  _fontSize={({ theme }) => theme.fontSizes.font13}
+                  _lineHeight="18px"
+                >
+                  컬렉션을 만들어 링크를 분류해 보세요
+                </Text>
+              </div>
+            </RemindAlert>
+          </AlertBox>
+        )}
+
         {/* 폴더리스트 시작 */}
         {userFolder.map((folder, idx) => (
           <ArticleFolder
@@ -122,15 +151,18 @@ const MyPage = props => {
             isMe={false}
           />
         )}
+        {modalOpen ? (
+          <AddCollection
+            setModalOpen={setModalOpen}
+            setShowModal={setShowModal}
+          />
+        ) : (
+          ""
+        )}
       </Container>
     </React.Fragment>
   );
 };
-
-const DContainer = styled.div`
-  width: 1115px;
-  margin: auto;
-`;
 
 const Container = styled.div`
   margin-bottom: 85px;

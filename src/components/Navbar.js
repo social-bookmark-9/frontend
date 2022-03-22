@@ -77,50 +77,6 @@ const Navbar = props => {
 };
 
 Navbar.defaultProps = {};
-const DNavContainer = styled.div`
-  width: 100%;
-`;
-
-const DNavBox = styled.div`
-  width: 1115px;
-  margin: auto;
-  padding: 20px 0px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const DLogoBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  & h1 {
-    padding-right: 8px;
-  }
-`;
-
-const DMenuBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  & p {
-    font-weight: ${({ theme }) => theme.fontWeight.semiBold};
-    padding-right: 30px;
-  }
-`;
-
-const DLine = styled.hr`
-  width: 1px;
-  height: 27px;
-  border: none;
-  background-color: ${({ theme }) => theme.colors.gray04};
-`;
-
-const ImageBox = styled.div`
-  & img {
-    margin-left: 30px;
-  }
-`;
 
 const Line = styled.hr`
   height: 1px;
