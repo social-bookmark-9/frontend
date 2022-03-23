@@ -6,9 +6,11 @@ import articleReducer from "./modules/Article";
 import folderReducer from "./modules/Folder";
 import profileReducer from "./modules/Profile";
 import localDataReducer from "./modules/Data";
+import mainReducer from "./modules/Main";
 
 export const store = configureStore({
   reducer: {
+    main: mainReducer,
     user: userReducer,
     article: articleReducer,
     folder: folderReducer,

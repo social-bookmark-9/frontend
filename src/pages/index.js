@@ -1,7 +1,7 @@
 import Login from "./Login";
 import UserNickname from "./UserNickname";
 import UserFavorites from "./UserFavorites";
-import Main from "./Main";
+import MainPage from "./MainPage";
 import ArticleList from "./ArticleList";
 import ArticleDetail from "./ArticleDetail";
 import Reviews from "./Reviews";
@@ -15,7 +15,7 @@ export {
   Login,
   UserNickname,
   UserFavorites,
-  Main,
+  MainPage,
   ArticleList,
   ArticleDetail,
   Reviews,

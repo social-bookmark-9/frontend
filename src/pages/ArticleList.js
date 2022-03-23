@@ -17,7 +17,6 @@ const ArticleList = props => {
   const params = useParams();
 
   const folderId = params.id;
-  console.log(folderId);
 
   useEffect(() => {
     dispatch(getFolderAxios(folderId));

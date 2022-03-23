@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Title } from "../elements";
 import styled from "styled-components";
+import Slider from "react-slick";
+import { Desktop, Tablet, Mobile } from "../styles/mediaquery";
 
 const RecommendListD = () => {
   const images = [
@@ -10,6 +12,19 @@ const RecommendListD = () => {
     { id: 3, image: "/images/icon103.png" },
     { id: 4, image: "/images/icon104.png" },
   ];
+
+  const tabletSettings = {
+    infinite: false,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    initialSlide: 1,
+    centerMode: true,
+    centerPadding: "50px",
+    focusOnSelect: true,
+    swipeToSlide: true,
+    arrows: false,
+  };
 
   const [isChecked, setIsChecked] = useState(false);
   const [checkedItems, setCheckedItems] = useState(new Set());
@@ -32,7 +47,6 @@ const RecommendListD = () => {
     setIsChecked(!isChecked);
     handleCheckedItems(e.target.parentNode, e.target.value, e.target.checked);
   };
-
   const handleCheckedItems = (box, value, isChecked) => {
     if (isChecked && checkedItems.size < 3) {
       checkedItems.add(value);
@@ -48,75 +62,108 @@ const RecommendListD = () => {
 
   return (
     <>
-      <div
-        style={{
-          margin: "0 auto 0 auto",
-          display: "flex",
-          width: "1220px",
-          paddingTop: "120px",
-        }}
-      >
+      <Desktop>
         <div
           style={{
-            flexDirection: "column",
-            width: "255px",
-            marginRight: "10%",
-            justifyContent: "start",
+            margin: "0 auto 0 auto",
+            display: "flex",
+            width: "1220px",
+            paddingTop: "120px",
           }}
         >
-          <Title _fontSize="34px" _lineHeight="41px" _padding="0 0 20px 0">
-            <div style={{ marginTop: "-46px" }}>
-              <img src="/images/DesktopMain1.png" width={"44px"} alt="icon" />
-            </div>
-            <div>이번달 버블러들이</div>
-            <div>모은 글</div>
-          </Title>
-          <div>
-            <FavoritesBox>
-              <Favorites onChange={handleChecked}>
-                {favoritesList.map((favor, idx) => (
-                  <InputBox key={idx}>
-                    <FavoriteInput
-                      type="checkbox"
-                      id={idx}
-                      name={favor}
-                      value={favor}
-                    />
-                    <FavoriteLabel htmlFor={idx}>
-                      <img
-                        src={`/images/icon${idx}.png`}
-                        width={"20px"}
-                        alt={`icon${idx}`}
+          <div
+            style={{
+              flexDirection: "column",
+              width: "255px",
+              marginRight: "10%",
+              justifyContent: "start",
+            }}
+          >
+            <Title _fontSize="34px" _lineHeight="41px" _padding="0 0 20px 0">
+              <div style={{ marginTop: "-46px" }}>
+                <img src="/images/DesktopMain1.png" width={"44px"} alt="icon" />
+              </div>
+              <div>이번달 버블러들이</div>
+              <div>모은 글</div>
+            </Title>
+            <div>
+              <FavoritesBox>
+                <Favorites onChange={handleChecked}>
+                  {favoritesList.map((favor, idx) => (
+                    <InputBox key={idx}>
+                      <FavoriteInput
+                        type="checkbox"
+                        id={idx}
+                        name={favor}
+                        value={favor}
                       />
-                      {favor}
-                    </FavoriteLabel>
-                  </InputBox>
-                ))}
-              </Favorites>
-            </FavoritesBox>
+                      <FavoriteLabel htmlFor={idx}>
+                        <img
+                          src={`/images/icon${idx}.png`}
+                          width={"20px"}
+                          alt={`icon${idx}`}
+                        />
+                        {favor}
+                      </FavoriteLabel>
+                    </InputBox>
+                  ))}
+                </Favorites>
+              </FavoritesBox>
+            </div>
+          </div>
+          <div
+            style={{
+              display: "inline-block",
+              flexDirection: "column",
+              justifyContent: "end",
+            }}
+          >
+            {images.map(item => {
+              return (
+                <div key={item.id} style={{ display: "inline-block" }}>
+                  <DesktopCard>
+                    <div style={{ width: "30px", height: "30px" }}>
+                      <img src={item.image} alt="" />
+                    </div>
+                    대충 글씨
+                  </DesktopCard>
+                </div>
+              );
+            })}
           </div>
         </div>
+      </Desktop>
+      <Tablet>
         <div
           style={{
-            display: "inline-block",
-            flexDirection: "column",
-            justifyContent: "end",
+            // margin: "0 -90px 0 -20px",
+            padding: "32px 0 40px 0",
+            backgroundColor: "#f2f3f4",
           }}
         >
-          {images.map(item => {
-            return (
-              <div key={item.id} style={{ display: "inline-block" }}>
-                <DesktopCard>
-                  <div style={{ width: "30px", height: "30px" }}>
-                    <img src={item.image} alt="" />
+          <Title _padding="0 0 20px 40px">추천 아티클</Title>
+          <div
+            style={{
+              marginLeft: "-20px",
+            }}
+          >
+            <Slider {...tabletSettings}>
+              {images.map(item => {
+                return (
+                  <div key={item.id}>
+                    <Card>
+                      <div style={{ width: "30px", height: "30px" }}>
+                        <img src={item.image} alt="" />
+                      </div>
+                      대충 글씨
+                    </Card>
                   </div>
-                  대충 글씨
-                </DesktopCard>
-              </div>
-            );
-          })}
+                );
+              })}
+            </Slider>
+          </div>
         </div>
-      </div>
+      </Tablet>
     </>
   );
 };

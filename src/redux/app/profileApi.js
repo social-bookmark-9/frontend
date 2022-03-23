@@ -23,7 +23,6 @@ export default class ProfileApi {
       .catch(err => console.log(err));
   }
 
-
   async editProfileUserDesc(userDesc) {
     const editProfileUserDescConfig = {
       method: "PATCH",
@@ -32,7 +31,7 @@ export default class ProfileApi {
         "Content-Type": "application/json",
         "X-AUTH-TOKEN": getToken(),
       },
-      data: JSON.stringify(userDesc)
+      data: JSON.stringify(userDesc),
     };
     return axios(editProfileUserDescConfig)
       .then(res => {
@@ -40,7 +39,6 @@ export default class ProfileApi {
       })
       .catch(err => console.log(err.response));
   }
-
 
   async editProfileUserName(nickname) {
     console.log(nickname);
@@ -61,7 +59,6 @@ export default class ProfileApi {
         console.log(err.response);
       });
   }
-
 
   async editProfileSns({ urlList }) {
     const editProfileSnsConfig = {
@@ -100,8 +97,6 @@ export default class ProfileApi {
         console.log(err.response);
       });
   }
-
-
 
   async editProfileHashtag({ hashtag }) {
     const editProfileHashtagConfig = {

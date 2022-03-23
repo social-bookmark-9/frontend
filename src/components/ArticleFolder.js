@@ -6,28 +6,19 @@ import { Label, Image, Title } from "../elements";
 import Carousel from "../elements/Carousel";
 
 const ArticleFolder = props => {
-  const {
-    folderColor,
-    isDefault,
-    folderId,
-    folderName,
-    completeRate,
-    hashTag1,
-    hashTag2,
-    hashTag3,
-    likeCount,
-    hide,
-  } = props;
+  const { folder, folderColor, isDefault } = props;
 
   const navigate = useNavigate();
   const isMe = useSelector(state => state.user.isMe);
 
   // 해시태스 리스트
-  const hashTag = [hashTag1, hashTag2, hashTag3];
+  // const _hashTag = [folder.hashTag1, folder.hashTag2, folder.hashTag3];
+  // const hashTag = _hashTag.filter((el, i) => el !== null);
+  const hashTag = [1, 2, 3];
 
   // 폴더 별 색상 (폰트, 라벨, 해시태그)
   const propsColor = () => {
-    switch (props.folderColor) {
+    switch (folderColor) {
       case "purple":
         return "#7881F5";
       case "blue":
@@ -46,9 +37,6 @@ const ArticleFolder = props => {
           folderColor={folderColor}
           isMe={isMe}
           isDefault={isDefault}
-          onClick={() => {
-            navigate(`/articles/${folderId}`);
-          }}
         >
           {isMe || isDefault ? (
             <LabelBox>
@@ -57,7 +45,7 @@ const ArticleFolder = props => {
                 borderColor={propsColor}
                 bgColor="none"
               >
-                완독률 {completeRate}%
+                완독률 {folder.completeRate}%
               </Label>
             </LabelBox>
           ) : (
@@ -81,12 +69,12 @@ const ArticleFolder = props => {
               _lineHeight="24px"
               _color={propsColor}
             >
-              {isDefault ? "미분류 컬렉션" : folderName}
+              {isDefault ? "미분류 컬렉션" : folder.folderName}
             </Title>
             {isMe || isDefault ? (
               <Label bgColor="white" _padding="7px" borderColor="white">
                 <Image
-                  _src={`/images/${hide ? "show" : "hide"}.png`}
+                  _src={`/images/${folder.hide ? "show" : "hide"}.png`}
                   _marginR="0px"
                   _width="20px"
                   _height="20px"
@@ -111,19 +99,21 @@ const ArticleFolder = props => {
                   _width="11px"
                   _height="11px"
                 />
-                {likeCount}
+                {folder.likeCount}
               </Label>
             )}
           </TitleBox>
-          <div style={{ paddingTop: "36px", margin: "0 -20px 0 -100px" }}>
-            <Carousel />
-          </div>
+          <CarouselBox>
+            <Carousel articleContents={folder.articleListDtoList} />
+          </CarouselBox>
         </CurationBox>
       </Container>
     </React.Fragment>
   );
 };
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100%;
+`;
 
 const CurationBox = styled.div`
   position: relative;
@@ -147,5 +137,10 @@ const TitleBox = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+`;
+
+const CarouselBox = styled.div`
+  padding-top: 36px;
+  margin: 0 -20px 0 -65px;
 `;
 export default ArticleFolder;

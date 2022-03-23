@@ -10,7 +10,7 @@ import NavProfile from "./NavProfile";
 import { Logo } from "../elements/ImageObj";
 
 const Navbar = props => {
-  const { title } = props;
+  const { title, bgColor } = props;
 
   const navigate = useNavigate();
   const isLogin = useSelector(state => state.user.isLogin);
@@ -29,11 +29,16 @@ const Navbar = props => {
 
   return (
     <React.Fragment>
-      <NavbarContainer>
+      <NavbarContainer bgColor={bgColor} onClick={menuOpen}>
         <NavBox>
           {title ? <Title>{title}</Title> : <Logo />}
           <NavMenu onClick={menuOpen}>
-            <Image _src="/images/menu.png" _width="24px" _height="24px" />
+            <Image
+              _src="/images/menu.png"
+              _width="24px"
+              _height="24px"
+              _marginR="0px"
+            />
           </NavMenu>
           <NavContainer className={isOpen ? "active" : ""}>
             <Nav className={isOpen ? "active" : ""} onClick={menuOpen}>
@@ -86,6 +91,7 @@ const Line = styled.hr`
 
 const NavbarContainer = styled.div`
   width: 100%;
+  ${props => (props.bgColor ? `background-color: ${props.bgColor}` : null)}
 `;
 const NavBox = styled.div`
   display: flex;
