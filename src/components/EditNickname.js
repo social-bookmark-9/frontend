@@ -3,14 +3,20 @@ import styled from "styled-components";
 import { FlexboxColumn } from "../styles/flexbox";
 import { Button, Title } from "../elements";
 import Swal from "sweetalert2";
+import { editProfileUserNameAxios } from "../redux/modules/Profile";
+import { useDispatch } from "react-redux";
 
 const EditNickname = props => {
-  const { setIsEdit } = props;
+  const { setIsEdit, setNewNickname } = props;
   const [words, setWords] = useState(0);
-  const [nickname, setNickname] = useState("");
+  const [nickName, setNickName] = useState("");
+  const dispatch = useDispatch();
+
   const handleEdit = () => {
-    if (nickname) {
+    if (nickName) {
       props.setIsEdit(false);
+      props.setNewNickname(nickName);
+      dispatch(editProfileUserNameAxios({nickname:nickName}));
       alert("변경완료");
     } else {
       Swal.fire({
@@ -27,13 +33,13 @@ const EditNickname = props => {
   const handleKeyUp = e => {
     if (e.target.value.length <= 6) {
       setWords(e.target.value.length);
-      setNickname(e.target.value);
+      setNickName(e.target.value);
     }
     if (e.target.value.length > 6) {
       e.target.value = e.target.value.slice(0, 6);
     }
   };
-  
+
   return (
     <React.Fragment>
       <UserBox>

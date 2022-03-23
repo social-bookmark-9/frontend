@@ -17,7 +17,7 @@ const Curations = props => {
         {folderList.map((folder, idx) => (
           <FolderBox
             key={idx}
-            _onClick={() => {
+            onClick={() => {
               navigate(`/articles/${folder.folderId}`);
             }}
           >

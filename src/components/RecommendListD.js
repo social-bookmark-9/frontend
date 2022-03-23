@@ -42,6 +42,7 @@ const RecommendListD = () => {
     "예술",
     "과학",
   ];
+
   const handleChecked = e => {
     setIsChecked(!isChecked);
     handleCheckedItems(e.target.parentNode, e.target.value, e.target.checked);

@@ -1,10 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+import { useParams } from "react-router";
 import styled from "styled-components";
 import { Title, Text } from "../elements";
 import { Circle } from "../elements/ImageObj";
 
 const UserProfile = props => {
-  const { nickName, userDesc, profileImageUrl } = props;
+  const { userInfo, memberId } = props;
+  const navigate = useNavigate();
+
+  const [myOwnPage, setMyOwnPage] = useState(false);
+  const params = useParams();
+
+  useEffect(() => {
+    if (parseInt(params.id) === parseInt(memberId)) {
+      setMyOwnPage(true);
+    } else if (parseInt(params.id) !== parseInt(memberId)) {
+      setMyOwnPage(false);
+    }
+  }, [memberId]);
+
+  const goEditProfile = () => {
+    navigate("/editprofile", {state: {memberId}});
+  }
+  
   return (
     <React.Fragment>
       {/* <Desktop>
@@ -46,15 +65,47 @@ const UserProfile = props => {
       <ProfileBox>
         <ProfileHead>
           <ProfileImage>
-            <img src={profileImageUrl} alt="profile" />
+            <img src={userInfo.profileImage} alt="profile" />
           </ProfileImage>
           <CircleBox>
             <Circle _width="28px" _height="28px" bgColor="black" />
           </CircleBox>
           <PropfileInfo>
-            <Title>{nickName}</Title>
+            {myOwnPage ? (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+              onClick={goEditProfile}
+            >
+              <div style={{
+                display: "flex",
+                justifyContent: "start",
+                alignItems: "center",
+              }}>
+                <Title>{userInfo.memberName}</Title>
+              </div>
+              <div style={{
+                display: "flex",
+                justifyContent: "end",
+                alignItems: "center",
+                marginLeft: "5px"
+              }}>
+                <img
+                  src={`/images/edit.png`}
+                  width={"20px"}
+                  height={"20px"}
+                  alt=""
+                />
+              </div>
+            </div>
+            ) : (
+              <Title>{userInfo.memberName}</Title>
+            )}
             <Text _fontSize="13px" _padding="8px 0px">
-              {userDesc}
+              {userInfo.memberComment}
             </Text>
           </PropfileInfo>
         </ProfileHead>
