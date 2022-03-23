@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +7,7 @@ import { Desktop, Mobile } from "../styles/mediaquery";
 import OAuthRedirectHandler from "../shared/OAuthRedirectHandler";
 
 import { checkUserAxios } from "../redux/modules/User";
-import { getMainAxios } from "../redux/modules/Main";
+import { getMainAxios, getMainWithAxios } from "../redux/modules/Main";
 import { getToken } from "./utils";
 
 import MainPage from "../pages/MainPage";
@@ -32,6 +32,8 @@ function App(props) {
   useEffect(() => {
     if (getToken()) {
       dispatch(checkUserAxios(getToken()));
+      dispatch(getMainWithAxios());
+    } else {
       dispatch(getMainAxios());
     }
   }, [dispatch]);

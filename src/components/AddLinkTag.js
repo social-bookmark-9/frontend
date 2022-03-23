@@ -11,6 +11,7 @@ import Favorite from "./Favorite";
 import { useNavigate } from "react-router";
 
 const AddLinkTag = props => {
+  const { setShowModal } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const folderName = useSelector(
@@ -57,7 +58,7 @@ const AddLinkTag = props => {
   ];
 
   const modalChange = () => {
-    props.setShowModal(current => !current);
+    setShowModal(current => !current);
   };
 
   const handleChecked = e => {

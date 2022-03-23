@@ -7,7 +7,7 @@ export default class articleApi {
     this.base = process.env.REACT_APP_SERVER;
   }
 
-  async postArticle({ articleData, setModalOpen }) {
+  async postArticle({ articleData, navigate }) {
     const postArticleConfig = {
       method: "POST",
       url: `${this.base}/api/articles`,
@@ -19,7 +19,7 @@ export default class articleApi {
     };
     return axios(postArticleConfig)
       .then(res => {
-        setModalOpen(true);
+        navigate("/", { replace: true });
         return res;
       })
       .catch(err => {

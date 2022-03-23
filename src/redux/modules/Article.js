@@ -14,9 +14,9 @@ const initialState = {
 export const postArticleAxios = createAsyncThunk(
   "article/postArticle",
   async ({ articleData, navigate }, { dispatch }) => {
+    console.log(articleData);
     const resp = await ArticleApi.postArticle({ articleData, navigate });
-    console.log(resp);
-    // return resp;
+    return resp;
   },
 );
 

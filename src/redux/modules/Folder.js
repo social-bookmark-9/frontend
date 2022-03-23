@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import folderApi from "../app/folderApi";
+import { postArticleAxios } from "./Article";
 // import { postArticleAxios } from "./Article";
 
 const FolderApi = new folderApi();
@@ -20,10 +21,11 @@ export const getFolderAxios = createAsyncThunk(
 
 export const createFolderAxios = createAsyncThunk(
   "folder/createFolder",
-  async ({ folderData, navigate }, { dispatch }) => {
+  async ({ folderData, articleData, navigate }, { dispatch }) => {
+    console.log(folderData);
+    console.log(articleData);
     const resp = await FolderApi.createFolder({ folderData, navigate });
-    console.log("폴더생성: ", resp);
-    // dispatch(postArticleAxios({ articleData, navigate }));
+    dispatch(postArticleAxios({ articleData, navigate }));
     return resp;
   },
 );

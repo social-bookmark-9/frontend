@@ -1,14 +1,9 @@
-import Slider from "react-slick";
+import React from "react";
 import styled from "styled-components";
+import Slider from "react-slick";
 
-const Carousel = () => {
-  const images = [
-    { id: 0, image: "/images/icon100.png" },
-    { id: 1, image: "/images/icon101.png" },
-    { id: 2, image: "/images/icon102.png" },
-    { id: 3, image: "/images/icon103.png" },
-    { id: 4, image: "/images/icon104.png" },
-  ];
+const Carousel = props => {
+  const { articleContents } = props;
 
   const settings = {
     infinite: false,
@@ -25,34 +20,31 @@ const Carousel = () => {
 
   return (
     <Slider {...settings}>
-      {images.map(item => {
+      {articleContents.map((content, idx) => {
+        console.log(content);
+        const contents = content.content.slice(0, 60);
         return (
-          <div key={item.id}>
+          <CardBox key={idx}>
             <Card>
-              <div
-                style={{
-                  padding: "0 2px 6px 2px",
-                  color: "#595959",
-                  fontSize: "14px",
-                }}
-              >
-                애자일이란 무엇인가
-              </div>
-              <div style={{ color: "#9190a0", fontSize: "12px" }}>
-                UX방법론에는 많은 것들이 있는데요 오늘은 어피니티 다이어그램에
-                대해 알아보겠습니다 UX방법론에는 많은
-              </div>
+              <CardTitle>{content.title}</CardTitle>
+              <CardContents>{contents}...</CardContents>
             </Card>
-          </div>
+          </CardBox>
         );
       })}
-      <SeeMoreCard>
-        <div>13개</div>
-        더보기
-      </SeeMoreCard>
+      {articleContents.length > 3 ? (
+        <SeeMoreCard>
+          <div>13개</div>
+          더보기
+        </SeeMoreCard>
+      ) : null}
     </Slider>
   );
 };
+
+const CardBox = styled.div`
+  width: 100%;
+`;
 
 const Card = styled.div`
   height: 146px;
@@ -68,6 +60,20 @@ const Card = styled.div`
     height: 100%;
     pointer-events: none;
   }
+`;
+
+const CardTitle = styled.div`
+  padding: 0px 2px 6px 2px;
+  color: ${({ theme }) => theme.colors.fontColor04};
+  font-size: ${({ theme }) => theme.fontSizes.font14};
+  font-weight: ${({ theme }) => theme.fontWeight.semiBold};
+  line-height: 20px;
+`;
+
+const CardContents = styled.div`
+  color: ${({ theme }) => theme.colors.fontColor03};
+  font-size: ${({ theme }) => theme.fontSizes.font12};
+  line-height: 16px;
 `;
 
 const SeeMoreCard = styled.div`

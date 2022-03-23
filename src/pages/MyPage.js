@@ -14,6 +14,7 @@ import AddCollection from "../components/AddCollection";
 const MyPage = props => {
   const dispatch = useDispatch();
   const params = useParams();
+
   const memberId = params.id;
   const isMe = useSelector(state => state.user.isMe);
 

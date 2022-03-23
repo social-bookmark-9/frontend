@@ -12,11 +12,30 @@ export default class mainApi {
       url: `${this.base}/api/mainpage`,
       headers: {
         "Content-Type": "application/json",
-        "X-AUTH-TOKEN": getToken(),
       },
     };
 
     return axios(getMainConfig)
+      .then(res => {
+        console.log(res);
+        return res.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  async getMainWith() {
+    const getMainWithConfig = {
+      method: "GET",
+      url: `${this.base}/api/mainpage`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
+    };
+
+    return axios(getMainWithConfig)
       .then(res => {
         console.log(res);
         return res.data;

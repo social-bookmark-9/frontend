@@ -1,17 +1,14 @@
-import { useState } from "react";
-import { Title } from "../elements";
+import React from "react";
+import { Image, Label, Title, Text } from "../elements";
 import styled from "styled-components";
 import Slider from "react-slick";
-import { Desktop, Tablet, Mobile } from "../styles/mediaquery";
+import { useNavigate } from "react-router";
+import { FlexboxSpace } from "../styles/flexbox";
 
-const RecommendList = () => {
-  const images = [
-    { id: 0, image: "/images/icon100.png" },
-    { id: 1, image: "/images/icon101.png" },
-    { id: 2, image: "/images/icon102.png" },
-    { id: 3, image: "/images/icon103.png" },
-    { id: 4, image: "/images/icon104.png" },
-  ];
+const RecommendList = props => {
+  const { articleList } = props;
+
+  const navigate = useNavigate();
 
   const mobileSettings = {
     infinite: false,
@@ -19,248 +16,125 @@ const RecommendList = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     centerMode: true,
-    centerPadding: "50px",
+    centerPadding: "55px",
     focusOnSelect: true,
     swipeToSlide: true,
     arrows: false,
-  };
-
-  const tabletSettings = {
-    infinite: false,
-    speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    initialSlide: 1,
-    centerMode: true,
-    centerPadding: "50px",
-    focusOnSelect: true,
-    swipeToSlide: true,
-    arrows: false,
-  };
-
-  const [isChecked, setIsChecked] = useState(false);
-  const [checkedItems, setCheckedItems] = useState(new Set());
-  const favoritesList = [
-    "커리어",
-    "업무스킬",
-    "IT",
-    "디자인",
-    "마케팅",
-    "투자",
-    "장소",
-    "인간관계",
-    "동기부여",
-    "패션",
-    "예술",
-    "과학",
-  ];
-  const handleChecked = e => {
-    setIsChecked(!isChecked);
-    handleCheckedItems(e.target.parentNode, e.target.value, e.target.checked);
-  };
-  const handleCheckedItems = (box, value, isChecked) => {
-    if (isChecked && checkedItems.size < 3) {
-      checkedItems.add(value);
-      setCheckedItems(checkedItems);
-      box.style.backgroundColor = "#d2d6da";
-    } else if (!isChecked && checkedItems.has(value)) {
-      checkedItems.delete(value);
-      setCheckedItems(checkedItems);
-      box.style.backgroundColor = "#ffffff";
-    }
-    return checkedItems;
   };
 
   return (
-    <>
-      <Desktop>
-        <div
-          style={{
-            margin: "0 auto 0 auto",
-            display: "flex",
-            width: "1220px",
-            paddingTop: "120px",
-          }}
-        >
-          <div
-            style={{
-              flexDirection: "column",
-              width: "255px",
-              marginRight: "10%",
-              justifyContent: "start",
-            }}
-          >
-            <Title _fontSize="34px" _lineHeight="41px" _padding="0 0 20px 0">
-              <div style={{ marginTop: "-46px" }}>
-                <img src="/images/DesktopMain1.png" width={"44px"} alt="icon" />
-              </div>
-              <div>이번달 버블러들이</div>
-              <div>모은 글</div>
-            </Title>
-            <div>
-              <FavoritesBox>
-                <Favorites onChange={handleChecked}>
-                  {favoritesList.map((favor, idx) => (
-                    <InputBox key={idx}>
-                      <FavoriteInput
-                        type="checkbox"
-                        id={idx}
-                        name={favor}
-                        value={favor}
-                      />
-                      <FavoriteLabel htmlFor={idx}>
-                        <img
-                          src={`/images/icon${idx}.png`}
-                          width={"20px"}
-                          alt={`icon${idx}`}
-                        />
-                        {favor}
-                      </FavoriteLabel>
-                    </InputBox>
-                  ))}
-                </Favorites>
-              </FavoritesBox>
-            </div>
-          </div>
-          <div
-            style={{
-              display: "inline-block",
-              flexDirection: "column",
-              justifyContent: "end",
-            }}
-          >
-            {images.map(item => {
-              return (
-                <div key={item.id} style={{ display: "inline-block" }}>
-                  <DesktopCard>
-                    <div style={{ width: "30px", height: "30px" }}>
-                      <img src={item.image} alt="" />
-                    </div>
-                    대충 글씨
-                  </DesktopCard>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </Desktop>
-      <Tablet>
-        <div
-          style={{
-            // margin: "0 -90px 0 -20px",
-            padding: "32px 0 40px 0",
-            backgroundColor: "#f2f3f4",
-          }}
-        >
-          <Title _padding="0 0 20px 40px">추천 아티클</Title>
-          <div
-            style={{
-              marginLeft: "-20px",
-            }}
-          >
-            <Slider {...tabletSettings}>
-              {images.map(item => {
-                return (
-                  <div key={item.id}>
-                    <Card>
-                      <div style={{ width: "30px", height: "30px" }}>
-                        <img src={item.image} alt="" />
-                      </div>
-                      대충 글씨
-                    </Card>
-                  </div>
-                );
-              })}
-            </Slider>
-          </div>
-        </div>
-      </Tablet>
+    <RecommendContainer>
+      <Title _padding="0 0 20px 4px">추천 아티클</Title>
+      <SliderBox>
+        <Slider {...mobileSettings}>
+          {articleList.map((article, idx) => {
+            const _hashTag = [
+              article.hashtag1,
+              article.hashtag2,
+              article.hashtag3,
+            ];
+            const hashTag = _hashTag.filter((el, i) => el !== null);
+            const contents = article.contentOg.slice(0, 50);
 
-      <Mobile>
-        <div
-          style={{
-            width: "100%",
-            padding: "32px 0 40px 18px",
-            backgroundColor: "#f2f3f4",
-          }}
-        >
-          <Title _padding="0 0 20px 4px">추천 아티클</Title>
-          <div
-            style={{
-              marginLeft: "-58px",
-            }}
-          >
-            <Slider {...mobileSettings}>
-              {images.map(item => {
-                return (
-                  <div key={item.id}>
-                    <Card>
-                      <div style={{ width: "30px", height: "30px" }}>
-                        <img src={item.image} alt="" />
-                      </div>
-                      대충 글씨
-                    </Card>
-                  </div>
-                );
-              })}
-            </Slider>
-          </div>
-        </div>
-      </Mobile>
-    </>
+            return (
+              <CardBox
+                key={idx}
+                onClick={() => {
+                  navigate(`/article/${article.articleId}`);
+                }}
+              >
+                <Card bgImage={article.imgOg}>
+                  <ImageBox>
+                    <Image
+                      _src={"/images/bookmark.png"}
+                      _width="25px"
+                      _height="24px"
+                      _marginR="none"
+                    />
+                  </ImageBox>
+                  <ArticleCardContent>
+                    <LabelBox>
+                      {hashTag.map((tag, idx) => (
+                        <Label key={idx}>{tag}</Label>
+                      ))}
+                    </LabelBox>
+                    <Title
+                      _fontsize={({ theme }) => theme.fontSizes.font18}
+                      _lineHeight="24px"
+                      _color={({ theme }) => theme.colors.white}
+                    >
+                      {article.titleOg}
+                    </Title>
+                    <Text
+                      _fontSize={({ theme }) => theme.fontSizes.font13}
+                      _lineHeight="18px"
+                      _color={({ theme }) => theme.colors.white}
+                    >
+                      {contents}...
+                    </Text>
+                  </ArticleCardContent>
+                </Card>
+              </CardBox>
+            );
+          })}
+        </Slider>
+      </SliderBox>
+    </RecommendContainer>
   );
 };
 
-const Card = styled.div`
-  height: 240px;
+const RecommendContainer = styled.div`
+  width: 100%;
+  padding: 32px 0 40px 18px;
+  background-color: #f2f3f4;
+`;
+
+const SliderBox = styled.div`
+  margin-left: -58px;
+`;
+
+const ArticleCardContent = styled.div`
   width: 95%;
-  padding: 10px;
-  margin: 0 6px 0 6px;
-  border: 1px solid #f2f4f6;
-  border-radius: 20px;
-  overflow: hidden;
-  background-color: #505866;
-  & img {
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
+  padding: 18px 28px;
+  & h1 {
+    padding-bottom: 8px;
   }
 `;
 
-const DesktopCard = styled(Card)`
-  width: 358px;
-  margin: 0 10px 10px 0;
+const LabelBox = styled.div`
+  display: flex;
+  padding-bottom: 8px;
 `;
 
-const FavoritesBox = styled.div`
+const CardBox = styled.div`
   width: 100%;
 `;
 
-const Favorites = styled.div`
-  margin: auto;
-  width: 317px;
-  justify-content: center;
-  text-align: left;
+const Card = styled.div`
+  ${FlexboxSpace}
+  flex-direction: column;
+  height: 240px;
+  width: 95%;
+  border: 1px solid #f2f4f6;
+  border-radius: 20px;
+  overflow: hidden;
+  ${props =>
+    props.bgImage
+      ? `background: rgba(0, 0, 0, 0.46)
+    url(${props.bgImage});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: darken;`
+      : `background-color: #505866`};
 `;
 
-const InputBox = styled.div`
-  display: inline-block;
-  margin: 4px;
-  border-radius: 8px;
-`;
-
-const FavoriteInput = styled.input`
-  display: none;
-`;
-
-const FavoriteLabel = styled.label`
+const ImageBox = styled.div`
   display: flex;
-  align-items: center;
-  padding: 8px 16px;
-  border: 0.8px solid #d2d6da;
-  box-sizing: border-box;
-  border-radius: 8px;
-  font-size: ${({ theme }) => theme.fontSizes.font14};
+  justify-content: flex-end;
+  padding: 28px;
+  & img {
+    margin-right: 0px;
+  }
 `;
 
 export default RecommendList;

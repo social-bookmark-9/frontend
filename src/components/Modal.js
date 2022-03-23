@@ -25,6 +25,16 @@ const Modal = () => {
     setShowModal(false);
   };
 
+  // const menuOpen = () => {
+  //   if (isOpen === false) {
+  //     setIsOpen(true);
+  //     document.body.style.cssText = `overflow: hidden; touch-action: none;`;
+  //   } else {
+  //     setIsOpen(false);
+  //     document.body.style.cssText = `overflow:auto;`;
+  //   }
+  // };
+
   const remindList = [
     { key: "내일", value: 1 },
     { key: "3일 뒤", value: 3 },
@@ -199,7 +209,6 @@ const Section = styled.div`
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  z-index: 99;
   background-color: rgba(0, 0, 0, 0.3);
 `;
 

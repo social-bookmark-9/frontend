@@ -17,7 +17,6 @@ export default class folderApi {
     };
     return axios(getFolderConfig)
       .then(res => {
-        console.log("폴더API: ", res);
         return res.data;
       })
       .catch(err => {
@@ -26,7 +25,6 @@ export default class folderApi {
   }
 
   async createFolder({ folderData, navigate }) {
-    console.log(folderData);
     const createFolderConfig = {
       method: "POST",
       url: `${this.base}/api/articleFolder`,
@@ -34,11 +32,12 @@ export default class folderApi {
         "Content-Type": "application/json",
         "X-AUTH-TOKEN": getToken(),
       },
-      data: folderData,
+      data: JSON.stringify(folderData),
     };
     return axios(createFolderConfig)
       .then(res => {
         console.log(res);
+        // return res.data
       })
       .catch(err => {
         console.log(err);

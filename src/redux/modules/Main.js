@@ -20,6 +20,15 @@ export const getMainAxios = createAsyncThunk(
   },
 );
 
+export const getMainWithAxios = createAsyncThunk(
+  "main/getMain",
+  async (_, { dispatch }) => {
+    const resp = await MainApi.getMainWith();
+    dispatch(setMain(resp.data));
+    return resp;
+  },
+);
+
 export const mainSlice = createSlice({
   name: "main",
   initialState,
@@ -45,7 +54,7 @@ export const mainSlice = createSlice({
   extraReducers: {
     [getMainAxios.fulfilled]: (state, action) => {
       // state.paging.page += 1;
-      // state.is_loading = false;
+      state.is_loading = false;
     },
   },
 });
