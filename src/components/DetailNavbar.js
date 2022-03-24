@@ -52,9 +52,9 @@ const DetailNavbar = props => {
     setFolder(e.target);
   };
 
-  const getTitleOg = e => {
-    const newTitleOg = e.target.value;
-  };
+  // const getTitleOg = e => {
+  //   const newTitleOg = e.target.value;
+  // };
 
   const modalChange = () => {
     setShowModal(current => !current);
@@ -139,7 +139,7 @@ const DetailNavbar = props => {
                       <Input
                         type="text"
                         defaultValue={article.titleOg ? article.titleOg : ""}
-                        onBlur={getTitleOg}
+                        // onBlur={getTitleOg}
                       />
                     </EditBox>
                     <Hr />

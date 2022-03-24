@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import styled from "styled-components";
-import { FlexboxColumn, FlexboxRow, FlexboxSpace } from "../styles/flexbox";
+import { FlexboxColumn, FlexboxRow } from "../styles/flexbox";
 
 import { Button, Image, Title } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
