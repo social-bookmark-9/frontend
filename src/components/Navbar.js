@@ -115,7 +115,7 @@ const NavContainer = styled.div`
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.3);
     transition: 350ms;
-    z-index: 1;
+    z-index: 4;
   }
 `;
 

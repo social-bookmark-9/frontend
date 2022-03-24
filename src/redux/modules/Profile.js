@@ -22,10 +22,10 @@ const initialState = {
 export const getProfileAxios = createAsyncThunk(
   "profile/getProfileAxios",
   async (memberId, { dispatch }) => {
-    const resp = await ProfileApi.getProfile(memberId);
-    dispatch(setProfile(resp.data));
-    dispatch(setFolder(resp.data));
-    return resp;
+    const res = await ProfileApi.getProfile(memberId);
+    dispatch(setProfile(res.data));
+    dispatch(setFolder(res.data));
+    return res;
   },
 );
 
@@ -46,6 +46,25 @@ export const editProfileUserNameAxios = createAsyncThunk(
   }
 )
 
+export const editProfileImageAxios = createAsyncThunk(
+  "profile/editProfileImageAxios",
+  async (formData, {getState}) => {
+    // for (var pair of formData.entries()) {
+    //   console.log(pair[0]+ ', ' + pair[1]);
+    // }
+    const res = await ProfileApi.editProfileImage(formData);
+    return res;
+  }
+)
+
+export const editProfileHashtagAxios = createAsyncThunk(
+  "profile/editProfileHashtagAxios",
+  async (hashTag) => {
+    const res = await ProfileApi.editProfileHashtag(hashTag);
+    return res;
+  }
+)
+
 export const profileSlice = createSlice({
   name: "profile",
   initialState,
@@ -60,6 +79,11 @@ export const profileSlice = createSlice({
       state.folder = action.payload.articleFolderList;
     },
     [editProfileUserDescAxios.fulfilled]: (state, action) => {
+      console.log(state);
+      console.log(action);
+    },
+    [editProfileImageAxios.fulfilled]: (state, action) => {
+      console.log(state);
       console.log(action);
     }
   },

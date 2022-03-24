@@ -1,17 +1,23 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import Title from "../elements/Title";
-import { Circle } from "../elements/ImageObj";
-import EditProfileLink from "../components/EditProfileLink";
-import EditNickname from "../components/EditNickname";
+import { Title } from "../elements";
+import { EditProfileLink, EditNickname, Navbar } from "../components";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router";
-import { editProfileUserDescAxios, getProfileAxios } from "../redux/modules/Profile";
+import { useLocation, useNavigate } from "react-router";
+import {
+  editProfileImageAxios,
+  editProfileUserDescAxios,
+  getProfileAxios
+} from "../redux/modules/Profile";
+
+
 
 const EditProfile = (props) => {
   const userDescRef = useRef();
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
+  const fileRef = useRef();
 
   useEffect(() => {
     dispatch(getProfileAxios(location.state.memberId));
@@ -24,17 +30,6 @@ const EditProfile = (props) => {
   const initialUserImage = props.profileImageUrl;
   const initialUserName = props.nickName;
   const initialUserDesc = props.userDesc;
-
-  // const [userDescColor, setUserDescColor] = useState(true);
-
-  // const setInitialUserDesc = () => {
-  //   if (initialUserDesc === null) {
-  //     setUserDescColor(false);
-  //     return "자기소개를 작성해 주세요."
-  //   } else if (initialUserDesc !== null) {
-  //     setUserDescColor(true);
-  //     return initialUserDesc;
-  // }}
 
   const [newNickname, setNewNickname] = useState(initialUserName);
 
@@ -57,27 +52,53 @@ const EditProfile = (props) => {
     dispatch(editProfileUserDescAxios({userDesc:userMessage}));
   }
 
+  // 이미지 업로드
+  const editImage = (e) => {
+    e.preventDefault();
+    const uploadFile = e.target.files[0]
+    const formData = new FormData();
+    formData.append('image',uploadFile);
+    dispatch(editProfileImageAxios(formData));
+  }
+
+
 
   return (
     <>
       {!isEdit ? (
         <>
           <Container>
+            <Navbar {...props} />
             <AreaWrap>
               <ProfileBox>
-                {/* 프로필사진 옆 검은 동그라미 */}
-                <CircleBox>
-                  <Circle _width="28px" _height="28px" bgColor="black" />
-                </CircleBox>
-
-                {/* 프로필 이미지 */}
-                <ProfileImage>
-                  <img
-                    src={initialUserImage}
-                    alt="profile"
-                    style={{ zIndex: "3" }}
+                <div style={{overflow:"hidden"}}>
+                  <label htmlFor="picture">
+                  <InputImage
+                    id="picture"
+                    type="file"
+                    ref={fileRef}
+                    name="file"
+                    onChange={editImage}
+                    accept="image/*"
                   />
-                </ProfileImage>
+
+                  {/* 프로필사진 옆 검은 동그라미 */}
+                  <CircleBox>
+                    <img src={'./images/camera.png'}
+                    style={{width:"100%", height:"100%", objectFit:"cover"}}
+                    alt="" />
+                  </CircleBox>
+
+                  {/* 프로필 이미지 */}
+                  <ProfileImage>
+                    <img
+                      src={initialUserImage}
+                      alt="profile"
+                      style={{ zIndex: "3" }}
+                    />
+                  </ProfileImage>
+                  </label>
+                </div>
 
                 {/* 이름 부분 */}
                 <div
@@ -121,13 +142,11 @@ const EditProfile = (props) => {
                 <TextAreaField
                   ref={userDescRef}
                   name="userDesc"
-                  // placeholder={setInitialUserDesc}
                   placeholder="자기소개를 작성해 주세요."
                   rows={5}
                   maxLength={34}
                   onKeyUp={handleKeyUp}
                   onBlur={editUserDesc}
-                  // state={userDescColor}
                 />
                 <InputCheck>{words}/34</InputCheck>
               </MemoBox>
@@ -135,11 +154,12 @@ const EditProfile = (props) => {
             </AreaWrap>
           </Container>
           <EditProfileLink {...myInfo} />
+
         </>
       ) : (
         <EditNickname
           setIsEdit={setIsEdit}
-          setNewNickname={setNewNickname}  
+          setNewNickname={setNewNickname}
         />
       )}
       {/* 마법의 svg */}
@@ -158,39 +178,58 @@ const EditProfile = (props) => {
 };
 
 const Container = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
+  width: 425px;
   background-color: ${({ theme }) => theme.colors.gray01};
 `;
+
 const AreaWrap = styled.div`
   width: 390px;
+  height: 436px;
+  margin: 0 auto 0 auto;
 `;
+
 const ProfileBox = styled.div`
   width: 100%;
   height: 278px;
   position: relative;
   padding: 51px 112px;
 `;
+
+const InputImage = styled.input`
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  display: none;
+  z-index: 3;
+`
+
 const ProfileImage = styled.div`
   display: inline-block;
   height: 150px;
   width: 156.34px;
   clip-path: url(#myClip);
   position: relative;
-  background-color: #c4c4c4;
-  z-index: -1;
+  background-color: #C4C4C4;
+  z-index: 1;
   & img {
     position: absolute;
     width: 100%;
   }
 `;
+
 const CircleBox = styled.div`
   position: absolute;
   top: 172px;
   right: 112px;
+  width: 30px;
+  height: 30px;
+  padding: 3px;
+  border-radius: 15px;
+  z-index: 2;
+  overflow: hidden;
+  background-color: white;
 `;
+
 const MemoBox = styled.div`
   width: 100%;
   padding: 0 17px 0 17px;
@@ -219,10 +258,6 @@ const TextAreaField = styled.textarea`
     letter-spacing: -0.0008em;
     line-height: 18px;
     color: ${({ theme }) => theme.colors.fontColor02};
-    /* ${({ state }) => state ?
-    `color: ${({ theme }) => theme.colors.fontColor02};`
-    : `color: ${({ theme }) => theme.colors.fontColor05}`
-    } */
   }
 `;
 
