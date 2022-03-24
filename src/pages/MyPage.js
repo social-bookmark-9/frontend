@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { Navbar, ArticleFolder, UserProfile } from "../components";
+import { Navbar, UserProfile } from "../components";
 import { useParams } from "react-router";
 import { getProfileAxios } from "../redux/modules/Profile";
 import AddCollection from "../components/AddCollection";
@@ -14,7 +14,7 @@ const MyPage = props => {
   const memberId = params.id;
   useEffect(() => {
     dispatch(getProfileAxios(memberId));
-  }, [dispatch]);
+  }, [dispatch, memberId]);
   // ----- 폴더 리스트 ----- //
   const folderList = useSelector(state => state.folder.articleFolderList);
   const defaultFolder = folderList;
@@ -62,6 +62,7 @@ const MyPage = props => {
           <AddCollection
             setModalOpen={setModalOpen}
             setShowModal={setShowModal}
+            showModal={showModal}
           />
         ) : null}
       </Container>
