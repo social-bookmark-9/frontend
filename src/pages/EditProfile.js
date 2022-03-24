@@ -174,12 +174,12 @@ const EditProfile = props => {
 };
 
 const Container = styled.div`
-  width: 425px;
+  max-width: 425px;
   background-color: ${({ theme }) => theme.colors.gray01};
 `;
 
 const AreaWrap = styled.div`
-  width: 390px;
+  max-width: 390px;
   height: 436px;
   margin: 0 auto 0 auto;
 `;

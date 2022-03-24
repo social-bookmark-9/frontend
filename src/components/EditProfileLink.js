@@ -200,15 +200,15 @@ const EditProfileLink = props => {
 
 const InnerDiv = styled.div`
   position: relative;
-  width: 425px;
+  max-width: 425px;
   z-index: 1;
   background-color: white;
 `;
 
 const ProfileLink = styled.div`
-  width: 100%;
+  max-width: 390px;
   background-color: ${({ theme }) => theme.colors.gray01};
-  color: #ffffff;
+  color: #FFFFFF;
   border-radius: 8px;
   padding: 28px;
   margin-bottom: 16px;
@@ -240,7 +240,7 @@ const ProfileChannel = styled.label`
   width: auto;
   height: 30px;
   padding: 9px 10px 9px 10px;
-  border: 0.8px solid #d2d6da;
+  border: 0.8px solid #D2D6DA;
   box-sizing: border-box;
   border-radius: 8px;
   font-size: ${({ theme }) => theme.fontSizes.font14};
@@ -252,7 +252,7 @@ const Input = styled.div`
   align-items: center;
   width: 100%;
   height: 50px;
-  border: 1px solid #e5e8ec;
+  border: 1px solid #E5E8EC;
   border-radius: 5px;
 `;
 
