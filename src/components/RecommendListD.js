@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Title } from "../elements";
 import styled from "styled-components";
 import Slider from "react-slick";
-import { Desktop, Tablet, Mobile } from "../styles/mediaquery";
+import { Desktop, Tablet } from "../styles/mediaquery";
 
 const RecommendListD = () => {
   const images = [

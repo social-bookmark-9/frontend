@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 import RemindCard from "./RemindCard";
 
-const MyPageSuggest = (props) => {
+const MyPageSuggest = props => {
   const { userInfo, memberId } = props;
 
   const [myOwnPage, setMyOwnPage] = useState(false);
@@ -16,7 +16,7 @@ const MyPageSuggest = (props) => {
     } else if (parseInt(params.id) !== parseInt(memberId)) {
       setMyOwnPage(false);
     }
-  }, [memberId]);
+  }, [memberId, params.id]);
 
   return (
     <>
@@ -28,11 +28,9 @@ const MyPageSuggest = (props) => {
           }
           _button="내 버블드 만들기"
         />
-      ) : (
-        null
-      )}
+      ) : null}
     </>
-  )
-}
+  );
+};
 
 export default MyPageSuggest;

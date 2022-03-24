@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 const CheckRemind = props => {
-  const { remindOption, changeRemind, checkedRemind } = props;
+  const { remindOption, changeRemind } = props;
 
   return (
     <React.Fragment>

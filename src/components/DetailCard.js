@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 
 import styled from "styled-components";
 import { Circle } from "../elements/ImageObj";
@@ -8,7 +8,7 @@ import LinesEllipsis from "react-lines-ellipsis";
 
 const DetailCard = props => {
   const { article } = props;
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const _hashTag = [article.hashtag1, article.hashtag2, article.hashtag3];
   const hashTag = _hashTag.filter((el, i) => el !== null);

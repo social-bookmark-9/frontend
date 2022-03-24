@@ -9,11 +9,11 @@ import AddFolder from "./AddFolder";
 import CheckRemind from "./CheckRemind";
 import { useDispatch } from "react-redux";
 import { postArticleAxios } from "../redux/modules/Article";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 
 const ModalD = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   // 모달 열고 닫기
   const [modalOpen, setModalOpen] = useState(false);
   // 어떤 모달창 보여줄지 (링크 추가 단계)
@@ -67,6 +67,8 @@ const ModalD = () => {
     articleFolderName: folder,
     folderHide: folderHide,
   };
+
+  console.log(folderData);
 
   const getUrl = e => {
     setUrl(e.target.value);

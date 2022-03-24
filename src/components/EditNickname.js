@@ -7,7 +7,7 @@ import { editProfileUserNameAxios } from "../redux/modules/Profile";
 import { useDispatch } from "react-redux";
 
 const EditNickname = props => {
-  const { setIsEdit, setNewNickname } = props;
+  // const { setIsEdit, setNewNickname } = props;
   const [words, setWords] = useState(0);
   const [nickName, setNickName] = useState("");
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const EditNickname = props => {
     if (nickName) {
       props.setIsEdit(false);
       props.setNewNickname(nickName);
-      dispatch(editProfileUserNameAxios({nickname:nickName}));
+      dispatch(editProfileUserNameAxios({ nickname: nickName }));
       alert("변경완료");
     } else {
       Swal.fire({
@@ -29,7 +29,7 @@ const EditNickname = props => {
   };
   const handleExit = () => {
     props.setIsEdit(false);
-  }
+  };
   const handleKeyUp = e => {
     if (e.target.value.length <= 6) {
       setWords(e.target.value.length);
@@ -44,11 +44,24 @@ const EditNickname = props => {
     <React.Fragment>
       <UserBox>
         <div style={{ display: "flex", alignItems: "center" }}>
-          <div style={{ display: "flex", width: "80%", justifyContent: "start"}} />
           <div
-            style={{ display: "flex", width: "20%", justifyContent: "end", padding:"14px 14px 0 0"}}
+            style={{ display: "flex", width: "80%", justifyContent: "start" }}
+          />
+          <div
+            style={{
+              display: "flex",
+              width: "20%",
+              justifyContent: "end",
+              padding: "14px 14px 0 0",
+            }}
           >
-            <img src="/images/close.png" width="24px" height="24px" alt="" onClick={handleExit} />
+            <img
+              src="/images/close.png"
+              width="24px"
+              height="24px"
+              alt=""
+              onClick={handleExit}
+            />
           </div>
         </div>
         <UserArea>
@@ -98,7 +111,7 @@ const InputBox = styled.div`
 `;
 const UserInput = styled.input`
   border: none;
-  border-bottom: 1px solid #C7C7C7;
+  border-bottom: 1px solid #c7c7c7;
   border-radius: 0px;
   padding: 12px;
   width: 100%;

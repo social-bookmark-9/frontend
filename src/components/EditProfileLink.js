@@ -6,9 +6,9 @@ import Button from "../elements/Button";
 import { Title } from "../elements";
 import { useNavigate } from "react-router";
 
-const EditProfileLink = (props) => {
-  const {memberId} = props;
-  
+const EditProfileLink = props => {
+  const { memberId } = props;
+
   const navigate = useNavigate();
   // 채널
   const channelList = [
@@ -28,7 +28,7 @@ const EditProfileLink = (props) => {
   // 추가된 링크 부분
   const [addUrl, setAddUrl] = useState([]);
   // 비교할 링크
-  const [addUrlSet, setAddUrlSet] = useState(new Set());
+  // const [addUrlSet, setAddUrlSet] = useState(new Set());
 
   const handleAddUrl = () => {
     if (addUrl.length < 1) {
@@ -44,7 +44,7 @@ const EditProfileLink = (props) => {
 
   return (
     <InnerDiv>
-      <div style={{width:"390px", margin:"0 auto 0 auto", padding:"16px"}}>
+      <div style={{ width: "390px", margin: "0 auto 0 auto", padding: "16px" }}>
         <Title
           _titleSize={({ theme }) => theme.fontSizes.font20}
           lineHeight="24px"
@@ -53,7 +53,9 @@ const EditProfileLink = (props) => {
           <Text _color="#353C49" _fontSize="20px" _padding="0 0 8px 0">
             프로필 링크 등록
           </Text>
-          <Text _fontSize="13px">프로필 링크는 4개까지만 등록할 수 있어요.</Text>
+          <Text _fontSize="13px">
+            프로필 링크는 4개까지만 등록할 수 있어요.
+          </Text>
         </Title>
 
         <div style={{ padding: "28px 0px 0px 0px" }} />
@@ -104,13 +106,15 @@ const EditProfileLink = (props) => {
                     style={{ height: "100%", fontSize: "13px" }}
                     name="url입력"
                     value={urlInput}
-                    onChange={e => {setUrlInput(e.target.value)}}
+                    onChange={e => {
+                      setUrlInput(e.target.value);
+                    }}
                   />
                 </div>
               </Input>
             </InputBox>
           </div>
-          <div style={{width: "100%",bottom: "24px"}}>
+          <div style={{ width: "100%", bottom: "24px" }}>
             <Button
               _onClick={handleAddUrl}
               _padding="18px"
@@ -141,7 +145,7 @@ const EditProfileLink = (props) => {
                     margin: "0 8px 8px 0",
                   }}
                 >
-                  <div style={{display: "flex"}}>
+                  <div style={{ display: "flex" }}>
                     <ProfileChannel htmlFor={url.img}>
                       <img
                         src={`/images/icon10${url.img}.png`}
@@ -204,7 +208,7 @@ const InnerDiv = styled.div`
 const ProfileLink = styled.div`
   width: 100%;
   background-color: ${({ theme }) => theme.colors.gray01};
-  color: #FFFFFF;
+  color: #ffffff;
   border-radius: 8px;
   padding: 28px;
   margin-bottom: 16px;
@@ -236,7 +240,7 @@ const ProfileChannel = styled.label`
   width: auto;
   height: 30px;
   padding: 9px 10px 9px 10px;
-  border: 0.8px solid #D2D6DA;
+  border: 0.8px solid #d2d6da;
   box-sizing: border-box;
   border-radius: 8px;
   font-size: ${({ theme }) => theme.fontSizes.font14};
@@ -248,7 +252,7 @@ const Input = styled.div`
   align-items: center;
   width: 100%;
   height: 50px;
-  border: 1px solid #E5E8EC;
+  border: 1px solid #e5e8ec;
   border-radius: 5px;
 `;
 
