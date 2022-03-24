@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useLocation, useParams } from "react-router";
+import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { getFolderAxios } from "../redux/modules/Folder";
 
@@ -12,7 +12,7 @@ import { Text, Button, Image } from "../elements";
 const ArticleList = props => {
   const { isDefault } = props;
 
-  const location = useLocation();
+  // const location = useLocation();
   const dispatch = useDispatch();
   const params = useParams();
   const folderId = params.id;

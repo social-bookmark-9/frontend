@@ -1,22 +1,20 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+// import { useDispatch } from "react-redux";
+// import { useNavigate } from "react-router";
 
 import styled from "styled-components";
-import { Title, Button, Text } from "../elements";
+import { Button, Text } from "../elements";
 
 import Favorite from "./Favorite";
 
-import Swal from "sweetalert2";
-
 const ChangeTag = props => {
-  const { setShowModal, openModal, article } = props;
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { setShowModal } = props;
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
 
   const [isChecked, setIsChecked] = useState(false);
   const [checkedItems, setCheckedItems] = useState(new Set());
-  const tagData = [...checkedItems];
+  // const tagData = [...checkedItems];
 
   const favoritesList = [
     "커리어",

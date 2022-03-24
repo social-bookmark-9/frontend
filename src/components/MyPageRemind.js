@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { Flexbox } from "../styles/flexbox";
-import ArticleFolder from "./ArticleFolder";
+// import ArticleFolder from "./ArticleFolder";
 
 import { RemindCard } from ".";
 import { Label, Title, Image, Text } from "../elements";
@@ -9,7 +9,7 @@ import { useParams } from "react-router";
 
 const MyPageRemind = props => {
   const {
-    defaultFolder,
+    // defaultFolder,
     userFolder,
     userInfo,
     completeRate,
@@ -26,7 +26,7 @@ const MyPageRemind = props => {
     } else if (parseInt(params.id) !== parseInt(memberId)) {
       setMyOwnPage(false);
     }
-  }, [memberId]);
+  }, [memberId, params.id]);
 
   return (
     <>

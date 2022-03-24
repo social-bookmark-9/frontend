@@ -3,37 +3,36 @@ import styled from "styled-components";
 import { Title } from "../elements";
 import { EditProfileLink, EditNickname, Navbar } from "../components";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation } from "react-router";
 import {
   editProfileImageAxios,
   editProfileUserDescAxios,
-  getProfileAxios
+  getProfileAxios,
 } from "../redux/modules/Profile";
 
-
-
-const EditProfile = (props) => {
+const EditProfile = props => {
   const userDescRef = useRef();
   const dispatch = useDispatch();
   const location = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const fileRef = useRef();
-
-  useEffect(() => {
-    dispatch(getProfileAxios(location.state.memberId));
-    if (initialUserDesc !== null) {
-      userDescRef.current.value = initialUserDesc;
-    }
-  }, [dispatch])
 
   const myInfo = useSelector(state => state.user.myInfo);
   const initialUserImage = props.profileImageUrl;
   const initialUserName = props.nickName;
   const initialUserDesc = props.userDesc;
 
+  useEffect(() => {
+    dispatch(getProfileAxios(location.state.memberId));
+    if (initialUserDesc !== null) {
+      userDescRef.current.value = initialUserDesc;
+    }
+  }, [dispatch, initialUserDesc, location.state.memberId]);
+
   const [newNickname, setNewNickname] = useState(initialUserName);
 
   const [words, setWords] = useState(0);
+
   const handleKeyUp = e => {
     if (e.target.value.length <= 34) {
       setWords(e.target.value.length);
@@ -49,19 +48,17 @@ const EditProfile = (props) => {
 
   const editUserDesc = () => {
     const userMessage = userDescRef.current.value;
-    dispatch(editProfileUserDescAxios({userDesc:userMessage}));
-  }
+    dispatch(editProfileUserDescAxios({ userDesc: userMessage }));
+  };
 
   // 이미지 업로드
-  const editImage = (e) => {
+  const editImage = e => {
     e.preventDefault();
-    const uploadFile = e.target.files[0]
+    const uploadFile = e.target.files[0];
     const formData = new FormData();
-    formData.append('image',uploadFile);
+    formData.append("image", uploadFile);
     dispatch(editProfileImageAxios(formData));
-  }
-
-
+  };
 
   return (
     <>
@@ -71,32 +68,38 @@ const EditProfile = (props) => {
             <Navbar {...props} />
             <AreaWrap>
               <ProfileBox>
-                <div style={{overflow:"hidden"}}>
+                <div style={{ overflow: "hidden" }}>
                   <label htmlFor="picture">
-                  <InputImage
-                    id="picture"
-                    type="file"
-                    ref={fileRef}
-                    name="file"
-                    onChange={editImage}
-                    accept="image/*"
-                  />
-
-                  {/* 프로필사진 옆 검은 동그라미 */}
-                  <CircleBox>
-                    <img src={'./images/camera.png'}
-                    style={{width:"100%", height:"100%", objectFit:"cover"}}
-                    alt="" />
-                  </CircleBox>
-
-                  {/* 프로필 이미지 */}
-                  <ProfileImage>
-                    <img
-                      src={initialUserImage}
-                      alt="profile"
-                      style={{ zIndex: "3" }}
+                    <InputImage
+                      id="picture"
+                      type="file"
+                      ref={fileRef}
+                      name="file"
+                      onChange={editImage}
+                      accept="image/*"
                     />
-                  </ProfileImage>
+
+                    {/* 프로필사진 옆 검은 동그라미 */}
+                    <CircleBox>
+                      <img
+                        src={"./images/camera.png"}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                        }}
+                        alt=""
+                      />
+                    </CircleBox>
+
+                    {/* 프로필 이미지 */}
+                    <ProfileImage>
+                      <img
+                        src={initialUserImage}
+                        alt="profile"
+                        style={{ zIndex: "3" }}
+                      />
+                    </ProfileImage>
                   </label>
                 </div>
 
@@ -115,9 +118,7 @@ const EditProfile = (props) => {
                       alignItems: "center",
                     }}
                   >
-                    <Title _padding="23px 15px 30px 23px">
-                      @{initialUserName}
-                    </Title>
+                    <Title _padding="23px 15px 30px 23px">@{newNickname}</Title>
                   </div>
                   <div
                     style={{
@@ -150,17 +151,12 @@ const EditProfile = (props) => {
                 />
                 <InputCheck>{words}/34</InputCheck>
               </MemoBox>
-
             </AreaWrap>
           </Container>
           <EditProfileLink {...myInfo} />
-
         </>
       ) : (
-        <EditNickname
-          setIsEdit={setIsEdit}
-          setNewNickname={setNewNickname}
-        />
+        <EditNickname setIsEdit={setIsEdit} setNewNickname={setNewNickname} />
       )}
       {/* 마법의 svg */}
       <svg width="0" height="0">
@@ -201,7 +197,7 @@ const InputImage = styled.input`
   position: absolute;
   display: none;
   z-index: 3;
-`
+`;
 
 const ProfileImage = styled.div`
   display: inline-block;
@@ -209,7 +205,7 @@ const ProfileImage = styled.div`
   width: 156.34px;
   clip-path: url(#myClip);
   position: relative;
-  background-color: #C4C4C4;
+  background-color: #c4c4c4;
   z-index: 1;
   & img {
     position: absolute;

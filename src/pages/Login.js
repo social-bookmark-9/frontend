@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { FlexboxColumn } from "../styles/flexbox";
 import { Button, Title, Text, Image } from "../elements";
 
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 const Login = () => {
   return (

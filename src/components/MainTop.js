@@ -1,4 +1,4 @@
-import { Desktop, Tablet, Mobile } from "../styles/mediaquery";
+import { Mobile } from "../styles/mediaquery";
 import { Button, Image, Text, Title } from "../elements";
 import { useNavigate } from "react-router";
 

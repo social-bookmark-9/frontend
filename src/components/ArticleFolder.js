@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { Label, Image, Title } from "../elements";
 import Carousel from "../elements/Carousel";
@@ -8,7 +8,7 @@ import Carousel from "../elements/Carousel";
 const ArticleFolder = props => {
   const { folder, folderColor, isDefault } = props;
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const isMe = useSelector(state => state.user.isMe);
 
   // 해시태스 리스트

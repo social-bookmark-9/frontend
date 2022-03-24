@@ -18,12 +18,12 @@ const UserProfile = props => {
     } else if (parseInt(params.id) !== parseInt(memberId)) {
       setMyOwnPage(false);
     }
-  }, [memberId]);
+  }, [memberId, params.id]);
 
   const goEditProfile = () => {
-    navigate("/editprofile", {state: {memberId}});
-  }
-  
+    navigate("/editprofile", { state: { memberId } });
+  };
+
   return (
     <React.Fragment>
       {/* <Desktop>
@@ -72,35 +72,39 @@ const UserProfile = props => {
           </CircleBox>
           <PropfileInfo>
             {myOwnPage ? (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-              onClick={goEditProfile}
-            >
-              <div style={{
-                display: "flex",
-                justifyContent: "start",
-                alignItems: "center",
-              }}>
-                <Title>{userInfo.memberName}</Title>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+                onClick={goEditProfile}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "center",
+                  }}
+                >
+                  <Title>{userInfo.memberName}</Title>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "end",
+                    alignItems: "center",
+                    marginLeft: "5px",
+                  }}
+                >
+                  <img
+                    src={`/images/edit.png`}
+                    width={"20px"}
+                    height={"20px"}
+                    alt=""
+                  />
+                </div>
               </div>
-              <div style={{
-                display: "flex",
-                justifyContent: "end",
-                alignItems: "center",
-                marginLeft: "5px"
-              }}>
-                <img
-                  src={`/images/edit.png`}
-                  width={"20px"}
-                  height={"20px"}
-                  alt=""
-                />
-              </div>
-            </div>
             ) : (
               <Title>{userInfo.memberName}</Title>
             )}
