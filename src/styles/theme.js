@@ -23,13 +23,13 @@ const colors = {
   black: "#000000",
   white: "#ffffff",
   kakao: "#FEEB00",
-  grayColor07: "#353C49",
-  grayColor06: "#505866",
-  grayColor05: "#B1B8C0",
-  grayColor04: "#D1D6DA",
-  grayColor03: "#d2d6da",
-  grayColor02: "#f2f3f4",
-  grayColor01: "#f2f4f6",
+  gray07: "#353C49",
+  gray06: "#505866",
+  gray05: "#B1B8C0",
+  gray04: "#D1D6DA",
+  gray03: "#d2d6da",
+  gray02: "#f2f3f4",
+  gray01: "#f2f4f6",
   fontColor05: "#353C49",
   fontColor04: "#505866",
   fontColor03: "#9198a0",
@@ -48,8 +48,8 @@ const colors = {
 
 const deviceSizes = {
   mobile: 390, //컨텐츠가 들어갈 사이즈는 360
-  tablet: 798, //컨텐츠가 들어갈 사이즈는 768
-  pc: 1080, //컨텐츠가 들어갈 사이즈는 1050
+  tablet: 1194, //컨텐츠가 들어갈 사이즈는 1115
+  pc: 1920, //컨텐츠가 들어갈 사이즈는 1115
 };
 
 //참고 : https://wonit.tistory.com/367
@@ -57,7 +57,7 @@ const deviceSizes = {
 const mediaQuery = {
   mobile: `screen and (max-width: ${deviceSizes.mobile})`,
   tablet: `screen and (max-width: ${deviceSizes.tablet})`,
-  pc: `screen and (max-width: ${deviceSizes.laptop})`,
+  pc: `screen and (max-width: ${deviceSizes.pc})`,
 };
 
 const theme = {

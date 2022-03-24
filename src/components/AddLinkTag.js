@@ -1,17 +1,57 @@
 import { useState } from "react";
+
 import styled from "styled-components";
+import { Title, Button, Text } from "../elements";
+
+import { useDispatch, useSelector } from "react-redux";
+import { createFolderAxios } from "../redux/modules/Folder";
+import { postArticleAxios } from "../redux/modules/Article";
+
 import Favorite from "./Favorite";
-import { Title, Button } from "../elements";
+import { useNavigate } from "react-router";
+
+import Swal from "sweetalert2";
 
 const AddLinkTag = props => {
-  const { setAddLink, checkedItems, setCheckedItems } = props;
-  // 완료
-  const addLinkFinish = () => {
-    props.setShowModal(current => !current);
-    setAddLink(true);
-  };
+  const { setShowModal, openModal } = props;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const folderName = useSelector(
+    state => state.localData.linkData.articleFolderName,
+  );
+  const linkData = useSelector(state => state.localData.linkData);
+  const folderData = useSelector(state => state.localData.folderData);
 
   const [isChecked, setIsChecked] = useState(false);
+  const [checkedItems, setCheckedItems] = useState(new Set());
+  const tagData = [...checkedItems];
+
+  const articleData = {
+    url: linkData.url,
+    readCount: linkData.readCount,
+    reminderDate: linkData.reminderDate,
+    articleFolderName: linkData.articleFolderName,
+    hashtag1: tagData[0],
+    hashtag2: tagData[1] ? tagData[1] : null,
+    hashtag3: tagData[2] ? tagData[2] : null,
+  };
+
+  const handleAddLink = () => {
+    if (folderName === "미분류 컬렉션") {
+      dispatch(postArticleAxios({ articleData, navigate }));
+    } else {
+      dispatch(createFolderAxios({ folderData, articleData, navigate }));
+    }
+    Swal.fire({
+      text: "링크가 저장되었습니다",
+      icon: "success",
+      confirmButtonText: "확인",
+      confirmButtonColor: "#353C49",
+    }).then(res => {
+      openModal();
+    });
+  };
+
   const favoritesList = [
     "커리어",
     "업무스킬",
@@ -28,7 +68,7 @@ const AddLinkTag = props => {
   ];
 
   const modalChange = () => {
-    props.setShowModal(current => !current);
+    setShowModal(current => !current);
   };
 
   const handleChecked = e => {
@@ -60,6 +100,7 @@ const AddLinkTag = props => {
           <div />
         </TitleBox>
         <FavoritesBox>
+          <Text></Text>
           <Favorites onChange={handleChecked}>
             {favoritesList.map((favor, idx) => (
               <Favorite key={idx} idx={idx} favoriteName={favor} />
@@ -75,8 +116,8 @@ const AddLinkTag = props => {
           bottom: "24px",
         }}
       >
-        <Button _onClick={addLinkFinish} _padding="18px">
-          완료
+        <Button _onClick={handleAddLink} _padding="18px">
+          링크 저장
         </Button>
       </div>
     </>

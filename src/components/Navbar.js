@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
 import styled from "styled-components";
 import { FlexboxColumn } from "../styles/flexbox";
 import { Button, Image, Title } from "../elements";
 
 import NavProfile from "./NavProfile";
 import { Logo } from "../elements/ImageObj";
-import { useSelector } from "react-redux";
 
 const Navbar = props => {
-  const { folderName } = props;
+  const { title, bgColor } = props;
 
   const navigate = useNavigate();
   const isLogin = useSelector(state => state.user.isLogin);
@@ -30,48 +29,75 @@ const Navbar = props => {
 
   return (
     <React.Fragment>
-      <NavBox>
-        {folderName ? <Title>{folderName}</Title> : <Logo />}
-        <NavMenu onClick={menuOpen}>
-          <Image _src="/images/menu.png" _width="24px" _height="24px" />
-        </NavMenu>
-      </NavBox>
-      <NavContainer className={isOpen ? "active" : ""}>
-        <Nav className={isOpen ? "active" : ""} onClick={menuOpen}>
-          <div>
-            <NavMenu onClick={menuOpen}>
-              <Image _src="/images/close.png" _width="24px" _height="24px" />
-            </NavMenu>
-            {/* ----- 네비게이션바 프로필 ----- */}
-            <NavProfile />
-            <Line />
-            <MenuBox>
-              <Link to="/">
-                <li>추천 아티클</li>
-              </Link>
-              <Link to={isLogin ? "/memos" : "/login"}>
-                <li>내가 작성한 메모</li>
-              </Link>
-            </MenuBox>
-          </div>
-          <Button
-            isBorder
-            _padding="15px 0px"
-            bgColor={({ theme }) => theme.colors.white}
-            _color={({ theme }) => theme.colors.fontColor02}
-            _onClick={() => {
-              isLogin ? navigate("/setting") : navigate("/login");
-            }}
-          >
-            설정
-          </Button>
-        </Nav>
-      </NavContainer>
+      <NavbarContainer bgColor={bgColor} onClick={menuOpen}>
+        <NavBox>
+          {title ? <Title>{title}</Title> : <Logo />}
+          {props.inDetail ? (
+            <EditBox>
+              <Image _src="/images/edit.png" _width="30px" _height="30px" />
+            </EditBox>
+          ) : null}
+          <NavMenu onClick={menuOpen}>
+            <Image
+              _src="/images/menu.png"
+              _width="24px"
+              _height="24px"
+              _marginR="0px"
+            />
+          </NavMenu>
+          <NavContainer className={isOpen ? "active" : ""}>
+            <Nav className={isOpen ? "active" : ""} onClick={menuOpen}>
+              <div>
+                <NavMenu onClick={menuOpen}>
+                  <Image
+                    _src="/images/close.png"
+                    _width="24px"
+                    _height="24px"
+                  />
+                </NavMenu>
+                {/* ----- 네비게이션바 프로필 ----- */}
+                <NavProfile {...props} />
+                <Line />
+                <MenuBox>
+                  <Link to="/">
+                    <li>추천 아티클</li>
+                  </Link>
+                  <Link to={isLogin ? "/memos" : "/login"}>
+                    <li>내가 작성한 메모</li>
+                  </Link>
+                </MenuBox>
+              </div>
+              <Button
+                isBorder
+                _padding="15px 0px"
+                bgColor={({ theme }) => theme.colors.white}
+                _color={({ theme }) => theme.colors.fontColor02}
+                _onClick={() => {
+                  isLogin ? navigate("/setting") : navigate("/login");
+                }}
+              >
+                설정
+              </Button>
+            </Nav>
+          </NavContainer>
+        </NavBox>
+      </NavbarContainer>
     </React.Fragment>
   );
 };
 
 Navbar.defaultProps = {};
+
+const Line = styled.hr`
+  height: 1px;
+  border: none;
+  background-color: ${({ theme }) => theme.colors.gray04};
+`;
+
+const NavbarContainer = styled.div`
+  width: 100%;
+  ${props => (props.bgColor ? `background-color: ${props.bgColor}` : null)}
+`;
 const NavBox = styled.div`
   display: flex;
   justify-content: space-between;
@@ -89,7 +115,7 @@ const NavContainer = styled.div`
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.3);
     transition: 350ms;
-    z-index: 1;
+    z-index: 4;
   }
 `;
 
@@ -122,9 +148,11 @@ const MenuBox = styled.ul`
   }
 `;
 
-const Line = styled.hr`
-  border: 1px solid #f2f3f4;
-  margin: 40px 0px 16px 0px;
+const EditBox = styled.div`
+  width: 30%;
+  position: absolute;
+  top: 16px;
+  left: 50%;
 `;
 
 export default Navbar;

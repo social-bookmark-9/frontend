@@ -1,20 +1,43 @@
 import axios from "axios";
+import { getToken } from "../../shared/utils";
 
 export default class folderApi {
-  // constructor() {
-  //   this.base = "http://localhost:3000";
-  // }
+  constructor() {
+    this.base = process.env.REACT_APP_SERVER;
+  }
 
-  async getFolders() {
+  async getFolder(folderId) {
     const getFolderConfig = {
       method: "GET",
-      url: `http://localhost:3000/api/folders.json`,
+      url: `${this.base}/api/articleFolders/${folderId}`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
     };
-
     return axios(getFolderConfig)
       .then(res => {
-        console.log(res);
         return res.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  async createFolder({ folderData, navigate }) {
+    const createFolderConfig = {
+      method: "POST",
+      url: `${this.base}/api/articleFolder`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
+      data: JSON.stringify(folderData),
+    };
+    return axios(createFolderConfig)
+      .then(res => {
+        console.log(res);
+        // return res.data
       })
       .catch(err => {
         console.log(err);

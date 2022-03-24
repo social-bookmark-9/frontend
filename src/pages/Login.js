@@ -5,12 +5,19 @@ import styled from "styled-components";
 import { FlexboxColumn } from "../styles/flexbox";
 import { Button, Title, Text, Image } from "../elements";
 
+// import { useSelector } from "react-redux";
+
 const Login = () => {
   return (
     <React.Fragment>
       <LoginBox>
         <Topdiv>
-          <Image _src="/images/bubbled.png" _width="65.37px" _height="52.4px" />
+          <Image
+            _src="/images/bubbled.png"
+            _width="65px"
+            _height="52px"
+            _marginR="0px"
+          />
           <TitleBox>
             <Title
               textAlign="center"

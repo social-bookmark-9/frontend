@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { sendToHashtags } from "../redux/modules/Data";
 
 import styled from "styled-components";
 import { Button, Text } from "../elements";
@@ -7,24 +9,26 @@ import { FlexboxRow, FlexboxSpace } from "../styles/flexbox";
 import AddLinkTag from "./AddLinkTag";
 import AddFolder from "./AddFolder";
 import CheckRemind from "./CheckRemind";
-import { useDispatch } from "react-redux";
-import { postArticleAxios } from "../redux/modules/Article";
-import { useNavigate } from "react-router";
 
 const Modal = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   // 모달 열고 닫기
   const [modalOpen, setModalOpen] = useState(false);
   // 어떤 모달창 보여줄지 (링크 추가 단계)
   const [showModal, setShowModal] = useState(false);
   // 모달 열고 닫기 펑션
+
   const openModal = () => {
-    setModalOpen(true);
-  };
-  const closeModal = () => {
-    setModalOpen(false);
-    setShowModal(false);
+    if (modalOpen === false) {
+      setModalOpen(true);
+      document.body.style.cssText = `overflow: hidden; touch-action: none;`;
+    } else {
+      setModalOpen(false);
+      setShowModal(false);
+      setUrl("");
+      setFolder("미분류 컬렉션");
+      document.body.style.cssText = `overflow:auto;`;
+    }
   };
 
   const remindList = [
@@ -50,19 +54,14 @@ const Modal = () => {
   const [url, setUrl] = useState("");
   const [checkedRemind, setCheckedRemind] = useState(0);
   const [folderHide, setFolderHide] = useState(false);
-  const [checkedItems, setCheckedItems] = useState(new Set());
-  const [addLink, setAddLink] = useState(false);
-  const tagData = [...checkedItems];
 
-  const articleData = {
+  const linkData = {
     url: url,
     readCount: 0,
     reminderDate: +checkedRemind,
     articleFolderName: folder,
-    hashtag1: tagData[0],
-    hashtag2: tagData[1] ? tagData[1] : null,
-    hashtag3: tagData[2] ? tagData[2] : null,
   };
+
   const folderData = {
     articleFolderName: folder,
     folderHide: folderHide,
@@ -78,6 +77,7 @@ const Modal = () => {
 
   const modalChange = () => {
     setShowModal(current => !current);
+    dispatch(sendToHashtags({ linkData, folderData }));
   };
 
   const toggleDropdown = () => {
@@ -86,10 +86,6 @@ const Modal = () => {
 
   const handleChangeFolder = e => {
     setFolder(e.target);
-  };
-
-  const handleAddLink = () => {
-    dispatch(postArticleAxios({ articleData, navigate }));
   };
 
   return (
@@ -102,6 +98,7 @@ const Modal = () => {
       </LinkButtonBox>
       {modalOpen ? (
         <Section>
+          <ModalCover onClick={openModal} />
           <MainModal>
             <div style={{ display: "flex", alignItems: "center" }}>
               <div
@@ -114,19 +111,12 @@ const Modal = () => {
               <div
                 style={{ display: "flex", width: "20%", justifyContent: "end" }}
               >
-                <button onClick={closeModal}>&times;</button>
+                <button onClick={openModal}>&times;</button>
               </div>
             </div>
             <Main>
               {showModal ? (
-                <AddLinkTag
-                  setAddLink={setAddLink}
-                  closeModal={closeModal}
-                  setShowModal={setShowModal}
-                  checkedItems={checkedItems}
-                  setCheckedItems={setCheckedItems}
-                  articleData={articleData}
-                />
+                <AddLinkTag openModal={openModal} setShowModal={setShowModal} />
               ) : (
                 <>
                   {addFolderList ? (
@@ -170,33 +160,22 @@ const Modal = () => {
                         <RemindSelection>
                           {remindList.map((remindOption, idx) => (
                             <CheckRemind
-                              remindOption={remindOption.key}
                               key={idx}
-                              id={remindOption.value}
+                              remindOption={remindOption}
                               changeRemind={changeRemind}
+                              checkedRemind={checkedRemind}
                             />
                           ))}
                         </RemindSelection>
                       </Reminder>
                       <ButtonBox>
-                        {addLink ? (
-                          <Button
-                            _onClick={handleAddLink}
-                            _padding="18px"
-                            _fontSize="14px"
-                          >
-                            링크 추가
-                          </Button>
-                        ) : (
-                          <Button
-                            _onClick={modalChange}
-                            _padding="18px"
-                            _fontSize="14px"
-                            articleData={articleData}
-                          >
-                            선택 완료
-                          </Button>
-                        )}
+                        <Button
+                          _onClick={modalChange}
+                          _padding="18px"
+                          _fontSize="14px"
+                        >
+                          선택 완료
+                        </Button>
                       </ButtonBox>
                     </LinkBox>
                   ) : (
@@ -224,8 +203,12 @@ const Section = styled.div`
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  z-index: 99;
   background-color: rgba(0, 0, 0, 0.3);
+`;
+
+const ModalCover = styled.div`
+  width: 100vw;
+  height: 100vh;
 `;
 
 const MainModal = styled.div`
@@ -247,7 +230,7 @@ const Main = styled.div`
 const LinkButtonBox = styled.div`
   display: inline-flex;
   position: fixed;
-  top: 50%;
+  bottom: 16px;
   right: 16px;
   & button {
     width: 62px;

@@ -1,34 +1,35 @@
+import React from "react";
+import styled from "styled-components";
 import { Title } from "../elements";
 import { Button } from "../elements";
 import ArticleFolder from "./ArticleFolder";
 import { useNavigate } from "react-router";
 
+const Curations = props => {
+  const { folderList } = props;
 
-const Curations = () => {
   const navigate = useNavigate();
-  const folderList = [0, 1, 2, 3];
 
   return (
-    <div style={{width:"100%"}}>
-      <Title _padding="28px 0 9px 20px">추천 큐레이션</Title>
-      {folderList.map((folderId, idx) => (
-        <ArticleFolder
-          key={idx}
-          _onClick={() => {
-            navigate("/articles");
-          }}
-          folderColor={
-            folderId % 3 === 0
-              ? "green"
-              : folderId % 3 === 1
-              ? "purple"
-              : "blue"
-          }
-        >
-        </ArticleFolder>
-      ))}
-
-      <div style={{margin:"18px 16px"}}>
+    <CurationContainer>
+      <CurationBox>
+        <Title _padding="0 0 19px 0">추천 큐레이션</Title>
+        {folderList.map((folder, idx) => (
+          <FolderBox
+            key={idx}
+            onClick={() => {
+              navigate(`/articles/${folder.folderId}`);
+            }}
+          >
+            <ArticleFolder
+              key={idx}
+              folderColor={
+                idx % 3 === 0 ? "green" : idx % 3 === 1 ? "purple" : "blue"
+              }
+              folder={folder}
+            ></ArticleFolder>
+          </FolderBox>
+        ))}
         <Button
           _padding="12px"
           bgColor="#ffffff"
@@ -37,11 +38,21 @@ const Curations = () => {
         >
           더보기
         </Button>
-      </div>
-    </div>
-  )
+      </CurationBox>
+    </CurationContainer>
+  );
+};
 
-}
+const CurationContainer = styled.div`
+  width: 100%;
+`;
 
+const CurationBox = styled.div`
+  padding: 28px 16px;
+`;
+
+const FolderBox = styled.div`
+  margin-bottom: 16px;
+`;
 
 export default Curations;

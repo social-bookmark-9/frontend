@@ -1,35 +1,23 @@
 import React from "react";
-import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
+// import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { Label, Image, Title } from "../elements";
 import Carousel from "../elements/Carousel";
 
 const ArticleFolder = props => {
-  const {
-    folderColor,
-    folderId,
-    folderName,
-    completeRate,
-    likeCnt,
-    isMe,
-    isDefault,
-    articleList,
-  } = props;
+  const { folder, folderColor, isDefault } = props;
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const isMe = useSelector(state => state.user.isMe);
+
   // 해시태스 리스트
-  const hashTag = [props.hashTag1, props.hashTag2, props.hashTag3];
-  // 아티클 리스트 데이터
-  const folderData = {
-    articleList: articleList,
-    folderName: folderName,
-    isMe: isMe,
-    likeCnt: likeCnt,
-    isDefault: isDefault,
-  };
+  const _hashTag = [folder.hashTag1, folder.hashTag2, folder.hashTag3];
+  const hashTag = _hashTag.filter((el, i) => el !== null);
+
   // 폴더 별 색상 (폰트, 라벨, 해시태그)
   const propsColor = () => {
-    switch (props.folderColor) {
+    switch (folderColor) {
       case "purple":
         return "#7881F5";
       case "blue":
@@ -48,11 +36,6 @@ const ArticleFolder = props => {
           folderColor={folderColor}
           isMe={isMe}
           isDefault={isDefault}
-          onClick={() => {
-            navigate(`/articles/${folderId}`, {
-              state: folderData,
-            });
-          }}
         >
           {isMe || isDefault ? (
             <LabelBox>
@@ -61,7 +44,7 @@ const ArticleFolder = props => {
                 borderColor={propsColor}
                 bgColor="none"
               >
-                완독률 {completeRate}%
+                완독률 {folder.completeRate}%
               </Label>
             </LabelBox>
           ) : (
@@ -85,15 +68,13 @@ const ArticleFolder = props => {
               _lineHeight="24px"
               _color={propsColor}
             >
-              {isDefault ? "미분류 컬렉션" : folderName}
+              {isDefault ? "미분류 컬렉션" : folder.folderName}
             </Title>
             {isMe || isDefault ? (
               <Label bgColor="white" _padding="7px" borderColor="white">
                 <Image
-                  _src="/images/hide.png"
+                  _src={`/images/${folder.hide ? "show" : "hide"}.png`}
                   _marginR="0px"
-                  _width="20px"
-                  _height="20px"
                 />
               </Label>
             ) : (
@@ -112,23 +93,24 @@ const ArticleFolder = props => {
                       ? "/images/thumbsUpPurple.png"
                       : "/images/thumbsUpGreen.png"
                   }
+                  _marginR="0px"
                   _width="11px"
                   _height="11px"
                 />
-                {likeCnt}
+                {folder.likeCount}
               </Label>
             )}
           </TitleBox>
-          <div style={{ paddingTop: "36px", margin: "0 -20px 0 -100px" }}>
-            <Carousel />
-          </div>
+          <CarouselBox>
+            <Carousel articleContents={folder.articleListDtoList} />
+          </CarouselBox>
         </CurationBox>
       </Container>
     </React.Fragment>
   );
 };
 const Container = styled.div`
-  padding: 9px 16px;
+  width: 100%;
 `;
 
 const CurationBox = styled.div`
@@ -141,7 +123,7 @@ const CurationBox = styled.div`
   ${props => props.folderColor === "green" && "background-color: #F2FDFA"};
   ${props => props.folderColor === "purple" && "background-color: #F7F7FD"};
   ${props => props.folderColor === "blue" && "background-color: #F0F7FB"};
-  ${props => props.folderColor === "default" && "background-color: #F2F3F4"};
+  ${props => props.folderColor === "default" && "background-color: #fafbfb"};
 `;
 
 const LabelBox = styled.div`
@@ -153,5 +135,10 @@ const TitleBox = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+`;
+
+const CarouselBox = styled.div`
+  padding-top: 36px;
+  margin: 0 -20px 0 -65px;
 `;
 export default ArticleFolder;

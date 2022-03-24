@@ -1,4 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import profileApi from "../app/profileApi";
+import { setFolder } from "./Folder";
+
+const ProfileApi = new profileApi();
+
 const initialState = {
   memberInfo: {
     memberId: "",
@@ -12,32 +17,76 @@ const initialState = {
     blogUrl: null,
     websiteUrl: null,
   },
-  articleFolderList: [
-    {
-      folderId: 0,
-      folderName: "",
-      hashTag1: "",
-      hashTag2: "",
-      hashTag3: "",
-      likeCnt: 0,
-      completeRate: 0,
-      isHide: true,
-      articleList: [
-        {
-          title: "",
-          content: "",
-        },
-      ],
-    },
-  ],
 };
+
 export const getProfileAxios = createAsyncThunk(
   "profile/getProfileAxios",
-  async (_, { dispatch, getState }) => {},
+  async (memberId, { dispatch }) => {
+    const res = await ProfileApi.getProfile(memberId);
+    dispatch(setProfile(res.data));
+    dispatch(setFolder(res.data));
+    return res;
+  },
 );
+
+export const editProfileUserDescAxios = createAsyncThunk(
+  "profile/editProfileUserDescAxios",
+  async ({userDesc}) => {
+    const res = await ProfileApi.editProfileUserDesc({userDesc});
+    return res;
+  }
+)
+
+export const editProfileUserNameAxios = createAsyncThunk(
+  "profile/editProfileUserNameAxios",
+  async ({nickname}) => {
+    const res = await ProfileApi.editProfileUserName({nickname});
+    console.log(res);
+    return res;
+  }
+)
+
+export const editProfileImageAxios = createAsyncThunk(
+  "profile/editProfileImageAxios",
+  async (formData, {getState}) => {
+    // for (var pair of formData.entries()) {
+    //   console.log(pair[0]+ ', ' + pair[1]);
+    // }
+    const res = await ProfileApi.editProfileImage(formData);
+    return res;
+  }
+)
+
+export const editProfileHashtagAxios = createAsyncThunk(
+  "profile/editProfileHashtagAxios",
+  async (hashTag) => {
+    const res = await ProfileApi.editProfileHashtag(hashTag);
+    return res;
+  }
+)
+
 export const profileSlice = createSlice({
   name: "profile",
   initialState,
-  reducers: {},
+  reducers: {
+    setProfile: (state, action) => {
+      const memberInfo = action.payload.memberInfoResponseDto;
+      state.memberInfo = { ...memberInfo };
+    },
+  },
+  extraReducers: {
+    [getProfileAxios.fulfilled]: (state, action) => {
+      state.folder = action.payload.articleFolderList;
+    },
+    [editProfileUserDescAxios.fulfilled]: (state, action) => {
+      console.log(state);
+      console.log(action);
+    },
+    [editProfileImageAxios.fulfilled]: (state, action) => {
+      console.log(state);
+      console.log(action);
+    }
+  },
 });
+export const { setProfile } = profileSlice.actions;
 export default profileSlice.reducer;

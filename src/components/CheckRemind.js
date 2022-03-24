@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 const CheckRemind = props => {
-  const { remindOption, id, changeRemind } = props;
+  const { remindOption, changeRemind } = props;
 
   return (
     <React.Fragment>
@@ -10,12 +10,12 @@ const CheckRemind = props => {
         <label>
           <RemindRadio
             type="radio"
-            id={id}
-            name="radioButton"
-            value={remindOption}
+            name="remindeCheck"
+            id={remindOption.value}
+            value={remindOption.value}
             onClick={changeRemind}
           />
-          <RemindText>{remindOption}</RemindText>
+          <RemindText>{remindOption.key}</RemindText>
         </label>
       </div>
     </React.Fragment>
@@ -60,7 +60,7 @@ const RemindRadio = styled.input.attrs({ type: "radio" })`
     ${({ theme }) => {
       const { colors } = theme;
       return css`
-        background-color: ${colors.grayColor05};
+        background-color: ${colors.gray05};
         border-color: ${colors.whilte};
         color: ${colors.white};
       `;

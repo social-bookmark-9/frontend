@@ -1,5 +1,7 @@
-import React from "react";
-import { useLocation } from "react-router";
+import React, { useEffect } from "react";
+import { useParams } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
+import { getFolderAxios } from "../redux/modules/Folder";
 
 import styled from "styled-components";
 import { FlexboxColumn } from "../styles/flexbox";
@@ -8,22 +10,28 @@ import { ArticleCard, Navbar } from "../components";
 import { Text, Button, Image } from "../elements";
 
 const ArticleList = props => {
-  const location = useLocation();
-  const folderName = location.state.folderName;
-  const isMe = location.state.isMe;
-  const isDefault = location.state.isDefault;
-  const likeCnt = location.state.likeCnt;
-  // 아티클리스트
-  const articleListData = location.state.articleList;
+  const { isDefault } = props;
+
+  // const location = useLocation();
+  const dispatch = useDispatch();
+  const params = useParams();
+  const folderId = params.id;
+
+  useEffect(() => {
+    dispatch(getFolderAxios(folderId));
+  }, [dispatch, folderId]);
+
+  const isMe = useSelector(state => state.folder.articleFolderList.me);
+  const articleListData = useSelector(state => state.folder.articleFolderList);
 
   return (
     <React.Fragment>
-      <Navbar folderName={folderName} />
+      <Navbar title="미분류 컬렉션" />
 
       <LikeBox isMe={isMe}>
         {isMe || isDefault ? (
           <Text _fontSize={({ theme }) => theme.fontSizes.font14}>
-            {likeCnt}명이 도움을 받았어요
+            {"likeCnt"}명이 도움을 받았어요
           </Text>
         ) : (
           <Button
@@ -33,7 +41,7 @@ const ArticleList = props => {
             isBorder
           >
             <Image _src="/images/icon7.png" _width="19px" _height="19px" />
-            유용해요 {likeCnt}
+            유용해요 {"likeCnt"}
           </Button>
         )}
       </LikeBox>

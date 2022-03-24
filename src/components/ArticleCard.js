@@ -2,20 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { DesignObj, Circle } from "../elements/ImageObj";
-import { Label, Title, Text, Image } from "../elements";
+import { Label, Image } from "../elements";
 import { FlexboxSpace } from "../styles/flexbox";
+import LinesEllipsis from "react-lines-ellipsis";
 
 const ArticleCard = props => {
-  const {
-    articleId,
-    content,
-    title,
-    isMe,
-    isRead,
-    isSaved,
-    imgUrl,
-    createdAt,
-  } = props;
+  const { articleId, isMe, isRead, isSaved, imgUrl, createdAt } = props;
   const articleData = {
     article: props,
     inDeatil: true,
@@ -86,19 +78,23 @@ const ArticleCard = props => {
               <Label key={idx}>{tag}</Label>
             ))} */}
           </LabelBox>
-          <Title
-            _fontsize={({ theme }) => theme.fontSizes.font18}
-            _lineHeight="24px"
-            _color={({ theme }) => theme.colors.white}
-          >
-            {title}
+          <Title>
+            <LinesEllipsis
+              text={"titleOg"}
+              maxLine="2"
+              ellipsis="..."
+              trimRight
+              basedOn="words"
+            />
           </Title>
-          <Text
-            _fontSize={({ theme }) => theme.fontSizes.font13}
-            _lineHeight="18px"
-            _color={({ theme }) => theme.colors.white}
-          >
-            {content}...
+          <Text>
+            <LinesEllipsis
+              text={"contentOg"}
+              maxLine="2"
+              ellipsis="..."
+              trimRight
+              basedOn="letters"
+            />
           </Text>
         </ArticleCardContent>
       </ArticleCardBox>
@@ -121,9 +117,18 @@ const ArticleCardContent = styled.div`
   position: absolute;
   bottom: 28px;
   left: 28px;
-  & h1 {
-    padding-bottom: 8px;
-  }
+`;
+const Title = styled.div`
+  padding-bottom: 8px;
+  font-size: ${({ theme }) => theme.fontSizes.font18};
+  line-height: 24px;
+  color: ${({ theme }) => theme.colors.white};
+`;
+
+const Text = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.font13};
+  line-height: 18px;
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 const LabelBox = styled.div`

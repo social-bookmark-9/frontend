@@ -1,16 +1,33 @@
 import axios from "axios";
 import { getToken } from "../../shared/utils";
-import Swal from "sweetalert2";
-import _ogs from "open-graph-scraper";
 
-// axios 인스턴스
 const instance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: process.env.REACT_APP_SERVER,
 });
 
-// interceptor 헤더 설정
-instance.interceptors.request.use(async config => {
-  config.headers["content-type"] = "application/json; charset=utf-8";
-  config.headers["X-AUTH-TOKEN"] = getToken;
-  return config;
-});
+instance.interceptors.request.use(
+  async req => {
+    req.headers["content-type"] = "application/json; charset=utf-8";
+    if (getToken() !== null) {
+      req.headers["X-AUTH-TOKEN"] = await getToken();
+    }
+    return req;
+  },
+  err => {
+    console.log(err);
+    return Promise.reject(err);
+  },
+);
+
+instance.interceptors.response.use(
+  resp => {
+    console.lof(resp);
+    return resp;
+  },
+  err => {
+    console.log(err);
+    return Promise.reject(err);
+  },
+);
+
+export default instance;

@@ -2,48 +2,56 @@ import React from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { Image } from "../elements";
-import { Title, Label, Text } from "../elements";
+import { Label } from "../elements";
+import LinesEllipsis from "react-lines-ellipsis";
 
 const RecommendCard = props => {
-  const { isSaved, hashTag, title, content } = props;
+  const { recommend } = props;
   const navigate = useNavigate();
+
+  const _hashTag = [recommend.hashtag1, recommend.hashtag2, recommend.hashtag3];
+  const hashTag = _hashTag.filter((el, i) => el !== null);
 
   return (
     <React.Fragment>
       {/* 사진이 없는 아티클 경우 - 읽기 전 */}
       <ReContainer
+        imgUrl={recommend.imgOg}
         onClick={() => {
-          navigate("/article");
+          navigate(`/article/${recommend.articleId}`);
         }}
       >
         <ImageBox>
           <Image
-            _src={`/images/${isSaved ? "bookmark" : "unbookmark"}.png`}
+            _src={`/images/bookmark.png`}
             _width="25px"
             _height="24px"
             _marginR="none"
           />
         </ImageBox>
-
         <ReCardContent>
           <LabelBox>
-            {/* {hashTag.map((tag, idx) => ( */}
-            <Label key={"idx"}>{"tag"}</Label>
-            {/* ))} */}
+            {hashTag.map((tag, idx) => (
+              <Label key={idx}>{tag}</Label>
+            ))}
           </LabelBox>
-          <Title
-            _fontsize={({ theme }) => theme.fontSizes.font18}
-            _lineHeight="24px"
-            _color={({ theme }) => theme.colors.white}
-          >
-            {title}
+          <Title>
+            <LinesEllipsis
+              text={recommend.titleOg}
+              maxLine="2"
+              ellipsis="..."
+              trimRight
+              basedOn="words"
+            />
           </Title>
-          <Text
-            _fontSize={({ theme }) => theme.fontSizes.font13}
-            _lineHeight="18px"
-            _color={({ theme }) => theme.colors.white}
-          >
-            {content}...
+          <Text>
+            <LinesEllipsis
+              text={recommend.contentOg}
+              maxLine="2"
+              ellipsis="..."
+              trimRight
+              basedOn="letters"
+            />
           </Text>
         </ReCardContent>
       </ReContainer>
@@ -89,6 +97,19 @@ const ReCardContent = styled.div`
   & h1 {
     padding-bottom: 8px;
   }
+`;
+
+const Title = styled.div`
+  padding-bottom: 8px;
+  font-size: ${({ theme }) => theme.fontSizes.font18};
+  line-height: 24px;
+  color: ${({ theme }) => theme.colors.white};
+`;
+
+const Text = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.font13};
+  line-height: 18px;
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 export default RecommendCard;

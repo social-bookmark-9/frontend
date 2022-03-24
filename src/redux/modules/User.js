@@ -1,27 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userApi from "../app/userApi";
 import Swal from "sweetalert2";
-
 const UserApi = new userApi();
-
 const initialState = {
   userInfo: null,
   myInfo: null,
   isLogin: false,
   isMe: false,
 };
-
 export const kakaoLoginAxios = createAsyncThunk(
   "user/kakaoLogin",
   async ({ code, navigate }, { dispatch }) => {
-    const user = await UserApi.kakaoLogin({ code, navigate });
+    const user = await UserApi.kakaoLogin({ code, navigate, dispatch });
     if (user) {
       dispatch(setMyInfo(user.data));
       return user;
     }
   },
 );
-
 export const registerAxios = createAsyncThunk(
   "user/register",
   async ({ userInfo, navigate }, { dispatch }) => {
@@ -33,10 +29,11 @@ export const registerAxios = createAsyncThunk(
   },
 );
 
-export const checkMyInfo = createAsyncThunk(
-  "user/checkMyInfo",
+export const checkUserAxios = createAsyncThunk(
+  "user/checkUser",
   async ({ token, navigate }, { dispatch }) => {
     const user = await UserApi.checkUser({ token, navigate });
+    console.log(user);
     if (user) {
       dispatch(setUser(user.data));
       return user;
@@ -44,9 +41,21 @@ export const checkMyInfo = createAsyncThunk(
   },
 );
 
+export const refreshTokensAxios = createAsyncThunk(
+  "user/refreshTokens",
+  async ({ tokens, navigate }, { dispatch }) => {
+    const user = await UserApi.refreshTokens({ tokens, navigate });
+    console.log(user);
+    if (user) {
+      dispatch(setMyInfo(user.data));
+      return user;
+    }
+  },
+);
+
 export const logoutAxios = createAsyncThunk(
   "user/logout",
-  async ({ navigate }, { dispatch }) => {
+  async (navigate, { dispatch }) => {
     dispatch(deleteUserFromSession());
     navigate("/", { replace: true });
     return true;
@@ -62,6 +71,8 @@ export const userSlice = createSlice({
       sessionStorage.setItem("refreshToken", action.payload.token.refreshToken);
       const myInfo = action.payload.myInfo;
       state.myInfo = { ...myInfo };
+      state.isLogin = action.payload.login;
+      state.isMe = action.payload.login;
     },
     deleteUserFromSession: (state, action) => {
       sessionStorage.removeItem("accessToken");
@@ -75,7 +86,7 @@ export const userSlice = createSlice({
   extraReducers: {
     [registerAxios.fulfilled]: (state, action) => {
       state.myInfo = action.payload.data.myInfo;
-      state.isLogin = action.payload.data.login;
+      state.isLogin = true;
       state.isMe = true;
     },
     [kakaoLoginAxios.fulfilled && kakaoLoginAxios.user === true]: (
@@ -83,28 +94,26 @@ export const userSlice = createSlice({
       action,
     ) => {
       state.myInfo = action.payload.data.myInfo;
-      state.isLogin = action.payload.data.login;
+      state.isLogin = true;
       state.isMe = true;
     },
+
     [logoutAxios.fulfilled]: (state, action) => {
       if (action.payload) {
-        state.token = initialState.token;
         state.isLogin = false;
       }
       Swal.fire({
-        text: "로그아웃 완료",
-        icon: "success",
+        text: "로그아웃 되었습니다",
         confirmButtonText: "확인",
-        confirmButtonColor: "#353C49",
       });
     },
-    [checkMyInfo.fulfilled]: (state, action) => {
+
+    [checkUserAxios.fulfilled]: (state, action) => {
       state.myInfo = action.payload.data.myInfo;
       state.isLogin = true;
       state.isMe = true;
     },
   },
 });
-
 export const { setMyInfo, deleteUserFromSession, setUser } = userSlice.actions;
 export default userSlice.reducer;
