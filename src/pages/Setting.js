@@ -1,71 +1,75 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { logoutAxios } from "../redux/modules/User";
-
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-
 import styled, { css } from "styled-components";
+import EditFavorites from "../components/EditFavorites";
+import Navbar from "../components/Navbar";
 import { Button, Image } from "../elements";
 import { FlexboxColumn } from "../styles/flexbox";
 
-import Navbar from "../components/Navbar";
-
 const Setting = props => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const isLogin = useSelector(state => state.user.isLogin);
+
+  const [isEdit, setIsEdit] = useState(false);
+  const toggleEdit = () => {
+    setIsEdit(!isEdit);
+  };
 
   return (
     <React.Fragment>
-      <Navbar title="설정" />
-      <div>
-        <Ul>
-          <Li
-            onClick={() => {
-              navigate("setting/reminder");
-            }}
-          >
-            <Image _src="/images/email.png" _width="22px" _height="22px" />
-            리마인드 메일 변경
-          </Li>
-          <Li
-            onClick={() => {
-              navigate("/setting/favorites");
-            }}
-          >
-            <Image _src="/images/favorite.png" _width="22px" _height="22px" />
-            관심 카테고리 변경
-          </Li>
-        </Ul>
-        <UlBackground>
+      {!isEdit ? (
+        <>
+        <Navbar title="설정" />
+        <div>
           <Ul>
-            <Li>
-              <Image _src="/images/team.png" _width="22px" _height="22px" />
-              버블드 팀 소개
+            <Li
+              onClick={() => {
+                navigate("/reminder");
+              }}
+            >
+              <Image _src="/images/email.png" _width="22px" _height="22px" />
+              리마인드 메일 변경
             </Li>
-            <Li>
-              <Image _src="/images/notice.png" _width="22px" _height="22px" />
-              공지사항
-            </Li>
-            <Li>
-              <Image _src="/images/request.png" _width="22px" _height="22px" />
-              문의하기
+            <Li
+              onClick={toggleEdit}
+            >
+              <Image _src="/images/favorite.png" _width="22px" _height="22px" />
+              관심 카테고리 변경
             </Li>
           </Ul>
-          <ButtonBox
-            onClick={() => {
-              dispatch(logoutAxios(navigate));
-            }}
-          >
-            <Button
-              bgColor={({ theme }) => theme.colors.gray03}
-              _color={({ theme }) => theme.colors.fontColor04}
-              _padding="15px"
-            >
-              로그아웃
-            </Button>
-          </ButtonBox>
-        </UlBackground>
-      </div>
+          <UlBackground>
+            <Ul>
+              <Li>
+                <Image _src="/images/team.png" _width="22px" _height="22px" />
+                버블드 팀 소개
+              </Li>
+              <Li>
+                <Image _src="/images/notice.png" _width="22px" _height="22px" />
+                공지사항
+              </Li>
+              <Li>
+                <Image _src="/images/request.png" _width="22px" _height="22px" />
+                문의하기
+              </Li>
+            </Ul>
+            <ButtonBox>
+              <Button
+                bgColor={({ theme }) => theme.colors.gray03}
+                _color={({ theme }) => theme.colors.fontColor04}
+                _padding="15px"
+              >
+                로그아웃
+              </Button>
+            </ButtonBox>
+          </UlBackground>
+        </div>
+        </>
+      ) : (
+        <EditFavorites
+          setIsEdit={setIsEdit}
+        />
+      )}
     </React.Fragment>
   );
 };

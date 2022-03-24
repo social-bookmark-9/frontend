@@ -22,10 +22,10 @@ const initialState = {
 export const getProfileAxios = createAsyncThunk(
   "profile/getProfileAxios",
   async (memberId, { dispatch }) => {
-    const resp = await ProfileApi.getProfile(memberId);
-    dispatch(setProfile(resp.data));
-    dispatch(setFolder(resp.data));
-    return resp;
+    const res = await ProfileApi.getProfile(memberId);
+    dispatch(setProfile(res.data));
+    dispatch(setFolder(res.data));
+    return res;
   },
 );
 
@@ -49,20 +49,19 @@ export const editProfileUserNameAxios = createAsyncThunk(
 export const editProfileImageAxios = createAsyncThunk(
   "profile/editProfileImageAxios",
   async (formData, {getState}) => {
-    // const _image = getState().image.imageUrl;
-    // formData.append("image", _image);
-    for (var pair of formData.entries()) {
-      console.log(pair[0]+ ', ' + pair[1]);
-    }
+    // for (var pair of formData.entries()) {
+    //   console.log(pair[0]+ ', ' + pair[1]);
+    // }
     const res = await ProfileApi.editProfileImage(formData);
-    console.log(res);
+    return res;
   }
 )
 
-export const editProfileSnsUrlAxios = createAsyncThunk(
-  "profile/editProfileSnsUrlAxios",
-  async ({urlList}) => {
-    const res = await ProfileApi.editProfileSnsUrl({urlList});
+export const editProfileHashtagAxios = createAsyncThunk(
+  "profile/editProfileHashtagAxios",
+  async (hashTag) => {
+    const res = await ProfileApi.editProfileHashtag(hashTag);
+    return res;
   }
 )
 

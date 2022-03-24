@@ -104,21 +104,19 @@ export default class ProfileApi {
       });
   }
 
-
-
-  async editProfileHashtag({ hashtag }) {
+  async editProfileHashtag(hashTag) {
     const editProfileHashtagConfig = {
       method: "PATCH",
       url: `${this.base}/api/mypage/hashtag`,
       headers: {
         "Content-Type": "application/json",
-        "X-AUTH-TOKEN": this.getToken,
+        "X-AUTH-TOKEN": getToken(),
       },
-      data: JSON.stringify(hashtag),
+      data: JSON.stringify(hashTag),
     };
     return axios(editProfileHashtagConfig)
       .then(res => {
-        console.log(res);
+        return res;
       })
       .catch(err => {
         console.log(err.response);
