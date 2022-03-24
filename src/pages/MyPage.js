@@ -17,8 +17,8 @@ const MyPage = props => {
   }, [dispatch]);
   // ----- 폴더 리스트 ----- //
   const folderList = useSelector(state => state.folder.articleFolderList);
-  const defaultFolder = folderList[0];
-  const userFolder = folderList.slice(1);
+  const defaultFolder = folderList;
+  const userFolder = folderList;
   // ----- 유저 정보 ----- //
   const userInfo = useSelector(state => state.profile.memberInfo);
   const myInfo = useSelector(state => state.user.myInfo);
@@ -33,17 +33,17 @@ const MyPage = props => {
   return (
     <React.Fragment>
       <Container>
-        <Navbar />
+        <Navbar {...props} />
         {/* ----- 프로필+이름 부분 ----- */}
         <UserProfile userInfo={userInfo} {...myInfo} />
         {/* ----- 리마인드, 디폴트 폴더 ----- */}
-        {/* <MyPageRemind
+        <MyPageRemind
           defaultFolder={defaultFolder}
           userFolder={userFolder}
           openModal={openModal}
           userInfo={userInfo}
           {...myInfo}
-        /> */}
+        />
 
         {/* 아티클 리마인드 또는 새 컬렉션 만들기 */}
 

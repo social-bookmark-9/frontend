@@ -15,15 +15,14 @@ const ArticleList = props => {
   const location = useLocation();
   const dispatch = useDispatch();
   const params = useParams();
-
   const folderId = params.id;
 
   useEffect(() => {
     dispatch(getFolderAxios(folderId));
-  }, [dispatch]);
+  }, [dispatch, folderId]);
 
-  const isMe = useSelector(state => state.user.isMe);
-  const articleListData = [1, 2, 3];
+  const isMe = useSelector(state => state.folder.articleFolderList.me);
+  const articleListData = useSelector(state => state.folder.articleFolderList);
 
   return (
     <React.Fragment>

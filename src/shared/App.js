@@ -24,6 +24,8 @@ import Reminder from "../pages/Reminder";
 import EditProfile from "../pages/EditProfile";
 import ChangeFavorites from "../pages/ChangeFavorites";
 import NotFound from "../pages/NotFound";
+import ErrorBoundary from "./ErrorBoundary";
+import Spinner from "../components/Spinner";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -40,30 +42,34 @@ function App(props) {
 
   return (
     <React.Fragment>
-      <Desktop>
-        <Routes>
-          <Route path="/mypage/:id" element={<MyPageD />} />
-        </Routes>
-      </Desktop>
-      <Mobile>
-        <Routes>
-          <Route path="/" element={<MainPage {...myInfo} />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/user/nickname" element={<UserNickname />} />
-          <Route path="/user/favorites" element={<UserFavorites />} />
-          <Route path="/articles/:id" element={<ArticleList />} />
-          <Route path="/article" element={<ArticleDetail />} />
-          <Route path="/article/:id" element={<ArticleDetail />} />
-          <Route path="/mypage/:id" element={<MyPage {...myInfo} />} />
-          <Route path="/setting" element={<Setting {...myInfo} />} />
-          <Route path="/reminder" element={<Reminder />} />
-          <Route path="/api/users/login" element={<OAuthRedirectHandler />} />
-          <Route path="/myreview" element={<MyReview />} />
-          <Route path="/editprofile" element={<EditProfile />} />
-          <Route path="/setting/favorites" element={<ChangeFavorites />} />
-          <Route element={<NotFound />} />
-        </Routes>
-      </Mobile>
+      <ErrorBoundary fallback={<Spinner />}>
+        <Desktop>
+          <Routes>
+            <Route path="/mypage/:id" element={<MyPageD />} />
+          </Routes>
+        </Desktop>
+        <Mobile>
+          <Routes>
+            <Route path="/" element={<MainPage {...myInfo} />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/user/nickname" element={<UserNickname />} />
+            <Route path="/user/favorites" element={<UserFavorites />} />
+            <Route path="/articles/:id" element={<ArticleList {...myInfo} />} />
+            <Route
+              path="/article/:id"
+              element={<ArticleDetail {...myInfo} />}
+            />
+            <Route path="/mypage/:id" element={<MyPage {...myInfo} />} />
+            <Route path="/setting" element={<Setting {...myInfo} />} />
+            <Route path="/reminder" element={<Reminder />} />
+            <Route path="/api/users/login" element={<OAuthRedirectHandler />} />
+            <Route path="/myreview" element={<MyReview />} />
+            <Route path="/editprofile" element={<EditProfile />} />
+            <Route path="/setting/favorites" element={<ChangeFavorites />} />
+            <Route element={<NotFound />} />
+          </Routes>
+        </Mobile>
+      </ErrorBoundary>
     </React.Fragment>
   );
 }

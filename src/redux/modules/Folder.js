@@ -14,8 +14,8 @@ export const getFolderAxios = createAsyncThunk(
   async (folderId, { dispatch }) => {
     const resp = await FolderApi.getFolder(folderId);
     console.log("아티클리스트가져오기: ", resp);
-    // dispatch(setFolder(resp.data));
-    // return resp;
+    dispatch(setFolder(resp.data));
+    return resp;
   },
 );
 
@@ -35,7 +35,7 @@ export const folderSlice = createSlice({
   initialState,
   reducers: {
     setFolder: (state, action) => {
-      const articleFolderList = action.payload.articleFolderListResponseDto;
+      const articleFolderList = action.payload.articles;
       state.articleFolderList = articleFolderList;
     },
   },

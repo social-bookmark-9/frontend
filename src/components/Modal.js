@@ -17,23 +17,19 @@ const Modal = () => {
   // 어떤 모달창 보여줄지 (링크 추가 단계)
   const [showModal, setShowModal] = useState(false);
   // 모달 열고 닫기 펑션
-  const openModal = () => {
-    setModalOpen(true);
-  };
-  const closeModal = () => {
-    setModalOpen(false);
-    setShowModal(false);
-  };
 
-  // const menuOpen = () => {
-  //   if (isOpen === false) {
-  //     setIsOpen(true);
-  //     document.body.style.cssText = `overflow: hidden; touch-action: none;`;
-  //   } else {
-  //     setIsOpen(false);
-  //     document.body.style.cssText = `overflow:auto;`;
-  //   }
-  // };
+  const openModal = () => {
+    if (modalOpen === false) {
+      setModalOpen(true);
+      document.body.style.cssText = `overflow: hidden; touch-action: none;`;
+    } else {
+      setModalOpen(false);
+      setShowModal(false);
+      setUrl("");
+      setFolder("미분류 컬렉션");
+      document.body.style.cssText = `overflow:auto;`;
+    }
+  };
 
   const remindList = [
     { key: "내일", value: 1 },
@@ -58,7 +54,6 @@ const Modal = () => {
   const [url, setUrl] = useState("");
   const [checkedRemind, setCheckedRemind] = useState(0);
   const [folderHide, setFolderHide] = useState(false);
-  // const [addLink, setAddLink] = useState(false);
 
   const linkData = {
     url: url,
@@ -66,6 +61,7 @@ const Modal = () => {
     reminderDate: +checkedRemind,
     articleFolderName: folder,
   };
+
   const folderData = {
     articleFolderName: folder,
     folderHide: folderHide,
@@ -102,6 +98,7 @@ const Modal = () => {
       </LinkButtonBox>
       {modalOpen ? (
         <Section>
+          <ModalCover onClick={openModal} />
           <MainModal>
             <div style={{ display: "flex", alignItems: "center" }}>
               <div
@@ -114,15 +111,12 @@ const Modal = () => {
               <div
                 style={{ display: "flex", width: "20%", justifyContent: "end" }}
               >
-                <button onClick={closeModal}>&times;</button>
+                <button onClick={openModal}>&times;</button>
               </div>
             </div>
             <Main>
               {showModal ? (
-                <AddLinkTag
-                  closeModal={closeModal}
-                  setShowModal={setShowModal}
-                />
+                <AddLinkTag openModal={openModal} setShowModal={setShowModal} />
               ) : (
                 <>
                   {addFolderList ? (
@@ -166,10 +160,10 @@ const Modal = () => {
                         <RemindSelection>
                           {remindList.map((remindOption, idx) => (
                             <CheckRemind
-                              remindOption={remindOption.key}
                               key={idx}
-                              id={remindOption.value}
+                              remindOption={remindOption}
                               changeRemind={changeRemind}
+                              checkedRemind={checkedRemind}
                             />
                           ))}
                         </RemindSelection>
@@ -210,6 +204,11 @@ const Section = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
+`;
+
+const ModalCover = styled.div`
+  width: 100vw;
+  height: 100vh;
 `;
 
 const MainModal = styled.div`

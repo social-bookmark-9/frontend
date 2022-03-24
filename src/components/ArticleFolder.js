@@ -12,9 +12,8 @@ const ArticleFolder = props => {
   const isMe = useSelector(state => state.user.isMe);
 
   // 해시태스 리스트
-  // const _hashTag = [folder.hashTag1, folder.hashTag2, folder.hashTag3];
-  // const hashTag = _hashTag.filter((el, i) => el !== null);
-  const hashTag = [1, 2, 3];
+  const _hashTag = [folder.hashTag1, folder.hashTag2, folder.hashTag3];
+  const hashTag = _hashTag.filter((el, i) => el !== null);
 
   // 폴더 별 색상 (폰트, 라벨, 해시태그)
   const propsColor = () => {
@@ -76,8 +75,6 @@ const ArticleFolder = props => {
                 <Image
                   _src={`/images/${folder.hide ? "show" : "hide"}.png`}
                   _marginR="0px"
-                  _width="20px"
-                  _height="20px"
                 />
               </Label>
             ) : (
@@ -96,6 +93,7 @@ const ArticleFolder = props => {
                       ? "/images/thumbsUpPurple.png"
                       : "/images/thumbsUpGreen.png"
                   }
+                  _marginR="0px"
                   _width="11px"
                   _height="11px"
                 />

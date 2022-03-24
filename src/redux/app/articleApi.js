@@ -27,6 +27,25 @@ export default class articleApi {
       });
   }
 
+  async postUserArticle({ articleData, navigate }) {
+    const postArticleConfig = {
+      method: "POST",
+      url: `${this.base}/api/articles`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
+      data: JSON.stringify(articleData),
+    };
+    return axios(postArticleConfig)
+      .then(res => {
+        return res;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   async getArticle({ articleId, navigate }) {
     const getArticleConfig = {
       method: "GET",
@@ -38,8 +57,8 @@ export default class articleApi {
     };
     return axios(getArticleConfig)
       .then(res => {
-        console.log(res);
-        // return res.data;
+        console.log("겟아티클:", res);
+        return res.data;
       })
       .catch(err => {
         console.log(err);
@@ -49,6 +68,7 @@ export default class articleApi {
   async updateReview({ articleId, review, navigate }) {
     const updateReviewConfig = {
       method: "PATCH",
+      url: `${this.base}/api/articles/${articleId}/review`,
       headers: {
         "Content-Type": "application/json",
         "X-AUTH-TOKEN": getToken(),
@@ -58,6 +78,7 @@ export default class articleApi {
     return axios(updateReviewConfig)
       .then(res => {
         console.log(res);
+        return res.data;
       })
       .catch(err => {
         console.log(err);

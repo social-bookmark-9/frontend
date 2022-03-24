@@ -1,20 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 import articleApi from "../app/articleApi";
 
 const ArticleApi = new articleApi();
 
 const initialState = {
-  status: null,
-  message: "",
   data: {},
-  // paging: { load: true, next: null, size: 3 },
-  // is_loading: false,
 };
 
 export const postArticleAxios = createAsyncThunk(
   "article/postArticle",
   async ({ articleData, navigate }, { dispatch }) => {
-    console.log(articleData);
     const resp = await ArticleApi.postArticle({ articleData, navigate });
     return resp;
   },
@@ -23,7 +19,7 @@ export const postArticleAxios = createAsyncThunk(
 export const getArticleAxios = createAsyncThunk(
   "article/getArticle",
   async ({ articleId, navigate }, { dispatch }) => {
-    const resp = await ArticleApi.getArticles({ articleId, navigate });
+    const resp = await ArticleApi.getArticle({ articleId, navigate });
     dispatch(setArticle(resp.data));
     return resp;
   },
@@ -33,7 +29,6 @@ export const updateReviewAxios = createAsyncThunk(
   "article/updateReview",
   async ({ articleId, review, navigate }, { dispatch }) => {
     const resp = await ArticleApi.updateReview({ articleId, review, navigate });
-    dispatch(setReview(resp.data));
     return resp;
   },
 );
@@ -59,16 +54,23 @@ export const articleSlice = createSlice({
   initialState,
   reducers: {
     setArticle: (state, action) => {
-      state.data = action.payload.article;
+      console.log("겟아티클:", action.payload);
+      state.data = action.payload;
     },
     setReview: (state, action) => {
-      state.data = action.payload.review;
+      state.data = action.payload;
     },
     setReviewHide: (state, action) => {},
   },
   extraReducers: {
     [updateReviewAxios.fulfilled]: (state, action) => {
       state.review = action.payload.data.review;
+    },
+    [postArticleAxios.fulfilled]: (state, action) => {
+      Swal.fire({
+        text: "링크가 저장되었습니다",
+        confirmButtonText: "확인",
+      });
     },
   },
 });

@@ -1,35 +1,37 @@
 import React from "react";
 import { useNavigate } from "react-router";
+
 import styled from "styled-components";
-import { Image } from "../elements";
-import { Label } from "../elements";
+import { Circle } from "../elements/ImageObj";
+import { Label, Image } from "../elements";
 import LinesEllipsis from "react-lines-ellipsis";
 
-const RecommendCard = props => {
-  const { recommend } = props;
+const DetailCard = props => {
+  const { article } = props;
   const navigate = useNavigate();
 
-  const _hashTag = [recommend.hashtag1, recommend.hashtag2, recommend.hashtag3];
+  const _hashTag = [article.hashtag1, article.hashtag2, article.hashtag3];
   const hashTag = _hashTag.filter((el, i) => el !== null);
+
+  const handleLink = () => {
+    window.open(`${article.url}`, "_blank");
+  };
 
   return (
     <React.Fragment>
-      {/* 사진이 없는 아티클 경우 - 읽기 전 */}
-      <ReContainer
-        imgUrl={recommend.imgOg}
-        onClick={() => {
-          navigate(`/article/${recommend.articleId}`);
-        }}
-      >
+      <DetailCardBox imgUrl={article.imgOg} onClick={handleLink}>
+        <CircleBox>
+          <Circle />
+        </CircleBox>
         <ImageBox>
           <Image
-            _src={`/images/bookmark.png`}
+            _src={`/images/link.png`}
             _width="25px"
             _height="24px"
             _marginR="none"
           />
         </ImageBox>
-        <ReCardContent>
+        <ArticleCardContent>
           <LabelBox>
             {hashTag.map((tag, idx) => (
               <Label key={idx}>{tag}</Label>
@@ -37,7 +39,7 @@ const RecommendCard = props => {
           </LabelBox>
           <Title>
             <LinesEllipsis
-              text={recommend.titleOg}
+              text={article.titleOg}
               maxLine="2"
               ellipsis="..."
               trimRight
@@ -46,57 +48,30 @@ const RecommendCard = props => {
           </Title>
           <Text>
             <LinesEllipsis
-              text={recommend.contentOg}
+              text={article.contentOg}
               maxLine="2"
               ellipsis="..."
               trimRight
               basedOn="letters"
             />
           </Text>
-        </ReCardContent>
-      </ReContainer>
+        </ArticleCardContent>
+      </DetailCardBox>
     </React.Fragment>
   );
 };
 
-const ReContainer = styled.div`
-  width: 100%;
-  height: 202px;
-  background-color: #505866;
-  color: #ffffff;
-  border-radius: 20px;
-  padding: 28px;
-  margin-bottom: 16px;
-  position: relative;
-  ${props =>
-    props.imgUrl
-      ? `
-  background: rgba(0, 0, 0, 0.26)
-    url(${props.imgUrl});
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-blend-mode: darken;`
-      : ""}
+const CircleBox = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 0;
 `;
 
-const ImageBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-
-const LabelBox = styled.div`
-  display: flex;
-  padding-bottom: 8px;
-`;
-
-const ReCardContent = styled.div`
+const ArticleCardContent = styled.div`
   width: 270px;
   position: absolute;
   bottom: 28px;
   left: 28px;
-  & h1 {
-    padding-bottom: 8px;
-  }
 `;
 
 const Title = styled.div`
@@ -112,4 +87,32 @@ const Text = styled.div`
   color: ${({ theme }) => theme.colors.white};
 `;
 
-export default RecommendCard;
+const LabelBox = styled.div`
+  display: flex;
+  padding-bottom: 8px;
+`;
+
+const ImageBox = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const DetailCardBox = styled.div`
+  width: 100%;
+  border-radius: 20px 20px 80px 20px;
+  padding: 28px;
+  margin-bottom: 16px;
+  position: relative;
+  background-color: #505866;
+  ${props =>
+    props.imgUrl
+      ? `background: rgba(0, 0, 0, 0.26)
+    url(${props.imgUrl});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: darken;
+  height: 288px`
+      : "height: 240px"};
+`;
+
+export default DetailCard;

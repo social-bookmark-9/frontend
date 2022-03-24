@@ -34,7 +34,8 @@ const RecommendList = props => {
               article.hashtag3,
             ];
             const hashTag = _hashTag.filter((el, i) => el !== null);
-            const contents = article.contentOg.slice(0, 50);
+            const title = article.titleOg.slice(0, 25);
+            const contents = article.contentOg.slice(0, 45);
 
             return (
               <CardBox
@@ -63,7 +64,7 @@ const RecommendList = props => {
                       _lineHeight="24px"
                       _color={({ theme }) => theme.colors.white}
                     >
-                      {article.titleOg}
+                      {title}...
                     </Title>
                     <Text
                       _fontSize={({ theme }) => theme.fontSizes.font13}

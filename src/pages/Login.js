@@ -12,7 +12,12 @@ const Login = () => {
     <React.Fragment>
       <LoginBox>
         <Topdiv>
-          <Image _src="/images/bubbled.png" _width="65.37px" _height="52.4px" />
+          <Image
+            _src="/images/bubbled.png"
+            _width="65px"
+            _height="52px"
+            _marginR="0px"
+          />
           <TitleBox>
             <Title
               textAlign="center"

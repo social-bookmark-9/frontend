@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { kakaoLoginAxios } from "../redux/modules/User";
+import Spinner from "../components/Spinner";
 
 const OAuthRedirectHandler = props => {
   const dispatch = useDispatch();
@@ -10,10 +11,10 @@ const OAuthRedirectHandler = props => {
   let code = new URL(window.location.href).searchParams.get("code");
 
   useEffect(() => {
-    dispatch(kakaoLoginAxios({code, navigate}));
+    dispatch(kakaoLoginAxios({ code, navigate }));
   });
 
-  return "잠시만 기다려주세요";
+  return <Spinner />;
 };
 
 export default OAuthRedirectHandler;

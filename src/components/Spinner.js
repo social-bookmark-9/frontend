@@ -1,13 +1,17 @@
 import React from "react";
-import ReactLoading from "react-loading";
 import styled from "styled-components";
-import { Title } from "../elements";
+import { Image, Title } from "../elements";
 
 const Spinner = props => {
   return (
     <React.Fragment>
       <Section>
-        <ReactLoading type="bubbles" color="#000000" />
+        <Image
+          _src="/images/bubbled.png"
+          _width="65px"
+          _height="52px"
+          _marginR="0px"
+        />
         <Title>bubbled</Title>
       </Section>
     </React.Fragment>
@@ -23,6 +27,9 @@ const Section = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: #fafbfb;
+  & h1 {
+    padding-top: 16px;
+  }
 `;
 
 export default Spinner;

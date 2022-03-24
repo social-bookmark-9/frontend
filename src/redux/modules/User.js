@@ -103,10 +103,8 @@ export const userSlice = createSlice({
         state.isLogin = false;
       }
       Swal.fire({
-        text: "로그아웃 완료",
-        icon: "success",
+        text: "로그아웃 되었습니다",
         confirmButtonText: "확인",
-        confirmButtonColor: "#353C49",
       });
     },
 

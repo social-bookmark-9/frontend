@@ -11,7 +11,6 @@ import {
 } from "../components";
 
 const MainPage = props => {
-  const isMe = useSelector(state => state.user.isMe);
   const isLogin = useSelector(state => state.user.isLogin);
   const memberInfo = useSelector(state => state.main.userInfo);
   const folderList = useSelector(state => state.main.folderList);
@@ -22,16 +21,14 @@ const MainPage = props => {
       <MainContainer>
         <Navbar {...props} bgColor={isLogin ? "#f2f3f4" : null} />
         {/* 맨 위 영역 */}
-        {isMe ? null : <MainTop />}
+        {isLogin ? null : <MainTop />}
         {/* 추천아티클 */}
         <RecommendList articleList={articleList} />
         {/* 추천 큐레이션 */}
         <Curations folderList={folderList} />
-
         {/* 추천 유저 */}
         <RecommendUser memberInfo={memberInfo} />
-
-        <Modal />
+        {isLogin ? <Modal /> : null}
       </MainContainer>
     </React.Fragment>
   );

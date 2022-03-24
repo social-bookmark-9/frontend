@@ -32,6 +32,11 @@ const Navbar = props => {
       <NavbarContainer bgColor={bgColor} onClick={menuOpen}>
         <NavBox>
           {title ? <Title>{title}</Title> : <Logo />}
+          {props.inDetail ? (
+            <EditBox>
+              <Image _src="/images/edit.png" _width="30px" _height="30px" />
+            </EditBox>
+          ) : null}
           <NavMenu onClick={menuOpen}>
             <Image
               _src="/images/menu.png"
@@ -141,6 +146,13 @@ const MenuBox = styled.ul`
   & li {
     padding: 20px 36px;
   }
+`;
+
+const EditBox = styled.div`
+  width: 30%;
+  position: absolute;
+  top: 16px;
+  left: 50%;
 `;
 
 export default Navbar;
