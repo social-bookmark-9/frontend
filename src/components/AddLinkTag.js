@@ -10,15 +10,11 @@ import { postArticleAxios } from "../redux/modules/Article";
 import Favorite from "./Favorite";
 import { useNavigate } from "react-router";
 
-import Swal from "sweetalert2";
-
 const AddLinkTag = props => {
   const { setShowModal, openModal } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const folderName = useSelector(
-    state => state.localData.linkData.articleFolderName,
-  );
+
   const linkData = useSelector(state => state.localData.linkData);
   const folderData = useSelector(state => state.localData.folderData);
 
@@ -36,20 +32,14 @@ const AddLinkTag = props => {
     hashtag3: tagData[2] ? tagData[2] : null,
   };
 
+  console.log(folderData === undefined);
+  console.log(articleData);
+
   const handleAddLink = () => {
-    if (folderName === "미분류 컬렉션") {
-      dispatch(postArticleAxios({ articleData, navigate }));
-    } else {
-      dispatch(createFolderAxios({ folderData, articleData, navigate }));
-    }
-    Swal.fire({
-      text: "링크가 저장되었습니다",
-      icon: "success",
-      confirmButtonText: "확인",
-      confirmButtonColor: "#353C49",
-    }).then(res => {
-      openModal();
-    });
+    folderData !== undefined
+      ? dispatch(createFolderAxios({ folderData, articleData, navigate }))
+      : dispatch(postArticleAxios({ articleData, navigate }));
+    openModal();
   };
 
   const favoritesList = [

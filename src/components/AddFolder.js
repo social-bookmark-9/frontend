@@ -1,31 +1,34 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
 import { Button, Text, Title } from "../elements";
+import { sendToHashtags } from "../redux/modules/Data";
 
 const AddFolder = props => {
+  const { setAddFolderList, myFolderList } = props;
+
+  const dispatch = useDispatch();
+
   const [folderName, setFolderName] = useState("");
   const [showOption, setShowOption] = useState(false);
-  // 뒤로가기
-  const modalChange = () => {
-    props.setAddFolderList(current => !current);
-  };
 
   const getFolderName = e => {
     setFolderName(e.target.value);
   };
 
-  // 컬렉션 추가 완료 버튼 (컬렉션 추가 + 뒤로가기)
-  const addFolderDone = () => {
-    const newOptions = [folderName, ...props.options];
-    modalChange(
-      props.setOptions(newOptions),
-      props.setFolderHide(showOption),
-      props.setFolder(folderName),
-    );
-  };
-
   const checkShow = e => {
     setShowOption(e.target.value);
+  };
+
+  const folderData = {
+    articleFolderName: folderName,
+    folderHide: showOption,
+  };
+
+  // 뒤로가기
+  const modalChange = () => {
+    setAddFolderList(current => !current);
+    dispatch(sendToHashtags(folderData));
   };
 
   return (
@@ -68,9 +71,9 @@ const AddFolder = props => {
       </LinkField>
       <ButtonBox>
         <Button
-          _onClick={addFolderDone}
+          _onClick={modalChange}
           _padding="18px"
-          options={props.options}
+          myFolderList={myFolderList}
         >
           완료
         </Button>

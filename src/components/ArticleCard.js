@@ -2,34 +2,36 @@ import React from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { DesignObj, Circle } from "../elements/ImageObj";
-import { Label, Image } from "../elements";
+import { Image, Label } from "../elements";
 import { FlexboxSpace } from "../styles/flexbox";
 import LinesEllipsis from "react-lines-ellipsis";
 
 const ArticleCard = props => {
-  const { articleId, isMe, isRead, isSaved, imgUrl, createdAt } = props;
-  const articleData = {
-    article: props,
-    inDeatil: true,
-  };
+  const { article, isMe } = props;
+
   const navigate = useNavigate();
 
-  // const contents = content.slice(0, 50);
+  const isRead = article.read;
+  // 해시태스 리스트
+  const _hashTag = [article.hashtag1, article.hashtag2, article.hashtag3];
+  const hashTag = _hashTag.filter((el, i) => el !== null);
+
   // 안읽은 날짜 구하기
-  const sdt = new Date(createdAt);
-  const edt = new Date();
-  const dayDiff = Math.ceil(
-    (edt.getTime() - sdt.getTime()) / (1000 * 3600 * 24) - 1,
-  );
+  // const sdt = new Date(createdAt);
+  // const edt = new Date();
+  // const dayDiff = Math.ceil(
+  //   (edt.getTime() - sdt.getTime()) / (1000 * 3600 * 24) - 1,
+  // );
 
   return (
     <React.Fragment>
       <ArticleCardBox
         onClick={() => {
-          navigate(`/article/${articleId}`, { state: articleData });
+          navigate(`/article/${article.articleId}`);
         }}
-        imgUrl={imgUrl}
+        imgUrl={article.imgOg}
         isRead={isRead}
+        isSave={article.save}
       >
         {isRead ? (
           <CircleBox>
@@ -39,48 +41,34 @@ const ArticleCard = props => {
           ""
         )}
         {isMe ? (
-          dayDiff > 0 ? (
-            <ArticleCardObj>
-              <DesignObj />
-              <Label>안 읽은지 {dayDiff}일째</Label>
-            </ArticleCardObj>
-          ) : (
-            <ArticleCardObj>
-              <DesignObj />
-            </ArticleCardObj>
-          )
+          // dayDiff > 0 ? (
+          //   <ArticleCardObj>
+          //     <DesignObj />
+          //     <Label>안 읽은지 {dayDiff}일째</Label>
+          //   </ArticleCardObj>
+          // ) : (
+          <ArticleCardObj>
+            <DesignObj />
+          </ArticleCardObj>
         ) : (
+          // )
           <ImageBox>
             <Image
-              _src={`/images/${isSaved ? "bookmark" : "unbookmark"}.png`}
+              _src={`/images/${article.save ? "bookmark" : "unbookmark"}.png`}
               _width="25px"
               _height="24px"
               _marginR="none"
             />
           </ImageBox>
         )}
-        {/* {inDetail ? (
-          <ImageBox>
-            <Image
-              _src={`/images/link.png`}
-              _width="25px"
-              _height="24px"
-              _marginR="none"
-            />
-          </ImageBox>
-        ) : (
-          ""
-        )} */}
-
         <ArticleCardContent>
           <LabelBox>
-            {/* {hashTag.map((tag, idx) => (
-              <Label key={idx}>{tag}</Label>
-            ))} */}
+            {hashTag &&
+              hashTag.map((tag, idx) => <Label key={idx}>{tag}</Label>)}
           </LabelBox>
           <Title>
             <LinesEllipsis
-              text={"titleOg"}
+              text={article.titleOg}
               maxLine="2"
               ellipsis="..."
               trimRight
@@ -89,7 +77,7 @@ const ArticleCard = props => {
           </Title>
           <Text>
             <LinesEllipsis
-              text={"contentOg"}
+              text={article.contentOg}
               maxLine="2"
               ellipsis="..."
               trimRight

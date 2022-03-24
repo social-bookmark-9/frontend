@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { sendToHashtags } from "../redux/modules/Data";
 
 import styled from "styled-components";
@@ -9,13 +9,56 @@ import { FlexboxRow, FlexboxSpace } from "../styles/flexbox";
 import AddLinkTag from "./AddLinkTag";
 import AddFolder from "./AddFolder";
 import CheckRemind from "./CheckRemind";
+import { getFolderListAxios } from "../redux/modules/Folder";
 
 const Modal = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getFolderListAxios());
+  }, [dispatch]);
+
+  const folderList = useSelector(state => state.folder.myFolderList);
+
+  const toggleAddFolderList = () => {
+    setAddFolderList(!addFolderList);
+  };
+
+  const myFolderList =
+    folderList &&
+    folderList
+      .map(list => list.articleFolderName)
+      .concat(
+        <FolderAdd onClick={toggleAddFolderList}>+ 새 컬렉션 추가</FolderAdd>,
+      );
+
+  const remindList = [
+    { key: "내일", value: 1 },
+    { key: "3일 뒤", value: 3 },
+    { key: "7일 뒤", value: 7 },
+  ];
+
   // 모달 열고 닫기
   const [modalOpen, setModalOpen] = useState(false);
   // 어떤 모달창 보여줄지 (링크 추가 단계)
   const [showModal, setShowModal] = useState(false);
+  const [options, setOptions] = useState(folderList);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [addFolderList, setAddFolderList] = useState(true);
+  const [folder, setFolder] = useState(myFolderList && myFolderList[0]);
+
+  // 전달할 정보 세팅
+  const [url, setUrl] = useState("");
+  const [checkedRemind, setCheckedRemind] = useState(0);
+
+  const linkData = {
+    url: url,
+    readCount: 0,
+    reminderDate: +checkedRemind,
+    articleFolderName: folder,
+  };
+
   // 모달 열고 닫기 펑션
 
   const openModal = () => {
@@ -31,42 +74,6 @@ const Modal = () => {
     }
   };
 
-  const remindList = [
-    { key: "내일", value: 1 },
-    { key: "3일 뒤", value: 3 },
-    { key: "7일 뒤", value: 7 },
-  ];
-
-  const toggleAddFolderList = () => {
-    setAddFolderList(!addFolderList);
-  };
-
-  const [options, setOptions] = useState([
-    "미분류 컬렉션",
-    <FolderAdd onClick={toggleAddFolderList}>+ 새 컬렉션 추가</FolderAdd>,
-  ]);
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [addFolderList, setAddFolderList] = useState(true);
-  const [folder, setFolder] = useState(options[0]);
-
-  // 전달할 정보 세팅
-  const [url, setUrl] = useState("");
-  const [checkedRemind, setCheckedRemind] = useState(0);
-  const [folderHide, setFolderHide] = useState(false);
-
-  const linkData = {
-    url: url,
-    readCount: 0,
-    reminderDate: +checkedRemind,
-    articleFolderName: folder,
-  };
-
-  const folderData = {
-    articleFolderName: folder,
-    folderHide: folderHide,
-  };
-
   const getUrl = e => {
     setUrl(e.target.value);
   };
@@ -77,7 +84,7 @@ const Modal = () => {
 
   const modalChange = () => {
     setShowModal(current => !current);
-    dispatch(sendToHashtags({ linkData, folderData }));
+    dispatch(sendToHashtags({ linkData }));
   };
 
   const toggleDropdown = () => {
@@ -129,15 +136,15 @@ const Modal = () => {
                         </DropdownHeader>
                         {isOpen && (
                           <DropdownList key={folder}>
-                            {options.map((option, idx) => (
+                            {myFolderList.map((list, idx) => (
                               <DropdownItem
                                 key={idx}
                                 onClick={() => {
-                                  toggleDropdown(setFolder(option));
+                                  toggleDropdown(setFolder(list));
                                 }}
                                 onChange={handleChangeFolder}
                               >
-                                {option}
+                                {list}
                               </DropdownItem>
                             ))}
                           </DropdownList>
@@ -180,11 +187,8 @@ const Modal = () => {
                     </LinkBox>
                   ) : (
                     <AddFolder
-                      options={options}
+                      myFolderList={myFolderList}
                       setAddFolderList={setAddFolderList}
-                      setOptions={setOptions}
-                      setFolderHide={setFolderHide}
-                      setFolder={setFolder}
                     />
                   )}
                 </>

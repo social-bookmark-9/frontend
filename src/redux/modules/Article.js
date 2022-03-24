@@ -71,6 +71,7 @@ export const articleSlice = createSlice({
         text: "링크가 저장되었습니다",
         confirmButtonText: "확인",
       });
+      state.localdata = null;
     },
   },
 });

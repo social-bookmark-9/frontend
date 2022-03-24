@@ -24,6 +24,25 @@ export default class folderApi {
       });
   }
 
+  async getFolderList() {
+    const getFolderListConfig = {
+      method: "GET",
+      url: `${this.base}/api/articleFolders/folderName`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
+    };
+    return axios(getFolderListConfig)
+      .then(res => {
+        console.log(res);
+        return res.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   async createFolder({ folderData, navigate }) {
     const createFolderConfig = {
       method: "POST",

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { Navbar, UserProfile } from "../components";
+import { ArticleFolder, Navbar, UserProfile } from "../components";
 import { useParams } from "react-router";
 import { getProfileAxios } from "../redux/modules/Profile";
 import AddCollection from "../components/AddCollection";
@@ -16,9 +16,9 @@ const MyPage = props => {
     dispatch(getProfileAxios(memberId));
   }, [dispatch, memberId]);
   // ----- 폴더 리스트 ----- //
-  const folderList = useSelector(state => state.folder.articleFolderList);
-  const defaultFolder = folderList;
-  const userFolder = folderList;
+  const folderList = useSelector(state => state.profile.folderInfo);
+  const defaultFolder = folderList[0];
+  const userFolder = folderList && folderList.slice(1);
   // ----- 유저 정보 ----- //
   const userInfo = useSelector(state => state.profile.memberInfo);
   const myInfo = useSelector(state => state.user.myInfo);
@@ -44,19 +44,20 @@ const MyPage = props => {
           userInfo={userInfo}
           {...myInfo}
         />
-
-        {/* 아티클 리마인드 또는 새 컬렉션 만들기 */}
-
         {/* 폴더리스트 시작 */}
-        {/* {userFolder.map((folder, idx) => (
-          <ArticleFolder
-            {...folder}
-            key={idx}
-            folderColor={
-              idx % 3 === 0 ? "green" : idx % 3 === 1 ? "purple" : "blue"
-            }
-          />
-        ))} */}
+        {console.log(userFolder)}
+        {userFolder &&
+          userFolder.map((folder, idx) => (
+            <FolderContainer>
+              <ArticleFolder
+                folder={folder}
+                key={idx}
+                folderColor={
+                  idx % 3 === 0 ? "green" : idx % 3 === 1 ? "purple" : "blue"
+                }
+              />
+            </FolderContainer>
+          ))}
         <MyPageSuggest userInfo={userInfo} {...myInfo} />
         {modalOpen ? (
           <AddCollection
@@ -72,4 +73,9 @@ const MyPage = props => {
 const Container = styled.div`
   margin-bottom: 85px;
 `;
+
+const FolderContainer = styled.div`
+  padding: 8px 16px;
+`;
+
 export default MyPage;

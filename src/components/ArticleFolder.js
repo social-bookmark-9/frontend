@@ -74,6 +74,8 @@ const ArticleFolder = props => {
               <Label bgColor="white" _padding="7px" borderColor="white">
                 <Image
                   _src={`/images/${folder.hide ? "show" : "hide"}.png`}
+                  _width="20px"
+                  _height="20px"
                   _marginR="0px"
                 />
               </Label>
