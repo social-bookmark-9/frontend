@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import profileApi from "../app/profileApi";
-import { setFolder } from "./Folder";
 
 const ProfileApi = new profileApi();
 
