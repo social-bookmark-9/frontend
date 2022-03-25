@@ -6,10 +6,11 @@ import { RemindCard } from ".";
 import { Label, Title, Image, Text } from "../elements";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import ArticleFolder from "./ArticleFolder";
 
 const MyPageRemind = props => {
   const {
-    // defaultFolder,
+    defaultFolder,
     userFolder,
     userInfo,
     completeRate,
@@ -53,25 +54,23 @@ const MyPageRemind = props => {
             </LabelBox>
           </Qheader>
 
-          {/* <div style={{padding:"0 16px"}}>
           <ArticleFolder
             folderColor="default"
-            isDefault={true}
-            {...defaultFolder}
+            folder={defaultFolder}
+            isDefault
           />
-        </div> */}
 
-          {userFolder.length > 0 ? (
+          {userFolder && userFolder.length > 0 ? (
             <AlertBox>
               <RemindAlert>
-                <div>
+                <ImageBox>
                   <Image
                     _src="/images/remind.png"
                     _width="20px"
                     _height="19px"
                   />
-                </div>
-                <div>
+                </ImageBox>
+                <TextBox>
                   <Title
                     _fontSize={({ theme }) => theme.fontSizes.font16}
                     _lineHeight="22px"
@@ -84,16 +83,16 @@ const MyPageRemind = props => {
                   >
                     아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
                   </Text>
-                </div>
+                </TextBox>
               </RemindAlert>
             </AlertBox>
           ) : (
             <AlertBox onClick={openModal}>
               <RemindAlert>
-                <div>
-                  <Image _src="/images/add.png" _width="16px" _height="16px" />
-                </div>
-                <div>
+                <ImageBox>
+                  <Image _src="/images/add.png" _width="20px" _height="20px" />
+                </ImageBox>
+                <TextBox>
                   <Title
                     _fontSize={({ theme }) => theme.fontSizes.font16}
                     _lineHeight="22px"
@@ -106,7 +105,7 @@ const MyPageRemind = props => {
                   >
                     컬렉션을 만들어 링크를 분류해 보세요
                   </Text>
-                </div>
+                </TextBox>
               </RemindAlert>
             </AlertBox>
           )}
@@ -133,10 +132,12 @@ const AlertBox = styled.div`
 
 const RemindAlert = styled.div`
   display: flex;
+  flex-direction: row;
   height: 82px;
   border: 1px solid #f2f3f4;
   border-radius: 16px;
   padding: 19px 22px;
+  cursor: pointer;
 `;
 
 const TextPoint = styled.span`
@@ -148,6 +149,17 @@ const TextPoint = styled.span`
       font-weight: ${fontWeight.semiBold};
     `;
   }}
+`;
+
+const ImageBox = styled.div`
+  display: flex;
+`;
+
+const TextBox = styled.div`
+  display: block;
+  & h1 {
+    padding-bottom: 2px;
+  }
 `;
 
 export default MyPageRemind;

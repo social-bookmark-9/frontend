@@ -7,7 +7,9 @@ import { Button, Image, Title } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getArticleAxios,
+  getArticleWithAxios,
   postArticleAxios,
+  reviewHideAxios,
   updateReviewAxios,
 } from "../redux/modules/Article";
 import { useNavigate, useParams } from "react-router";
@@ -15,8 +17,10 @@ import DetailCard from "../components/DetailCard";
 import DetailNavbar from "../components/DetailNavbar";
 import RecommendCard from "../components/RecommendCard";
 import Swal from "sweetalert2";
+// import DetailRemind from "../components/DetailRemind";
 
 const ArticleDetail = props => {
+  const { isLogin } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -25,15 +29,25 @@ const ArticleDetail = props => {
 
   const memoRef = useRef();
 
+  // useEffect(() => {
+  //   dispatch(getArticleDB({ articleId, navigate }));
+  // }, [dispatch]);
+
   useEffect(() => {
-    dispatch(getArticleAxios({ articleId, navigate }));
-  }, [dispatch, articleId, navigate]);
+    if (isLogin) {
+      dispatch(getArticleWithAxios({ articleId, navigate }));
+    } else {
+      dispatch(getArticleAxios({ articleId, navigate }));
+    }
+  }, [dispatch, articleId, navigate, isLogin]);
 
   const article = useSelector(state => state.article.data);
   const recommendList = article.recommendArticles;
+  // const reminderDate = article.reminderDate;
+  const isMe = true;
 
   const [words, setWords] = useState(0);
-  const [reviewHide, setReviewHide] = useState(false);
+  const [reviewHide, setReviewHide] = useState(article.reviewHide);
 
   const handleKeyUp = e => {
     if (e.target.value.length <= 200) {
@@ -50,8 +64,8 @@ const ArticleDetail = props => {
       dispatch(updateReviewAxios({ articleId, review, navigate }));
     }
   };
-
   console.log(reviewHide);
+
   const handleMemoHide = () => {
     if (reviewHide) {
       Swal.fire({
@@ -61,6 +75,7 @@ const ArticleDetail = props => {
         cancelButtonText: "취소",
       }).then(result => {
         if (result.isConfirmed) {
+          dispatch(reviewHideAxios(articleId));
           Swal.fire({ text: "저장했습니다", confirmButtonText: "확인" });
           setReviewHide(false);
         }
@@ -73,6 +88,7 @@ const ArticleDetail = props => {
         cancelButtonText: "취소",
       }).then(result => {
         if (result.isConfirmed) {
+          dispatch(reviewHideAxios(articleId));
           Swal.fire({ text: "저장했습니다", confirmButtonText: "확인" });
           setReviewHide(true);
         }
@@ -90,7 +106,6 @@ const ArticleDetail = props => {
       hashtag2: article.hashtag2,
       hashtag3: article.hashtag3,
     };
-
     dispatch(postArticleAxios({ articleData, navigate }));
   };
 
@@ -119,11 +134,13 @@ const ArticleDetail = props => {
               _fontSize={({ theme }) => theme.fontSizes.font20}
               _lineHeight="24px"
             >
-              내이름의 메모
+              "내이름"의 메모
             </Title>
-            <ImageBox onClick={handleMemoHide}>
-              <Image _src="/images/hide.png" _width="20px" _height="20px" />
-            </ImageBox>
+            {isMe ? (
+              <ImageBox onClick={handleMemoHide}>
+                <Image _src="/images/hide.png" _width="20px" _height="20px" />
+              </ImageBox>
+            ) : null}
           </MemoHead>
           <TextAreaField
             ref={memoRef}
@@ -137,6 +154,7 @@ const ArticleDetail = props => {
           />
           <InputCheck>{words}/200</InputCheck>
         </MemoBox>
+        {/* <DetailRemind reminderDate={reminderDate} /> */}
       </DetailContainer>
       <Line />
       <div style={{ padding: "24px 20px" }}>

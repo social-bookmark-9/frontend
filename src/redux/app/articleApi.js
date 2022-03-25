@@ -52,12 +52,30 @@ export default class articleApi {
       url: `${this.base}/api/articles/${articleId}`,
       headers: {
         "Content-Type": "application/json",
-        "X-AUTH-TOKEN": getToken(),
       },
     };
     return axios(getArticleConfig)
       .then(res => {
-        console.log("겟아티클:", res);
+        console.log("비로그인 겟아티클:", res);
+        return res.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  async getArticleWith({ articleId, navigate }) {
+    const getArticleWithConfig = {
+      method: "GET",
+      url: `${this.base}/api/articles/${articleId}`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
+    };
+    return axios(getArticleWithConfig)
+      .then(res => {
+        console.log("로그인 겟아티클:", res);
         return res.data;
       })
       .catch(err => {

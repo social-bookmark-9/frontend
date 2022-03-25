@@ -53,7 +53,7 @@ const MainD = props => {
   );
 };
 
-Main.defaultProps = {};
+MainD.defaultProps = {};
 
 const MainContainer = styled.div``;
 

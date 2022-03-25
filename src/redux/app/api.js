@@ -7,10 +7,12 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   async req => {
-    req.headers["content-type"] = "application/json; charset=utf-8";
     if (getToken() !== null) {
       req.headers["X-AUTH-TOKEN"] = await getToken();
     }
+    req.headers["content-type"] = "application/json; charset=utf-8";
+    // req.headers["X-Requested-With"] = "XMLHttpRequest";
+    // req.headers.Accept = "application/json";
     return req;
   },
   err => {
@@ -19,15 +21,14 @@ instance.interceptors.request.use(
   },
 );
 
-instance.interceptors.response.use(
-  resp => {
-    console.lof(resp);
-    return resp;
-  },
-  err => {
-    console.log(err);
-    return Promise.reject(err);
-  },
-);
+// export const userApi = {
+//   kakaoLogin: ({ code, navigate, dispatch }) =>
+//     instance.get(`${process.env.REACT_APP_KAKAO_URI}?code=${code}`),
+// };
 
-export default instance;
+export const api = {
+  getArticle: ({ articleId, navigate }) =>
+    instance.get(`/api/articles/${articleId}`),
+};
+
+export default api;

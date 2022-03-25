@@ -9,6 +9,7 @@ import {
   RecommendUser,
   MainTop,
 } from "../components";
+import Search from "../components/Search";
 
 const MainPage = props => {
   const isLogin = useSelector(state => state.user.isLogin);
@@ -28,6 +29,8 @@ const MainPage = props => {
         <Curations folderList={folderList} />
         {/* 추천 유저 */}
         <RecommendUser memberInfo={memberInfo} />
+        {/* 검색 */}
+        <Search />
         {isLogin ? <Modal /> : null}
       </MainContainer>
     </React.Fragment>
