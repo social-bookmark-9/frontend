@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import styled from "styled-components";
-import { Title, Button, Text } from "../elements";
+import { Title, Button, Text, Image } from "../elements";
 
 import { useDispatch, useSelector } from "react-redux";
 import { createFolderAxios } from "../redux/modules/Folder";
@@ -9,9 +9,10 @@ import { postArticleAxios } from "../redux/modules/Article";
 
 import Favorite from "./Favorite";
 import { useNavigate } from "react-router";
+import { FlexboxRow } from "../styles/flexbox";
 
 const AddLinkTag = props => {
-  const { setShowModal, openModal } = props;
+  const { setShowModal, openModal, myFolderList } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -32,13 +33,12 @@ const AddLinkTag = props => {
     hashtag3: tagData[2] ? tagData[2] : null,
   };
 
-  console.log(folderData === undefined);
-  console.log(articleData);
-
   const handleAddLink = () => {
-    folderData !== undefined
-      ? dispatch(createFolderAxios({ folderData, articleData, navigate }))
-      : dispatch(postArticleAxios({ articleData, navigate }));
+    if (myFolderList.includes(linkData.articleFolderName)) {
+      dispatch(postArticleAxios({ articleData, navigate }));
+    } else {
+      dispatch(createFolderAxios({ folderData, articleData, navigate }));
+    }
     openModal();
   };
 
@@ -90,7 +90,20 @@ const AddLinkTag = props => {
           <div />
         </TitleBox>
         <FavoritesBox>
-          <Text></Text>
+          <NotiBox>
+            <Image
+              _src="/images/DesktopMain1.png"
+              _width="16px"
+              _height="16px"
+            />
+            <Text
+              _fontSize={({ theme }) => theme.fontSizes.font13}
+              textAlign="center"
+            >
+              링크와 비슷한 유형의 태그부터 선택해주세요{" "}
+              <TextSpan>(최대 3개)</TextSpan>
+            </Text>
+          </NotiBox>
           <Favorites onChange={handleChecked}>
             {favoritesList.map((favor, idx) => (
               <Favorite key={idx} idx={idx} favoriteName={favor} />
@@ -135,6 +148,21 @@ const Favorites = styled.div`
   width: 317px;
   justify-content: center;
   text-align: center;
+`;
+
+const NotiBox = styled.div`
+  ${FlexboxRow};
+  align-items: center;
+  padding: 8px 0 16px 0;
+  & p {
+    display: inline-block;
+  }
+`;
+
+const TextSpan = styled.span`
+  color: ${({ theme }) => theme.colors.fontColor01};
+  font-size: ${({ theme }) => theme.fontSizes.font12};
+  line-height: 16px;
 `;
 
 export default AddLinkTag;

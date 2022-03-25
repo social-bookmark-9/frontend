@@ -12,7 +12,11 @@ const ArticleFolder = props => {
   const isMe = useSelector(state => state.user.isMe);
 
   // 해시태스 리스트
-  const _hashTag = [folder.hashTag1, folder.hashTag2, folder.hashTag3];
+  const _hashTag = folder && [
+    folder.hashTag1,
+    folder.hashTag2,
+    folder.hashTag3,
+  ];
   const hashTag = _hashTag.filter((el, i) => el !== null);
 
   // 폴더 별 색상 (폰트, 라벨, 해시태그)

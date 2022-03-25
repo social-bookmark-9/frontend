@@ -17,7 +17,7 @@ import DetailCard from "../components/DetailCard";
 import DetailNavbar from "../components/DetailNavbar";
 import RecommendCard from "../components/RecommendCard";
 import Swal from "sweetalert2";
-import DetailRemind from "../components/DetailRemind";
+// import DetailRemind from "../components/DetailRemind";
 
 const ArticleDetail = props => {
   const { isLogin } = props;
@@ -43,7 +43,7 @@ const ArticleDetail = props => {
 
   const article = useSelector(state => state.article.data);
   const recommendList = article.recommendArticles;
-  const reminderDate = article.reminderDate;
+  // const reminderDate = article.reminderDate;
   const isMe = true;
 
   const [words, setWords] = useState(0);

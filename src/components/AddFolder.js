@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
 import { Button, Text, Title } from "../elements";
-import { sendToHashtags } from "../redux/modules/Data";
+import { sendFolderDataToLocal } from "../redux/modules/LocalData";
 
 const AddFolder = props => {
-  const { setAddFolderList } = props;
+  const { setAddFolderList, setOptions, setFolder, options } = props;
 
   const dispatch = useDispatch();
 
@@ -25,10 +25,16 @@ const AddFolder = props => {
     folderHide: showOption,
   };
 
+  console.log("폴더 추가", options);
+  console.log(folderData);
+
   // 뒤로가기
   const modalChange = () => {
+    const newOptions = [folderName, options];
+    setOptions(newOptions);
+    setFolder(folderName);
     setAddFolderList(current => !current);
-    dispatch(sendToHashtags(folderData));
+    dispatch(sendFolderDataToLocal(folderData));
   };
 
   return (
@@ -70,13 +76,60 @@ const AddFolder = props => {
         </Settingwrap>
       </LinkField>
       <ButtonBox>
-        <Button _onClick={modalChange} _padding="18px">
-          컬렉션 생성하기
+        <Button _onClick={modalChange} _padding="18px" options={props.options}>
+          완료
         </Button>
       </ButtonBox>
     </div>
   );
 };
+
+// return (
+//   <div>
+//     <TitleBox>
+//       <BackButton onClick={modalChange}>{"<"}</BackButton>
+//       <Title _fontSize={({ theme }) => theme.fontSizes.font16}>
+//         새 컬렉션 추가
+//       </Title>
+//       <div />
+//     </TitleBox>
+//     <Header>
+//       <Text _fontSize="14px">새 컬렉션 이름</Text>
+//       <Input placeholder="컬렉션명을 입력하세요" onChange={getFolderName} />
+//     </Header>
+//     <LinkField>
+//       <Text _fontSize="14px">공개여부</Text>
+//       <Settingwrap>
+//         <ShowLabel>
+//           <ShowRadio
+//             type="radio"
+//             id="0"
+//             name="radioButton"
+//             value={false}
+//             onClick={checkShow}
+//           />
+//           <ShowText>공개</ShowText>
+//         </ShowLabel>
+//         <ShowLabel>
+//           <ShowRadio
+//             type="radio"
+//             id="1"
+//             name="radioButton"
+//             value={true}
+//             onClick={checkShow}
+//           />
+//           <ShowText>비공개</ShowText>
+//         </ShowLabel>
+//       </Settingwrap>
+//     </LinkField>
+//     <ButtonBox>
+//       <Button _onClick={modalChange} _padding="18px">
+//         컬렉션 생성하기
+//       </Button>
+//     </ButtonBox>
+//   </div>
+// );
+// };
 
 const TitleBox = styled.div`
   display: flex;

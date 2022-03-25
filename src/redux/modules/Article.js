@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Swal from "sweetalert2";
 import articleApi from "../app/articleApi";
-import api from "../app/api";
+// import api from "../app/api";
 
 const ArticleApi = new articleApi();
 
@@ -13,6 +13,10 @@ export const postArticleAxios = createAsyncThunk(
   "article/postArticle",
   async ({ articleData, navigate }, { dispatch }) => {
     const resp = await ArticleApi.postArticle({ articleData, navigate });
+    Swal.fire({
+      text: "링크가 저장되었습니다",
+      confirmButtonText: "확인",
+    });
     return resp;
   },
 );
@@ -92,11 +96,7 @@ export const articleSlice = createSlice({
       state.review = action.payload.data.review;
     },
     [postArticleAxios.fulfilled]: (state, action) => {
-      Swal.fire({
-        text: "링크가 저장되었습니다",
-        confirmButtonText: "확인",
-      });
-      state.localdata = null;
+      state.localdata = initialState;
     },
   },
 });
