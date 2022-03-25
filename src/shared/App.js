@@ -26,7 +26,6 @@ import ChangeFavorites from "../pages/ChangeFavorites";
 import NotFound from "../pages/NotFound";
 import ErrorBoundary from "./ErrorBoundary";
 import Spinner from "../components/Spinner";
-import { getFolderListAxios } from "../redux/modules/Folder";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -37,7 +36,6 @@ function App(props) {
     if (getToken()) {
       dispatch(checkUserAxios(getToken()));
       dispatch(getMainWithAxios());
-      dispatch(getFolderListAxios());
     } else {
       dispatch(getMainAxios());
     }
