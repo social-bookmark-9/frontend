@@ -11,7 +11,7 @@ export default class userApi {
     const kakaoLoginConfig = {
       method: "GET",
       // url: `${this.base}${process.env.REACT_APP_KAKAO_URI}?code=${code}`,
-      url: `${this.base}http://finalproject9.s3-website.ap-northeast-2.amazonaws.com/api/users/login?code=${code}`,
+      url: `${this.base}/api/users/login?code=${code}`,
     };
     return axios(kakaoLoginConfig)
       .then(res => {

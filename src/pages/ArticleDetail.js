@@ -42,12 +42,18 @@ const ArticleDetail = props => {
   }, [dispatch, articleId, navigate, isLogin]);
 
   const article = useSelector(state => state.article.data);
+  const myId = useSelector(state => state.user.myInfo.memberId);
   const recommendList = article.recommendArticles;
   // const reminderDate = article.reminderDate;
-  const isMe = true;
-
   const [words, setWords] = useState(0);
   const [reviewHide, setReviewHide] = useState(article.reviewHide);
+  const [isMe, setIsMe] = useState(false);
+
+  if (article.writerMemberID === myId) {
+    setIsMe(true);
+  }
+
+  console.log(article.reviewHide);
 
   const handleKeyUp = e => {
     if (e.target.value.length <= 200) {
@@ -134,7 +140,7 @@ const ArticleDetail = props => {
               _fontSize={({ theme }) => theme.fontSizes.font20}
               _lineHeight="24px"
             >
-              "내이름"의 메모
+              {article.writerMemberName}의 메모
             </Title>
             {isMe ? (
               <ImageBox onClick={handleMemoHide}>

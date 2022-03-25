@@ -18,9 +18,11 @@ const MyPageRemind = props => {
     openModal,
   } = props;
 
-  const [myOwnPage, setMyOwnPage] = useState(false);
   const params = useParams();
+  // const isDefault = defaultFolder.isdDeleteable;
+  const isDefault = true;
 
+  const [myOwnPage, setMyOwnPage] = useState(false);
   useEffect(() => {
     if (parseInt(params.id) === parseInt(memberId)) {
       setMyOwnPage(true);
@@ -57,7 +59,7 @@ const MyPageRemind = props => {
           <ArticleFolder
             folderColor="default"
             folder={defaultFolder}
-            isDefault
+            isDefault={isDefault}
           />
 
           {userFolder && userFolder.length > 0 ? (

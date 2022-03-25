@@ -17,7 +17,7 @@ const ArticleFolder = props => {
     folder.hashTag2,
     folder.hashTag3,
   ];
-  const hashTag = _hashTag.filter((el, i) => el !== null);
+  const hashTag = folder && _hashTag.filter(el => el !== null);
 
   // 폴더 별 색상 (폰트, 라벨, 해시태그)
   const propsColor = () => {
@@ -41,16 +41,18 @@ const ArticleFolder = props => {
           isMe={isMe}
           isDefault={isDefault}
         >
-          {isMe || isDefault ? (
-            <LabelBox>
-              <Label
-                _color={propsColor}
-                borderColor={propsColor}
-                bgColor="none"
-              >
-                완독률 {folder.completeRate}%
-              </Label>
-            </LabelBox>
+          {isMe ? (
+            folder && isDefault ? null : (
+              <LabelBox>
+                <Label
+                  _color={propsColor}
+                  borderColor={propsColor}
+                  bgColor="none"
+                >
+                  완독률 {folder.completeRate}%
+                </Label>
+              </LabelBox>
+            )
           ) : (
             <LabelBox>
               {hashTag.map((tag, idx) => (
@@ -72,17 +74,19 @@ const ArticleFolder = props => {
               _lineHeight="24px"
               _color={propsColor}
             >
-              {isDefault ? "미분류 컬렉션" : folder.folderName}
+              {folder.folderName}
             </Title>
-            {isMe || isDefault ? (
-              <Label bgColor="white" _padding="7px" borderColor="white">
-                <Image
-                  _src={`/images/${folder.hide ? "show" : "hide"}.png`}
-                  _width="20px"
-                  _height="20px"
-                  _marginR="0px"
-                />
-              </Label>
+            {isMe ? (
+              isDefault ? null : (
+                <Label bgColor="white" _padding="7px" borderColor="white">
+                  <Image
+                    _src={`/images/${folder.hide ? "show" : "hide"}.png`}
+                    _width="20px"
+                    _height="20px"
+                    _marginR="0px"
+                  />
+                </Label>
+              )
             ) : (
               <Label
                 _fontSize={({ theme }) => theme.fontSizes.font12}
@@ -99,7 +103,6 @@ const ArticleFolder = props => {
                       ? "/images/thumbsUpPurple.png"
                       : "/images/thumbsUpGreen.png"
                   }
-                  _marginR="0px"
                   _width="11px"
                   _height="11px"
                 />
