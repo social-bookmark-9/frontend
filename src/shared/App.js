@@ -30,6 +30,7 @@ import Spinner from "../components/Spinner";
 function App(props) {
   const dispatch = useDispatch();
   const myInfo = useSelector(state => state.user.myInfo);
+  const isLogin = useSelector(state => state.user.isLogin);
 
   useEffect(() => {
     if (getToken()) {
@@ -54,12 +55,18 @@ function App(props) {
             <Route path="/login" element={<Login />} />
             <Route path="/user/nickname" element={<UserNickname />} />
             <Route path="/user/favorites" element={<UserFavorites />} />
-            <Route path="/articles/:id" element={<ArticleList {...myInfo} />} />
+            <Route
+              path="/articles/:id"
+              element={<ArticleList {...myInfo} isLogin={isLogin} />}
+            />
             <Route
               path="/article/:id"
-              element={<ArticleDetail {...myInfo} />}
+              element={<ArticleDetail {...myInfo} isLogin={isLogin} />}
             />
-            <Route path="/mypage/:id" element={<MyPage {...myInfo} />} />
+            <Route
+              path="/mypage/:id"
+              element={<MyPage {...myInfo} isLogin={isLogin} />}
+            />
             <Route path="/setting" element={<Setting {...myInfo} />} />
             <Route path="/reminder" element={<Reminder />} />
             <Route path="/api/users/login" element={<OAuthRedirectHandler />} />

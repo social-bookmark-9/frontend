@@ -14,7 +14,17 @@ export const getFolderAxios = createAsyncThunk(
   "folder/getFolder",
   async (folderId, { dispatch }) => {
     const resp = await FolderApi.getFolder(folderId);
-    console.log("아티클리스트가져오기: ", resp);
+    console.log("비로그인 아티클리스트가져오기: ", resp);
+    dispatch(setFolder(resp.data));
+    return resp;
+  },
+);
+
+export const getFolderWithAxios = createAsyncThunk(
+  "folder/getFolder",
+  async (folderId, { dispatch }) => {
+    const resp = await FolderApi.getFolderWith(folderId);
+    console.log("로그인 아티클리스트가져오기: ", resp);
     dispatch(setFolder(resp.data));
     return resp;
   },

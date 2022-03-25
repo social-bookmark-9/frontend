@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { getFolderAxios } from "../redux/modules/Folder";
+import { getFolderAxios, getFolderWithAxios } from "../redux/modules/Folder";
 
 import styled from "styled-components";
 import { FlexboxColumn } from "../styles/flexbox";
@@ -11,21 +11,25 @@ import { Text, Button, Image } from "../elements";
 import Swal from "sweetalert2";
 
 const ArticleList = props => {
+  const { isLogin } = props;
   // const location = useLocation();
   const dispatch = useDispatch();
   const params = useParams();
   const copyUrlRef = useRef();
 
   const folderId = params.id;
-
-  useEffect(() => {
-    dispatch(getFolderAxios(folderId));
-  }, [dispatch, folderId]);
-
   const isMe = useSelector(state => state.folder.folderInfo.me);
   const folderInfo = useSelector(state => state.folder.folderInfo);
   const articleListData = useSelector(state => state.folder.articleList);
   const collectionUrl = window.location.href;
+
+  useEffect(() => {
+    if (isLogin) {
+      dispatch(getFolderWithAxios(folderId));
+    } else {
+      dispatch(getFolderAxios(folderId));
+    }
+  }, [dispatch, folderId, isLogin]);
 
   const copyCollectionUrl = () => {
     copyUrlRef.current.focus();

@@ -5,7 +5,7 @@ import { Button, Text, Title } from "../elements";
 import { sendToHashtags } from "../redux/modules/Data";
 
 const AddFolder = props => {
-  const { setAddFolderList, myFolderList } = props;
+  const { setAddFolderList } = props;
 
   const dispatch = useDispatch();
 
@@ -70,12 +70,8 @@ const AddFolder = props => {
         </Settingwrap>
       </LinkField>
       <ButtonBox>
-        <Button
-          _onClick={modalChange}
-          _padding="18px"
-          myFolderList={myFolderList}
-        >
-          완료
+        <Button _onClick={modalChange} _padding="18px">
+          컬렉션 생성하기
         </Button>
       </ButtonBox>
     </div>

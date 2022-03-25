@@ -131,7 +131,9 @@ const Modal = () => {
                       <Text _fontSize="14px">컬렉션 선택</Text>
                       <Dropdown>
                         <DropdownHeader state={isOpen} onClick={toggleDropdown}>
-                          <FolderName>{folder}</FolderName>
+                          <FolderName>
+                            {folder ? folder : "미분류 컬렉션"}
+                          </FolderName>
                           <SelectIcon>{">"}</SelectIcon>
                         </DropdownHeader>
                         {isOpen && (

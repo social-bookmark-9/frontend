@@ -12,10 +12,27 @@ export default class folderApi {
       url: `${this.base}/api/articleFolders/${folderId}`,
       headers: {
         "Content-Type": "application/json",
-        "X-AUTH-TOKEN": getToken(),
       },
     };
     return axios(getFolderConfig)
+      .then(res => {
+        return res.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  async getFolderWith(folderId) {
+    const getFolderWithConfig = {
+      method: "GET",
+      url: `${this.base}/api/articleFolders/${folderId}`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
+    };
+    return axios(getFolderWithConfig)
       .then(res => {
         return res.data;
       })
