@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import styled from "styled-components";
-import { Title, Button, Text } from "../elements";
+import { Title, Button, Text, Image } from "../elements";
 
 import { useDispatch, useSelector } from "react-redux";
 import { createFolderAxios } from "../redux/modules/Folder";
@@ -9,16 +9,13 @@ import { postArticleAxios } from "../redux/modules/Article";
 
 import Favorite from "./Favorite";
 import { useNavigate } from "react-router";
-
-import Swal from "sweetalert2";
+import { FlexboxRow } from "../styles/flexbox";
 
 const AddLinkTag = props => {
-  const { setShowModal, openModal } = props;
+  const { setShowModal, openModal, myFolderList } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const folderName = useSelector(
-    state => state.localData.linkData.articleFolderName,
-  );
+
   const linkData = useSelector(state => state.localData.linkData);
   const folderData = useSelector(state => state.localData.folderData);
 
@@ -37,19 +34,12 @@ const AddLinkTag = props => {
   };
 
   const handleAddLink = () => {
-    if (folderName === "미분류 컬렉션") {
+    if (myFolderList.includes(linkData.articleFolderName)) {
       dispatch(postArticleAxios({ articleData, navigate }));
     } else {
       dispatch(createFolderAxios({ folderData, articleData, navigate }));
     }
-    Swal.fire({
-      text: "링크가 저장되었습니다",
-      icon: "success",
-      confirmButtonText: "확인",
-      confirmButtonColor: "#353C49",
-    }).then(res => {
-      openModal();
-    });
+    openModal();
   };
 
   const favoritesList = [
@@ -100,7 +90,20 @@ const AddLinkTag = props => {
           <div />
         </TitleBox>
         <FavoritesBox>
-          <Text></Text>
+          <NotiBox>
+            <Image
+              _src="/images/DesktopMain1.png"
+              _width="16px"
+              _height="16px"
+            />
+            <Text
+              _fontSize={({ theme }) => theme.fontSizes.font13}
+              textAlign="center"
+            >
+              링크와 비슷한 유형의 태그부터 선택해주세요{" "}
+              <TextSpan>(최대 3개)</TextSpan>
+            </Text>
+          </NotiBox>
           <Favorites onChange={handleChecked}>
             {favoritesList.map((favor, idx) => (
               <Favorite key={idx} idx={idx} favoriteName={favor} />
@@ -145,6 +148,21 @@ const Favorites = styled.div`
   width: 317px;
   justify-content: center;
   text-align: center;
+`;
+
+const NotiBox = styled.div`
+  ${FlexboxRow};
+  align-items: center;
+  padding: 8px 0 16px 0;
+  & p {
+    display: inline-block;
+  }
+`;
+
+const TextSpan = styled.span`
+  color: ${({ theme }) => theme.colors.fontColor01};
+  font-size: ${({ theme }) => theme.fontSizes.font12};
+  line-height: 16px;
 `;
 
 export default AddLinkTag;

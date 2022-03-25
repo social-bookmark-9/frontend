@@ -5,7 +5,7 @@ import userReducer from "./modules/User";
 import articleReducer from "./modules/Article";
 import folderReducer from "./modules/Folder";
 import profileReducer from "./modules/Profile";
-import localDataReducer from "./modules/Data";
+import localDataReducer from "./modules/LocalData";
 import mainReducer from "./modules/Main";
 
 export const store = configureStore({

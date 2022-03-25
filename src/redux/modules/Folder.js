@@ -6,15 +6,36 @@ import { postArticleAxios } from "./Article";
 const FolderApi = new folderApi();
 
 const initialState = {
-  articleFolderList: [],
+  folderInfo: {},
+  articleList: [],
 };
 
 export const getFolderAxios = createAsyncThunk(
   "folder/getFolder",
   async (folderId, { dispatch }) => {
     const resp = await FolderApi.getFolder(folderId);
-    console.log("아티클리스트가져오기: ", resp);
+    console.log("비로그인 아티클리스트가져오기: ", resp);
     dispatch(setFolder(resp.data));
+    return resp;
+  },
+);
+
+export const getFolderWithAxios = createAsyncThunk(
+  "folder/getFolder",
+  async (folderId, { dispatch }) => {
+    const resp = await FolderApi.getFolderWith(folderId);
+    console.log("로그인 아티클리스트가져오기: ", resp);
+    dispatch(setFolder(resp.data));
+    return resp;
+  },
+);
+
+export const getFolderListAxios = createAsyncThunk(
+  "folder/getFolderList",
+  async (_, { dispatch }) => {
+    const resp = await FolderApi.getFolderList();
+    console.log("폴더목록가져오기: ", resp);
+    dispatch(setFolderList(resp.data));
     return resp;
   },
 );
@@ -35,12 +56,20 @@ export const folderSlice = createSlice({
   initialState,
   reducers: {
     setFolder: (state, action) => {
-      const articleFolderList = action.payload.articles;
-      state.articleFolderList = articleFolderList;
+      state.folderInfo = action.payload;
+    },
+    setFolderList: (state, action) => {
+      state.myFolderList = action.payload;
+    },
+  },
+  extraReducers: {
+    [getFolderAxios.fulfilled]: (state, action) => {
+      state.articleList =
+        action.payload.data.articlesInfoInFolderResponseDtoList;
     },
   },
 });
 
-export const { setFolder } = folderSlice.actions;
+export const { setFolder, setFolderList } = folderSlice.actions;
 
 export default folderSlice.reducer;

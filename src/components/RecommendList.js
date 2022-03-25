@@ -24,7 +24,7 @@ const RecommendList = props => {
 
   return (
     <RecommendContainer>
-      <Title _padding="0 0 20px 4px">추천 아티클</Title>
+      <Title _padding="0 0 20px 4px">당신을 위한 아티클</Title>
       <SliderBox>
         <Slider {...mobileSettings}>
           {articleList.map((article, idx) => {

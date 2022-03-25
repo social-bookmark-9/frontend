@@ -26,15 +26,18 @@ import ChangeFavorites from "../pages/ChangeFavorites";
 import NotFound from "../pages/NotFound";
 import ErrorBoundary from "./ErrorBoundary";
 import Spinner from "../components/Spinner";
+import { getFolderListAxios } from "../redux/modules/Folder";
 
 function App(props) {
   const dispatch = useDispatch();
   const myInfo = useSelector(state => state.user.myInfo);
+  const isLogin = useSelector(state => state.user.isLogin);
 
   useEffect(() => {
     if (getToken()) {
       dispatch(checkUserAxios(getToken()));
       dispatch(getMainWithAxios());
+      dispatch(getFolderListAxios());
     } else {
       dispatch(getMainAxios());
     }
@@ -54,17 +57,23 @@ function App(props) {
             <Route path="/login" element={<Login />} />
             <Route path="/user/nickname" element={<UserNickname />} />
             <Route path="/user/favorites" element={<UserFavorites />} />
-            <Route path="/articles/:id" element={<ArticleList {...myInfo} />} />
+            <Route
+              path="/articles/:id"
+              element={<ArticleList {...myInfo} isLogin={isLogin} />}
+            />
             <Route
               path="/article/:id"
-              element={<ArticleDetail {...myInfo} />}
+              element={<ArticleDetail {...myInfo} isLogin={isLogin} />}
             />
-            <Route path="/mypage/:id" element={<MyPage {...myInfo} />} />
+            <Route
+              path="/mypage/:id"
+              element={<MyPage {...myInfo} isLogin={isLogin} />}
+            />
             <Route path="/setting" element={<Setting {...myInfo} />} />
             <Route path="/reminder" element={<Reminder />} />
             <Route path="/api/users/login" element={<OAuthRedirectHandler />} />
             <Route path="/myreview" element={<MyReview />} />
-            <Route path="/editprofile" element={<EditProfile />} />
+            <Route path="/editprofile" element={<EditProfile {...myInfo} />} />
             <Route path="/setting/favorites" element={<ChangeFavorites />} />
             <Route element={<NotFound />} />
           </Routes>
