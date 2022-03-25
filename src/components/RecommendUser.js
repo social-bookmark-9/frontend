@@ -1,10 +1,15 @@
 import { Button, Text, Title } from "../elements";
 import { Circle } from "../elements/ImageObj";
 import styled from "styled-components";
-import { Desktop, Tablet, Mobile } from "../styles/mediaquery";
+import { Tablet, Mobile } from "../styles/mediaquery";
 import Slider from "react-slick";
+import { useNavigate } from "react-router";
 
-const RecommendUser = () => {
+const RecommendUser = (props) => {
+  const { memberInfo } = props;
+
+  const navigate = useNavigate();
+
   const images = [
     { id: 0, image: "/images/icon100.png" },
     { id: 1, image: "/images/icon101.png" },
@@ -29,73 +34,6 @@ const RecommendUser = () => {
 
   return (
     <>
-    <Desktop>
-      <div style={{ margin:"0 auto 184px auto", display:"flex", width:"1220px", paddingTop:"184px" }}>
-        <div style={{
-          flexDirection:"column",
-          minWidth: "255px",
-          marginRight: "10%",
-          justifyContent: "start"}}>
-          <div style={{ marginTop:"-46px" }}>
-            <img src="/images/DesktopMain3.png" width={"44px"} alt="" />
-          </div>
-          <Title _fontSize="34px" _lineHeight="41px" _padding="0 0 20px 0">
-            <div>추천 유저</div>
-          </Title>
-          <div style={{fontSize:"20px", color:"#b1b8c0"}}>
-            설명설명설명설명
-          </div>
-        </div>
-        <div style={{
-          display:"inline-block",
-          flexDirection:"column",
-          width:"734px",
-          justifyContent: "end" }}>
-          <div style={{display:"flex"}}>
-            {images.slice(0,3).map(item => (
-              <div key={item.id}>
-                <DesktopCard>
-                  <ProfileBox>
-                    {/*  그거... 동그라미 */}
-                    <CircleBoxDesktop>
-                      <Circle
-                        _width="22px"
-                        _height="22px"
-                        bgColor="black"
-                      />
-                    </CircleBoxDesktop>
-                    <ProfileImageDesktop>
-                      <img
-                        src={item.image}
-                        alt="profile"
-                        style={{ zIndex: "3" }}
-                      />
-                    </ProfileImageDesktop>
-                    <Title _padding="23px 15px 2px 15px" textAlign="center">
-                      김철수
-                    </Title>
-                    <Text
-                      _color="#3e3e3e"
-                      _fontSize="13px"
-                      _padding="0 0 8px 0"
-                      textAlign="center"
-                    >
-                      글쓰는 UX디자이너
-                    </Text>
-                    <div style={{ display: "inline-block" }}>
-                      <Button _width="76px" _padding="6px" borderRadius="45px">
-                        구경하기
-                      </Button>
-                    </div>
-                  </ProfileBox>
-                </DesktopCard>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </Desktop>
-
 
     <Tablet>
     <div style={{ margin:"0 auto 0 auto", maxWidth:"1194px", padding:"47px 40px 0 40px" }}>
@@ -124,7 +62,7 @@ const RecommendUser = () => {
                     김철수
                   </Title>
                   <Text
-                    _color="#3e3e3e"
+                    _color="#3E3E3E"
                     _fontSize="13px"
                     _padding="0 0 8px 0"
                     textAlign="center"
@@ -153,16 +91,16 @@ const RecommendUser = () => {
         padding: "32px 0 40px 18px",
       }}
     >
-      <Title _padding="0 0 20px 4px">추천 유저</Title>
+      <Title _padding="0 0 20px 4px">나와 비슷한 버블러</Title>
       <div
         style={{
           marginLeft: "-58px",
         }}
       >
         <Slider {...mobileSettings}>
-          {images.map(item => {
+          {memberInfo.map(member => {
             return (
-              <div key={item.id}>
+              <div key={member.memberId}>
                 <Card>
                   <ProfileBox>
                     {/*  그거... 동그라미 */}
@@ -175,24 +113,29 @@ const RecommendUser = () => {
                     </CircleBox>
                     <ProfileImage>
                       <img
-                        src={item.image}
+                        src={member.profileImage}
                         alt="profile"
                         style={{ zIndex: "3" }}
                       />
                     </ProfileImage>
                     <Title _padding="23px 15px 2px 15px" textAlign="center">
-                      김철수
+                      {member.memberName}
                     </Title>
                     <Text
-                      _color="#3e3e3e"
+                      _color="#3E3E3E"
                       _fontSize="13px"
                       _padding="0 0 8px 0"
                       textAlign="center"
                     >
-                      글쓰는 UX디자이너
+                      {member.memberComment}
                     </Text>
                     <div style={{ display: "inline-block" }}>
-                      <Button _width="76px" _padding="6px" borderRadius="45px">
+                      <Button
+                        _width="76px"
+                        _padding="6px"
+                        borderRadius="45px"
+                        _onClick={() => {navigate(`/mypage/${member.memberId}`)}}
+                      >
                         구경하기
                       </Button>
                     </div>
@@ -217,16 +160,7 @@ const RecommendUser = () => {
       </defs>
     </svg>
 
-    <svg width="0" height="0">
-      <defs>
-        <clipPath id="desktopClip">
-          <ellipse cx="44.8" cy="56" rx="44.8" ry="44" />
-          <ellipse cx="111" cy="56" rx="44.8" ry="44" />
-          <ellipse cx="25" cy="44" rx="44.8" ry="44" />
-          <ellipse cx="62" cy="24.5" rx="44.8" ry="44" />
-        </clipPath>
-      </defs>
-    </svg>
+
 
     </>
   );
@@ -237,10 +171,10 @@ const Card = styled.div`
   width: 95%;
   padding: 20px;
   margin: 0 6px 0 6px;
-  border: 1px solid #f2f4f6;
+  border: 1px solid #F2F4F6;
   border-radius: 20px;
   overflow: hidden;
-  background-color: #f2f4f6;
+  background-color: #F2F4F6;
   text-align: center;
   & img {
     width: 100%;
@@ -255,10 +189,7 @@ const TabletCard = styled(Card)`
   margin: 0 20px 0 0;
 `;
 
-const DesktopCard = styled(Card)`
-  width: 234px;
-  height: 312px;
-`;
+
 
 const ProfileBox = styled.div`
   display: inline-block;
@@ -273,17 +204,11 @@ const ProfileImage = styled.div`
   width: 87px;
   clip-path: url(#myClip);
   position: relative;
-  background-color: #c4c4c4;
+  background-color: #C4C4C4;
   & img {
     position: absolute;
     width: 100%;
   }
-`;
-
-const ProfileImageDesktop = styled(ProfileImage)`
-  height: 123px;
-  width: 127.5px;
-  clip-path: url(#desktopClip);
 `;
 
 const CircleBox = styled.div`
@@ -293,9 +218,6 @@ const CircleBox = styled.div`
   z-index: 3;
 `;
 
-const CircleBoxDesktop = styled(CircleBox)`
-  top: 70px;
-  right: 30px;
-`;
+
 
 export default RecommendUser;

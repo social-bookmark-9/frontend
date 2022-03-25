@@ -138,7 +138,7 @@ const UserArea = styled.div`
 `;
 
 const TitleBox = styled.div`
-  padding: 100px 0px;
+  padding: 65px 0px;
 `;
 
 const FavoritesBox = styled.div`
