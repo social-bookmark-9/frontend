@@ -3,8 +3,8 @@ import { getToken } from "../../shared/utils";
 
 export default class articleApi {
   constructor() {
-    // this.base = "http://localhost:3000";
-    this.base = process.env.REACT_APP_SERVER;
+    this.base = "http://3.34.99.169";
+    // this.base = process.env.REACT_APP_SERVER;
   }
 
   async postArticle({ articleData, navigate }) {

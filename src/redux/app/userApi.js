@@ -3,13 +3,15 @@ import { getToken, getTokens } from "../../shared/utils";
 import { refreshTokensAxios } from "../modules/User";
 export default class userApi {
   constructor() {
-    this.base = process.env.REACT_APP_SERVER;
+    // this.base = process.env.REACT_APP_SERVER;
+    this.base = "http://3.34.99.169";
   }
 
   async kakaoLogin({ code, navigate, dispatch }) {
     const kakaoLoginConfig = {
       method: "GET",
-      url: `${this.base}${process.env.REACT_APP_KAKAO_URI}?code=${code}`,
+      // url: `${this.base}${process.env.REACT_APP_KAKAO_URI}?code=${code}`,
+      url: `${this.base}http://finalproject9.s3-website.ap-northeast-2.amazonaws.com/api/users/login?code=${code}`,
     };
     return axios(kakaoLoginConfig)
       .then(res => {

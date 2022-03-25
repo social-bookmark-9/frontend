@@ -3,7 +3,8 @@ import { getToken } from "../../shared/utils";
 
 export default class ProfileApi {
   constructor() {
-    this.base = process.env.REACT_APP_SERVER;
+    // this.base = process.env.REACT_APP_SERVER;
+    this.base = "http://3.34.99.169";
   }
 
   async getProfile(memberId) {
@@ -22,7 +23,6 @@ export default class ProfileApi {
       .catch(err => console.log(err));
   }
 
-
   async editProfileUserDesc(userDesc) {
     const editProfileUserDescConfig = {
       method: "PATCH",
@@ -31,7 +31,7 @@ export default class ProfileApi {
         "Content-Type": "application/json",
         "X-AUTH-TOKEN": getToken(),
       },
-      data: JSON.stringify(userDesc)
+      data: JSON.stringify(userDesc),
     };
     return axios(editProfileUserDescConfig)
       .then(res => {
@@ -39,7 +39,6 @@ export default class ProfileApi {
       })
       .catch(err => console.log(err.response));
   }
-
 
   async editProfileUserName(nickname) {
     const editProfileUserNameConfig = {
@@ -59,7 +58,6 @@ export default class ProfileApi {
         console.log(err.response);
       });
   }
-
 
   async editProfileSnsUrl(urlList) {
     console.log(urlList);
@@ -83,7 +81,8 @@ export default class ProfileApi {
 
   async editProfileImage(formData) {
     for (var pair of formData.entries()) {
-      console.log(pair[0]+ ', ' + pair[1]);}
+      console.log(pair[0] + ", " + pair[1]);
+    }
     console.log(formData);
     const editProfileImageConfig = {
       method: "POST",

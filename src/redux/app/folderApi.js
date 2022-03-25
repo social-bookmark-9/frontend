@@ -3,7 +3,8 @@ import { getToken } from "../../shared/utils";
 
 export default class folderApi {
   constructor() {
-    this.base = process.env.REACT_APP_SERVER;
+    // this.base = process.env.REACT_APP_SERVER;
+    this.base = "http://3.34.99.169";
   }
 
   async getFolder(folderId) {
