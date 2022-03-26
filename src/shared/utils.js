@@ -14,6 +14,15 @@ export const getToken = () => {
   }
 };
 
+export const getReToken = () => {
+  const token = sessionStorage.getItem("refreshToken");
+  if (token) {
+    return token;
+  } else {
+    return null;
+  }
+};
+
 export const getTokens = () => {
   const accessToken = sessionStorage.getItem("accessToken");
   const refreshToken = sessionStorage.getItem("refreshToken");

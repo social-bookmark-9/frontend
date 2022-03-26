@@ -18,26 +18,29 @@ const Carousel = props => {
     arrows: false,
   };
 
+  console.log(articleContents);
+
   return (
     <Slider {...settings}>
-      {articleContents.map((content, idx) => {
-        console.log(content);
-        const contents = content.content.slice(0, 60);
-        return (
-          <CardBox key={idx}>
-            <Card>
-              <CardTitle>{content.title}</CardTitle>
-              <CardContents>{contents}...</CardContents>
-            </Card>
-          </CardBox>
-        );
-      })}
-      {articleContents.length > 3 ? (
-        <SeeMoreCard>
-          <div>13개</div>
-          더보기
-        </SeeMoreCard>
-      ) : null}
+      {articleContents &&
+        articleContents.map((content, idx) => {
+          console.log(content);
+          const contents = content.content.slice(0, 60);
+          return (
+            <CardBox key={idx}>
+              <Card>
+                <CardTitle>{content.title}</CardTitle>
+                <CardContents>{contents}...</CardContents>
+              </Card>
+            </CardBox>
+          );
+        })}
+      {/* {articleContents.length > 3 ? ( */}
+      {/* <SeeMoreCard>
+        <div>13개</div>
+        더보기
+      </SeeMoreCard> */}
+      {/* ) : null} */}
     </Slider>
   );
 };

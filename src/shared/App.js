@@ -8,25 +8,25 @@ import OAuthRedirectHandler from "../shared/OAuthRedirectHandler";
 
 import { checkUserAxios } from "../redux/modules/User";
 import { getMainAxios, getMainWithAxios } from "../redux/modules/Main";
+import { getFolderListAxios } from "../redux/modules/Folder";
 import { getToken } from "./utils";
 
-import MainPage from "../pages/MainPage";
-import Login from "../pages/Login";
-import UserNickname from "../pages/UserNickname";
-import UserFavorites from "../pages/UserFavorites";
-import ArticleList from "../pages/ArticleList";
-import ArticleDetail from "../pages/ArticleDetail";
-import MyPage from "../pages/MyPage";
-import MyPageD from "../pages/MyPageD";
-import Setting from "../pages/Setting";
-import MyReview from "../pages/MyReview";
-import Reminder from "../pages/Reminder";
-import EditProfile from "../pages/EditProfile";
-import ChangeFavorites from "../pages/ChangeFavorites";
-import NotFound from "../pages/NotFound";
+import MyPage from "../pages/mobile/MyPage";
+
+import MainPage from "../pages/mobile/MainPage";
+import Login from "../pages/mobile/Login";
+import UserNickname from "../pages/mobile/UserNickname";
+import UserFavorites from "../pages/mobile/UserFavorites";
+import ArticleList from "../pages/mobile/ArticleList";
+import ArticleDetail from "../pages/mobile/ArticleDetail";
+import MyPageD from "../pages/desktop/MyPageD";
+import Setting from "../pages/mobile/Setting";
+import MyReview from "../pages/mobile/MyReview";
+import MyReminder from "../pages/mobile/MyReminder";
+import EditProfile from "../pages/mobile/EditProfile";
+import NotFound from "./NotFound";
 import ErrorBoundary from "./ErrorBoundary";
-import Spinner from "../components/Spinner";
-import { getFolderListAxios } from "../redux/modules/Folder";
+import Spinner from "./Spinner";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -70,11 +70,10 @@ function App(props) {
               element={<MyPage {...myInfo} isLogin={isLogin} />}
             />
             <Route path="/setting" element={<Setting {...myInfo} />} />
-            <Route path="/reminder" element={<Reminder />} />
+            <Route path="/setting/reminder" element={<MyReminder />} />
             <Route path="/api/users/login" element={<OAuthRedirectHandler />} />
             <Route path="/myreview" element={<MyReview />} />
             <Route path="/editprofile" element={<EditProfile {...myInfo} />} />
-            <Route path="/setting/favorites" element={<ChangeFavorites />} />
             <Route element={<NotFound />} />
           </Routes>
         </Mobile>

@@ -16,6 +16,7 @@ export const postArticleAxios = createAsyncThunk(
     Swal.fire({
       text: "링크가 저장되었습니다",
       confirmButtonText: "확인",
+      confirmButtonColor: "#353C49",
     });
     return resp;
   },
@@ -39,6 +40,14 @@ export const getArticleAxios = createAsyncThunk(
   async ({ articleId, navigate }, { dispatch }) => {
     const resp = await ArticleApi.getArticle({ articleId, navigate });
     dispatch(setArticle(resp.data));
+    return resp;
+  },
+);
+
+export const deleteArticleAxios = createAsyncThunk(
+  "article/deleteArticle",
+  async ({ articleId, navigate }) => {
+    const resp = await ArticleApi.deleteArticle({ articleId, navigate });
     return resp;
   },
 );
@@ -69,10 +78,29 @@ export const reviewHideAxios = createAsyncThunk(
   },
 );
 
-export const saveMyArticleAxios = createAsyncThunk(
+export const saveArticleAxios = createAsyncThunk(
   "article/saveArticle",
   async ({ articleId, navigate }, { dispatch }) => {
-    const resp = await ArticleApi.saveMyArticle({ articleId, navigate });
+    const resp = await ArticleApi.saveArticle({ articleId, navigate });
+    return resp;
+  },
+);
+
+export const updateTitleOgAxios = createAsyncThunk(
+  "article/updateTitleOg",
+  async ({ articleId, titleOg }, { dispatch }) => {
+    const resp = await ArticleApi.updateTitleOg({ articleId, titleOg });
+    dispatch(setNewTitleOg(resp.data));
+    return resp;
+  },
+);
+export const changeArticleFolderAxios = createAsyncThunk(
+  "article/changeFolder",
+  async ({ articleId, articleFolderName }) => {
+    const resp = await ArticleApi.changeArticleFolder({
+      articleId,
+      articleFolderName,
+    });
     return resp;
   },
 );
@@ -90,6 +118,9 @@ export const articleSlice = createSlice({
     setReviewHide: (state, action) => {
       state.review = action.payload;
     },
+    setNewTitleOg: (state, action) => {
+      state.data.titleOg = action.payload;
+    },
   },
   extraReducers: {
     [updateReviewAxios.fulfilled]: (state, action) => {
@@ -101,6 +132,7 @@ export const articleSlice = createSlice({
   },
 });
 
-export const { setArticle, setReview, setReviewHide } = articleSlice.actions;
+export const { setArticle, setReview, setReviewHide, setNewTitleOg } =
+  articleSlice.actions;
 
 export default articleSlice.reducer;

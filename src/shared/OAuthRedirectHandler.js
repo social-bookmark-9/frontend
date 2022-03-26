@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { kakaoLoginAxios } from "../redux/modules/User";
-import Spinner from "../components/Spinner";
+import Spinner from "./Spinner";
 
 const OAuthRedirectHandler = props => {
   const dispatch = useDispatch();

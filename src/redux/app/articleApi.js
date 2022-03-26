@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 import { getToken } from "../../shared/utils";
 
 export default class articleApi {
@@ -83,6 +84,32 @@ export default class articleApi {
       });
   }
 
+  async deleteArticle({ articleId, navigate }) {
+    const deleteArticleConfig = {
+      method: "DELETE",
+      url: `${this.base}/api/articles/${articleId}`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
+    };
+    return axios(deleteArticleConfig)
+      .then(res => {
+        console.log(res);
+        Swal.fire({
+          text: "링크를 삭제했습니다",
+          confirmButtonText: "확인",
+          confirmButtonColor: "#353C49",
+        }).then(res => {
+          navigate("/", { replace: true });
+        });
+        return res;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   async updateReview({ articleId, review, navigate }) {
     const updateReviewConfig = {
       method: "PATCH",
@@ -132,6 +159,46 @@ export default class articleApi {
     return axios(reviewHideConfig)
       .then(res => {
         console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  async updateTitleOg({ articleId, titleOg }) {
+    const updateTitleOgConfig = {
+      method: "PATCH",
+      url: `${this.base}/api/articles/${articleId}/title`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
+      data: JSON.stringify(titleOg),
+    };
+    return axios(updateTitleOgConfig)
+      .then(res => {
+        console.log(res);
+        return res;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  async changeArticleFolder({ articleId, articleFolderName }) {
+    const changeArticleFolderConfig = {
+      method: "PATCH",
+      url: `${this.base}/api/articles/${articleId}/title`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
+      data: JSON.stringify(articleFolderName),
+    };
+    return axios(changeArticleFolderConfig)
+      .then(res => {
+        console.log(res);
+        return res;
       })
       .catch(err => {
         console.log(err);
