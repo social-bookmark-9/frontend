@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
 import { FlexboxColumn, FlexboxRow } from "../../styles/flexbox";
-import { Button, Image, Title } from "../../elements";
+import { Button, Image, Title, Text } from "../../elements";
 
 import {
   getArticleAxios,
@@ -15,7 +15,8 @@ import {
 } from "../../redux/modules/Article";
 
 import DetailNavbar from "../../components/detailpage/DetailNavbar";
-import DetailCard from "../../components/detailpage/DetailNavbar";
+import DetailCard from "../../components/detailpage/DetailCard";
+import DetailRemind from "../../components/detailpage/DetailRemind";
 import RecommendCard from "../../components/detailpage/RecommendCard";
 
 import Swal from "sweetalert2";
@@ -34,15 +35,14 @@ const ArticleDetail = props => {
   useEffect(() => {
     if (isLogin) {
       dispatch(getArticleWithAxios({ articleId, navigate }));
-    } else {
-      dispatch(getArticleAxios({ articleId, navigate }));
     }
+    dispatch(getArticleAxios({ articleId, navigate }));
   }, [dispatch, articleId, navigate, isLogin]);
 
   const article = useSelector(state => state.article.data);
   const recommendList = article.recommendArticles;
   // const reminderDate = article.reminderDate;
-  const isMe = true;
+  const isMe = article.writerMemberId === props.memberId;
 
   const [words, setWords] = useState(0);
   const [reviewHide, setReviewHide] = useState(article.reviewHide);
@@ -120,16 +120,18 @@ const ArticleDetail = props => {
         {/* 아티클 카드 */}
         <DetailCard article={article} />
         {/* 아티클 저장 */}
-        <Button
-          _onClick={handleSave}
-          _padding="12px"
-          bgColor={({ theme }) => theme.colors.white}
-          _color={({ theme }) => theme.colors.fontColor05}
-          isBorder
-          bold
-        >
-          내 컬렉션에 저장
-        </Button>
+        {isMe ? null : (
+          <Button
+            _onClick={handleSave}
+            _padding="12px"
+            bgColor={({ theme }) => theme.colors.white}
+            _color={({ theme }) => theme.colors.fontColor05}
+            isBorder
+            bold
+          >
+            내 컬렉션에 저장
+          </Button>
+        )}
         {/* 유저 메모 작성 */}
         <MemoBox>
           <MemoHead>
@@ -145,19 +147,27 @@ const ArticleDetail = props => {
               </ImageBox>
             ) : null}
           </MemoHead>
-          <TextAreaField
-            ref={memoRef}
-            name="userMemo"
-            defaultValue={article.review != null ? article.review : null}
-            placeholder="여기를 눌러 메모를 남겨보세요."
-            rows={5}
-            maxLength={200}
-            onKeyUp={handleKeyUp}
-            onBlur={updateUserMemo}
-          />
-          <InputCheck>{words}/200</InputCheck>
+          {isMe ? (
+            <>
+              <TextAreaField
+                ref={memoRef}
+                name="userMemo"
+                defaultValue={article.review != null ? article.review : null}
+                placeholder="여기를 눌러 메모를 남겨보세요."
+                rows={5}
+                maxLength={200}
+                onKeyUp={handleKeyUp}
+                onBlur={updateUserMemo}
+              />
+              <InputCheck>{words}/200</InputCheck>
+            </>
+          ) : (
+            <TextBox>
+              <Text>{article.review}</Text>
+            </TextBox>
+          )}
         </MemoBox>
-        {/* <DetailRemind reminderDate={reminderDate} /> */}
+        <DetailRemind reminderDate={article.reminderDate} />
       </DetailContainer>
       <Line />
       <div style={{ padding: "24px 20px" }}>
@@ -206,6 +216,14 @@ const TextAreaField = styled.textarea`
     letter-spacing: -0.0008em;
     line-height: 46px;
   }
+`;
+
+const TextBox = styled.div`
+  width: 100%;
+  height: 100px;
+  padding: 26px;
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.colors.gray01};
 `;
 
 const ImageBox = styled.div`

@@ -10,61 +10,66 @@ const RecommendCard = props => {
   const { recommendList } = props;
   const navigate = useNavigate();
 
-  recommendList &&
-    recommendList.map((recommend, idx) => {
-      const hashTagList = [
-        recommend.hashtag1,
-        recommend.hashtag2,
-        recommend.hashtag3,
-      ];
-      const hashTag = hashTagList.filter((el, i) => el !== null);
-      return (
-        <React.Fragment>
-          <ReContainer
-            key={idx}
-            imgUrl={recommend.imgOg}
-            onClick={() => {
-              navigate(`/article/${recommend.articleId}`);
-            }}
-          >
-            <ImageBox>
-              <Image
-                _src={`/images/bookmark.png`}
-                _width="25px"
-                _height="24px"
-                _marginR="none"
-              />
-            </ImageBox>
-            <ReCardContent>
-              <LabelBox>
-                {hashTag.map((tag, idx) => (
-                  <Label key={idx}>{tag}</Label>
-                ))}
-              </LabelBox>
-              <Title>
-                <LinesEllipsis
-                  text={recommend.titleOg}
-                  maxLine="2"
-                  ellipsis="..."
-                  trimRight
-                  basedOn="words"
+  console.log(recommendList);
+  console.log(props.hashtag1);
+
+  return (
+    <React.Fragment>
+      {recommendList &&
+        recommendList.map((recommend, idx) => {
+          const hashTagList = [
+            recommend.hashtag1,
+            recommend.hashtag2,
+            recommend.hashtag3,
+          ];
+          const hashTag = hashTagList.filter((el, i) => el !== null);
+
+          return (
+            <ReContainer
+              key={idx}
+              imgUrl={recommend.imgOg}
+              onClick={() => {
+                navigate(`/article/${recommend.articleId}`);
+              }}
+            >
+              <ImageBox>
+                <Image
+                  _src={`/images/bookmark.png`}
+                  _width="25px"
+                  _height="24px"
+                  _marginR="none"
                 />
-              </Title>
-              <Text>
-                <LinesEllipsis
-                  text={recommend.contentOg}
-                  maxLine="2"
-                  ellipsis="..."
-                  trimRight
-                  basedOn="letters"
-                />
-              </Text>
-            </ReCardContent>
-          </ReContainer>
-          ;
-        </React.Fragment>
-      );
-    });
+              </ImageBox>
+              <ReCardContent>
+                <LabelBox>
+                  {hashTag.map((tag, idx) => (
+                    <Label key={idx}>{tag}</Label>
+                  ))}
+                </LabelBox>
+                <Title>
+                  <LinesEllipsis
+                    text={recommend.titleOg}
+                    maxLine="2"
+                    ellipsis="..."
+                    trimRight
+                    basedOn="words"
+                  />
+                </Title>
+                <Text>
+                  <LinesEllipsis
+                    text={recommend.contentOg}
+                    maxLine="2"
+                    ellipsis="..."
+                    trimRight
+                    basedOn="letters"
+                  />
+                </Text>
+              </ReCardContent>
+            </ReContainer>
+          );
+        })}
+    </React.Fragment>
+  );
 };
 
 const ReContainer = styled.div`

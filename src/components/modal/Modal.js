@@ -132,7 +132,6 @@ const Modal = () => {
                       <Text _fontSize="14px">컬렉션 선택</Text>
                       <Dropdown>
                         <DropdownHeader state={isOpen} onClick={toggleDropdown}>
-                          {console.log(folder)}
                           <FolderName>{folder}</FolderName>
                           <SelectIcon>{">"}</SelectIcon>
                         </DropdownHeader>

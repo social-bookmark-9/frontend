@@ -64,12 +64,6 @@ const ModalD = () => {
     hashtag2: tagData[1] ? tagData[1] : null,
     hashtag3: tagData[2] ? tagData[2] : null,
   };
-  const folderData = {
-    articleFolderName: folder,
-    folderHide: folderHide,
-  };
-
-  console.log(folderData);
 
   const getUrl = e => {
     setUrl(e.target.value);
@@ -204,6 +198,7 @@ const ModalD = () => {
                     </LinkBox>
                   ) : (
                     <AddFolder
+                      folderHide={folderHide}
                       options={options}
                       setAddFolderList={setAddFolderList}
                       setOptions={setOptions}

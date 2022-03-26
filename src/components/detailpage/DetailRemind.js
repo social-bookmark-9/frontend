@@ -8,6 +8,7 @@ const DetailRemind = ({ reminderDate }) => {
   const [userRemind, setUserRemind] = useState(reminderDate);
 
   const remindList = [
+    { key: "선택안함", value: 0 },
     { key: "내일", value: 1 },
     { key: "3일 뒤", value: 3 },
     { key: "7일 뒤", value: 7 },
@@ -15,6 +16,7 @@ const DetailRemind = ({ reminderDate }) => {
 
   const changeRemind = e => {
     setUserRemind(e.target.value);
+    console.log(e.target.value);
   };
 
   return (
@@ -37,29 +39,6 @@ const DetailRemind = ({ reminderDate }) => {
               <RemindText>{remind.key}</RemindText>
             </RemindLabel>
           ))}
-
-          {/* <RemindLabel>
-            <RemindRadio
-              type="radio"
-              name="remindeCheck"
-              id={3}
-              value={3}
-              checked={userRemind === 3}
-              onClick={changeRemind}
-            />
-            <RemindText>{"3일 후"}</RemindText>
-          </RemindLabel>
-          <RemindLabel>
-            <RemindRadio
-              type="radio"
-              name="remindeCheck"
-              id={7}
-              value={7}
-              checked={userRemind === 7}
-              onClick={changeRemind}
-            />
-            <RemindText>{"7일 후"}</RemindText>
-          </RemindLabel> */}
         </RemindSelection>
       </Reminder>
     </React.Fragment>
@@ -103,8 +82,9 @@ const RemindRadio = styled.input.attrs({ type: "radio" })`
         font-weight: 500;
       }
       &:checked + ${RemindText} {
-        background-color: ${colors.gray05};
-        border-color: ${colors.whilte};
+        background-color: ${colors.pointPurple01};
+        border-color: ${colors.pointPurple02};
+        color: ${colors.pointPurple02};
       }
     `;
   }}

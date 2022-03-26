@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 
 import styled from "styled-components";
 
@@ -11,11 +10,6 @@ import RecommendUser from "../../components/mainpage/RecommendUser";
 import MainTopD from "../../components/mainpage/MainTopD";
 
 const MainD = props => {
-  console.log(
-    "로그인정보 확인",
-    useSelector(state => state.user),
-  );
-
   return (
     <React.Fragment>
       <MainContainer>

@@ -167,9 +167,9 @@ const EditProfile = props => {
       <svg width="0" height="0">
         <defs>
           <clipPath id="myClip">
-            <ellipse cx="44" cy="106" rx="44.78" ry="44" />
+            <ellipse cx="45" cy="106" rx="44.78" ry="44" />
             <ellipse cx="108" cy="106" rx="44.78" ry="44" />
-            <ellipse cx="44" cy="44" rx="44.78" ry="44" />
+            <ellipse cx="45" cy="44" rx="44.78" ry="44" />
             <ellipse cx="108" cy="44" rx="44.78" ry="44" />
           </clipPath>
         </defs>

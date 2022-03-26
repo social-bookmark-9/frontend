@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Swal from "sweetalert2";
 import articleApi from "../app/articleApi";
-// import api from "../app/api";
 
 const ArticleApi = new articleApi();
 
 const initialState = {
   data: {},
+  recommendList: [],
 };
 
 export const postArticleAxios = createAsyncThunk(
@@ -21,19 +21,6 @@ export const postArticleAxios = createAsyncThunk(
     return resp;
   },
 );
-
-// export const getArticleDB = createAsyncThunk(
-//   "article/getArticle",
-//   async ({ articleId, navigate }, { dispatch }) => {
-//     await api
-//       .getArticle({ articleId, navigate })
-//       .then(resp => {
-//         dispatch(setArticle(resp.data));
-//         return resp;
-//       })
-//       .catch(err => console.log(err));
-//   },
-// );
 
 export const getArticleAxios = createAsyncThunk(
   "article/getArticle",
@@ -53,7 +40,7 @@ export const deleteArticleAxios = createAsyncThunk(
 );
 
 export const getArticleWithAxios = createAsyncThunk(
-  "article/getArticle",
+  "article/getArticleWith",
   async ({ articleId, navigate }, { dispatch }) => {
     const resp = await ArticleApi.getArticleWith({ articleId, navigate });
     dispatch(setArticle(resp.data));
@@ -89,6 +76,7 @@ export const saveArticleAxios = createAsyncThunk(
 export const updateTitleOgAxios = createAsyncThunk(
   "article/updateTitleOg",
   async ({ articleId, titleOg }, { dispatch }) => {
+    console.log(titleOg);
     const resp = await ArticleApi.updateTitleOg({ articleId, titleOg });
     dispatch(setNewTitleOg(resp.data));
     return resp;
@@ -111,6 +99,7 @@ export const articleSlice = createSlice({
   reducers: {
     setArticle: (state, action) => {
       state.data = action.payload;
+      state.recommendList = action.payload.recommendArticles;
     },
     setReview: (state, action) => {
       state.data = action.payload;

@@ -72,20 +72,21 @@ const DetailNavbar = props => {
   const getFolderName = e => {
     setFolder(e.target);
   };
-  console.log(folder);
 
   const getTitleOg = e => {
     setNewTitleOg(e.target.value);
   };
-  console.log(newTitleOg);
-  console.log(article.titleOg);
 
+  const titleOg = { titleOg: newTitleOg };
+
+  console.log(titleOg);
+  console.log(newTitleOg);
   const handleUpdate = () => {
-    if (article.titleOg !== newTitleOg) {
-      dispatch(updateTitleOgAxios({ articleId, newTitleOg }));
-    } else if (title !== folder) {
-      dispatch(changeArticleFolderAxios({ articleId, folder }));
-    }
+    // if (article.titleOg !== newTitleOg) {
+    dispatch(updateTitleOgAxios({ articleId, titleOg }));
+    // } else if (title !== folder) {
+    //   dispatch(changeArticleFolderAxios({ articleId, folder }));
+    // }
   };
 
   return (

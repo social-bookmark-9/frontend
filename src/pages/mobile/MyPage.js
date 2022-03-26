@@ -7,7 +7,7 @@ import { getProfileAxios } from "../../redux/modules/Profile";
 import styled from "styled-components";
 
 import Navbar from "../../components/common/Navbar";
-import ArticleFolder from "../../components/mypage/AddCollection";
+import ArticleFolder from "../../components/folderpage/ArticleFolder";
 import UserProfile from "../../components/mypage/UserProfile";
 import AddCollection from "../../components/mypage/AddCollection";
 import MyPageRemind from "../../components/mypage/MyPageRemind";
@@ -31,8 +31,6 @@ const MyPage = props => {
   const myInfo = useSelector(state => state.user.myInfo);
   // 모달 열고 닫기
   const [modalOpen, setModalOpen] = useState(false);
-  // 어떤 모달창 보여줄지 (링크 추가 단계)
-  const [showModal, setShowModal] = useState(false);
   // 모달 열고 닫기 펑션
   const openModal = () => {
     setModalOpen(true);
@@ -66,13 +64,7 @@ const MyPage = props => {
             </FolderContainer>
           ))}
         <MyPageSuggest userInfo={userInfo} {...myInfo} />
-        {modalOpen ? (
-          <AddCollection
-            setModalOpen={setModalOpen}
-            setShowModal={setShowModal}
-            showModal={showModal}
-          />
-        ) : null}
+        {modalOpen ? <AddCollection setModalOpen={setModalOpen} /> : null}
       </Container>
     </React.Fragment>
   );

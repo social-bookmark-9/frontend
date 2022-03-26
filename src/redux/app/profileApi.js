@@ -19,9 +19,27 @@ export default class ProfileApi {
       .then(res => {
         return res.data;
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+      });
   }
 
+  async getProfileWith(memberId) {
+    const getProfileWithConfig = {
+      method: "GET",
+      url: `${this.base}/api/mypage/${memberId}`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    return axios(getProfileWithConfig)
+      .then(res => {
+        return res.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
   async editProfileUserDesc(userDesc) {
     const editProfileUserDescConfig = {
@@ -31,15 +49,16 @@ export default class ProfileApi {
         "Content-Type": "application/json",
         "X-AUTH-TOKEN": getToken(),
       },
-      data: JSON.stringify(userDesc)
+      data: JSON.stringify(userDesc),
     };
     return axios(editProfileUserDescConfig)
       .then(res => {
         return res.data;
       })
-      .catch(err => console.log(err.response));
+      .catch(err => {
+        console.log(err);
+      });
   }
-
 
   async editProfileUserName(nickname) {
     const editProfileUserNameConfig = {
@@ -56,13 +75,11 @@ export default class ProfileApi {
         return res.data;
       })
       .catch(err => {
-        console.log(err.response);
+        console.log(err);
       });
   }
 
-
   async editProfileSnsUrl(urlList) {
-    console.log(urlList);
     const editProfileSnsUrlConfig = {
       method: "PATCH",
       url: `${this.base}/api/mypage/snsurl`,
@@ -77,14 +94,11 @@ export default class ProfileApi {
         console.log(res);
       })
       .catch(err => {
-        console.log(err.response);
+        console.log(err);
       });
   }
 
   async editProfileImage(formData) {
-    for (var pair of formData.entries()) {
-      console.log(pair[0]+ ', ' + pair[1]);}
-    console.log(formData);
     const editProfileImageConfig = {
       method: "POST",
       url: `${this.base}/api/mypage/profileimage`,
@@ -100,7 +114,7 @@ export default class ProfileApi {
         return res;
       })
       .catch(err => {
-        console.log(err.response);
+        console.log(err);
       });
   }
 
@@ -119,7 +133,7 @@ export default class ProfileApi {
         return res;
       })
       .catch(err => {
-        console.log(err.response);
+        console.log(err);
       });
   }
 }

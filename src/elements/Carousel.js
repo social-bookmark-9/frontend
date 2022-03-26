@@ -18,13 +18,10 @@ const Carousel = props => {
     arrows: false,
   };
 
-  console.log(articleContents);
-
   return (
     <Slider {...settings}>
       {articleContents &&
         articleContents.map((content, idx) => {
-          console.log(content);
           const contents = content.content.slice(0, 60);
           return (
             <CardBox key={idx}>
@@ -79,16 +76,16 @@ const CardContents = styled.div`
   line-height: 16px;
 `;
 
-const SeeMoreCard = styled.div`
-  height: 146px;
-  width: 61px;
-  padding: 57px 14px;
-  margin-left: 8px;
-  font-size: 12px;
-  text-align: center;
-  border: 1px solid #f2f4f6;
-  border-radius: 10px;
-  overflow: hidden;
-`;
+// const SeeMoreCard = styled.div`
+//   height: 146px;
+//   width: 61px;
+//   padding: 57px 14px;
+//   margin-left: 8px;
+//   font-size: 12px;
+//   text-align: center;
+//   border: 1px solid #f2f4f6;
+//   border-radius: 10px;
+//   overflow: hidden;
+// `;
 
 export default Carousel;

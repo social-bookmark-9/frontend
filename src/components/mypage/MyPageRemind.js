@@ -53,40 +53,66 @@ const MyPageRemind = props => {
               </Label>
             </LabelBox>
           </Qheader>
-
-          <ArticleFolder
-            folderColor="default"
-            folder={defaultFolder}
-            {...defaultFolder}
-            isDefault
-          />
-
+          <FolderContainer>
+            <ArticleFolder
+              folderColor="default"
+              folder={defaultFolder}
+              {...defaultFolder}
+            />
+          </FolderContainer>
           {folderList && folderList.length > 0 ? (
-            <AlertBox>
-              <RemindAlert>
-                <ImageBox>
-                  <Image
-                    _src="/images/remind.png"
-                    _width="20px"
-                    _height="19px"
-                  />
-                </ImageBox>
-                <TextBox>
-                  <Title
-                    _fontSize={({ theme }) => theme.fontSizes.font16}
-                    _lineHeight="22px"
-                  >
-                    아티클 리마인드
-                  </Title>
-                  <Text
-                    _fontSize={({ theme }) => theme.fontSizes.font13}
-                    _lineHeight="18px"
-                  >
-                    아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
-                  </Text>
-                </TextBox>
-              </RemindAlert>
-            </AlertBox>
+            <>
+              <AlertBox onClick={openModal}>
+                <RemindAlert>
+                  <ImageBox>
+                    <Image
+                      _src="/images/add.png"
+                      _width="20px"
+                      _height="20px"
+                    />
+                  </ImageBox>
+                  <TextBox>
+                    <Title
+                      _fontSize={({ theme }) => theme.fontSizes.font16}
+                      _lineHeight="22px"
+                    >
+                      새 컬렉션 만들기
+                    </Title>
+                    <Text
+                      _fontSize={({ theme }) => theme.fontSizes.font13}
+                      _lineHeight="18px"
+                    >
+                      컬렉션을 만들어 링크를 분류해 보세요
+                    </Text>
+                  </TextBox>
+                </RemindAlert>
+              </AlertBox>
+              <AlertBox>
+                <RemindAlert>
+                  <ImageBox>
+                    <Image
+                      _src="/images/remind.png"
+                      _width="20px"
+                      _height="19px"
+                    />
+                  </ImageBox>
+                  <TextBox>
+                    <Title
+                      _fontSize={({ theme }) => theme.fontSizes.font16}
+                      _lineHeight="22px"
+                    >
+                      아티클 리마인드
+                    </Title>
+                    <Text
+                      _fontSize={({ theme }) => theme.fontSizes.font13}
+                      _lineHeight="18px"
+                    >
+                      아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
+                    </Text>
+                  </TextBox>
+                </RemindAlert>
+              </AlertBox>
+            </>
           ) : (
             <AlertBox onClick={openModal}>
               <RemindAlert>
@@ -161,6 +187,10 @@ const TextBox = styled.div`
   & h1 {
     padding-bottom: 2px;
   }
+`;
+
+const FolderContainer = styled.div`
+  padding: 8px 16px;
 `;
 
 export default MyPageRemind;

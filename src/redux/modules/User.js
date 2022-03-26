@@ -32,7 +32,6 @@ export const checkUserAxios = createAsyncThunk(
   "user/checkUser",
   async ({ token, navigate }, { dispatch }) => {
     const user = await UserApi.checkUser({ token, navigate });
-    console.log(user);
     if (user) {
       dispatch(setUser(user.data));
       return user;
@@ -44,7 +43,6 @@ export const refreshTokensAxios = createAsyncThunk(
   "user/refreshTokens",
   async ({ tokens, navigate }, { dispatch }) => {
     const user = await UserApi.refreshTokens({ tokens, navigate });
-    console.log(user);
     if (user) {
       dispatch(setMyInfo(user.data));
       return user;

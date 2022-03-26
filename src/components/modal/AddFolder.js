@@ -27,9 +27,6 @@ const AddFolder = props => {
     folderHide: showOption,
   };
 
-  console.log("폴더 추가", options);
-  console.log(folderData);
-
   // 뒤로가기
   const modalChange = () => {
     const newOptions = [folderName, options];

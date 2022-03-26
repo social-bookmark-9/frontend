@@ -166,6 +166,7 @@ export default class articleApi {
   }
 
   async updateTitleOg({ articleId, titleOg }) {
+    console.log(titleOg);
     const updateTitleOgConfig = {
       method: "PATCH",
       url: `${this.base}/api/articles/${articleId}/title`,

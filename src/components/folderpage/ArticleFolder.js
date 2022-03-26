@@ -7,10 +7,12 @@ import { Label, Image, Title } from "../../elements";
 import Carousel from "../../elements/Carousel";
 
 const ArticleFolder = props => {
-  const { folder, folderColor, isDefault } = props;
+  const { folder, folderColor } = props;
 
+  console.log(props);
   const navigate = useNavigate();
   const isMe = useSelector(state => state.user.isMe);
+  const isDefault = folder.isdDeleteable;
   const articleContents = folder.articleListDtoList;
 
   // 해시태스 리스트
@@ -150,6 +152,6 @@ const TitleBox = styled.div`
 
 const CarouselBox = styled.div`
   padding-top: 36px;
-  margin: 0 -20px 0 -65px;
+  margin: 0 -20px 0 -60px;
 `;
 export default ArticleFolder;

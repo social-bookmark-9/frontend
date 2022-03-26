@@ -4,8 +4,6 @@ import styled, { css } from "styled-components";
 const CheckRemind = props => {
   const { remindOption, changeRemind } = props;
 
-  console.log(remindOption);
-
   return (
     <React.Fragment>
       <div>
