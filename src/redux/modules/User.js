@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userApi from "../app/userApi";
-import Swal from "sweetalert2";
 const UserApi = new userApi();
 const initialState = {
   userInfo: null,
@@ -33,7 +32,6 @@ export const checkUserAxios = createAsyncThunk(
   "user/checkUser",
   async ({ token, navigate }, { dispatch }) => {
     const user = await UserApi.checkUser({ token, navigate });
-    console.log(user);
     if (user) {
       dispatch(setUser(user.data));
       return user;
@@ -45,7 +43,6 @@ export const refreshTokensAxios = createAsyncThunk(
   "user/refreshTokens",
   async ({ tokens, navigate }, { dispatch }) => {
     const user = await UserApi.refreshTokens({ tokens, navigate });
-    console.log(user);
     if (user) {
       dispatch(setMyInfo(user.data));
       return user;
@@ -56,9 +53,9 @@ export const refreshTokensAxios = createAsyncThunk(
 export const logoutAxios = createAsyncThunk(
   "user/logout",
   async (navigate, { dispatch }) => {
+    const user = await UserApi.logout(navigate);
     dispatch(deleteUserFromSession());
-    navigate("/", { replace: true });
-    return true;
+    return user;
   },
 );
 
@@ -101,11 +98,8 @@ export const userSlice = createSlice({
     [logoutAxios.fulfilled]: (state, action) => {
       if (action.payload) {
         state.isLogin = false;
+        state.isMe = false;
       }
-      Swal.fire({
-        text: "로그아웃 되었습니다",
-        confirmButtonText: "확인",
-      });
     },
 
     [checkUserAxios.fulfilled]: (state, action) => {

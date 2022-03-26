@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import profileApi from "../app/profileApi";
+import { setFolder } from "./Folder";
 
 const ProfileApi = new profileApi();
 
@@ -17,14 +18,25 @@ const initialState = {
     websiteUrl: null,
   },
   folderInfo: [],
+  defaultFolder: {},
 };
 
 export const getProfileAxios = createAsyncThunk(
   "profile/getProfileAxios",
   async (memberId, { dispatch }) => {
     const res = await ProfileApi.getProfile(memberId);
-    console.log(res);
     dispatch(setProfile(res.data));
+    dispatch(setFolder(res.data.articleFolderListResponseDto));
+    return res;
+  },
+);
+
+export const getProfileWithAxios = createAsyncThunk(
+  "profile/getProfileAxios",
+  async (memberId, { dispatch }) => {
+    const res = await ProfileApi.getProfileWith(memberId);
+    dispatch(setProfile(res.data));
+    dispatch(setFolder(res.data.articleFolderListResponseDto));
     return res;
   },
 );
@@ -41,7 +53,6 @@ export const editProfileUserNameAxios = createAsyncThunk(
   "profile/editProfileUserNameAxios",
   async ({ nickname }) => {
     const res = await ProfileApi.editProfileUserName({ nickname });
-    console.log(res);
     return res;
   },
 );
@@ -49,9 +60,6 @@ export const editProfileUserNameAxios = createAsyncThunk(
 export const editProfileImageAxios = createAsyncThunk(
   "profile/editProfileImageAxios",
   async (formData, { getState }) => {
-    // for (var pair of formData.entries()) {
-    //   console.log(pair[0]+ ', ' + pair[1]);
-    // }
     const res = await ProfileApi.editProfileImage(formData);
     return res;
   },
@@ -71,18 +79,16 @@ export const profileSlice = createSlice({
   reducers: {
     setProfile: (state, action) => {
       state.memberInfo = action.payload.memberInfoResponseDto;
-      state.folderInfo = action.payload.articleFolderListResponseDto;
+      state.folderInfo = action.payload.articleFolderListResponseDto.slice(
+        1,
+        9,
+      );
+      state.defaultFolder = action.payload.articleFolderListResponseDto[0];
     },
   },
   extraReducers: {
-    [editProfileUserDescAxios.fulfilled]: (state, action) => {
-      console.log(state);
-      console.log(action);
-    },
-    [editProfileImageAxios.fulfilled]: (state, action) => {
-      console.log(state);
-      console.log(action);
-    },
+    [editProfileUserDescAxios.fulfilled]: (state, action) => {},
+    [editProfileImageAxios.fulfilled]: (state, action) => {},
   },
 });
 export const { setProfile } = profileSlice.actions;

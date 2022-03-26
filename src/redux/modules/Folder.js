@@ -14,7 +14,6 @@ export const getFolderAxios = createAsyncThunk(
   "folder/getFolder",
   async (folderId, { dispatch }) => {
     const resp = await FolderApi.getFolder(folderId);
-    console.log("비로그인 아티클리스트가져오기: ", resp);
     dispatch(setFolder(resp.data));
     return resp;
   },
@@ -24,7 +23,6 @@ export const getFolderWithAxios = createAsyncThunk(
   "folder/getFolder",
   async (folderId, { dispatch }) => {
     const resp = await FolderApi.getFolderWith(folderId);
-    console.log("로그인 아티클리스트가져오기: ", resp);
     dispatch(setFolder(resp.data));
     return resp;
   },
@@ -34,7 +32,6 @@ export const getFolderListAxios = createAsyncThunk(
   "folder/getFolderList",
   async (_, { dispatch }) => {
     const resp = await FolderApi.getFolderList();
-    console.log("폴더목록가져오기: ", resp);
     dispatch(setFolderList(resp.data));
     return resp;
   },
@@ -43,8 +40,6 @@ export const getFolderListAxios = createAsyncThunk(
 export const createFolderAxios = createAsyncThunk(
   "folder/createFolder",
   async ({ folderData, articleData, navigate }, { dispatch }) => {
-    console.log(folderData);
-    console.log(articleData);
     const resp = await FolderApi.createFolder({ folderData, navigate });
     dispatch(postArticleAxios({ articleData, navigate }));
     return resp;

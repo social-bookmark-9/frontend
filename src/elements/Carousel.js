@@ -20,24 +20,24 @@ const Carousel = props => {
 
   return (
     <Slider {...settings}>
-      {articleContents.map((content, idx) => {
-        console.log(content);
-        const contents = content.content.slice(0, 60);
-        return (
-          <CardBox key={idx}>
-            <Card>
-              <CardTitle>{content.title}</CardTitle>
-              <CardContents>{contents}...</CardContents>
-            </Card>
-          </CardBox>
-        );
-      })}
-      {articleContents.length > 3 ? (
-        <SeeMoreCard>
-          <div>13개</div>
-          더보기
-        </SeeMoreCard>
-      ) : null}
+      {articleContents &&
+        articleContents.map((content, idx) => {
+          const contents = content.content.slice(0, 60);
+          return (
+            <CardBox key={idx}>
+              <Card>
+                <CardTitle>{content.title}</CardTitle>
+                <CardContents>{contents}...</CardContents>
+              </Card>
+            </CardBox>
+          );
+        })}
+      {/* {articleContents.length > 3 ? ( */}
+      {/* <SeeMoreCard>
+        <div>13개</div>
+        더보기
+      </SeeMoreCard> */}
+      {/* ) : null} */}
     </Slider>
   );
 };
@@ -76,16 +76,16 @@ const CardContents = styled.div`
   line-height: 16px;
 `;
 
-const SeeMoreCard = styled.div`
-  height: 146px;
-  width: 61px;
-  padding: 57px 14px;
-  margin-left: 8px;
-  font-size: 12px;
-  text-align: center;
-  border: 1px solid #f2f4f6;
-  border-radius: 10px;
-  overflow: hidden;
-`;
+// const SeeMoreCard = styled.div`
+//   height: 146px;
+//   width: 61px;
+//   padding: 57px 14px;
+//   margin-left: 8px;
+//   font-size: 12px;
+//   text-align: center;
+//   border: 1px solid #f2f4f6;
+//   border-radius: 10px;
+//   overflow: hidden;
+// `;
 
 export default Carousel;

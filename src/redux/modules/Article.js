@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Swal from "sweetalert2";
 import articleApi from "../app/articleApi";
-// import api from "../app/api";
 
 const ArticleApi = new articleApi();
 
 const initialState = {
   data: {},
+  recommendList: [],
 };
 
 export const postArticleAxios = createAsyncThunk(
@@ -16,23 +16,11 @@ export const postArticleAxios = createAsyncThunk(
     Swal.fire({
       text: "링크가 저장되었습니다",
       confirmButtonText: "확인",
+      confirmButtonColor: "#353C49",
     });
     return resp;
   },
 );
-
-// export const getArticleDB = createAsyncThunk(
-//   "article/getArticle",
-//   async ({ articleId, navigate }, { dispatch }) => {
-//     await api
-//       .getArticle({ articleId, navigate })
-//       .then(resp => {
-//         dispatch(setArticle(resp.data));
-//         return resp;
-//       })
-//       .catch(err => console.log(err));
-//   },
-// );
 
 export const getArticleAxios = createAsyncThunk(
   "article/getArticle",
@@ -43,8 +31,16 @@ export const getArticleAxios = createAsyncThunk(
   },
 );
 
+export const deleteArticleAxios = createAsyncThunk(
+  "article/deleteArticle",
+  async ({ articleId, navigate }) => {
+    const resp = await ArticleApi.deleteArticle({ articleId, navigate });
+    return resp;
+  },
+);
+
 export const getArticleWithAxios = createAsyncThunk(
-  "article/getArticle",
+  "article/getArticleWith",
   async ({ articleId, navigate }, { dispatch }) => {
     const resp = await ArticleApi.getArticleWith({ articleId, navigate });
     dispatch(setArticle(resp.data));
@@ -69,10 +65,30 @@ export const reviewHideAxios = createAsyncThunk(
   },
 );
 
-export const saveMyArticleAxios = createAsyncThunk(
+export const saveArticleAxios = createAsyncThunk(
   "article/saveArticle",
   async ({ articleId, navigate }, { dispatch }) => {
-    const resp = await ArticleApi.saveMyArticle({ articleId, navigate });
+    const resp = await ArticleApi.saveArticle({ articleId, navigate });
+    return resp;
+  },
+);
+
+export const updateTitleOgAxios = createAsyncThunk(
+  "article/updateTitleOg",
+  async ({ articleId, titleOg }, { dispatch }) => {
+    console.log(titleOg);
+    const resp = await ArticleApi.updateTitleOg({ articleId, titleOg });
+    dispatch(setNewTitleOg(resp.data));
+    return resp;
+  },
+);
+export const changeArticleFolderAxios = createAsyncThunk(
+  "article/changeFolder",
+  async ({ articleId, articleFolderName }) => {
+    const resp = await ArticleApi.changeArticleFolder({
+      articleId,
+      articleFolderName,
+    });
     return resp;
   },
 );
@@ -83,12 +99,16 @@ export const articleSlice = createSlice({
   reducers: {
     setArticle: (state, action) => {
       state.data = action.payload;
+      state.recommendList = action.payload.recommendArticles;
     },
     setReview: (state, action) => {
       state.data = action.payload;
     },
     setReviewHide: (state, action) => {
       state.review = action.payload;
+    },
+    setNewTitleOg: (state, action) => {
+      state.data.titleOg = action.payload;
     },
   },
   extraReducers: {
@@ -101,6 +121,7 @@ export const articleSlice = createSlice({
   },
 });
 
-export const { setArticle, setReview, setReviewHide } = articleSlice.actions;
+export const { setArticle, setReview, setReviewHide, setNewTitleOg } =
+  articleSlice.actions;
 
 export default articleSlice.reducer;
