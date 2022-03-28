@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Button, Text, Title } from "../../elements";
-import { Circle } from "../../elements/ImageObj";
+import { Button, Text, Title } from "../elements";
+import { Circle } from "../elements/ImageObj";
 
 const RecommendUserD = () => {
   const images = [
@@ -24,8 +24,8 @@ const RecommendUserD = () => {
         <div
           style={{
             flexDirection: "column",
-            minWidth: "255px",
-            marginRight: "10%",
+            minWidth: "35%",
+            // marginRight: "10%",
             justifyContent: "start",
           }}
         >
@@ -43,8 +43,9 @@ const RecommendUserD = () => {
           style={{
             display: "inline-block",
             flexDirection: "column",
-            width: "734px",
+            width: "65%",
             justifyContent: "end",
+            textAlign: "right",
           }}
         >
           <div style={{ display: "flex" }}>
@@ -106,10 +107,10 @@ const DesktopCard = styled.div`
   height: 312px;
   padding: 20px;
   margin: 0 6px 0 6px;
-  border: 1px solid #f2f4f6;
+  border: 1px solid #F2F4F6;
   border-radius: 20px;
   overflow: hidden;
-  background-color: #f2f4f6;
+  background-color: #F2F4F6;
   text-align: center;
   & img {
     width: 100%;
@@ -124,7 +125,7 @@ const ProfileImageDesktop = styled.div`
   width: 127.5px;
   clip-path: url(#desktopClip);
   position: relative;
-  background-color: #c4c4c4;
+  background-color: #C4C4C4;
   & img {
     position: absolute;
     width: 100%;
