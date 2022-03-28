@@ -7,6 +7,7 @@ import folderReducer from "./modules/Folder";
 import profileReducer from "./modules/Profile";
 import localDataReducer from "./modules/LocalData";
 import mainReducer from "./modules/Main";
+import reminderReducer from "./modules/Reminder"
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     folder: folderReducer,
     profile: profileReducer,
     localData: localDataReducer,
+    reminder: reminderReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

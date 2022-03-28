@@ -175,7 +175,7 @@ const ArticleDetail = props => {
             </TextBox>
           )}
         </MemoBox>
-        <DetailRemind reminderDate={article.reminderDate} />
+        <DetailRemind {...article} />
       </DetailContainer>
       <Line />
       <div style={{ padding: "24px 20px" }}>
