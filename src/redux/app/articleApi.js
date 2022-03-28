@@ -126,7 +126,7 @@ export default class articleApi {
       });
   }
 
-  async saveMyArticle({ articleId, navigate }) {
+  async saveArticle({ articleId, navigate }) {
     const saveArticleConfig = {
       methos: "PATCH",
       headers: {
@@ -137,6 +137,25 @@ export default class articleApi {
     return axios(saveArticleConfig)
       .then(res => {
         return res;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  async saveAllArticle({ folderId, articleFolderName }) {
+    const saveArticleConfig = {
+      method: "PATCH",
+      url: `${this.base}/api/articles/articlefolder/${folderId}`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
+      data: JSON.stringify(articleFolderName),
+    };
+    return axios(saveArticleConfig)
+      .then(res => {
+        return res.data;
       })
       .catch(err => {
         console.log(err);
@@ -183,7 +202,7 @@ export default class articleApi {
   async changeArticleFolder({ articleId, articleFolderName }) {
     const changeArticleFolderConfig = {
       method: "PATCH",
-      url: `${this.base}/api/articles/${articleId}/title`,
+      url: `${this.base}/api/articles/${articleId}/folder`,
       headers: {
         "Content-Type": "application/json",
         "X-AUTH-TOKEN": getToken(),

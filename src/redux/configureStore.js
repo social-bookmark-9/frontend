@@ -20,7 +20,5 @@ export const store = configureStore({
     reminder: reminderReducer,
   },
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }).concat(logger),
+    getDefaultMiddleware({ serializableCheck: false }).concat(logger),
 });

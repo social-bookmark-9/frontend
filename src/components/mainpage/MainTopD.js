@@ -1,13 +1,25 @@
 import { Button, Image, Text, Title } from "../../elements";
 
 const MainTopD = () => {
-
   return (
-    <div style={{ backgroundColor:"#f2f3f4" }}>
-      <div style={{ margin:"0 auto 0 auto", display:"flex", width:"1220px", padding:"315px 0 336px 0" }}>
-        <div style={{ flexDirection:"column", width: "80%", justifyContent: "start" }}>
+    <div style={{ backgroundColor: "#f2f3f4" }}>
+      <div
+        style={{
+          margin: "0 auto 0 auto",
+          display: "flex",
+          width: "1220px",
+          padding: "315px 0 336px 0",
+        }}
+      >
+        <div
+          style={{
+            flexDirection: "column",
+            width: "80%",
+            justifyContent: "start",
+          }}
+        >
           <Title _fontSize="47px" _padding="0 0 40px 0">
-            <div style={{ marginBottom:"-10px"}}>
+            <div style={{ marginBottom: "-10px" }}>
               Express yourself with
               <span style={{ verticalAlign: "middle" }}>
                 <Image _src="/images/emoji1.png" _width="75px" _height="75px" />
@@ -36,12 +48,18 @@ const MainTopD = () => {
             내 버블드 만들기
           </Button>
         </div>
-        <div style={{ flexDirection:"column", width: "20%", justifyContent: "end" }}>
+        <div
+          style={{
+            flexDirection: "column",
+            width: "20%",
+            justifyContent: "end",
+          }}
+        >
           이미지 들어갈 곳
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default MainTopD;

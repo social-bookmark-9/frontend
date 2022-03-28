@@ -23,11 +23,10 @@ const Carousel = props => {
     <Slider {...settings}>
       {articleContents &&
         articleContents.map((content, idx) => {
-          // const contents = content.content.slice(0, 60);
           return (
             <CardBox key={idx}>
               <Card>
-              <CardTitle>
+                <CardTitle>
                   {content.title !== null ? (
                     <LinesEllipsis
                       text={content.title}

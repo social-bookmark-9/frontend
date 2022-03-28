@@ -116,6 +116,7 @@ const ArticleCardContent = styled.div`
   bottom: 28px;
   left: 28px;
 `;
+
 const Title = styled.div`
   padding-bottom: 8px;
   font-size: ${({ theme }) => theme.fontSizes.font18};

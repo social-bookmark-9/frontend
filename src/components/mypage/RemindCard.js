@@ -6,7 +6,7 @@ import { Title, Text, Button } from "../../elements";
 import { Desktop, Tablet, Mobile } from "../../styles/mediaquery";
 
 const RemindCard = props => {
-  const { _title, _text, _button, isMe } = props;
+  const { _title, _text, _button, isLogin, memberId } = props;
   const navigate = useNavigate();
 
   const onNavigate = () => {

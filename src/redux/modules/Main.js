@@ -16,6 +16,7 @@ export const getMainAxios = createAsyncThunk(
   async (_, { dispatch }) => {
     const resp = await MainApi.getMain();
     dispatch(setMain(resp.data));
+    console.log(resp);
     return resp;
   },
 );
@@ -25,6 +26,7 @@ export const getMainWithAxios = createAsyncThunk(
   async (_, { dispatch }) => {
     const resp = await MainApi.getMainWith();
     dispatch(setMain(resp.data));
+    console.log(resp);
     return resp;
   },
 );

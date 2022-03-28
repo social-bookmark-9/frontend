@@ -1,28 +1,34 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userApi from "../app/userApi";
+
 const UserApi = new userApi();
+
 const initialState = {
   userInfo: null,
   myInfo: null,
   isLogin: false,
   isMe: false,
 };
+
 export const kakaoLoginAxios = createAsyncThunk(
   "user/kakaoLogin",
   async ({ code, navigate }, { dispatch }) => {
     const user = await UserApi.kakaoLogin({ code, navigate, dispatch });
     if (user) {
       dispatch(setMyInfo(user.data));
+      console.log(user);
       return user;
     }
   },
 );
+
 export const registerAxios = createAsyncThunk(
   "user/register",
   async ({ userInfo, navigate }, { dispatch }) => {
     const user = await UserApi.register({ userInfo, navigate });
     if (user) {
       dispatch(setMyInfo(user.data));
+      console.log(user);
       return user;
     }
   },
@@ -34,6 +40,7 @@ export const checkUserAxios = createAsyncThunk(
     const user = await UserApi.checkUser({ token, navigate });
     if (user) {
       dispatch(setUser(user.data));
+      console.log(user);
       return user;
     }
   },
@@ -45,6 +52,7 @@ export const refreshTokensAxios = createAsyncThunk(
     const user = await UserApi.refreshTokens({ tokens, navigate });
     if (user) {
       dispatch(setMyInfo(user.data));
+      console.log(user);
       return user;
     }
   },
@@ -55,6 +63,7 @@ export const kakaoLogoutAxios = createAsyncThunk(
   async navigate => {
     const user = await UserApi.kakaoLogout(navigate);
     // dispatch(deleteUserFromSession());
+    console.log(user);
     return user;
   },
 );

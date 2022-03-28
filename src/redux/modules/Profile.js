@@ -24,52 +24,58 @@ const initialState = {
 export const getProfileAxios = createAsyncThunk(
   "profile/getProfileAxios",
   async (memberId, { dispatch }) => {
-    const res = await ProfileApi.getProfile(memberId);
-    dispatch(setProfile(res.data));
-    dispatch(setFolder(res.data.articleFolderListResponseDto));
-    return res;
+    const resp = await ProfileApi.getProfile(memberId);
+    dispatch(setProfile(resp.data));
+    dispatch(setFolder(resp.data.articleFolderListResponseDto));
+    console.log(resp);
+    return resp;
   },
 );
 
 export const getProfileWithAxios = createAsyncThunk(
   "profile/getProfileAxios",
   async (memberId, { dispatch }) => {
-    const res = await ProfileApi.getProfileWith(memberId);
-    dispatch(setProfile(res.data));
-    dispatch(setFolder(res.data.articleFolderListResponseDto));
-    return res;
+    const resp = await ProfileApi.getProfileWith(memberId);
+    dispatch(setProfile(resp.data));
+    dispatch(setFolder(resp.data.articleFolderListResponseDto));
+    console.log(resp);
+    return resp;
   },
 );
 
 export const editProfileUserDescAxios = createAsyncThunk(
   "profile/editProfileUserDescAxios",
   async ({ userDesc }) => {
-    const res = await ProfileApi.editProfileUserDesc({ userDesc });
-    return res;
+    const resp = await ProfileApi.editProfileUserDesc({ userDesc });
+    console.log(resp);
+    return resp;
   },
 );
 
 export const editProfileUserNameAxios = createAsyncThunk(
   "profile/editProfileUserNameAxios",
   async ({ nickname }) => {
-    const res = await ProfileApi.editProfileUserName({ nickname });
-    return res;
+    const resp = await ProfileApi.editProfileUserName({ nickname });
+    console.log(resp);
+    return resp;
   },
 );
 
 export const editProfileImageAxios = createAsyncThunk(
   "profile/editProfileImageAxios",
   async (formData, { getState }) => {
-    const res = await ProfileApi.editProfileImage(formData);
-    return res;
+    const resp = await ProfileApi.editProfileImage(formData);
+    console.log(resp);
+    return resp;
   },
 );
 
 export const editProfileHashtagAxios = createAsyncThunk(
   "profile/editProfileHashtagAxios",
   async hashTag => {
-    const res = await ProfileApi.editProfileHashtag(hashTag);
-    return res;
+    const resp = await ProfileApi.editProfileHashtag(hashTag);
+    console.log(resp);
+    return resp;
   },
 );
 

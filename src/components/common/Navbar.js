@@ -30,7 +30,7 @@ const Navbar = props => {
 
   return (
     <React.Fragment>
-      <NavbarContainer bgColor={bgColor} onClick={menuOpen}>
+      <NavbarContainer bgColor={bgColor}>
         <NavBox>
           {title ? <Title>{title}</Title> : <Logo />}
           {props.inDetail ? (
@@ -123,6 +123,7 @@ const NavContainer = styled.div`
 const NavMenu = styled.div`
   float: right;
   display: flow-root;
+  cursor: pointer;
 `;
 
 const Nav = styled.div`

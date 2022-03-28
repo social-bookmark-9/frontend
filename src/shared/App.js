@@ -28,11 +28,13 @@ import NotFound from "./NotFound";
 import ErrorBoundary from "./ErrorBoundary";
 import Spinner from "./Spinner";
 import MainD from "../pages/desktop/MainD";
+import RemindEmail from "../pages/mobile/RemindEmail";
 
 function App(props) {
   const dispatch = useDispatch();
   const myInfo = useSelector(state => state.user.myInfo);
   const isLogin = useSelector(state => state.user.isLogin);
+  // const memberName = myInfo.nickName;
 
   useEffect(() => {
     if (getToken()) {
@@ -55,7 +57,10 @@ function App(props) {
         </Desktop>
         <Mobile>
           <Routes>
-            <Route path="/" element={<MainPage {...myInfo} />} />
+            <Route
+              path="/"
+              element={<MainPage {...myInfo} isLogin={isLogin} />}
+            />
             <Route path="/login" element={<Login />} />
             <Route path="/user/nickname" element={<UserNickname />} />
             <Route path="/user/favorites" element={<UserFavorites />} />
@@ -76,6 +81,10 @@ function App(props) {
             <Route path="/api/users/login" element={<OAuthRedirectHandler />} />
             <Route path="/myreview" element={<MyReview />} />
             <Route path="/editprofile" element={<EditProfile {...myInfo} />} />
+            <Route
+              path="/setting/remindEmail"
+              element={<RemindEmail {...myInfo} />}
+            />
             <Route element={<NotFound />} />
           </Routes>
         </Mobile>

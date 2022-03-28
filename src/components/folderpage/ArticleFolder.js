@@ -44,18 +44,16 @@ const ArticleFolder = props => {
           isMe={isMe}
           isDefault={isDefault}
         >
-          {isMe ? (
-            isDefault ? null : (
-              <LabelBox>
-                <Label
-                  _color={propsColor}
-                  borderColor={propsColor}
-                  bgColor="none"
-                >
-                  완독률 {props.completeRate}%
-                </Label>
-              </LabelBox>
-            )
+          {isMe || isDefault ? (
+            <LabelBox>
+              <Label
+                _color={propsColor}
+                borderColor={propsColor}
+                bgColor="none"
+              >
+                완독률 {props.completeRate}%
+              </Label>
+            </LabelBox>
           ) : (
             <LabelBox>
               {hashTag.map((tag, idx) => (
@@ -79,17 +77,15 @@ const ArticleFolder = props => {
             >
               {props.folderName}
             </Title>
-            {isMe ? (
-              isDefault ? null : (
-                <Label bgColor="white" _padding="7px" borderColor="white">
-                  <Image
-                    _src={`/images/${props.hide ? "show" : "hide"}.png`}
-                    _width="20px"
-                    _height="20px"
-                    _marginR="0px"
-                  />
-                </Label>
-              )
+            {isMe || isDefault ? (
+              <Label bgColor="white" _padding="7px" borderColor="white">
+                <Image
+                  _src={`/images/${props.hide ? "show" : "hide"}.png`}
+                  _width="20px"
+                  _height="20px"
+                  _marginR="0px"
+                />
+              </Label>
             ) : (
               <Label
                 _fontSize={({ theme }) => theme.fontSizes.font12}
