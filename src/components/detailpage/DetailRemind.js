@@ -2,10 +2,10 @@ import React, { useState } from "react";
 
 import styled, { css } from "styled-components";
 import { Text } from "../../elements";
-import { FlexboxRow, FlexboxSpace } from "../../styles/flexbox";
+import { FlexboxColumn, FlexboxRow } from "../../styles/flexbox";
 
 const DetailRemind = ({ reminderDate }) => {
-  const [userRemind, setUserRemind] = useState(reminderDate);
+  const [userRemind, setUserRemind] = useState(reminderDate && reminderDate);
 
   const remindList = [
     { key: "선택안함", value: 0 },
@@ -16,7 +16,6 @@ const DetailRemind = ({ reminderDate }) => {
 
   const changeRemind = e => {
     setUserRemind(e.target.value);
-    console.log(e.target.value);
   };
 
   return (
@@ -33,7 +32,7 @@ const DetailRemind = ({ reminderDate }) => {
                 name="remindeCheck"
                 id={remind.value}
                 value={remind.value}
-                checked={userRemind === reminderDate ? true : false}
+                defaultChecked={userRemind === reminderDate ? true : false}
                 onClick={changeRemind}
               />
               <RemindText>{remind.key}</RemindText>
@@ -91,7 +90,7 @@ const RemindRadio = styled.input.attrs({ type: "radio" })`
 `;
 
 const Reminder = styled.div`
-  ${FlexboxSpace}
+  ${FlexboxColumn}
   align-items: center;
   padding: 17px 0px;
 `;

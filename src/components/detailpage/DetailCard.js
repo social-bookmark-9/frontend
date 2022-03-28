@@ -5,15 +5,20 @@ import { Circle } from "../../elements/ImageObj";
 import { Label, Image } from "../../elements";
 
 import LinesEllipsis from "react-lines-ellipsis";
+import { useDispatch } from "react-redux";
+import { updateReadCountAxios } from "../../redux/modules/Article";
 
 const DetailCard = props => {
-  const { article } = props;
+  const { article, articleId } = props;
+
+  const dispatch = useDispatch();
 
   const _hashTag = [article.hashtag1, article.hashtag2, article.hashtag3];
   const hashTag = _hashTag.filter((el, i) => el !== null);
 
   const handleLink = () => {
     window.open(`${article.url}`, "_blank");
+    dispatch(updateReadCountAxios(articleId));
   };
 
   return (
@@ -42,7 +47,7 @@ const DetailCard = props => {
               maxLine="2"
               ellipsis="..."
               trimRight
-              basedOn="words"
+              basedOn="letters"
             />
           </Title>
           <Text>

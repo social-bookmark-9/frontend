@@ -14,7 +14,7 @@ const Favorite = props => {
     "동기부여",
     "패션",
     "예술",
-    "과학",
+    "기타",
   ];
 
   return (

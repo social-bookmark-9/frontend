@@ -110,7 +110,6 @@ export default class ProfileApi {
     };
     return axios(editProfileImageConfig)
       .then(res => {
-        console.log(res);
         return res;
       })
       .catch(err => {

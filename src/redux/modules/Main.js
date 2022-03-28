@@ -8,7 +8,7 @@ const initialState = {
   folderList: [],
   articleList: [],
   paging: { page: 0, limit: 3 },
-  is_loading: false,
+  isLoading: false,
 };
 
 export const getMainAxios = createAsyncThunk(
@@ -54,7 +54,7 @@ export const mainSlice = createSlice({
   extraReducers: {
     [getMainAxios.fulfilled]: (state, action) => {
       // state.paging.page += 1;
-      state.is_loading = false;
+      state.isLoading = false;
     },
   },
 });

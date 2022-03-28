@@ -10,9 +10,6 @@ const RecommendCard = props => {
   const { recommendList } = props;
   const navigate = useNavigate();
 
-  console.log(recommendList);
-  console.log(props.hashtag1);
-
   return (
     <React.Fragment>
       {recommendList &&

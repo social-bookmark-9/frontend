@@ -71,7 +71,6 @@ export default class userApi {
     };
     return axios(checkUserConfig)
       .then(res => {
-        console.log(res);
         return res.data;
       })
       .catch(err => {
@@ -97,27 +96,22 @@ export default class userApi {
       });
   }
 
-  async logout(navigate) {
+  async kakaoLogout(navigate) {
     const logoutConfig = {
       method: "GET",
-      url: `${this.base}/api/users/logout`,
-      headers: {
-        "content-type": "application/json",
-        "X-AUTH-TOKEN": getToken(),
-      },
-      data: getReToken(),
+      url: `https://kauth.kakao.com/oauth/logout?client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&logout_redirect_uri=http://localhost:3000`,
     };
     return axios(logoutConfig)
       .then(res => {
         console.log(res);
-        Swal.fire({
-          text: "로그아웃 되었습니다",
-          confirmButtonText: "확인",
-          confirmButtonColor: "#353C49",
-        }).then(res => {
-          navigate("/", { replace: true });
-        });
-        return res;
+        // Swal.fire({
+        //   text: "로그아웃 되었습니다",
+        //   confirmButtonText: "확인",
+        //   confirmButtonColor: "#353C49",
+        // }).then(res => {
+        //   navigate("/", { replace: true });
+        // });
+        // return res;
       })
       .catch(err => {
         console.log(err);

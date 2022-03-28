@@ -31,19 +31,19 @@ export const getArticleAxios = createAsyncThunk(
   },
 );
 
-export const deleteArticleAxios = createAsyncThunk(
-  "article/deleteArticle",
-  async ({ articleId, navigate }) => {
-    const resp = await ArticleApi.deleteArticle({ articleId, navigate });
-    return resp;
-  },
-);
-
 export const getArticleWithAxios = createAsyncThunk(
   "article/getArticleWith",
   async ({ articleId, navigate }, { dispatch }) => {
     const resp = await ArticleApi.getArticleWith({ articleId, navigate });
     dispatch(setArticle(resp.data));
+    return resp;
+  },
+);
+
+export const deleteArticleAxios = createAsyncThunk(
+  "article/deleteArticle",
+  async ({ articleId, navigate }) => {
+    const resp = await ArticleApi.deleteArticle({ articleId, navigate });
     return resp;
   },
 );
@@ -65,18 +65,9 @@ export const reviewHideAxios = createAsyncThunk(
   },
 );
 
-export const saveArticleAxios = createAsyncThunk(
-  "article/saveArticle",
-  async ({ articleId, navigate }, { dispatch }) => {
-    const resp = await ArticleApi.saveArticle({ articleId, navigate });
-    return resp;
-  },
-);
-
 export const updateTitleOgAxios = createAsyncThunk(
   "article/updateTitleOg",
   async ({ articleId, titleOg }, { dispatch }) => {
-    console.log(titleOg);
     const resp = await ArticleApi.updateTitleOg({ articleId, titleOg });
     dispatch(setNewTitleOg(resp.data));
     return resp;
@@ -89,6 +80,32 @@ export const changeArticleFolderAxios = createAsyncThunk(
       articleId,
       articleFolderName,
     });
+    return resp;
+  },
+);
+
+export const updateHashtagAxios = createAsyncThunk(
+  "article/updateHashtag",
+  async ({ articleId, tagData }, { dispatch }) => {
+    const resp = await ArticleApi.updateHashtag({ articleId, tagData });
+    console.log(resp);
+    return resp;
+  },
+);
+
+export const saveArticleAxios = createAsyncThunk(
+  "article/saveArticle",
+  async ({ articleId, navigate }, { dispatch }) => {
+    const resp = await ArticleApi.saveArticle({ articleId, navigate });
+    return resp;
+  },
+);
+
+export const updateReadCountAxios = createAsyncThunk(
+  "article/updateHashtag",
+  async (articleId, { dispatch }) => {
+    const resp = await ArticleApi.updateReadCount(articleId);
+    console.log(resp);
     return resp;
   },
 );
@@ -108,12 +125,12 @@ export const articleSlice = createSlice({
       state.review = action.payload;
     },
     setNewTitleOg: (state, action) => {
-      state.data.titleOg = action.payload;
+      console.log(action.payload);
     },
   },
   extraReducers: {
     [updateReviewAxios.fulfilled]: (state, action) => {
-      state.review = action.payload.data.review;
+      console.log(action.payload);
     },
     [postArticleAxios.fulfilled]: (state, action) => {
       state.localdata = initialState;

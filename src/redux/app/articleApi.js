@@ -57,7 +57,6 @@ export default class articleApi {
     };
     return axios(getArticleConfig)
       .then(res => {
-        console.log("비로그인 겟아티클:", res);
         return res.data;
       })
       .catch(err => {
@@ -76,7 +75,6 @@ export default class articleApi {
     };
     return axios(getArticleWithConfig)
       .then(res => {
-        console.log("로그인 겟아티클:", res);
         return res.data;
       })
       .catch(err => {
@@ -95,7 +93,6 @@ export default class articleApi {
     };
     return axios(deleteArticleConfig)
       .then(res => {
-        console.log(res);
         Swal.fire({
           text: "링크를 삭제했습니다",
           confirmButtonText: "확인",
@@ -122,7 +119,6 @@ export default class articleApi {
     };
     return axios(updateReviewConfig)
       .then(res => {
-        console.log(res);
         return res.data;
       })
       .catch(err => {
@@ -140,17 +136,17 @@ export default class articleApi {
     };
     return axios(saveArticleConfig)
       .then(res => {
-        console.log(res);
+        return res;
       })
       .catch(err => {
         console.log(err);
       });
   }
 
-  async reviewHide({ articleId, navigate }) {
+  async reviewHide(articleId) {
     const reviewHideConfig = {
       method: "PATCH",
-      url: `/api/articles/${articleId}/review/hide`,
+      url: `${this.base}/api/articles/${articleId}/review/hide`,
       headers: {
         "Content-Type": "application/json",
         "X-AUTH-TOKEN": getToken(),
@@ -158,7 +154,7 @@ export default class articleApi {
     };
     return axios(reviewHideConfig)
       .then(res => {
-        console.log(res);
+        return res;
       })
       .catch(err => {
         console.log(err);
@@ -166,7 +162,6 @@ export default class articleApi {
   }
 
   async updateTitleOg({ articleId, titleOg }) {
-    console.log(titleOg);
     const updateTitleOgConfig = {
       method: "PATCH",
       url: `${this.base}/api/articles/${articleId}/title`,
@@ -178,7 +173,6 @@ export default class articleApi {
     };
     return axios(updateTitleOgConfig)
       .then(res => {
-        console.log(res);
         return res;
       })
       .catch(err => {
@@ -198,7 +192,43 @@ export default class articleApi {
     };
     return axios(changeArticleFolderConfig)
       .then(res => {
-        console.log(res);
+        return res;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  async updateHashtag({ articleId, tagData }) {
+    const updateHashtagConfig = {
+      method: "PATCH",
+      url: `${this.base}/api/articles/${articleId}/hashtag`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
+      data: JSON.stringify(tagData),
+    };
+    return axios(updateHashtagConfig)
+      .then(res => {
+        return res;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  async updateReadCount(articleId) {
+    const updateReadCountConfig = {
+      method: "PATCH",
+      url: `${this.base}/api/articles/${articleId}/readcount`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
+    };
+    return axios(updateReadCountConfig)
+      .then(res => {
         return res;
       })
       .catch(err => {

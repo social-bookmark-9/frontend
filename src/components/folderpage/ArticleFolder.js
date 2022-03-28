@@ -9,7 +9,6 @@ import Carousel from "../../elements/Carousel";
 const ArticleFolder = props => {
   const { folder, folderColor } = props;
 
-  console.log(props);
   const navigate = useNavigate();
   const isMe = useSelector(state => state.user.isMe);
   const isDefault = folder.isdDeleteable;
