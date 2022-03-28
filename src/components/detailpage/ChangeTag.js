@@ -1,18 +1,41 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
+import Swal from "sweetalert2";
 import { Button, Text } from "../../elements";
+import { updateHashtagAxios } from "../../redux/modules/Article";
 
 import Favorite from "../common/Favorite";
 
 const ChangeTag = props => {
-  const { setShowModal } = props;
+  const { articleId } = props;
+
+  const dispatch = useDispatch();
 
   const [isChecked, setIsChecked] = useState(false);
   const [checkedItems, setCheckedItems] = useState(new Set());
 
-  const modalChange = () => {
-    setShowModal(current => !current);
+  const tagList = [...checkedItems];
+  const tagData = {
+    hashtag1: tagList[0],
+    hashtag2: tagList[1] ? tagList[1] : null,
+    hashtag3: tagList[2] ? tagList[2] : null,
+  };
+
+  const changeTags = () => {
+    Swal.fire({
+      text: "선택하신 태그로 변경할까요?",
+      showCancelButton: true,
+      confirmButtonText: "확인",
+      confirmButtonColor: "#353C49",
+      cancelButtonText: "취소",
+    }).then(result => {
+      if (result.isConfirmed) {
+        dispatch(updateHashtagAxios({ articleId, tagData }));
+        Swal.fire({ text: "변경되었습니다", confirmButtonText: "확인" });
+      }
+    });
   };
 
   const handleChecked = e => {
@@ -35,24 +58,28 @@ const ChangeTag = props => {
 
   return (
     <>
-      <div style={{ height: "270" }}>
+      <TagBox>
         <TitleBox>
           <Text _fontSize="14px">태그 선택</Text>
         </TitleBox>
         <FavoritesBox>
           <Favorites onChange={handleChecked}>
-            <Favorite />
+            <Favorite tagList={tagList} />
           </Favorites>
         </FavoritesBox>
-      </div>
+      </TagBox>
       <ButtonBox>
-        <Button _onClick={modalChange} _padding="18px">
-          링크 저장
+        <Button _onClick={changeTags} _padding="18px">
+          태그 변경하기
         </Button>
       </ButtonBox>
     </>
   );
 };
+
+const TagBox = styled.div`
+  height: 270px;
+`;
 
 const TitleBox = styled.div`
   display: flex;

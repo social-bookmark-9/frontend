@@ -50,11 +50,11 @@ export const refreshTokensAxios = createAsyncThunk(
   },
 );
 
-export const logoutAxios = createAsyncThunk(
+export const kakaoLogoutAxios = createAsyncThunk(
   "user/logout",
-  async (navigate, { dispatch }) => {
-    const user = await UserApi.logout(navigate);
-    dispatch(deleteUserFromSession());
+  async navigate => {
+    const user = await UserApi.kakaoLogout(navigate);
+    // dispatch(deleteUserFromSession());
     return user;
   },
 );
@@ -95,7 +95,7 @@ export const userSlice = createSlice({
       state.isMe = true;
     },
 
-    [logoutAxios.fulfilled]: (state, action) => {
+    [kakaoLogoutAxios.fulfilled]: (state, action) => {
       if (action.payload) {
         state.isLogin = false;
         state.isMe = false;

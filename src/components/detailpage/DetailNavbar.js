@@ -16,7 +16,7 @@ import ChangeTag from "./ChangeTag";
 import Swal from "sweetalert2";
 
 const DetailNavbar = props => {
-  const { title, article } = props;
+  const { title, article, articleId } = props;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,9 +32,9 @@ const DetailNavbar = props => {
   const [isOpen, setIsOpen] = useState(false);
   const [folder, setFolder] = useState(title);
   const [newTitleOg, setNewTitleOg] = useState(article.titleOg);
+  const tagList = [article.hashtag1, article.hashtag2, article.hashtag3];
 
   const isMe = true;
-  const articleId = article.articleId;
 
   const openModal = () => {
     if (modalOpen === false) {
@@ -79,14 +79,14 @@ const DetailNavbar = props => {
 
   const titleOg = { titleOg: newTitleOg };
 
-  console.log(titleOg);
-  console.log(newTitleOg);
   const handleUpdate = () => {
-    // if (article.titleOg !== newTitleOg) {
-    dispatch(updateTitleOgAxios({ articleId, titleOg }));
-    // } else if (title !== folder) {
-    //   dispatch(changeArticleFolderAxios({ articleId, folder }));
-    // }
+    if (article.titleOg !== newTitleOg) {
+      dispatch(updateTitleOgAxios({ articleId, titleOg }));
+    }
+
+    if (title !== folder) {
+      dispatch(changeArticleFolderAxios({ articleId, folder }));
+    }
   };
 
   return (
@@ -128,12 +128,7 @@ const DetailNavbar = props => {
                 </ImageBox>
               </ImageContainer>
               {showModal ? (
-                <ChangeTag
-                  openModal={openModal}
-                  setShowModal={setShowModal}
-                  article={article}
-                  showModal={showModal}
-                />
+                <ChangeTag tagList={tagList} articleId={articleId} />
               ) : (
                 <Main>
                   <LinkBox>

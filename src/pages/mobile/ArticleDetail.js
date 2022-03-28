@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
+import { getToken } from "../../shared/utils";
+
 import styled from "styled-components";
 import { FlexboxColumn, FlexboxRow } from "../../styles/flexbox";
 import { Button, Image, Title, Text } from "../../elements";
@@ -22,8 +24,6 @@ import RecommendCard from "../../components/detailpage/RecommendCard";
 import Swal from "sweetalert2";
 
 const ArticleDetail = props => {
-  const { isLogin } = props;
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -33,11 +33,12 @@ const ArticleDetail = props => {
   const memoRef = useRef();
 
   useEffect(() => {
-    if (isLogin) {
+    if (getToken()) {
       dispatch(getArticleWithAxios({ articleId, navigate }));
+    } else {
+      dispatch(getArticleAxios({ articleId, navigate }));
     }
-    dispatch(getArticleAxios({ articleId, navigate }));
-  }, [dispatch, articleId, navigate, isLogin]);
+  }, [dispatch, articleId, navigate]);
 
   const article = useSelector(state => state.article.data);
   const recommendList = article.recommendArticles;
@@ -63,6 +64,7 @@ const ArticleDetail = props => {
     }
   };
 
+  console.log("상세페이지 아이디:", articleId);
   const handleMemoHide = () => {
     if (reviewHide) {
       Swal.fire({
@@ -118,7 +120,7 @@ const ArticleDetail = props => {
       />
       <DetailContainer>
         {/* 아티클 카드 */}
-        <DetailCard article={article} />
+        <DetailCard article={article} articleId={articleId} />
         {/* 아티클 저장 */}
         {isMe ? null : (
           <Button
@@ -143,7 +145,13 @@ const ArticleDetail = props => {
             </Title>
             {isMe ? (
               <ImageBox onClick={handleMemoHide}>
-                <Image _src="/images/hide.png" _width="20px" _height="20px" />
+                <Image
+                  _src={`/images/${
+                    reviewHide && reviewHide ? "hide" : "show"
+                  }.png`}
+                  _width="20px"
+                  _height="20px"
+                />
               </ImageBox>
             ) : null}
           </MemoHead>

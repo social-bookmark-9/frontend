@@ -52,7 +52,6 @@ export default class folderApi {
     };
     return axios(getFolderListConfig)
       .then(res => {
-        console.log(res);
         return res.data;
       })
       .catch(err => {
@@ -72,8 +71,7 @@ export default class folderApi {
     };
     return axios(createFolderConfig)
       .then(res => {
-        console.log(res);
-        // return res.data
+        return res.data;
       })
       .catch(err => {
         console.log(err);

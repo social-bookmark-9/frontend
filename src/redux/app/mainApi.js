@@ -17,7 +17,6 @@ export default class mainApi {
 
     return axios(getMainConfig)
       .then(res => {
-        console.log(res);
         return res.data;
       })
       .catch(err => {
@@ -37,7 +36,6 @@ export default class mainApi {
 
     return axios(getMainWithConfig)
       .then(res => {
-        console.log(res);
         return res.data;
       })
       .catch(err => {
