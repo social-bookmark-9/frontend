@@ -14,6 +14,10 @@ const UserNickname = props => {
   const [words, setWords] = useState(0);
   const [nickname, setNickname] = useState("");
 
+  // const handleOnInput = (e) => {
+  //   e.value = e.value.replace(/[^A-Za-z]/gi, "");
+  // }
+
   const onFavorite = () => {
     if (nickname) {
       navigate("/user/favorites", {

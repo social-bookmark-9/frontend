@@ -2,10 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router";
 
 import styled from "styled-components";
-import { Image, Label, Title, Text } from "../../elements";
+import { Image, Label, Title } from "../../elements";
 import { FlexboxSpace } from "../../styles/flexbox";
 
 import Slider from "react-slick";
+import LinesEllipsis from "react-lines-ellipsis";
 
 const RecommendList = props => {
   const { articleList } = props;
@@ -36,8 +37,6 @@ const RecommendList = props => {
               article.hashtag3,
             ];
             const hashTag = _hashTag.filter((el, i) => el !== null);
-            const title = article.titleOg.slice(0, 25);
-            const contents = article.contentOg.slice(0, 45);
 
             return (
               <CardBox
@@ -61,20 +60,32 @@ const RecommendList = props => {
                         <Label key={idx}>{tag}</Label>
                       ))}
                     </LabelBox>
-                    <Title
-                      _fontsize={({ theme }) => theme.fontSizes.font18}
-                      _lineHeight="24px"
-                      _color={({ theme }) => theme.colors.white}
-                    >
-                      {title}...
-                    </Title>
-                    <Text
-                      _fontSize={({ theme }) => theme.fontSizes.font13}
-                      _lineHeight="18px"
-                      _color={({ theme }) => theme.colors.white}
-                    >
-                      {contents}...
-                    </Text>
+                    <ArticleTitle>
+                      {article.titleOg !== null ? (
+                        <LinesEllipsis
+                          text={article.titleOg}
+                          maxLine="2"
+                          ellipsis="..."
+                          trimRight
+                          basedOn="letters"
+                        />
+                      ) : (
+                        "제목없음"
+                      )}
+                    </ArticleTitle>
+                    <ArticleText>
+                      {article.contentOg !== null ? (
+                        <LinesEllipsis
+                          text={article.contentOg}
+                          maxLine="2"
+                          ellipsis="..."
+                          trimRight
+                          basedOn="letters"
+                        />
+                      ) : (
+                        "미리보기 내용을 불러올 수 없습니다"
+                      )}
+                    </ArticleText>
                   </ArticleCardContent>
                 </Card>
               </CardBox>
@@ -129,6 +140,19 @@ const Card = styled.div`
   background-repeat: no-repeat;
   background-blend-mode: darken;`
       : `background-color: #505866`};
+`;
+
+const ArticleTitle = styled.div`
+  padding-bottom: 8px;
+  font-size: ${({ theme }) => theme.fontSizes.font18};
+  line-height: 24px;
+  color: ${({ theme }) => theme.colors.white};
+`;
+
+const ArticleText = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.font13};
+  line-height: 18px;
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 const ImageBox = styled.div`

@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getProfileAxios } from "../../redux/modules/Profile";
+import {
+  getProfileAxios,
+  getProfileWithAxios,
+} from "../../redux/modules/Profile";
 
 import styled from "styled-components";
 
@@ -14,18 +17,22 @@ import MyPageRemind from "../../components/mypage/MyPageRemind";
 import MyPageSuggest from "../../components/mypage/MyPageSuggest";
 
 const MyPage = props => {
+  const { isLogin } = props;
   const dispatch = useDispatch();
   const params = useParams();
   const memberId = params.id;
 
   useEffect(() => {
-    dispatch(getProfileAxios(memberId));
-  }, [dispatch, memberId]);
+    if (isLogin) {
+      dispatch(getProfileWithAxios(memberId));
+    } else {
+      dispatch(getProfileAxios(memberId));
+    }
+  }, [dispatch, memberId, isLogin]);
 
   // ----- 폴더 리스트 ----- //
   const folderList = useSelector(state => state.profile.folderInfo);
   const defaultFolder = useSelector(state => state.profile.defaultFolder);
-
   // ----- 유저 정보 ----- //
   const userInfo = useSelector(state => state.profile.memberInfo);
   const myInfo = useSelector(state => state.user.myInfo);
@@ -63,8 +70,9 @@ const MyPage = props => {
               />
             </FolderContainer>
           ))}
-        <MyPageSuggest userInfo={userInfo} {...myInfo} />
+        <MyPageSuggest userInfo={userInfo} {...myInfo} isLogin={isLogin} />
         {modalOpen ? <AddCollection setModalOpen={setModalOpen} /> : null}
+        {/* <Modal isLogin={isLogin} /> */}
       </Container>
     </React.Fragment>
   );

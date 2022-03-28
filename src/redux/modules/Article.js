@@ -18,6 +18,7 @@ export const postArticleAxios = createAsyncThunk(
       confirmButtonText: "확인",
       confirmButtonColor: "#353C49",
     });
+    console.log(resp);
     return resp;
   },
 );
@@ -27,6 +28,7 @@ export const getArticleAxios = createAsyncThunk(
   async ({ articleId, navigate }, { dispatch }) => {
     const resp = await ArticleApi.getArticle({ articleId, navigate });
     dispatch(setArticle(resp.data));
+    console.log(resp);
     return resp;
   },
 );
@@ -36,6 +38,7 @@ export const getArticleWithAxios = createAsyncThunk(
   async ({ articleId, navigate }, { dispatch }) => {
     const resp = await ArticleApi.getArticleWith({ articleId, navigate });
     dispatch(setArticle(resp.data));
+    console.log(resp);
     return resp;
   },
 );
@@ -44,6 +47,7 @@ export const deleteArticleAxios = createAsyncThunk(
   "article/deleteArticle",
   async ({ articleId, navigate }) => {
     const resp = await ArticleApi.deleteArticle({ articleId, navigate });
+    console.log(resp);
     return resp;
   },
 );
@@ -52,6 +56,7 @@ export const updateReviewAxios = createAsyncThunk(
   "article/updateReview",
   async ({ articleId, review, navigate }, { dispatch }) => {
     const resp = await ArticleApi.updateReview({ articleId, review, navigate });
+    console.log(resp);
     return resp;
   },
 );
@@ -61,6 +66,7 @@ export const reviewHideAxios = createAsyncThunk(
   async (articleId, { dispatch }) => {
     const resp = await ArticleApi.reviewHide(articleId);
     dispatch(setReviewHide());
+    console.log(resp);
     return resp;
   },
 );
@@ -70,9 +76,11 @@ export const updateTitleOgAxios = createAsyncThunk(
   async ({ articleId, titleOg }, { dispatch }) => {
     const resp = await ArticleApi.updateTitleOg({ articleId, titleOg });
     dispatch(setNewTitleOg(resp.data));
+    console.log(resp);
     return resp;
   },
 );
+
 export const changeArticleFolderAxios = createAsyncThunk(
   "article/changeFolder",
   async ({ articleId, articleFolderName }) => {
@@ -80,6 +88,7 @@ export const changeArticleFolderAxios = createAsyncThunk(
       articleId,
       articleFolderName,
     });
+    console.log(resp);
     return resp;
   },
 );
@@ -97,6 +106,19 @@ export const saveArticleAxios = createAsyncThunk(
   "article/saveArticle",
   async ({ articleId, navigate }, { dispatch }) => {
     const resp = await ArticleApi.saveArticle({ articleId, navigate });
+    console.log(resp);
+    return resp;
+  },
+);
+
+export const saveAllArticleAxios = createAsyncThunk(
+  "article/saveAllArticle",
+  async ({ folderId, articleFolderName }, { dispatch }) => {
+    const resp = await ArticleApi.saveAllArticle({
+      folderId,
+      articleFolderName,
+    });
+    console.log(resp);
     return resp;
   },
 );

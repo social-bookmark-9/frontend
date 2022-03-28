@@ -5,7 +5,7 @@ import { Title } from "../../elements";
 
 import Slider from "react-slick";
 
-import { Desktop, Tablet } from "../styles/mediaquery";
+import { Desktop, Tablet } from "../../styles/mediaquery";
 
 const RecommendListD = () => {
   const images = [

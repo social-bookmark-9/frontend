@@ -8,7 +8,7 @@ const DetailRemind = ({ reminderDate }) => {
   const [userRemind, setUserRemind] = useState(reminderDate && reminderDate);
 
   const remindList = [
-    { key: "선택안함", value: 0 },
+    { key: "선택안함", value: "null" },
     { key: "내일", value: 1 },
     { key: "3일 뒤", value: 3 },
     { key: "7일 뒤", value: 7 },

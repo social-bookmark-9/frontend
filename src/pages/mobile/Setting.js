@@ -3,7 +3,6 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 
 import { kakaoLogoutAxios } from "../../redux/modules/User";
-import { KAKAO_AUTH_LOGOUT_URL } from "../../shared/OAuth";
 
 import styled, { css } from "styled-components";
 import { Button, Image } from "../../elements";
@@ -47,7 +46,7 @@ const Setting = props => {
             <Ul>
               <Li
                 onClick={() => {
-                  navigate("/reminder");
+                  navigate("/setting/remindEmail");
                 }}
               >
                 <Image _src="/images/email.png" _width="22px" _height="22px" />

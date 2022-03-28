@@ -24,6 +24,7 @@ import RecommendCard from "../../components/detailpage/RecommendCard";
 import Swal from "sweetalert2";
 
 const ArticleDetail = props => {
+  const { memberId } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -43,7 +44,7 @@ const ArticleDetail = props => {
   const article = useSelector(state => state.article.data);
   const recommendList = article.recommendArticles;
   // const reminderDate = article.reminderDate;
-  const isMe = article.writerMemberId === props.memberId;
+  const isMe = article.writerMemberId === memberId;
 
   const [words, setWords] = useState(0);
   const [reviewHide, setReviewHide] = useState(article.reviewHide);
@@ -117,6 +118,7 @@ const ArticleDetail = props => {
         {...article}
         title={article.articleFolderName}
         articleId={articleId}
+        isMe={isMe}
       />
       <DetailContainer>
         {/* 아티클 카드 */}

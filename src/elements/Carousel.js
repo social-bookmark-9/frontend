@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
+import LinesEllipsis from "react-lines-ellipsis";
 
 const Carousel = props => {
   const { articleContents } = props;
@@ -22,12 +23,35 @@ const Carousel = props => {
     <Slider {...settings}>
       {articleContents &&
         articleContents.map((content, idx) => {
-          const contents = content.content.slice(0, 60);
           return (
             <CardBox key={idx}>
               <Card>
-                <CardTitle>{content.title}</CardTitle>
-                <CardContents>{contents}...</CardContents>
+                <CardTitle>
+                  {content.title !== null ? (
+                    <LinesEllipsis
+                      text={content.title}
+                      maxLine="2"
+                      ellipsis="..."
+                      trimRight
+                      basedOn="words"
+                    />
+                  ) : (
+                    "제목없음"
+                  )}
+                </CardTitle>
+                <CardContents>
+                  {content.content !== null ? (
+                    <LinesEllipsis
+                      text={content.content}
+                      maxLine="2"
+                      ellipsis="..."
+                      trimRight
+                      basedOn="letters"
+                    />
+                  ) : (
+                    "미리보기 내용을 불러올 수 없습니다"
+                  )}
+                </CardContents>
               </Card>
             </CardBox>
           );

@@ -77,4 +77,41 @@ export default class folderApi {
         console.log(err);
       });
   }
+
+  async updateFolderName({ folderId, articleFolderName }) {
+    const updateFolderNameConfig = {
+      method: "PATCH",
+      url: `${this.base}/api/articleFolders/${folderId}`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
+      data: JSON.stringify(articleFolderName),
+    };
+    return axios(updateFolderNameConfig)
+      .then(res => {
+        return res.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  async deleteFolder({ folderId, navigate }) {
+    const deleteFolderConfig = {
+      method: "DELETE",
+      url: `${this.base}/api/articleFolders/${folderId}`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
+    };
+    return axios(deleteFolderConfig)
+      .then(res => {
+        return res.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 }

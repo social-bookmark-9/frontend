@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Button, Text, Title } from "../elements";
-import { Circle } from "../elements/ImageObj";
+import { Button, Text, Title } from "../../elements";
+import { Circle } from "../../elements/ImageObj";
 
 const RecommendUserD = () => {
   const images = [
@@ -107,10 +107,10 @@ const DesktopCard = styled.div`
   height: 312px;
   padding: 20px;
   margin: 0 6px 0 6px;
-  border: 1px solid #F2F4F6;
+  border: 1px solid #f2f4f6;
   border-radius: 20px;
   overflow: hidden;
-  background-color: #F2F4F6;
+  background-color: #f2f4f6;
   text-align: center;
   & img {
     width: 100%;
@@ -125,7 +125,7 @@ const ProfileImageDesktop = styled.div`
   width: 127.5px;
   clip-path: url(#desktopClip);
   position: relative;
-  background-color: #C4C4C4;
+  background-color: #c4c4c4;
   & img {
     position: absolute;
     width: 100%;

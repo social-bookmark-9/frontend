@@ -13,7 +13,7 @@ import Modal from "../../components/modal/Modal";
 import Search from "../../components/mainpage/Search";
 
 const MainPage = props => {
-  const isLogin = useSelector(state => state.user.isLogin);
+  const { isLogin } = props;
   const memberInfo = useSelector(state => state.main.userInfo);
   const folderList = useSelector(state => state.main.folderList);
   const articleList = useSelector(state => state.main.articleList);
