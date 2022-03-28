@@ -27,6 +27,7 @@ import EditProfile from "../pages/mobile/EditProfile";
 import NotFound from "./NotFound";
 import ErrorBoundary from "./ErrorBoundary";
 import Spinner from "./Spinner";
+import MainD from "../pages/desktop/MainD";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ function App(props) {
       <ErrorBoundary fallback={<Spinner />}>
         <Desktop>
           <Routes>
+            <Route path="/" element={<MainD />} />
             <Route path="/mypage/:id" element={<MyPageD />} />
           </Routes>
         </Desktop>

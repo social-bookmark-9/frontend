@@ -6,8 +6,9 @@ import Navbar from "../../components/common/Navbar";
 import ModalD from "../../components/modal/ModalD";
 import CurationsD from "../../components/mainpage/CurationsD";
 import RecommendListD from "../../components/mainpage/RecommendListD";
-import RecommendUser from "../../components/mainpage/RecommendUser";
 import MainTopD from "../../components/mainpage/MainTopD";
+import MainPageFooterD from "../../components/mainpage/MainPageFooterD";
+import RecommendUserD from "../../components/mainpage/RecommendUserD";
 
 const MainD = props => {
   return (
@@ -24,22 +25,10 @@ const MainD = props => {
         <CurationsD />
 
         {/* 추천 유저 */}
-        <RecommendUser />
+        <RecommendUserD />
 
-        <div
-          style={{
-            width: "100%",
-            height: "446px",
-            backgroundColor: "#E7E8FA",
-          }}
-        />
-        <div
-          style={{
-            width: "100%",
-            height: "446px",
-            backgroundColor: "#353C49",
-          }}
-        />
+        {/* 검색창, 기타 아랫부분 */}
+        <MainPageFooterD />
 
         <ModalD />
       </MainContainer>
