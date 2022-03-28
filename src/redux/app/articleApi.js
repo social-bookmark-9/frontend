@@ -235,4 +235,23 @@ export default class articleApi {
         console.log(err);
       });
   }
+
+  async getArticleReview() {
+    const getArticleReviewConfig = {
+      method: "GET",
+      url: `${this.base}/api/reviews`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
+    };
+    return axios(getArticleReviewConfig)
+      .then(res => {
+        return(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
 }
