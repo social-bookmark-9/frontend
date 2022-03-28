@@ -63,7 +63,7 @@ const Navbar = props => {
                   <Link to="/">
                     <li>추천 아티클</li>
                   </Link>
-                  <Link to={isLogin ? "/memos" : "/login"}>
+                  <Link to={isLogin ? "/myreview" : "/login"}>
                     <li>내가 작성한 메모</li>
                   </Link>
                 </MenuBox>

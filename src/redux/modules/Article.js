@@ -123,6 +123,14 @@ export const saveAllArticleAxios = createAsyncThunk(
   },
 );
 
+export const getArticleReviewAxios = createAsyncThunk(
+  "reviews",
+  async () => {
+    const res = await ArticleApi.getArticleReview();
+    return (res.data)
+  },
+)
+
 export const updateReadCountAxios = createAsyncThunk(
   "article/updateHashtag",
   async (articleId, { dispatch }) => {
@@ -157,6 +165,10 @@ export const articleSlice = createSlice({
     [postArticleAxios.fulfilled]: (state, action) => {
       state.localdata = initialState;
     },
+    [getArticleReviewAxios.fulfilled]: (state, action) => {
+      console.log(action.payload);
+      state.reviewList = action.payload;
+    }
   },
 });
 
