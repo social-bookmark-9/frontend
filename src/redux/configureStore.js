@@ -18,7 +18,5 @@ export const store = configureStore({
     localData: localDataReducer,
   },
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }).concat(logger),
+    getDefaultMiddleware({ serializableCheck: false }).concat(logger),
 });

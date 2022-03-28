@@ -12,7 +12,6 @@ export default class ProfileApi {
       url: `${this.base}/api/mypage/${memberId}`,
       headers: {
         "Content-Type": "application/json",
-        "X-AUTH-TOKEN": getToken(),
       },
     };
     return axios(getProfileConfig)
@@ -30,6 +29,7 @@ export default class ProfileApi {
       url: `${this.base}/api/mypage/${memberId}`,
       headers: {
         "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
       },
     };
     return axios(getProfileWithConfig)

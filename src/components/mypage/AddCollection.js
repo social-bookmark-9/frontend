@@ -33,9 +33,11 @@ const AddCollection = props => {
     setShowOption(e.target.value);
   };
 
+  console.log(folderData);
   // 컬렉션 추가 완료 버튼
   const addFolderDone = () => {
     dispatch(createFolderAxios({ folderData, navigate }));
+    setModalOpen(false);
   };
 
   return (

@@ -44,22 +44,30 @@ const RecommendCard = props => {
                   ))}
                 </LabelBox>
                 <Title>
-                  <LinesEllipsis
-                    text={recommend.titleOg}
-                    maxLine="2"
-                    ellipsis="..."
-                    trimRight
-                    basedOn="words"
-                  />
+                  {recommend.titleOg !== null ? (
+                    <LinesEllipsis
+                      text={recommend.titleOg}
+                      maxLine="2"
+                      ellipsis="..."
+                      trimRight
+                      basedOn="letters"
+                    />
+                  ) : (
+                    "제목없음"
+                  )}
                 </Title>
                 <Text>
-                  <LinesEllipsis
-                    text={recommend.contentOg}
-                    maxLine="2"
-                    ellipsis="..."
-                    trimRight
-                    basedOn="letters"
-                  />
+                  {recommend.contentOg !== null ? (
+                    <LinesEllipsis
+                      text={recommend.contentOg}
+                      maxLine="2"
+                      ellipsis="..."
+                      trimRight
+                      basedOn="letters"
+                    />
+                  ) : (
+                    "미리보기 내용을 불러올 수 없습니다"
+                  )}
                 </Text>
               </ReCardContent>
             </ReContainer>

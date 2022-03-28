@@ -16,7 +16,7 @@ import ChangeTag from "./ChangeTag";
 import Swal from "sweetalert2";
 
 const DetailNavbar = props => {
-  const { title, article, articleId } = props;
+  const { title, article, articleId, isMe } = props;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,29 +26,27 @@ const DetailNavbar = props => {
     folderList && folderList.map(list => list.articleFolderName);
 
   // 모달 열고 닫기
-  const [modalOpen, setModalOpen] = useState(false);
+  const [folderModalOpen, setfolderModalOpen] = useState(false);
   // 어떤 모달창 보여줄지 (링크 추가 단계)
-  const [showModal, setShowModal] = useState(false);
+  const [showFolderModal, setshowFolderModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [folder, setFolder] = useState(title);
   const [newTitleOg, setNewTitleOg] = useState(article.titleOg);
   const tagList = [article.hashtag1, article.hashtag2, article.hashtag3];
 
-  const isMe = true;
-
-  const openModal = () => {
-    if (modalOpen === false) {
-      setModalOpen(true);
+  const openFolderModal = () => {
+    if (folderModalOpen === false) {
+      setfolderModalOpen(true);
       document.body.style.cssText = `overflow: hidden; touch-action: none;`;
     } else {
-      setModalOpen(false);
-      setShowModal(false);
+      setfolderModalOpen(false);
+      setshowFolderModal(false);
       document.body.style.cssText = `overflow:auto;`;
     }
   };
 
   const modalChange = () => {
-    setShowModal(current => !current);
+    setshowFolderModal(current => !current);
   };
 
   const toggleDropdown = () => {
@@ -78,14 +76,38 @@ const DetailNavbar = props => {
   };
 
   const titleOg = { titleOg: newTitleOg };
+  const articleFolderName = { articleFolderName: folder };
 
   const handleUpdate = () => {
-    if (article.titleOg !== newTitleOg) {
-      dispatch(updateTitleOgAxios({ articleId, titleOg }));
-    }
-
-    if (title !== folder) {
-      dispatch(changeArticleFolderAxios({ articleId, folder }));
+    if (newTitleOg === undefined && folder === undefined) {
+      Swal.fire({
+        text: "변경 할 내용이 없습니다.",
+        confirmButtonText: "확인",
+      });
+    } else {
+      Swal.fire({
+        text: "변경하신 내용을 저장할까요?",
+        showCancelButton: true,
+        confirmButtonText: "확인",
+        confirmButtonColor: "#353C49",
+        cancelButtonText: "취소",
+      }).then(result => {
+        if (result.isConfirmed) {
+          if (newTitleOg !== undefined) {
+            return article.titleOg !== newTitleOg
+              ? dispatch(updateTitleOgAxios({ articleId, titleOg }))
+              : null;
+          }
+          if (folder !== undefined) {
+            return title !== folder
+              ? dispatch(
+                  changeArticleFolderAxios({ articleId, articleFolderName }),
+                )
+              : null;
+          }
+          Swal.fire({ text: "변경되었습니다", confirmButtonText: "확인" });
+        }
+      });
     }
   };
 
@@ -95,7 +117,7 @@ const DetailNavbar = props => {
         <NavBox>
           <Title>{title}</Title>
           {isMe ? (
-            <NavMenu onClick={openModal}>
+            <NavMenu onClick={openFolderModal}>
               <Image
                 _src="/images/editMenu.png"
                 _width="24px"
@@ -105,9 +127,9 @@ const DetailNavbar = props => {
             </NavMenu>
           ) : null}
         </NavBox>
-        {modalOpen ? (
+        {folderModalOpen ? (
           <Section>
-            <ModalCover onClick={openModal} />
+            <ModalCover onClick={openFolderModal} />
             <MainModal>
               <ImageContainer>
                 <ImageBox onClick={handleDelete}>
@@ -118,7 +140,7 @@ const DetailNavbar = props => {
                     _marginR="0px"
                   />
                 </ImageBox>
-                <ImageBox onClick={openModal}>
+                <ImageBox onClick={openFolderModal}>
                   <Image
                     _src="/images/close.png"
                     _width="24px"
@@ -127,7 +149,7 @@ const DetailNavbar = props => {
                   />
                 </ImageBox>
               </ImageContainer>
-              {showModal ? (
+              {showFolderModal ? (
                 <ChangeTag tagList={tagList} articleId={articleId} />
               ) : (
                 <Main>

@@ -69,22 +69,30 @@ const ArticleCard = props => {
               hashTag.map((tag, idx) => <Label key={idx}>{tag}</Label>)}
           </LabelBox>
           <Title>
-            <LinesEllipsis
-              text={article.titleOg}
-              maxLine="2"
-              ellipsis="..."
-              trimRight
-              basedOn="words"
-            />
+            {article.titleOg !== null ? (
+              <LinesEllipsis
+                text={article.titleOg}
+                maxLine="2"
+                ellipsis="..."
+                trimRight
+                basedOn="letters"
+              />
+            ) : (
+              "제목없음"
+            )}
           </Title>
           <Text>
-            <LinesEllipsis
-              text={article.contentOg}
-              maxLine="2"
-              ellipsis="..."
-              trimRight
-              basedOn="letters"
-            />
+            {article.contentOg !== null ? (
+              <LinesEllipsis
+                text={article.contentOg}
+                maxLine="2"
+                ellipsis="..."
+                trimRight
+                basedOn="letters"
+              />
+            ) : (
+              "미리보기 내용을 불러올 수 없습니다"
+            )}
           </Text>
         </ArticleCardContent>
       </ArticleCardBox>
@@ -108,6 +116,7 @@ const ArticleCardContent = styled.div`
   bottom: 28px;
   left: 28px;
 `;
+
 const Title = styled.div`
   padding-bottom: 8px;
   font-size: ${({ theme }) => theme.fontSizes.font18};

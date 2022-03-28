@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 
-import { Title, Button } from "../elements";
+import { Title, Button } from "../../elements";
 
 import ArticleFolder from "../folderpage/ArticleFolder";
 import ArticleFolderD from "../folderpage/ArticleFolderD";

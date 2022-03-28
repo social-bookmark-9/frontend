@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
-import { createFolderAxios } from "../../redux/modules/Folder";
+import { createFolderWithAxios } from "../../redux/modules/Folder";
 import { postArticleAxios } from "../../redux/modules/Article";
 
 import styled from "styled-components";
@@ -37,7 +37,7 @@ const AddLinkTag = props => {
     if (myFolderList.includes(linkData.articleFolderName)) {
       dispatch(postArticleAxios({ articleData, navigate }));
     } else {
-      dispatch(createFolderAxios({ folderData, articleData, navigate }));
+      dispatch(createFolderWithAxios({ folderData, articleData, navigate }));
     }
     openModal();
   };

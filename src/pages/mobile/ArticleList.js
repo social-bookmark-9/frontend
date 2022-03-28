@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -9,7 +9,8 @@ import { Text, Button, Image } from "../../elements";
 import { getFolderAxios, getFolderWithAxios } from "../../redux/modules/Folder";
 
 import ArticleCard from "../../components/folderpage/ArticleCard";
-import Navbar from "../../components/common/Navbar";
+import SelectFolder from "../../components/folderpage/SelectFolder";
+import FolderNavbar from "../../components/folderpage/FolderNavbar";
 
 import Swal from "sweetalert2";
 
@@ -34,6 +35,8 @@ const ArticleList = props => {
     }
   }, [dispatch, folderId, isLogin]);
 
+  const [modalOpen, setModalOpen] = useState(false);
+
   const copyCollectionUrl = () => {
     copyUrlRef.current.focus();
     copyUrlRef.current.select();
@@ -54,11 +57,25 @@ const ArticleList = props => {
     });
   };
 
-  const saveCollection = () => {};
+  const openModal = () => {
+    if (modalOpen === false) {
+      setModalOpen(true);
+      document.body.style.cssText = `overflow: hidden; touch-action: none;`;
+    } else {
+      setModalOpen(false);
+      document.body.style.cssText = `overflow:auto;`;
+    }
+  };
+
+  const handleLikeFolder = () => {};
 
   return (
     <React.Fragment>
-      <Navbar title={folderInfo.folderName} {...props} />
+      <FolderNavbar
+        title={folderInfo.folderName}
+        folderId={folderId}
+        isMe={isMe}
+      />
 
       <LikeBox isMe={isMe}>
         {isMe ? (
@@ -71,6 +88,7 @@ const ArticleList = props => {
             _color={({ theme }) => theme.colors.fontColor05}
             bgColor={({ theme }) => theme.colors.white}
             isBorder
+            _onClick={handleLikeFolder}
           >
             <Image _src="/images/icon7.png" _width="19px" _height="19px" />
             유용해요 {folderInfo.likeCount}
@@ -117,7 +135,7 @@ const ArticleList = props => {
           </>
         ) : (
           <Button
-            _onClick={saveCollection}
+            _onClick={openModal}
             _padding="12px"
             bgColor={({ theme }) => theme.colors.white}
             _color={({ theme }) => theme.colors.fontColor05}
@@ -128,6 +146,9 @@ const ArticleList = props => {
           </Button>
         )}
       </AlButton>
+      {modalOpen ? (
+        <SelectFolder openModal={openModal} isMe={isMe} folderId={folderId} />
+      ) : null}
     </React.Fragment>
   );
 };
