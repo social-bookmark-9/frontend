@@ -1,21 +1,45 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
 
 import styled, { css } from "styled-components";
 import { Text } from "../../elements";
+import {
+  postReminderAxios,
+  patchReminderAxios,
+  deleteReminderAxios,
+} from "../../redux/modules/Reminder";
 import { FlexboxColumn, FlexboxRow } from "../../styles/flexbox";
 
-const DetailRemind = ({ reminderDate }) => {
-  const [userRemind, setUserRemind] = useState(reminderDate && reminderDate);
+const DetailRemind = props => {
+  const { reminderDate, articleId, titleOg, imgOg } = props;
+
+  const dispatch = useDispatch();
 
   const remindList = [
     { key: "선택안함", value: "null" },
     { key: "내일", value: 1 },
     { key: "3일 뒤", value: 3 },
     { key: "7일 뒤", value: 7 },
+    { key: "선택안함", value: 0 },
   ];
 
+  console.log(reminderDate);
+
   const changeRemind = e => {
-    setUserRemind(e.target.value);
+    const remindData = {
+      articleId: parseInt(articleId),
+      titleOg: titleOg,
+      buttonDate: parseInt(e.target.value),
+      imgOg: imgOg,
+    };
+    console.log(e.target.value);
+    if (reminderDate === null && e.target.value !== "0") {
+      dispatch(postReminderAxios(remindData));
+    } else if (reminderDate !== null && e.target.value === "0") {
+      dispatch(deleteReminderAxios(remindData));
+    } else if (reminderDate !== null && e.target.value !== "0") {
+      dispatch(patchReminderAxios(remindData));
+    }
   };
 
   return (
@@ -27,14 +51,25 @@ const DetailRemind = ({ reminderDate }) => {
         <RemindSelection>
           {remindList.map((remind, idx) => (
             <RemindLabel key={idx}>
-              <RemindRadio
-                type="radio"
-                name="remindeCheck"
-                id={remind.value}
-                value={remind.value}
-                defaultChecked={userRemind === reminderDate ? true : false}
-                onClick={changeRemind}
-              />
+              {remind.value === 0 && reminderDate === null ? (
+                <RemindRadio
+                  type="radio"
+                  name="remindeCheck"
+                  id={remind.value}
+                  value={remind.value}
+                  defaultChecked={true}
+                  onClick={changeRemind}
+                />
+              ) : (
+                <RemindRadio
+                  type="radio"
+                  name="remindeCheck"
+                  id={remind.value}
+                  value={remind.value}
+                  defaultChecked={remind.value === reminderDate ? true : false}
+                  onClick={changeRemind}
+                />
+              )}
               <RemindText>{remind.key}</RemindText>
             </RemindLabel>
           ))}
