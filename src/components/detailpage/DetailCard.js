@@ -42,22 +42,30 @@ const DetailCard = props => {
             ))}
           </LabelBox>
           <Title>
-            <LinesEllipsis
-              text={article.titleOg}
-              maxLine="2"
-              ellipsis="..."
-              trimRight
-              basedOn="letters"
-            />
+            {article.titleOg !== null ? (
+              <LinesEllipsis
+                text={article.titleOg}
+                maxLine="2"
+                ellipsis="..."
+                trimRight
+                basedOn="letters"
+              />
+            ) : (
+              "제목없음"
+            )}
           </Title>
           <Text>
-            <LinesEllipsis
-              text={article.contentOg}
-              maxLine="2"
-              ellipsis="..."
-              trimRight
-              basedOn="letters"
-            />
+            {article.contentOg !== null ? (
+              <LinesEllipsis
+                text={article.contentOg}
+                maxLine="2"
+                ellipsis="..."
+                trimRight
+                basedOn="letters"
+              />
+            ) : (
+              "미리보기 내용을 불러올 수 없습니다"
+            )}
           </Text>
         </ArticleCardContent>
       </DetailCardBox>

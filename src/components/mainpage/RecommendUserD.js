@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Button, Text, Title } from "../elements";
-import { Circle } from "../elements/ImageObj";
+import { Button, Text, Title } from "../../elements";
+import { Circle } from "../../elements/ImageObj";
 
 const RecommendUserD = () => {
   const images = [

@@ -1,4 +1,4 @@
-import { Button, Image, Text, Title } from "../elements";
+import { Button, Image, Text, Title } from "../../elements";
 
 const MainTopD = () => {
 
