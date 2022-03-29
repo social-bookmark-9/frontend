@@ -1,3 +1,7 @@
+const RecommendListT = () => {
+
+  return (
+
 <Tablet>
         <div
           style={{
@@ -29,3 +33,7 @@
           </div>
         </div>
       </Tablet>
+  )
+}
+
+export default RecommendListT;
