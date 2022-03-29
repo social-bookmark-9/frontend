@@ -29,6 +29,9 @@ import ErrorBoundary from "./ErrorBoundary";
 import Spinner from "./Spinner";
 import MainD from "./desktop/MainD";
 import RemindEmail from "./mobile/RemindEmail";
+import LoginD from "./desktop/LoginD";
+import UserNicknameD from "./desktop/UserNicknameD";
+import UserFavoritesD from "./desktop/UserFavoritesD";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -53,6 +56,9 @@ function App(props) {
           <Routes>
             <Route path="/" element={<MainD />} />
             <Route path="/mypage/:id" element={<MyPageD />} />
+            <Route path="/login" element={<LoginD />} />
+            <Route path="/user/nickname" element={<UserNicknameD />} />
+            <Route path="/user/favorites" element={<UserFavoritesD />} />
           </Routes>
         </Desktop>
         <Mobile>
