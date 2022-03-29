@@ -32,6 +32,7 @@ import RemindEmail from "./mobile/RemindEmail";
 import LoginD from "./desktop/LoginD";
 import UserNicknameD from "./desktop/UserNicknameD";
 import UserFavoritesD from "./desktop/UserFavoritesD";
+import EditProfileD from "./desktop/EditProfileD";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -54,11 +55,14 @@ function App(props) {
       <ErrorBoundary fallback={<Spinner />}>
         <Desktop>
           <Routes>
-            <Route path="/" element={<MainD />} />
+            <Route path="/" element={<MainD {...myInfo} isLogin={isLogin} />} />
             <Route path="/mypage/:id" element={<MyPageD />} />
             <Route path="/login" element={<LoginD />} />
             <Route path="/user/nickname" element={<UserNicknameD />} />
             <Route path="/user/favorites" element={<UserFavoritesD />} />
+            <Route path="/editprofile" element={<EditProfileD {...myInfo} />} />
+            <Route path="/api/users/login" element={<OAuthRedirectHandler />} />
+            <Route element={<NotFound />} />
           </Routes>
         </Desktop>
         <Mobile>

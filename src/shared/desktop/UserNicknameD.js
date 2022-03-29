@@ -47,7 +47,7 @@ const UserNicknameD = props => {
             <TitleBox>
               <Title
                 textAlign="left"
-                _fontSize={({ theme }) => theme.fontSizes.font34}
+                _fontSize={({ theme }) => theme.fontSizes.font24}
                 _lineHeight="38px"
               >
                 버블드에서 사용할 <br />
@@ -114,12 +114,14 @@ const TitleBox = styled.div`
 const InputBox = styled.div`
   padding: 90px 0px 0 0;
   width: 547px;
+  font-size: 16px;
 `;
 
 const UserInput = styled.input`
   border: none;
   border-bottom: 1px solid #c7c7c7;
   border-radius: 0px;
+  font-size: ${({ theme }) => theme.fontSizes.font16};
   padding: 12px;
   width: 100%;
   &::placeholder {
