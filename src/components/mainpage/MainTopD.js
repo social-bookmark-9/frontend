@@ -1,37 +1,10 @@
-// import { useRef, useEffect } from "react";
-// import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
 import { Button, Image, Text, Title } from "../../elements";
 
-// import styled from "styled-components";
-// import lottie from "lottie-web";
-
 
 const MainTopD = () => {
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
-
-//   const faceLottie = useRef();
-//   const bubbleLottie = useRef();
-
-//   useEffect(() => {
-//     lottie.loadAnimation({
-//       container: faceLottie.current,
-//       renderer: "svg",
-//       loop: true,
-//       autoplay: true,
-//       animationData: require("../../faceAnimation.json"),
-//     });
-
-//     lottie.loadAnimation({
-//       container: bubbleLottie.current,
-//       renderer: "svg",
-//       loop: true,
-//       autoplay: true,
-//       animationData: require("../../bookAnimation.json"),
-//     });
-//   }, [dispatch]);
 
   return (
     <div style={{ backgroundColor: "#fafbfb" }}>
@@ -51,15 +24,6 @@ const MainTopD = () => {
           }}
         >
           <Title _fontSize="47px" _padding="0 0 40px 0">
-            {/* <div>
-              Express yourself
-              <LottieBox style={{ verticalAlign: "middle" }} ref={faceLottie} />
-            </div>
-            <div>
-              with what you
-              <LottieBox style={{ verticalAlign: "middle" }} ref={bubbleLottie} />
-              read.
-            </div> */}
             <div style={{ marginBottom: "-10px" }}>
               Express yourself with
               <span style={{ verticalAlign: "middle" }}>
