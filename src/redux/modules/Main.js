@@ -9,6 +9,7 @@ const initialState = {
   articleList: [],
   paging: { page: 0, limit: 3 },
   isLoading: false,
+  hashtagList: []
 };
 
 export const getMainAxios = createAsyncThunk(
@@ -30,6 +31,14 @@ export const getMainWithAxios = createAsyncThunk(
     return resp;
   },
 );
+
+export const getMainByHashtagAxios = createAsyncThunk(
+  "main/getMainByHashtag",
+  async (chosenHashtag) => {
+    const res = await MainApi.getMainByHashtag(chosenHashtag);
+    console.log(res);
+  }
+)
 
 export const mainSlice = createSlice({
   name: "main",
@@ -58,6 +67,10 @@ export const mainSlice = createSlice({
       // state.paging.page += 1;
       state.isLoading = false;
     },
+    [getMainByHashtagAxios.fulfilled]: (state, action) => {
+      state.hashtagList = action.payload;
+      console.log(action);
+    }
   },
 });
 
