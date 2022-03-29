@@ -1,6 +1,5 @@
 import axios from "axios";
-import Swal from "sweetalert2";
-import { getToken, getTokens, getReToken } from "../../shared/utils";
+import { getToken, getTokens } from "../../shared/utils";
 import { refreshTokensAxios } from "../modules/User";
 export default class userApi {
   constructor() {
@@ -52,7 +51,6 @@ export default class userApi {
     };
     return axios(registerConfig)
       .then(res => {
-        navigate("/", { replace: true });
         return res.data;
       })
       .catch(err => {

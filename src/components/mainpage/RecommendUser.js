@@ -142,7 +142,7 @@ const RecommendUser = props => {
                             borderRadius="45px"
                             _onClick={() => {
                               // navigate(`/mypage/${member.memberId}`);
-                              navigate(`/${member.memberName}`);
+                              navigate(`/mypage/${member.memberId}`);
                             }}
                           >
                             구경하기

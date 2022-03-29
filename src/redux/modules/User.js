@@ -28,6 +28,7 @@ export const registerAxios = createAsyncThunk(
     const user = await UserApi.register({ userInfo, navigate });
     if (user) {
       dispatch(setMyInfo(user.data));
+      navigate("/", { replace: true });
       console.log(user);
       return user;
     }

@@ -3,7 +3,7 @@ import { useLocation } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
-import { Title } from "../../elements";
+import { Image, Title } from "../../elements";
 
 import {
   editProfileImageAxios,
@@ -11,9 +11,9 @@ import {
   getProfileAxios,
 } from "../../redux/modules/Profile";
 
-import Navbar from "../../components/common/Navbar";
 import EditProfileLink from "../../components/editprofile/EditProfileLink";
 import EditNickname from "../../components/editprofile/EditNickname";
+import { Flexbox, FlexboxColumn, FlexboxRow } from "../../styles/flexbox";
 
 const EditProfile = props => {
   const userDescRef = useRef();
@@ -65,104 +65,55 @@ const EditProfile = props => {
     dispatch(editProfileImageAxios(formData));
   };
 
-  return (
-    <>
-      {!isEdit ? (
-        <>
-          <Container>
-            <Navbar {...props} />
-            <AreaWrap>
-              <ProfileBox>
-                <div style={{ overflow: "hidden" }}>
-                  <label htmlFor="picture">
-                    <InputImage
-                      id="picture"
-                      type="file"
-                      ref={fileRef}
-                      name="file"
-                      onChange={editImage}
-                      accept="image/*"
-                    />
+  return !isEdit ? (
+    <Container>
+      <AreaWrap>
+        <ProfileBox>
+          <ProfileLabel htmlFor="picture">
+            <InputImage
+              id="picture"
+              type="file"
+              ref={fileRef}
+              name="file"
+              onChange={editImage}
+              accept="image/*"
+            />
 
-                    {/* 프로필사진 옆 검은 동그라미 */}
-                    <CircleBox>
-                      <img
-                        src={"./images/camera.png"}
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                        }}
-                        alt=""
-                      />
-                    </CircleBox>
+            {/* 프로필사진 옆 검은 동그라미 */}
+            <CircleBox>
+              <CameraImage src="/images/camera.png" alt="editImage" />
+            </CircleBox>
 
-                    {/* 프로필 이미지 */}
-                    <ProfileImage>
-                      <img
-                        src={initialUserImage}
-                        alt="profile"
-                        style={{ zIndex: "3" }}
-                      />
-                    </ProfileImage>
-                  </label>
-                </div>
+            {/* 프로필 이미지 */}
+            <ProfileImage>
+              <img src={initialUserImage} alt="profile" />
+            </ProfileImage>
+          </ProfileLabel>
+        </ProfileBox>
+        {/* 이름 부분 */}
+        <EditNicknameBox>
+          <NicknameBox>
+            <Title _padding="23px 15px 30px 23px">@{newNickname}</Title>
+          </NicknameBox>
+          <ImageBox onClick={toggleEdit}>
+            <Image _src="/images/edit.png" _width="20px" _height="20px" />
+          </ImageBox>
+        </EditNicknameBox>
 
-                {/* 이름 부분 */}
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "start",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Title _padding="23px 15px 30px 23px">@{newNickname}</Title>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "end",
-                      alignItems: "center",
-                    }}
-                  >
-                    <img
-                      src={`/images/edit.png`}
-                      width={"20px"}
-                      height={"20px"}
-                      onClick={toggleEdit}
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </ProfileBox>
-
-              {/* 자기소개 부분 */}
-              <MemoBox>
-                <TextAreaField
-                  ref={userDescRef}
-                  name="userDesc"
-                  placeholder="자기소개를 작성해 주세요."
-                  rows={5}
-                  maxLength={34}
-                  onKeyUp={handleKeyUp}
-                  onBlur={editUserDesc}
-                />
-                <InputCheck>{words}/34</InputCheck>
-              </MemoBox>
-            </AreaWrap>
-          </Container>
-          <EditProfileLink {...myInfo} />
-        </>
-      ) : (
-        <EditNickname setIsEdit={setIsEdit} setNewNickname={setNewNickname} />
-      )}
+        {/* 자기소개 부분 */}
+        <MemoBox>
+          <TextAreaField
+            ref={userDescRef}
+            name="userDesc"
+            placeholder="자기소개를 작성해 주세요."
+            rows={5}
+            maxLength={34}
+            onKeyUp={handleKeyUp}
+            onBlur={editUserDesc}
+          />
+          <InputCheck>{words}/34</InputCheck>
+        </MemoBox>
+      </AreaWrap>
       {/* 마법의 svg */}
       <svg width="0" height="0">
         <defs>
@@ -174,26 +125,36 @@ const EditProfile = props => {
           </clipPath>
         </defs>
       </svg>
-    </>
+      <EditProfileLink {...myInfo} />
+    </Container>
+  ) : (
+    <EditNickname setIsEdit={setIsEdit} setNewNickname={setNewNickname} />
   );
 };
 
 const Container = styled.div`
-  max-width: 425px;
+  ${FlexboxColumn};
+  width: 100vw;
   background-color: ${({ theme }) => theme.colors.gray01};
 `;
 
 const AreaWrap = styled.div`
-  max-width: 390px;
-  height: 436px;
-  margin: 0 auto 0 auto;
+  min-width: 390px;
+  margin: auto;
+  padding: 50px 0px;
 `;
 
 const ProfileBox = styled.div`
-  width: 100%;
-  height: 278px;
+  ${Flexbox};
+  align-items: center;
+  margin: auto;
+  width: 170px;
+  height: 170px;
   position: relative;
-  padding: 51px 112px;
+`;
+
+const ProfileLabel = styled.label`
+  display: block;
 `;
 
 const InputImage = styled.input`
@@ -202,6 +163,10 @@ const InputImage = styled.input`
   position: absolute;
   display: none;
   z-index: 3;
+`;
+
+const ImageBox = styled.div`
+  display: flex;
 `;
 
 const ProfileImage = styled.div`
@@ -218,10 +183,15 @@ const ProfileImage = styled.div`
   }
 `;
 
+const CameraImage = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
 const CircleBox = styled.div`
   position: absolute;
-  top: 172px;
-  right: 112px;
+  top: 130px;
+  right: 0px;
   width: 30px;
   height: 30px;
   padding: 3px;
@@ -229,6 +199,15 @@ const CircleBox = styled.div`
   z-index: 2;
   overflow: hidden;
   background-color: white;
+`;
+
+const EditNicknameBox = styled.div`
+  ${FlexboxRow};
+  align-items: center;
+`;
+
+const NicknameBox = styled.div`
+  display: flex;
 `;
 
 const MemoBox = styled.div`
