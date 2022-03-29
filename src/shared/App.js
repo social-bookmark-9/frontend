@@ -11,24 +11,27 @@ import { getMainAxios, getMainWithAxios } from "../redux/modules/Main";
 import { getFolderListAxios } from "../redux/modules/Folder";
 import { getToken } from "./utils";
 
-import MyPage from "../pages/mobile/MyPage";
+import MyPage from "./mobile/MyPage";
 
-import MainPage from "../pages/mobile/MainPage";
-import Login from "../pages/mobile/Login";
-import UserNickname from "../pages/mobile/UserNickname";
-import UserFavorites from "../pages/mobile/UserFavorites";
-import ArticleList from "../pages/mobile/ArticleList";
-import ArticleDetail from "../pages/mobile/ArticleDetail";
-import MyPageD from "../pages/desktop/MyPageD";
-import Setting from "../pages/mobile/Setting";
-import MyReview from "../pages/mobile/MyReview";
-import MyReminder from "../pages/mobile/MyReminder";
-import EditProfile from "../pages/mobile/EditProfile";
+import MainPage from "./mobile/MainPage";
+import Login from "./mobile/Login";
+import UserNickname from "./mobile/UserNickname";
+import UserFavorites from "./mobile/UserFavorites";
+import ArticleList from "./mobile/ArticleList";
+import ArticleDetail from "./mobile/ArticleDetail";
+import MyPageD from "./desktop/MyPageD";
+import Setting from "./mobile/Setting";
+import MyReview from "./mobile/MyReview";
+import MyReminder from "./mobile/MyReminder";
+import EditProfile from "./mobile/EditProfile";
 import NotFound from "./NotFound";
 import ErrorBoundary from "./ErrorBoundary";
 import Spinner from "./Spinner";
-import MainD from "../pages/desktop/MainD";
-import RemindEmail from "../pages/mobile/RemindEmail";
+import MainD from "./desktop/MainD";
+import RemindEmail from "./mobile/RemindEmail";
+import LoginD from "./desktop/LoginD";
+import UserNicknameD from "./desktop/UserNicknameD";
+import UserFavoritesD from "./desktop/UserFavoritesD";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -53,6 +56,9 @@ function App(props) {
           <Routes>
             <Route path="/" element={<MainD />} />
             <Route path="/mypage/:id" element={<MyPageD />} />
+            <Route path="/login" element={<LoginD />} />
+            <Route path="/user/nickname" element={<UserNicknameD />} />
+            <Route path="/user/favorites" element={<UserFavoritesD />} />
           </Routes>
         </Desktop>
         <Mobile>
