@@ -1,32 +1,42 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { postArticleAxios } from "../../redux/modules/Article";
+import { getFolderListAxios } from "../../redux/modules/Folder";
+import { sendLinkDataToLocal } from "../../redux/modules/LocalData";
 
 import styled from "styled-components";
-import { Button, Text } from "../../elements";
+import { Button, Text, Image } from "../../elements";
 import { FlexboxRow, FlexboxSpace } from "../../styles/flexbox";
 
-import AddLinkTag from "./AddLinkTag";
+import AddLinkTagD from "./AddLinkTagD";
 import AddFolder from "./AddFolder";
 import CheckRemind from "./CheckRemind";
-// import { useNavigate } from "react-router";
 
-const ModalD = () => {
+
+const ModalD = (props) => {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
-  // 모달 열고 닫기
-  const [modalOpen, setModalOpen] = useState(false);
-  // 어떤 모달창 보여줄지 (링크 추가 단계)
-  const [showModal, setShowModal] = useState(false);
-  // 모달 열고 닫기 펑션
-  const openModal = () => {
-    setModalOpen(true);
+
+  useEffect(() => {
+    dispatch(getFolderListAxios());
+  }, [dispatch]);
+
+  const toggleAddFolderList = () => {
+    setAddFolderList(!addFolderList);
   };
-  const closeModal = () => {
-    setModalOpen(false);
-    setShowModal(false);
-  };
+  
+  const { newUrl } = props
+
+  // 메인페이지에서 사용되는지 구분
+  const [mainPage, setMainPage] = useState(false);
+
+  const folderList = useSelector(state => state.folder.myFolderList);
+  const myFolderList =
+    folderList &&
+    folderList
+      .map(list => list.articleFolderName)
+      .concat(
+        <FolderAdd onClick={toggleAddFolderList}>+ 새 컬렉션 추가</FolderAdd>,
+      );
 
   const remindList = [
     { key: "내일", value: 1 },
@@ -34,35 +44,37 @@ const ModalD = () => {
     { key: "7일 뒤", value: 7 },
   ];
 
-  const toggleAddFolderList = () => {
-    setAddFolderList(!addFolderList);
-  };
-
-  const [options, setOptions] = useState([
-    "미분류 컬렉션",
-    <FolderAdd onClick={toggleAddFolderList}>+ 새 컬렉션 추가</FolderAdd>,
-  ]);
-
+  // 모달 열고 닫기
+  const [modalOpen, setModalOpen] = useState(false);
+  // 어떤 모달창 보여줄지 (링크 추가 단계)
+  const [showModal, setShowModal] = useState(false);
+  const [options, setOptions] = useState(myFolderList);
   const [isOpen, setIsOpen] = useState(false);
   const [addFolderList, setAddFolderList] = useState(true);
-  const [folder, setFolder] = useState(options[0]);
-
+  const [folder, setFolder] = useState(myFolderList && myFolderList[0]);
   // 전달할 정보 세팅
   const [url, setUrl] = useState("");
   const [checkedRemind, setCheckedRemind] = useState(0);
-  const [folderHide, setFolderHide] = useState(false);
-  const [checkedItems, setCheckedItems] = useState(new Set());
-  const [addLink, setAddLink] = useState(false);
-  const tagData = [...checkedItems];
 
-  const articleData = {
+  const linkData = {
     url: url,
     readCount: 0,
     reminderDate: +checkedRemind,
     articleFolderName: folder,
-    hashtag1: tagData[0],
-    hashtag2: tagData[1] ? tagData[1] : null,
-    hashtag3: tagData[2] ? tagData[2] : null,
+  };
+
+  // 모달 열고 닫기 펑션
+  const openModal = () => {
+    if (modalOpen === false) {
+      setModalOpen(true);
+      document.body.style.cssText = `overflow: hidden; touch-action: none;`;
+    } else {
+      setModalOpen(false);
+      setShowModal(false);
+      setUrl("");
+      setFolder("미분류 컬렉션");
+      document.body.style.cssText = `overflow:auto;`;
+    }
   };
 
   const getUrl = e => {
@@ -75,6 +87,7 @@ const ModalD = () => {
 
   const modalChange = () => {
     setShowModal(current => !current);
+    dispatch(sendLinkDataToLocal(linkData));
   };
 
   const toggleDropdown = () => {
@@ -85,18 +98,22 @@ const ModalD = () => {
     setFolder(e.target);
   };
 
-  const handleAddLink = () => {
-    dispatch(postArticleAxios({ articleData, setModalOpen }));
-  };
-
   return (
     <>
       {/* 아직 버튼 모양은 안 잡아서 기본으로! */}
-      <LinkButtonBox>
+      {!mainPage ? (
+        <MainPageLinkButtonBox>
+          <Button borderRadius="10px" _fontSize="28px" _onClick={openModal}>
+            +
+          </Button>
+        </MainPageLinkButtonBox>
+      ) : (
+        <LinkButtonBox>
         <Button borderRadius="16px" _fontSize="28px" _onClick={openModal}>
           +
         </Button>
       </LinkButtonBox>
+      )}
       {modalOpen ? (
         <Section>
           <MainModal>
@@ -110,23 +127,21 @@ const ModalD = () => {
               />
               <div
                 style={{ display: "flex", width: "20%", justifyContent: "end" }}
+                onClick={openModal}
               >
-                <button onClick={closeModal}>&times;</button>
+                <Image _src="/images/close.png" _width="24px" _height="24px" />
               </div>
             </div>
             <Main>
               {showModal ? (
-                <AddLinkTag
-                  closeModal={closeModal}
-                  setAddLink={setAddLink}
-                  setShowModal={setShowModal}
-                  setCheckedItems={setCheckedItems}
-                  checkedItems={checkedItems}
-                  articleData={articleData}
+                <AddLinkTagD
+                openModal={openModal}
+                setShowModal={setShowModal}
+                myFolderList={myFolderList}
                 />
               ) : (
                 <>
-                  {addFolderList ? (
+                  {myFolderList && addFolderList ? (
                     <LinkBox>
                       <Text _fontSize="14px">컬렉션 선택</Text>
                       <Dropdown>
@@ -136,7 +151,7 @@ const ModalD = () => {
                         </DropdownHeader>
                         {isOpen && (
                           <DropdownList key={folder}>
-                            {options.map((option, idx) => (
+                            {myFolderList.map((option, idx) => (
                               <DropdownItem
                                 key={idx}
                                 onClick={() => {
@@ -151,10 +166,10 @@ const ModalD = () => {
                         )}
                       </Dropdown>
                       <LinkField>
-                        <Text _fontSize="14px">링크</Text>
+                        <Text _fontSize="14px" _padding="0 0 8px 0">링크</Text>
                         <Input
                           type="text"
-                          defaultValue={url ? url : ""}
+                          defaultValue={(newUrl !== null) ? newUrl : ""}
                           placeholder="링크를 입력해주세요"
                           onBlur={getUrl}
                         ></Input>
@@ -167,7 +182,7 @@ const ModalD = () => {
                         <RemindSelection>
                           {remindList.map((remindOption, idx) => (
                             <CheckRemind
-                              remindOption={remindOption.key}
+                              remindOption={remindOption}
                               key={idx}
                               id={remindOption.value}
                               changeRemind={changeRemind}
@@ -176,34 +191,21 @@ const ModalD = () => {
                         </RemindSelection>
                       </Reminder>
                       <ButtonBox>
-                        {addLink ? (
-                          <Button
-                            _onClick={handleAddLink}
-                            _padding="18px"
-                            _fontSize="14px"
-                          >
-                            링크 추가
-                          </Button>
-                        ) : (
-                          <Button
-                            _onClick={modalChange}
-                            _padding="18px"
-                            _fontSize="14px"
-                            articleData={articleData}
-                          >
-                            선택 완료
-                          </Button>
-                        )}
+                        <Button
+                          _onClick={modalChange}
+                          _padding="18px"
+                          _fontSize="14px"
+                        >
+                          선택 완료
+                        </Button>
                       </ButtonBox>
                     </LinkBox>
                   ) : (
                     <AddFolder
-                      folderHide={folderHide}
-                      options={options}
-                      setAddFolderList={setAddFolderList}
-                      setOptions={setOptions}
-                      setFolderHide={setFolderHide}
-                      setFolder={setFolder}
+                    options={options}
+                    setAddFolderList={setAddFolderList}
+                    setOptions={setOptions}
+                    setFolder={setFolder}
                     />
                   )}
                 </>
@@ -220,20 +222,22 @@ const Section = styled.div`
   position: fixed;
   top: 0;
   box-sizing: border-box;
-  width: 100%;
-  height: 100%;
+  right: -500px;
+  width: 99999px;
+  height: 99999px;
   z-index: 99;
   background-color: rgba(0, 0, 0, 0.3);
 `;
 
 const MainModal = styled.div`
   position: fixed;
-  width: 100%;
+  width: 390px;
   height: 398px;
-  bottom: 0;
+  top: 20vh;
+  left: 35vw;
   padding: 20px 28px 24px 28px;
   background-color: white;
-  border-radius: 12px 12px 0 0;
+  border-radius: 12px;
 `;
 
 const Main = styled.div`
@@ -250,6 +254,15 @@ const LinkButtonBox = styled.div`
   & button {
     width: 62px;
     height: 64px;
+    font-weight: ${({ theme }) => theme.fontWeight.semiBold};
+  }
+`;
+
+const MainPageLinkButtonBox = styled.div`
+  display: inline-flex;
+  & button {
+    width: 42px;
+    height: 42px;
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
   }
 `;
@@ -297,12 +310,14 @@ const SelectIcon = styled.div`
   color: ${({ theme }) => theme.colors.fontColor03};
   transform: rotate(90deg);
 `;
+
 const DropdownList = styled.ul`
-  position: relative;
+  position: absolute;
   width: 100%;
   height: 147px;
   overflow: scroll;
   padding: 0;
+  text-align: left;
   border-radius: 0 0 5px 5px;
   cursor: pointer;
 `;
@@ -338,10 +353,11 @@ const Input = styled.input`
 `;
 
 const Hr = styled.hr`
-  width: 100%;
+  width: 385px;
   height: 1px;
   left: 0;
   border: 0;
+  margin-left: -24px;
   border-top: 1px solid #f2f4f6;
   bottom: 145px;
 `;
@@ -361,10 +377,8 @@ const RemindText = styled.div`
 `;
 
 const ButtonBox = styled.div`
-  width: 100%;
-  padding-right: 56px;
-  position: fixed;
-  bottom: 24px;
+  width: 334px;
+  margin-top: 7.5px;
 `;
 
 export default ModalD;
