@@ -6,7 +6,12 @@ import styled from "styled-components";
 import { FlexboxColumn } from "../../styles/flexbox";
 import { Text, Button, Image } from "../../elements";
 
-import { getFolderAxios, getFolderWithAxios } from "../../redux/modules/Folder";
+import {
+  addLikeAxios,
+  cancelLikeAios,
+  getFolderAxios,
+  getFolderWithAxios,
+} from "../../redux/modules/Folder";
 
 import ArticleCard from "../../components/folderpage/ArticleCard";
 import SelectFolder from "../../components/folderpage/SelectFolder";
@@ -36,6 +41,22 @@ const ArticleList = props => {
   }, [dispatch, folderId, isLogin]);
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [likeCnt, setLikeCnt] = useState(
+    folderInfo && parseInt(folderInfo.likeCount),
+  );
+  const [userLiked, setUserLiked] = useState(false);
+
+  const cancelLike = () => {
+    dispatch(cancelLikeAios(folderId));
+    setUserLiked(false);
+    setLikeCnt(likeCnt - 1);
+  };
+
+  const addLike = () => {
+    dispatch(addLikeAxios(folderId));
+    setUserLiked(true);
+    setLikeCnt(likeCnt + 1);
+  };
 
   const copyCollectionUrl = () => {
     copyUrlRef.current.focus();
@@ -67,8 +88,6 @@ const ArticleList = props => {
     }
   };
 
-  const handleLikeFolder = () => {};
-
   return (
     <React.Fragment>
       <FolderNavbar
@@ -82,16 +101,28 @@ const ArticleList = props => {
           <Text _fontSize={({ theme }) => theme.fontSizes.font14}>
             {folderInfo.likeCount}명이 도움을 받았어요
           </Text>
+        ) : userLiked ? (
+          <Button
+            _padding="8px 16px"
+            _color={({ theme }) => theme.colors.fontColor05}
+            bgColor={({ theme }) => theme.colors.pointPurple01}
+            borderColor={({ theme }) => theme.colors.pointPurple02}
+            _onClick={cancelLike}
+            isBorder
+          >
+            <Image _src="/images/icon7.png" _width="19px" _height="19px" />
+            유용해요 {likeCnt}
+          </Button>
         ) : (
           <Button
             _padding="8px 16px"
             _color={({ theme }) => theme.colors.fontColor05}
             bgColor={({ theme }) => theme.colors.white}
             isBorder
-            _onClick={handleLikeFolder}
+            _onClick={addLike}
           >
             <Image _src="/images/icon7.png" _width="19px" _height="19px" />
-            유용해요 {folderInfo.likeCount}
+            유용해요 {likeCnt}
           </Button>
         )}
       </LikeBox>

@@ -6,13 +6,13 @@ import { getFolderListAxios } from "../../redux/modules/Folder";
 import styled from "styled-components";
 import { Button, Text, Image } from "../../elements";
 import { saveAllArticleAxios } from "../../redux/modules/Article";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 
 const SelectFolder = props => {
   const { openModal, folderId } = props;
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getFolderListAxios());

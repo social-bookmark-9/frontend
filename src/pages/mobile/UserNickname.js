@@ -1,22 +1,18 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import { editProfileUserNameAxios } from "../../redux/modules/Profile";
+import { useLocation, useNavigate } from "react-router";
 
 import styled, { css } from "styled-components";
 import { FlexboxColumn } from "../../styles/flexbox";
 import { Button, Title } from "../../elements";
 
 import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
 import { checkMemberNameAxios } from "../../redux/modules/User";
 
-const EditNickname = props => {
+const UserNickname = props => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const [words, setWords] = useState(0);
-  const [nickName, setNickName] = useState("");
-  const [activeMessage, setActiveMessage] = useState(false);
-  const [checkCharsKor, setCheckCharsKor] = useState(false);
 
   const checkMemberName = useSelector(
     state => state.user.register.checkMemberName,
@@ -25,12 +21,16 @@ const EditNickname = props => {
     state => state.user.register.usableMemberName,
   );
 
-  const handleEdit = () => {
-    if (nickName) {
-      props.setIsEdit(false);
-      props.setNewNickname(nickName);
-      dispatch(editProfileUserNameAxios({ nickname: nickName }));
-      alert("변경완료");
+  const [words, setWords] = useState(0);
+  const [nickname, setNickname] = useState("");
+  const [activeMessage, setActiveMessage] = useState(false);
+  const [checkCharsKor, setCheckCharsKor] = useState(false);
+
+  const handleFavorite = () => {
+    if (nickname) {
+      navigate("/user/favorites", {
+        state: { ...location.state, nickname },
+      });
     } else {
       Swal.fire({
         text: "닉네임을 입력해주세요",
@@ -40,13 +40,16 @@ const EditNickname = props => {
       });
     }
   };
-  const handleExit = () => {
-    props.setIsEdit(false);
+
+  const memberNameData = {
+    memberName: nickname,
   };
+
+  console.log(memberNameData);
 
   const handleCheckMemberName = e => {
     e.preventDefault();
-    dispatch(checkMemberNameAxios(nickName));
+    dispatch(checkMemberNameAxios(memberNameData));
     setActiveMessage(true);
   };
 
@@ -62,7 +65,7 @@ const EditNickname = props => {
         setCheckCharsKor(false);
       }
       setWords(checkChars.value.length);
-      setNickName(checkChars.value);
+      setNickname(checkChars.value);
     }
     if (checkChars.value.length > 16) {
       if (regExp.test(checkChars.value)) {
@@ -75,40 +78,19 @@ const EditNickname = props => {
   return (
     <React.Fragment>
       <UserBox>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <div
-            style={{ display: "flex", width: "80%", justifyContent: "start" }}
-          />
-          <div
-            style={{
-              display: "flex",
-              width: "20%",
-              justifyContent: "end",
-              padding: "14px 14px 0 0",
-            }}
-          >
-            <img
-              src="/images/close.png"
-              width="24px"
-              height="24px"
-              alt=""
-              onClick={handleExit}
-            />
-          </div>
-        </div>
         <UserArea>
           <Title
             _fontSize={({ theme }) => theme.fontSizes.font24}
             _lineHeight="38px"
           >
-            변경할 닉네임을
+            버블드에서 사용할
             <br />
-            적어주세요
+            닉네임을 적어주세요
           </Title>
           <InputBox>
             <UserInput
-              placeholder="닉네임을 입력해주세요"
-              maxLength={6}
+              placeholder="영어로 된 닉네임을 입력해주세요"
+              maxLength={16}
               onKeyUp={handleCheckChars}
             />
             <CheckButton onClick={handleCheckMemberName}>중복확인</CheckButton>
@@ -130,18 +112,19 @@ const EditNickname = props => {
         </UserArea>
         <ButtonBox>
           <Button
-            _onClick={handleEdit}
+            _onClick={handleFavorite}
             _fontSize={({ theme }) => theme.fontSizes.font20}
             borderRadius="0px"
             _padding="18px 0px"
           >
-            확인
+            다음
           </Button>
         </ButtonBox>
       </UserBox>
     </React.Fragment>
   );
 };
+
 // 스타일 컴포넌트 작성 위치
 const UserBox = styled.div`
   ${FlexboxColumn}
@@ -149,12 +132,15 @@ const UserBox = styled.div`
   width: 100%;
   height: 100%;
 `;
+
 const UserArea = styled.div`
   padding: 65px 24px;
 `;
+
 const InputBox = styled.div`
   padding: 48px 0px;
 `;
+
 const UserInput = styled.input`
   border: none;
   border-bottom: 1px solid #c7c7c7;
@@ -162,13 +148,14 @@ const UserInput = styled.input`
   padding: 12px;
   width: 100%;
   &::placeholder {
-    color: ${({ theme }) => theme.colors.grayColor03};
-    font-size: ${({ theme }) => theme.fontSizes.font16};
+    color: ${({ theme }) => theme.colors.gray03};
+    font-size: ${({ theme }) => theme.fontSizes.font14};
   }
   &:focus {
     outline: none;
   }
 `;
+
 const InputCheck = styled.p`
   text-align: right;
   padding: 4px 0px;
@@ -177,6 +164,7 @@ const InputCheck = styled.p`
   line-height: 18px;
   letter-spacing: -0.0008em;
 `;
+
 const ButtonBox = styled.div`
   position: fixed;
   bottom: 0;
@@ -235,6 +223,8 @@ const ConfirmMessage = styled.p`
     `;
   }}
 `;
+
 // default props 작성 위치
-EditNickname.defaultProps = {};
-export default EditNickname;
+UserNickname.defaultProps = {};
+
+export default UserNickname;

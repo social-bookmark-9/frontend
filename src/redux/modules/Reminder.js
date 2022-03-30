@@ -1,11 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import reminderApi from "../app/reminderApi";
-import { setFolder } from "./Folder";
 
 const ReminderApi = new reminderApi();
 
 const initialState = {
-  remindData:[]
+  remindData: [],
 };
 
 export const getReminderAxios = createAsyncThunk(
@@ -18,28 +17,27 @@ export const getReminderAxios = createAsyncThunk(
 
 export const postReminderAxios = createAsyncThunk(
   "reminder/postReminderAxios",
-  async (remindData) => {
+  async remindData => {
     const res = await ReminderApi.postReminder(remindData);
     return res;
-  }
-)
+  },
+);
 
 export const patchReminderAxios = createAsyncThunk(
   "reminder/patchReminderAxios",
-  async (remindData) => {
+  async remindData => {
     const res = await ReminderApi.patchReminder(remindData);
     return res;
-  }
-)
+  },
+);
 
 export const deleteReminderAxios = createAsyncThunk(
   "reminder/deleteReminderAxios",
-  async (remindData) => {
+  async remindData => {
     const res = await ReminderApi.deleteReminder(remindData);
     return res;
-  }
-)
-
+  },
+);
 
 // export const editProfileHashtagAxios = createAsyncThunk(
 //   "profile/editProfileHashtagAxios",
