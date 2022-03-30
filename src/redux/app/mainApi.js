@@ -42,4 +42,22 @@ export default class mainApi {
         console.log(err);
       });
   }
+
+  async getMainByHashtag(chosenHashtag) {
+    const getMainWithConfig = {
+      method: "GET",
+      url: `${this.base}/api/mainpage/hashtags?hashtag=${chosenHashtag}`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    return axios(getMainWithConfig)
+      .then(res => {
+        return(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 }

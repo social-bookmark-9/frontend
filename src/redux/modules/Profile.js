@@ -91,6 +91,14 @@ export const editProfileSnsUrlAxios = createAsyncThunk(
   },
 );
 
+export const editReminderEmailAxios = createAsyncThunk(
+  "profile/editReminderEmailAxios",
+  async remindEmail => {
+    const res = await ProfileApi.editReminderEmail(remindEmail);
+    return res;
+  },
+);
+
 export const profileSlice = createSlice({
   name: "profile",
   initialState,

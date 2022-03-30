@@ -285,7 +285,7 @@ const SelectIcon = styled.div`
   transform: rotate(90deg);
 `;
 const DropdownList = styled.ul`
-  position: relative;
+  position: absolute;
   width: 100%;
   height: 147px;
   overflow: scroll;

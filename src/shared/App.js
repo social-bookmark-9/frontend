@@ -28,10 +28,11 @@ import UserNickname from "../pages/mobile/UserNickname";
 import UserFavorites from "../pages/mobile/UserFavorites";
 import ArticleDetail from "../pages/mobile/ArticleDetail";
 
-import MainPageD from "../pages/desktop/MainPageD";
 import LoginD from "../pages/desktop/LoginD";
 import MyPageD from "../pages/desktop/MyPageD";
+import MainD from "../pages/desktop/MainD";
 import UserNicknameD from "../pages/desktop/UserNicknameD";
+import UserFavoritesD from "../pages/desktop/UserFavoritesD";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -54,18 +55,16 @@ function App(props) {
       <ErrorBoundary fallback={<Spinner />}>
         <Desktop>
           <Routes>
-            <Route
-              path="/"
-              element={<MainPageD {...myInfo} isLogin={isLogin} />}
-            />
+            <Route path="/" element={<MainD {...myInfo} isLogin={isLogin} />} />
             <Route
               path="/mypage/:id"
               element={<MyPageD {...myInfo} isLogin={isLogin} />}
             />
             <Route path="/login" element={<LoginD />} />
             <Route path="/user/nickname" element={<UserNicknameD />} />
-            <Route path="/user/favorites" element={<UserFavorites />} />
+            <Route path="/user/favorites" element={<UserFavoritesD />} />
             <Route path="/api/users/login" element={<OAuthRedirectHandler />} />
+            <Route element={<NotFound />} />
           </Routes>
         </Desktop>
         <Mobile>
