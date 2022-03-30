@@ -36,7 +36,6 @@ const UserNicknameD = props => {
         text: "닉네임을 입력해주세요",
         icon: "warning",
         confirmButtonText: "확인",
-        confirmButtonColor: "#353C49",
       });
     }
   };

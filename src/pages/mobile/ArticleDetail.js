@@ -72,7 +72,6 @@ const ArticleDetail = props => {
         text: "작성한 메모를 공개할까요?",
         showCancelButton: true,
         confirmButtonText: "확인",
-        confirmButtonColor: "#353C49",
         cancelButtonText: "취소",
       }).then(result => {
         if (result.isConfirmed) {
@@ -86,7 +85,6 @@ const ArticleDetail = props => {
         text: "작성한 메모를 비공개할까요?",
         showCancelButton: true,
         confirmButtonText: "확인",
-        confirmButtonColor: "#353C49",
         cancelButtonText: "취소",
       }).then(result => {
         if (result.isConfirmed) {

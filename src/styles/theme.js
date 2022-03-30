@@ -31,6 +31,7 @@ const colors = {
   gray03: "#d2d6da",
   gray02: "#f2f3f4",
   gray01: "#f2f4f6",
+  gray00: "#fafbfb",
   fontColor05: "#353C49",
   fontColor04: "#505866",
   fontColor03: "#9198a0",

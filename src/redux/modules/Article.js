@@ -16,7 +16,6 @@ export const postArticleAxios = createAsyncThunk(
     Swal.fire({
       text: "링크가 저장되었습니다",
       confirmButtonText: "확인",
-      confirmButtonColor: "#353C49",
     });
     console.log(resp);
     return resp;
@@ -109,7 +108,6 @@ export const saveArticleAxios = createAsyncThunk(
     Swal.fire({
       text: "아티클이 저장되었습니다",
       confirmButtonText: "확인",
-      confirmButtonColor: "#353C49",
     });
     console.log(resp);
     return resp;
@@ -126,7 +124,6 @@ export const saveAllArticleAxios = createAsyncThunk(
     Swal.fire({
       text: "모든 아티클이 저장되었습니다",
       confirmButtonText: "확인",
-      confirmButtonColor: "#353C49",
     });
     console.log(resp);
     return resp;

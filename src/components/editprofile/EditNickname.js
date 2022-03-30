@@ -30,13 +30,23 @@ const EditNickname = props => {
       props.setIsEdit(false);
       props.setNewNickname(nickName);
       dispatch(editProfileUserNameAxios({ nickname: nickName }));
-      alert("변경완료");
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top",
+        iconColor: "#DAF8F1",
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: false,
+      });
+      Toast.fire({
+        icon: "success",
+        title: "변경완료",
+      });
     } else {
       Swal.fire({
         text: "닉네임을 입력해주세요",
         icon: "warning",
         confirmButtonText: "확인",
-        confirmButtonColor: "#353C49",
       });
     }
   };

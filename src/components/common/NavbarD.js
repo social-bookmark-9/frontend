@@ -2,10 +2,52 @@ import React from "react";
 import { useNavigate } from "react-router";
 
 import styled from "styled-components";
+import Swal from "sweetalert2";
 import { Image, Text, Title } from "../../elements";
 
 const NavbarD = props => {
+  const { isLogin } = props;
   const navigate = useNavigate();
+
+  const handleMemoPage = () => {
+    if (isLogin) {
+      navigate("/myreview");
+    } else {
+      Swal.fire({
+        title: "잠깐!",
+        text: "로그인이 필요한 서비스에요",
+        icon: "warning",
+        showCancelButton: true,
+        cancelButtonColor: `${({ theme }) => theme.colors.error}`,
+        confirmButtonText: "로그인 하기",
+        cancelButtonText: "취소",
+      }).then(result => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  };
+
+  const handleSettingPage = () => {
+    if (isLogin) {
+      navigate("/setting");
+    } else {
+      Swal.fire({
+        title: "잠깐!",
+        text: "로그인이 필요한 서비스에요",
+        icon: "warning",
+        showCancelButton: true,
+        cancelButtonColor: `${({ theme }) => theme.colors.error}`,
+        confirmButtonText: "로그인 하기",
+        cancelButtonText: "취소",
+      }).then(result => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  };
 
   return (
     <React.Fragment>
@@ -20,7 +62,7 @@ const NavbarD = props => {
             </LogoBox>
             <MenuBox>
               <Text
-                _fontSize="18px"
+                _fontSize={({ theme }) => theme.fontSizes.font18}
                 _color={({ theme }) => theme.colors.fontColor05}
                 _onClick={() => {
                   navigate("/");
@@ -29,18 +71,10 @@ const NavbarD = props => {
                 홈 피드
               </Text>
               <Line />
-              <ImageBox
-                onClick={() => {
-                  navigate("/remind");
-                }}
-              >
+              <ImageBox onClick={handleMemoPage}>
                 <Image _src="/images/memo.png" _width="24px" _height="24px" />
               </ImageBox>
-              <ImageBox
-                onClick={() => {
-                  navigate("/setting");
-                }}
-              >
+              <ImageBox onClick={handleSettingPage}>
                 <Image
                   _src="/images/setting.png"
                   _width="24px"
@@ -92,6 +126,7 @@ const MenuBox = styled.div`
   & p {
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
     padding-right: 30px;
+    cursor: pointer;
   }
 `;
 

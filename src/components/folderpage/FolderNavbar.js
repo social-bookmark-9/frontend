@@ -42,7 +42,6 @@ const FolderNavbar = props => {
       text: "컬렉션을 삭제하시겠습니까?",
       showCancelButton: true,
       confirmButtonText: "확인",
-      confirmButtonColor: "#353C49",
       cancelButtonText: "취소",
     }).then(result => {
       if (result.isConfirmed) {
@@ -60,14 +59,12 @@ const FolderNavbar = props => {
       Swal.fire({
         text: "동일한 컬렉션 이름이 존재합니다",
         confirmButtonText: "확인",
-        confirmButtonColor: "#353C49",
       });
     } else {
       Swal.fire({
         text: "변경한 내용을 저장할까요?",
         showCancelButton: true,
         confirmButtonText: "확인",
-        confirmButtonColor: "#353C49",
         cancelButtonText: "취소",
       }).then(result => {
         if (result.isConfirmed) {

@@ -34,17 +34,17 @@ const MainTop = props => {
 
   return (
     <div style={{ padding: "0 26px 44px 26px" }}>
-      <Title _fontSize="24px" _padding="20px 0 12px 0">
+      <TitleBox>
         <div>
           Express yourself
-          <LottieBox style={{ verticalAlign: "middle" }} ref={faceLottie} />
+          <LottieBox ref={faceLottie} />
         </div>
         <div>
           with what you
-          <LottieBox style={{ verticalAlign: "middle" }} ref={bubbleLottie} />
+          <LottieBox ref={bubbleLottie} />
           read.
         </div>
-      </Title>
+      </TitleBox>
       <Text _color="#505866" _fontSize="14px" _padding="0 0 24px 0">
         내가 읽은 것들로 나를 표현하는 공간, 버블드
       </Text>
@@ -65,9 +65,14 @@ const MainTop = props => {
     </div>
   );
 };
+const TitleBox = styled.div`
+  font-size: 24px;
+  padding: 20px 0 12px 0;
+`;
 
 const LottieBox = styled.span`
   padding: 0px 8px;
+  vertical-align: middle;
   & svg {
     width: 30px !important;
     height: 30px !important;
