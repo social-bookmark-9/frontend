@@ -37,7 +37,7 @@ const MainD = props => {
         <RecommendUserD memberInfo={memberInfo}/>
 
         {/* 검색창, 기타 아랫부분 */}
-        <MainPageFooterD />
+        <MainPageFooterD {...props} {...memberInfo} />
         
       </MainContainer>
     </React.Fragment>
