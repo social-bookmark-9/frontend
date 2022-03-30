@@ -1,31 +1,19 @@
 import React from "react";
 import { useNavigate } from "react-router";
 
+import styled from "styled-components";
 import { Title, Button } from "../../elements";
 
 import ArticleFolderD from "../folderpage/ArticleFolderD";
 
-const CurationsD = () => {
+const CurationsD = (props) => {
+  const { folderList } = props;
   const navigate = useNavigate();
-  const folderList = [0, 1, 2, 3];
+  
 
   return (
-    <div
-      style={{
-        margin: "0 auto 0 auto",
-        display: "flex",
-        width: "1220px",
-        paddingTop: "120px",
-      }}
-    >
-      <div
-        style={{
-          flexDirection: "column",
-          width: "255px",
-          marginRight: "10%",
-          justifyContent: "start",
-        }}
-      >
+    <CurationContainer>
+      <CurationExplain>
         <div style={{ marginTop: "-46px" }}>
           <img src="/images/DesktopMain2.png" width={"44px"} alt="icon" />
         </div>
@@ -35,28 +23,25 @@ const CurationsD = () => {
         <div style={{ fontSize: "20px", color: "#b1b8c0" }}>
           설명설명설명설명
         </div>
-      </div>
-      <div
-        style={{
-          display: "inline-block",
-          flexDirection: "column",
-          justifyContent: "end",
-        }}
-      >
-        {folderList.map((folderId, idx) => (
-          <ArticleFolderD
+      </CurationExplain>
+      
+      <CurationBox>
+        {folderList.map((folder, idx) => (
+          <FolderBox
             key={idx}
-            _onClick={() => {
-              navigate("/articles");
+            onClick={() => {
+              navigate(`/articles/${folder.folderId}`);
             }}
-            folderColor={
-              folderId % 3 === 0
-                ? "green"
-                : folderId % 3 === 1
-                ? "purple"
-                : "blue"
-            }
-          ></ArticleFolderD>
+          >
+            <ArticleFolderD
+              key={idx}
+              folderColor={
+                idx % 3 === 0 ? "green" : idx % 3 === 1 ? "purple" : "blue"
+              }
+              folder={folder}
+              {...folder}
+            />
+          </FolderBox>
         ))}
 
         <div style={{ marginTop: "38px" }}>
@@ -69,9 +54,34 @@ const CurationsD = () => {
             더보기
           </Button>
         </div>
-      </div>
-    </div>
+      </CurationBox>
+    </CurationContainer>
   );
 };
+
+const CurationContainer = styled.div`
+  margin: 0 auto 0 auto;
+  display: flex;
+  width: 1220px;
+  padding-top: 120px;
+`;
+
+const CurationExplain = styled.div`
+  flex-direction: column;
+  width: 35%;
+  justify-content: start;
+`;
+
+const CurationBox = styled.div`
+  display: inline-block;
+  flex-direction: column;
+  justify-content: end;
+  width: 65%;
+`;
+
+const FolderBox = styled.div`
+  margin-bottom: 16px;
+  width: 100%
+`;
 
 export default CurationsD;

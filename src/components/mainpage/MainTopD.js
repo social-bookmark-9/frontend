@@ -74,7 +74,6 @@ const MainTopD = () => {
 };
 
 const Container = styled.div`
-  width: 100vw;
   background-color: ${({ theme }) => theme.colors.gray00};
 `;
 
