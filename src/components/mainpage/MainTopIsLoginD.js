@@ -50,12 +50,7 @@ const MainTopIsLoginD = () => {
                   fontSize: "22px",
                 }}
               >
-                <input
-                  style={{
-                    width: "957px",
-                    height: "68px",
-                    fontSize: "22px",
-                  }}
+                <LinkInput
                   name="url입력"
                   onChange={e => setNewUrl(newUrlRef.current.value)}
                   placeholder="이곳에 링크를 붙여넣어 주세요"
@@ -89,6 +84,15 @@ const Input = styled.div`
   border: 1px solid #e5e8ec;
   border-radius: 15px;
   padding: 13px 26px 13px 26px;
+`;
+
+const LinkInput = styled.input`
+  width: 957px;
+  height: 68px;
+  font-size: 22px;
+  &:focus {
+    background-color: none;
+  }
 `;
 
 export default MainTopIsLoginD;

@@ -13,10 +13,12 @@ export const postArticleAxios = createAsyncThunk(
   "article/postArticle",
   async ({ articleData, navigate }, { dispatch }) => {
     const resp = await ArticleApi.postArticle({ articleData, navigate });
-    Swal.fire({
-      text: "링크가 저장되었습니다",
-      confirmButtonText: "확인",
-    });
+    if (resp) {
+      Swal.fire({
+        text: "링크가 저장되었습니다",
+        confirmButtonText: "확인",
+      });
+    }
     console.log(resp);
     return resp;
   },

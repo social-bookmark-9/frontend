@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router";
 
 import styled, { css } from "styled-components";
 import { FlexboxRow } from "../../styles/flexbox";
-import { Button, Title } from "../../elements";
+import { Button, Image, Title } from "../../elements";
 
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
@@ -76,7 +76,9 @@ const UserNicknameD = props => {
     <React.Fragment>
       <Container>
         <HeaderContainer>
-          <HeaderBox>GIF IMAGE</HeaderBox>
+          <HeaderBox>
+            <Image _src="/images/loginGif.gif" _width="400px" _height="400px" />
+          </HeaderBox>
         </HeaderContainer>
         <UserContainer>
           <UserBox>

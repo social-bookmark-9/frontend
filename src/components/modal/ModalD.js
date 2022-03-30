@@ -52,7 +52,7 @@ const ModalD = props => {
   const [addFolderList, setAddFolderList] = useState(true);
   const [folder, setFolder] = useState("미분류 컬렉션");
   // 전달할 정보 세팅
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState(newUrl);
   const [checkedRemind, setCheckedRemind] = useState(0);
 
   const linkData = {
@@ -62,10 +62,14 @@ const ModalD = props => {
     articleFolderName: folder,
   };
 
+  console.log(newUrl);
+  console.log(linkData);
+
   // 모달 열고 닫기 펑션
   const openModal = () => {
     if (modalOpen === false) {
       setModalOpen(true);
+      setUrl(newUrl);
       document.body.style.cssText = `overflow: hidden; touch-action: none;`;
     } else {
       setModalOpen(false);

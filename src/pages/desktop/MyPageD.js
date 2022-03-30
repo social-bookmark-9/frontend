@@ -7,15 +7,11 @@ import {
   getProfileWithAxios,
 } from "../../redux/modules/Profile";
 
-import styled, { css } from "styled-components";
-import { Flexbox } from "../../styles/flexbox";
-import { Label, Title, Image, Text } from "../../elements";
+import styled from "styled-components";
 
 import NavbarD from "../../components/common/NavbarD";
 import ArticleFolder from "../../components/folderpage/ArticleFolder";
-import RemindCard from "../../components/mypage/RemindCard";
 import UserProfile from "../../components/mypage/UserProfile";
-import ModalD from "../../components/modal/ModalD";
 import MyPageRemind from "../../components/mypage/MyPageRemind";
 import MyPageSuggest from "../../components/mypage/MyPageSuggest";
 import AddCollection from "../../components/mypage/AddCollection";

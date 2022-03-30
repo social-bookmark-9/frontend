@@ -6,7 +6,8 @@ import Swal from "sweetalert2";
 import { Image, Text, Title } from "../../elements";
 
 const NavbarD = props => {
-  const { isLogin } = props;
+  const { isLogin, memberId } = props;
+  console.log(props);
   const navigate = useNavigate();
 
   const handleMemoPage = () => {
@@ -83,7 +84,7 @@ const NavbarD = props => {
               </ImageBox>
               <ImageBox
                 onClick={() => {
-                  navigate("/mypage");
+                  navigate(`/mypage/${memberId}`);
                 }}
               >
                 <Image _src="/images/iconMe.png" _width="30px" _height="30px" />

@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router";
 import { registerAxios } from "../../redux/modules/User";
 
 import styled from "styled-components";
-import { Button, Title, Text } from "../../elements";
+import { Button, Title, Text, Image } from "../../elements";
 import { FlexboxColumn, FlexboxRow } from "../../styles/flexbox";
 
 import FavoriteD from "../../components/common/FavoriteD";
@@ -67,7 +67,9 @@ const UserFavoritesD = props => {
     <React.Fragment>
       <BaseDiv>
         <HeaderContainer>
-          <HeaderBox>GIF IMAGE</HeaderBox>
+          <HeaderBox>
+            <Image _src="/images/loginGif.gif" _width="400px" _height="400px" />
+          </HeaderBox>
         </HeaderContainer>
         <UserBox>
           <Topdiv>
