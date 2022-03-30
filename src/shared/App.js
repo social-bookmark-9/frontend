@@ -52,7 +52,10 @@ function App(props) {
         <Desktop>
           <Routes>
             <Route path="/" element={<MainD />} />
-            <Route path="/mypage/:id" element={<MyPageD />} />
+            <Route
+              path="/mypage/:id"
+              element={<MyPageD {...myInfo} isLogin={isLogin} />}
+            />
           </Routes>
         </Desktop>
         <Mobile>

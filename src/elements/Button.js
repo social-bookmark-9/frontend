@@ -7,12 +7,13 @@ const Button = props => {
     _width,
     children,
     _onClick,
-    borderRadius,
     _padding,
     bgColor,
     _color,
     _fontSize,
     isBorder,
+    borderRadius,
+    borderColor,
     bold,
   } = props;
   const styles = {
@@ -23,6 +24,7 @@ const Button = props => {
     _color,
     _fontSize,
     isBorder,
+    borderColor,
     bold,
   };
 
@@ -41,6 +43,7 @@ Button.defaultProps = {
   _color: "#ffffff",
   _fontSize: "14px",
   isBorder: false,
+  borderColor: "#DCDCDC",
   borderRadius: "8px",
   bold: false,
 };
@@ -54,7 +57,8 @@ const StyledButton = styled.button`
   font-size: ${props => props._fontSize};
   font-weight: ${props => (props.bold ? "600" : "")};
   color: ${props => props._color};
-  ${props => (props.isBorder ? "border: 0.8px solid #DCDCDC" : "")};
+  ${props => (props.isBorder ? "border: 0.8px solid" : "")};
+  border-color: ${props => props.borderColor || "#DCDCDC"};
   border-radius: ${props => props.borderRadius};
 `;
 

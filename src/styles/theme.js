@@ -23,6 +23,7 @@ const colors = {
   black: "#000000",
   white: "#ffffff",
   kakao: "#FEEB00",
+  error: "#F95D5D",
   gray07: "#353C49",
   gray06: "#505866",
   gray05: "#B1B8C0",

@@ -114,4 +114,40 @@ export default class folderApi {
         console.log(err);
       });
   }
+
+  async addLike(folderId) {
+    const addLikeConfig = {
+      method: "POST",
+      url: `${this.base}/api/articleFolders/${folderId}/likes`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
+    };
+    return axios(addLikeConfig)
+      .then(res => {
+        return res.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  async Like(folderId) {
+    const cancelLikeConfig = {
+      method: "DELETE",
+      url: `${this.base}/api/articleFolders/${folderId}/likes`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
+    };
+    return axios(cancelLikeConfig)
+      .then(res => {
+        return res.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 }

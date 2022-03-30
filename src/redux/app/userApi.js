@@ -42,6 +42,22 @@ export default class userApi {
       });
   }
 
+  async checkMemberName(memberName) {
+    const checkMemberNameConfig = {
+      method: "GET",
+      url: `${this.base}/api/users/checkmembername`,
+      headers: { "content-type": "application/json" },
+      data: JSON.stringify(memberName),
+    };
+    return axios(checkMemberNameConfig)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   async register({ userInfo, navigate }) {
     const registerConfig = {
       method: "POST",
@@ -51,6 +67,7 @@ export default class userApi {
     };
     return axios(registerConfig)
       .then(res => {
+        navigate("/", { replace: true });
         return res.data;
       })
       .catch(err => {

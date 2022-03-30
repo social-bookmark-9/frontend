@@ -8,6 +8,10 @@ const initialState = {
   myInfo: null,
   isLogin: false,
   isMe: false,
+  register: {
+    checkMemberName: "",
+    usableMemberName: false,
+  },
 };
 
 export const kakaoLoginAxios = createAsyncThunk(
@@ -22,13 +26,24 @@ export const kakaoLoginAxios = createAsyncThunk(
   },
 );
 
+export const checkMemberNameAxios = createAsyncThunk(
+  "user/checkMemberName",
+  async (memberName, { dispatch }) => {
+    const user = await UserApi.checkMemberName(memberName);
+    if (user) {
+      dispatch(setMessage(user.message));
+      console.log(user);
+      return user;
+    }
+  },
+);
+
 export const registerAxios = createAsyncThunk(
   "user/register",
   async ({ userInfo, navigate }, { dispatch }) => {
     const user = await UserApi.register({ userInfo, navigate });
     if (user) {
       dispatch(setMyInfo(user.data));
-      navigate("/", { replace: true });
       console.log(user);
       return user;
     }
@@ -73,6 +88,14 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    setMessage: (state, action) => {
+      state.register.checkMemberName = action.payload;
+      if (action.payload === "사용 가능한 닉네임 입니다") {
+        state.register.usableMemberName = true;
+      } else {
+        state.register.usableMemberName = false;
+      }
+    },
     setMyInfo: (state, action) => {
       sessionStorage.setItem("accessToken", action.payload.token.accessToken);
       sessionStorage.setItem("refreshToken", action.payload.token.refreshToken);
@@ -119,5 +142,6 @@ export const userSlice = createSlice({
     },
   },
 });
-export const { setMyInfo, deleteUserFromSession, setUser } = userSlice.actions;
+export const { setMessage, setMyInfo, deleteUserFromSession, setUser } =
+  userSlice.actions;
 export default userSlice.reducer;
