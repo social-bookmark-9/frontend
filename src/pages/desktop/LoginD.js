@@ -2,7 +2,7 @@ import React from "react";
 import { KAKAO_AUTH_URL } from "../../shared/OAuth";
 
 import styled from "styled-components";
-import { FlexboxColumn } from "../../styles/flexbox";
+import { FlexboxColumn, FlexboxRow } from "../../styles/flexbox";
 import { Button, Title, Text, Image } from "../../elements";
 
 // import { useSelector } from "react-redux";
@@ -10,59 +10,92 @@ import { Button, Title, Text, Image } from "../../elements";
 const LoginD = () => {
   return (
     <React.Fragment>
-      <LoginBox>
-        <Topdiv>
-          <Image
-            _src="/images/bubbled.png"
-            _width="65px"
-            _height="52px"
-            _marginR="0px"
-          />
-          <TitleBox>
-            <Title
-              textAlign="center"
-              _titleSize={({ theme }) => theme.fontSizes.font28}
-              _lineHeight="36px"
-            >
-              Express yourself <br />
-              with what you read
-            </Title>
-            <Text
-              textAlign="center"
-              _padding="22px 0px"
-              _fontSize={({ theme }) => theme.fontSizes.font14}
-            >
-              내가 읽은 것들로 나를 표현하는 공간. 버블드
-            </Text>
-          </TitleBox>
-        </Topdiv>
-        <Bottomdiv>
-          <a href={KAKAO_AUTH_URL}>
-            <Button
-              _padding="14px 0px"
-              bgColor={({ theme }) => theme.colors.kakao}
-              _color="#381E1F"
-              _fontSize={({ theme }) => theme.fontSizes.font12}
-              borderRadius="3px"
-            >
-              <img src="/images/kakao.png" width={20} height={17} alt="kakao" />
-              카카오로 로그인
-            </Button>
-          </a>
-        </Bottomdiv>
-      </LoginBox>
+      <Container>
+        <HeaderContainer>
+          <HeaderBox>GIF IMAGE</HeaderBox>
+        </HeaderContainer>
+        <LoginContainer>
+          <LoginBox>
+            <Topdiv>
+              <Image
+                _src="/images/bubbled.png"
+                _width="65px"
+                _height="52px"
+                _marginR="0px"
+              />
+              <TitleBox>
+                <Title
+                  _titleSize={({ theme }) => theme.fontSizes.font28}
+                  _lineHeight="36px"
+                >
+                  Express yourself <br />
+                  with what you read
+                </Title>
+                <Text
+                  _padding="22px 0px"
+                  _fontSize={({ theme }) => theme.fontSizes.font14}
+                >
+                  내가 읽은 것들로 나를 표현하는 공간. 버블드
+                </Text>
+              </TitleBox>
+            </Topdiv>
+            <Bottomdiv>
+              <a href={KAKAO_AUTH_URL}>
+                <Button
+                  _padding="14px 0px"
+                  bgColor={({ theme }) => theme.colors.kakao}
+                  _color="#381E1F"
+                  _fontSize={({ theme }) => theme.fontSizes.font12}
+                  borderRadius="3px"
+                >
+                  <img
+                    src="/images/kakao.png"
+                    width={20}
+                    height={17}
+                    alt="kakao"
+                  />
+                  카카오로 로그인
+                </Button>
+              </a>
+            </Bottomdiv>
+          </LoginBox>
+        </LoginContainer>
+      </Container>
     </React.Fragment>
   );
 };
 
 // 스타일드 컴포넌트 작성 위치
+
+const Container = styled.div`
+  ${FlexboxRow};
+  width: 100vw;
+`;
+
+const HeaderContainer = styled.div`
+  width: 43vw;
+  padding: 188px 0px;
+  background-color: ${({ theme }) => theme.colors.gray07};
+`;
+
+const HeaderBox = styled.div`
+  width: 400px;
+  height: 400px;
+  margin: auto;
+  background-color: ${({ theme }) => theme.colors.white};
+`;
+
+const LoginContainer = styled.div`
+  width: 57vw;
+  padding: 0px 115px;
+`;
+
 const LoginBox = styled.div`
-  width: 100%;
+  width: 547px;
 `;
 
 const Topdiv = styled.div`
-  ${FlexboxColumn}
-  align-items: center;
+  ${FlexboxColumn};
   height: 75vh;
 `;
 
@@ -72,7 +105,6 @@ const TitleBox = styled.div`
 
 const Bottomdiv = styled.div`
   height: 25vh;
-  padding: 0px 60px;
   text-align: center;
 `;
 

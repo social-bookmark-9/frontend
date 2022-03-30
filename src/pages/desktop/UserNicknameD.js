@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 
 import styled, { css } from "styled-components";
-import { FlexboxColumn } from "../../styles/flexbox";
+import { FlexboxRow } from "../../styles/flexbox";
 import { Button, Title } from "../../elements";
 
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { checkMemberNameAxios } from "../../redux/modules/User";
 
-const UserNickname = props => {
+const UserNicknameD = props => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -45,8 +45,6 @@ const UserNickname = props => {
     memberName: nickname,
   };
 
-  console.log(memberNameData);
-
   const handleCheckMemberName = e => {
     e.preventDefault();
     dispatch(checkMemberNameAxios(memberNameData));
@@ -77,64 +75,97 @@ const UserNickname = props => {
 
   return (
     <React.Fragment>
-      <UserBox>
-        <UserArea>
-          <Title
-            _fontSize={({ theme }) => theme.fontSizes.font24}
-            _lineHeight="38px"
-          >
-            버블드에서 사용할
-            <br />
-            닉네임을 적어주세요
-          </Title>
-          <InputBox>
-            <UserInput
-              placeholder="영어로 된 닉네임을 입력해주세요"
-              maxLength={16}
-              onKeyUp={handleCheckChars}
-            />
-            <CheckButton onClick={handleCheckMemberName}>중복확인</CheckButton>
-            <MessageBox>
-              {activeMessage ? (
-                usableMemberName ? (
-                  <ConfirmMessage>{checkMemberName}</ConfirmMessage>
-                ) : (
-                  <ErrorMessage>{checkMemberName}</ErrorMessage>
-                )
-              ) : checkCharsKor ? (
-                <ErrorMessage>영어, 숫자만 사용가능합니다</ErrorMessage>
-              ) : (
-                <div />
-              )}
-              <InputCheck>{words}/16</InputCheck>
-            </MessageBox>
-          </InputBox>
-        </UserArea>
-        <ButtonBox>
-          <Button
-            _onClick={handleFavorite}
-            _fontSize={({ theme }) => theme.fontSizes.font20}
-            borderRadius="0px"
-            _padding="18px 0px"
-          >
-            다음
-          </Button>
-        </ButtonBox>
-      </UserBox>
+      <Container>
+        <HeaderContainer>
+          <HeaderBox>GIF IMAGE</HeaderBox>
+        </HeaderContainer>
+        <UserContainer>
+          <UserBox>
+            <UserArea>
+              <Title
+                _fontSize={({ theme }) => theme.fontSizes.font24}
+                _lineHeight="38px"
+              >
+                버블드에서 사용할
+                <br />
+                닉네임을 적어주세요
+              </Title>
+              <InputBox>
+                <UserInput
+                  placeholder="영어로 된 닉네임을 입력해주세요"
+                  maxLength={16}
+                  onKeyUp={handleCheckChars}
+                />
+                <CheckButton onClick={handleCheckMemberName}>
+                  중복확인
+                </CheckButton>
+                <MessageBox>
+                  {activeMessage ? (
+                    usableMemberName ? (
+                      <ConfirmMessage>{checkMemberName}</ConfirmMessage>
+                    ) : (
+                      <ErrorMessage>{checkMemberName}</ErrorMessage>
+                    )
+                  ) : checkCharsKor ? (
+                    <ErrorMessage>영어, 숫자만 사용가능합니다</ErrorMessage>
+                  ) : (
+                    <div />
+                  )}
+                  <InputCheck>{words}/16</InputCheck>
+                </MessageBox>
+              </InputBox>
+            </UserArea>
+            <ButtonBox>
+              <Button
+                _onClick={handleFavorite}
+                _fontSize={({ theme }) => theme.fontSizes.font20}
+                borderRadius="0px"
+                _padding="18px 0px"
+              >
+                다음
+              </Button>
+            </ButtonBox>
+          </UserBox>
+        </UserContainer>
+      </Container>
     </React.Fragment>
   );
 };
 
 // 스타일 컴포넌트 작성 위치
+const Container = styled.div`
+  ${FlexboxRow};
+  width: 100vw;
+  height: 100vh;
+`;
+
+const HeaderContainer = styled.div`
+  width: 43vw;
+  padding: 188px 0px;
+  background-color: ${({ theme }) => theme.colors.gray07};
+`;
+
+const HeaderBox = styled.div`
+  width: 400px;
+  height: 400px;
+  margin: auto;
+  background-color: ${({ theme }) => theme.colors.white};
+`;
+
+const UserContainer = styled.div`
+  width: 57vw;
+  padding: 0px 115px;
+`;
+
 const UserBox = styled.div`
-  ${FlexboxColumn}
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
+  width: 547px;
+  position: relative;
 `;
 
 const UserArea = styled.div`
-  padding: 65px 24px;
+  width: 100%;
+  height: 75vh;
+  padding: 195px 0px;
 `;
 
 const InputBox = styled.div`
@@ -166,8 +197,7 @@ const InputCheck = styled.p`
 `;
 
 const ButtonBox = styled.div`
-  position: fixed;
-  bottom: 0;
+  height: 25wh;
   width: 100%;
 `;
 
@@ -185,8 +215,8 @@ const CheckButton = styled.button`
       border-radius: 45px;
       display: flex;
       position: absolute;
-      right: 25px;
-      top: 194px;
+      right: 0px;
+      top: 325px;
     `;
   }}
 `;
@@ -225,6 +255,6 @@ const ConfirmMessage = styled.p`
 `;
 
 // default props 작성 위치
-UserNickname.defaultProps = {};
+UserNicknameD.defaultProps = {};
 
-export default UserNickname;
+export default UserNicknameD;

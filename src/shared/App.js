@@ -11,24 +11,27 @@ import { getMainAxios, getMainWithAxios } from "../redux/modules/Main";
 import { getFolderListAxios } from "../redux/modules/Folder";
 import { getToken } from "./utils";
 
-import MyPage from "../pages/mobile/MyPage";
-
-import MainPage from "../pages/mobile/MainPage";
+// 모바일 페이지
+import Spinner from "./Spinner";
+import NotFound from "./NotFound";
 import Login from "../pages/mobile/Login";
-import UserNickname from "../pages/mobile/UserNickname";
-import UserFavorites from "../pages/mobile/UserFavorites";
-import ArticleList from "../pages/mobile/ArticleList";
-import ArticleDetail from "../pages/mobile/ArticleDetail";
-import MyPageD from "../pages/desktop/MyPageD";
+import ErrorBoundary from "./ErrorBoundary";
+import MyPage from "../pages/mobile/MyPage";
 import Setting from "../pages/mobile/Setting";
 import MyReview from "../pages/mobile/MyReview";
+import MainPage from "../pages/mobile/MainPage";
 import MyReminder from "../pages/mobile/MyReminder";
-import EditProfile from "../pages/mobile/EditProfile";
-import NotFound from "./NotFound";
-import ErrorBoundary from "./ErrorBoundary";
-import Spinner from "./Spinner";
-import MainD from "../pages/desktop/MainD";
 import RemindEmail from "../pages/mobile/RemindEmail";
+import ArticleList from "../pages/mobile/ArticleList";
+import EditProfile from "../pages/mobile/EditProfile";
+import UserNickname from "../pages/mobile/UserNickname";
+import UserFavorites from "../pages/mobile/UserFavorites";
+import ArticleDetail from "../pages/mobile/ArticleDetail";
+
+import MainD from "../pages/desktop/MainD";
+import LoginD from "../pages/desktop/LoginD";
+import MyPageD from "../pages/desktop/MyPageD";
+import UserNicknameD from "../pages/desktop/UserNicknameD";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -56,6 +59,10 @@ function App(props) {
               path="/mypage/:id"
               element={<MyPageD {...myInfo} isLogin={isLogin} />}
             />
+            <Route path="/login" element={<LoginD />} />
+            <Route path="/user/nickname" element={<UserNicknameD />} />
+            <Route path="/user/favorites" element={<UserFavorites />} />
+            <Route path="/api/users/login" element={<OAuthRedirectHandler />} />
           </Routes>
         </Desktop>
         <Mobile>

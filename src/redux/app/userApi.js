@@ -42,16 +42,17 @@ export default class userApi {
       });
   }
 
-  async checkMemberName(memberName) {
+  async checkMemberName(memberNameData) {
     const checkMemberNameConfig = {
-      method: "GET",
+      method: "POST",
       url: `${this.base}/api/users/checkmembername`,
       headers: { "content-type": "application/json" },
-      data: JSON.stringify(memberName),
+      data: JSON.stringify(memberNameData),
     };
     return axios(checkMemberNameConfig)
       .then(res => {
         console.log(res);
+        return res.data;
       })
       .catch(err => {
         console.log(err);

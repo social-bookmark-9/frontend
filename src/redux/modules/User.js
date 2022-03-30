@@ -28,8 +28,9 @@ export const kakaoLoginAxios = createAsyncThunk(
 
 export const checkMemberNameAxios = createAsyncThunk(
   "user/checkMemberName",
-  async (memberName, { dispatch }) => {
-    const user = await UserApi.checkMemberName(memberName);
+  async (memberNameData, { dispatch }) => {
+    console.log(memberNameData);
+    const user = await UserApi.checkMemberName(memberNameData);
     if (user) {
       dispatch(setMessage(user.message));
       console.log(user);
