@@ -1,8 +1,18 @@
-import React from "react";
+import React,{ useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import { Button, Image, Text, Title } from "../../elements";
+import { useDispatch } from "react-redux";
+import { editReminderEmailAxios } from "../../redux/modules/Profile";
+
 
 const RemindEmail = props => {
+  const emailRef = useRef(null);
+  const dispatch = useDispatch();
+  const handleRemindEmail = () => {
+    const remindEmail = {"email" : emailRef.current.value}
+    dispatch(editReminderEmailAxios(remindEmail));
+  }
+
   return (
     <React.Fragment>
       <RemindContainer>
@@ -52,8 +62,8 @@ const RemindEmail = props => {
         </KeyframeBox>
         <EmailInputBox>
           <Title _lineHeight="28px">리마인드 수신 메일</Title>
-          <EmailInput placeholder="bubbled@bubbled.com" />
-          <Button _fontSize="14px" _padding="15px 0px">
+          <EmailInput ref={emailRef} type="text" placeholder="bubbled@bubbled.com" />
+          <Button _fontSize="14px" _padding="15px 0px" _onClick={handleRemindEmail} >
             저장
           </Button>
         </EmailInputBox>

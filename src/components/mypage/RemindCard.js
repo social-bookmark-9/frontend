@@ -11,7 +11,7 @@ const RemindCard = props => {
 
   const onNavigate = () => {
     // isMe ? navigate("/setting/reminder") : navigate("/login");
-    navigate("/setting/reminder")
+    navigate("/setting/reminder");
   };
 
   return (

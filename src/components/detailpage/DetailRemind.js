@@ -3,14 +3,18 @@ import { useDispatch } from "react-redux";
 
 import styled, { css } from "styled-components";
 import { Text } from "../../elements";
-import { postReminderAxios, patchReminderAxios, deleteReminderAxios } from "../../redux/modules/Reminder";
+import {
+  postReminderAxios,
+  patchReminderAxios,
+  deleteReminderAxios,
+} from "../../redux/modules/Reminder";
 import { FlexboxColumn, FlexboxRow } from "../../styles/flexbox";
 
-const DetailRemind = (props) => {
-  const {reminderDate, articleId, titleOg, imgOg} = props;
-  
+const DetailRemind = props => {
+  const { reminderDate, articleId, titleOg, imgOg } = props;
+
   const dispatch = useDispatch();
-  
+
   const remindList = [
     { key: "선택안함", value: "null" },
     { key: "내일", value: 1 },
@@ -27,7 +31,7 @@ const DetailRemind = (props) => {
       titleOg: titleOg,
       buttonDate: parseInt(e.target.value),
       imgOg: imgOg,
-    }
+    };
     console.log(e.target.value);
     if (reminderDate === null && e.target.value !== "0") {
       dispatch(postReminderAxios(remindData));
@@ -47,15 +51,15 @@ const DetailRemind = (props) => {
         <RemindSelection>
           {remindList.map((remind, idx) => (
             <RemindLabel key={idx}>
-              {remind.value===0 && reminderDate === null ? (
+              {remind.value === 0 && reminderDate === null ? (
                 <RemindRadio
-                type="radio"
-                name="remindeCheck"
-                id={remind.value}
-                value={remind.value}
-                defaultChecked={true}
-                onClick={changeRemind}
-              />
+                  type="radio"
+                  name="remindeCheck"
+                  id={remind.value}
+                  value={remind.value}
+                  defaultChecked={true}
+                  onClick={changeRemind}
+                />
               ) : (
                 <RemindRadio
                   type="radio"

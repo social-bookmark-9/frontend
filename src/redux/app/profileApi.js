@@ -135,4 +135,25 @@ export default class ProfileApi {
         console.log(err);
       });
   }
+
+  async editReminderEmail(remindEmail) {
+    console.log(remindEmail)
+    const editReminderEmailConfig = {
+      method: "PATCH",
+      url: `${this.base}/api/mypage/reminder`,
+      headers: {
+        "Content-Type": "application/json",
+        "X-AUTH-TOKEN": getToken(),
+      },
+      data: remindEmail,
+    };
+    return axios(editReminderEmailConfig)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    }
 }

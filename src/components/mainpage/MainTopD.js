@@ -1,14 +1,19 @@
+import { useNavigate } from "react-router";
+
 import { Button, Image, Text, Title } from "../../elements";
 
+
 const MainTopD = () => {
+  const navigate = useNavigate();
+
   return (
-    <div style={{ backgroundColor: "#f2f3f4" }}>
+    <div style={{ backgroundColor: "#fafbfb" }}>
       <div
         style={{
           margin: "0 auto 0 auto",
           display: "flex",
           width: "1220px",
-          padding: "315px 0 336px 0",
+          padding: "315px 0 300px 0",
         }}
       >
         <div
@@ -33,7 +38,7 @@ const MainTopD = () => {
               read.
             </div>
           </Title>
-          <Text _color="#505866" _fontSize="26px" _padding="0 0 24px 0">
+          <Text _color="#505866" _fontSize="26px" _padding="0 0 52px 0">
             내가 읽은 것들로 나를 표현하는 공간, 버블드
           </Text>
           <Button
@@ -44,6 +49,9 @@ const MainTopD = () => {
             _color="#383838"
             isBorder="true"
             borderRadius="5px"
+            _onClick={() => {
+              navigate("/login");
+            }}
           >
             내 버블드 만들기
           </Button>
