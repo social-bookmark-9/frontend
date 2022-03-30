@@ -34,7 +34,7 @@ const MainD = props => {
         <CurationsD folderList={folderList} />
 
         {/* 추천 유저 */}
-        <RecommendUserD />
+        <RecommendUserD memberInfo={memberInfo}/>
 
         {/* 검색창, 기타 아랫부분 */}
         <MainPageFooterD />

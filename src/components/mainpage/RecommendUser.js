@@ -7,8 +7,6 @@ import { Circle } from "../../elements/ImageObj";
 
 import Slider from "react-slick";
 
-import { Tablet, Mobile } from "../../styles/mediaquery";
-
 const RecommendUser = props => {
   const { memberInfo } = props;
 
@@ -124,12 +122,6 @@ const Card = styled.div`
     height: 100%;
     pointer-events: none;
   }
-`;
-
-const TabletCard = styled(Card)`
-  display: inline-block;
-  width: 159px;
-  margin: 0 20px 0 0;
 `;
 
 const ProfileBox = styled.div`
