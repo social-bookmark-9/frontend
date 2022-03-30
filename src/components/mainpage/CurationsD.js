@@ -68,8 +68,7 @@ const CurationContainer = styled.div`
 
 const CurationExplain = styled.div`
   flex-direction: column;
-  width: 255px;
-  margin-right: 10%;
+  width: 35%;
   justify-content: start;
 `;
 
@@ -77,11 +76,12 @@ const CurationBox = styled.div`
   display: inline-block;
   flex-direction: column;
   justify-content: end;
-  width: 738px;
+  width: 65%;
 `;
 
 const FolderBox = styled.div`
   margin-bottom: 16px;
+  width: 100%
 `;
 
 export default CurationsD;

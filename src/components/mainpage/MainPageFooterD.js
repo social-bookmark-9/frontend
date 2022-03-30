@@ -112,14 +112,15 @@ const MainPageFooterD = (props) => {
               </Text>
               <div style={{ margin: "54px 0" }}>
                 <Button
-                  _width="166px"
+                  _width="190px"
                   _padding="18px 24px"
                   bgColor="#FFFFFF"
                   _color="#383838"
                   _fontSize="21px"
                   bold="true"
+                  _onClick={() => navigate("/login")}
                 >
-                  리마인드 받기
+                  내 버블드 만들기
                 </Button>
               </div>
             </LeftFloatDiv>

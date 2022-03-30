@@ -153,14 +153,14 @@ const Container = styled.div`
 
 const LeftDiv = styled.div`
   flex-direction: column;
-  width: 255px;
-  margin-right: 10%;
+  width: 35%;
   justify-content: start;
 `;
 
 const RightDiv = styled.div`
   flex-direction: column;
   justify-content: end;
+  width: 65%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
@@ -207,7 +207,6 @@ const FavoritesBox = styled.div`
 `;
 
 const Favorites = styled.div`
-  margin: auto;
   width: 317px;
   justify-content: center;
   text-align: left;

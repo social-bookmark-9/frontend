@@ -74,8 +74,6 @@ const MainTopD = () => {
 };
 
 const Container = styled.div`
-  margin: 0 auto 0 auto;
-  width: 1220px;
   background-color: ${({ theme }) => theme.colors.gray00};
 `;
 
@@ -83,6 +81,8 @@ const TopBox = styled.div`
   ${FlexboxRow};
   align-items: center;
   padding: 240px 0 261px 0;
+  margin: 0 auto 0 auto;
+  width: 1220px;
 `;
 
 const TitleContainer = styled.div`
