@@ -10,7 +10,7 @@ import MainTopD from "../../components/mainpage/MainTopD";
 import MainPageFooterD from "../../components/mainpage/MainPageFooterD";
 import RecommendUserD from "../../components/mainpage/RecommendUserD";
 
-const MainD = props => {
+const MainPageD = props => {
   return (
     <React.Fragment>
       <MainContainer>
@@ -36,8 +36,8 @@ const MainD = props => {
   );
 };
 
-MainD.defaultProps = {};
+MainPageD.defaultProps = {};
 
 const MainContainer = styled.div``;
 
-export default MainD;
+export default MainPageD;

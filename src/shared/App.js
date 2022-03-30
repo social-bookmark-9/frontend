@@ -28,7 +28,7 @@ import UserNickname from "../pages/mobile/UserNickname";
 import UserFavorites from "../pages/mobile/UserFavorites";
 import ArticleDetail from "../pages/mobile/ArticleDetail";
 
-import MainD from "../pages/desktop/MainD";
+import MainPageD from "../pages/desktop/MainPageD";
 import LoginD from "../pages/desktop/LoginD";
 import MyPageD from "../pages/desktop/MyPageD";
 import UserNicknameD from "../pages/desktop/UserNicknameD";
@@ -54,7 +54,10 @@ function App(props) {
       <ErrorBoundary fallback={<Spinner />}>
         <Desktop>
           <Routes>
-            <Route path="/" element={<MainD />} />
+            <Route
+              path="/"
+              element={<MainPageD {...myInfo} isLogin={isLogin} />}
+            />
             <Route
               path="/mypage/:id"
               element={<MyPageD {...myInfo} isLogin={isLogin} />}
