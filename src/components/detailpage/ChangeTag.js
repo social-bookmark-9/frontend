@@ -28,7 +28,6 @@ const ChangeTag = props => {
       text: "선택하신 태그로 변경할까요?",
       showCancelButton: true,
       confirmButtonText: "확인",
-      confirmButtonColor: "#353C49",
       cancelButtonText: "취소",
     }).then(result => {
       if (result.isConfirmed) {

@@ -50,7 +50,6 @@ const EditFavorites = props => {
         text: "관심분야를 최소 한개는 선택해주세요",
         icon: "warning",
         confirmButtonText: "확인",
-        confirmButtonColor: "#353C49",
       });
     } else {
       props.setIsEdit(false);

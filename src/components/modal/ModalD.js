@@ -12,8 +12,9 @@ import AddLinkTagD from "./AddLinkTagD";
 import AddFolder from "./AddFolder";
 import CheckRemind from "./CheckRemind";
 
+const ModalD = props => {
+  const { newUrl } = props;
 
-const ModalD = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,8 +24,6 @@ const ModalD = (props) => {
   const toggleAddFolderList = () => {
     setAddFolderList(!addFolderList);
   };
-  
-  const { newUrl } = props
 
   // 메인페이지에서 사용되는지 구분
   const [mainPage, setMainPage] = useState(false);
@@ -51,7 +50,7 @@ const ModalD = (props) => {
   const [options, setOptions] = useState(myFolderList);
   const [isOpen, setIsOpen] = useState(false);
   const [addFolderList, setAddFolderList] = useState(true);
-  const [folder, setFolder] = useState(myFolderList && myFolderList[0]);
+  const [folder, setFolder] = useState("미분류 컬렉션");
   // 전달할 정보 세팅
   const [url, setUrl] = useState("");
   const [checkedRemind, setCheckedRemind] = useState(0);
@@ -109,10 +108,10 @@ const ModalD = (props) => {
         </MainPageLinkButtonBox>
       ) : (
         <LinkButtonBox>
-        <Button borderRadius="16px" _fontSize="28px" _onClick={openModal}>
-          +
-        </Button>
-      </LinkButtonBox>
+          <Button borderRadius="16px" _fontSize="28px" _onClick={openModal}>
+            +
+          </Button>
+        </LinkButtonBox>
       )}
       {modalOpen ? (
         <Section>
@@ -135,9 +134,9 @@ const ModalD = (props) => {
             <Main>
               {showModal ? (
                 <AddLinkTagD
-                openModal={openModal}
-                setShowModal={setShowModal}
-                myFolderList={myFolderList}
+                  openModal={openModal}
+                  setShowModal={setShowModal}
+                  myFolderList={myFolderList}
                 />
               ) : (
                 <>
@@ -166,10 +165,12 @@ const ModalD = (props) => {
                         )}
                       </Dropdown>
                       <LinkField>
-                        <Text _fontSize="14px" _padding="0 0 8px 0">링크</Text>
+                        <Text _fontSize="14px" _padding="0 0 8px 0">
+                          링크
+                        </Text>
                         <Input
                           type="text"
-                          defaultValue={(newUrl !== null) ? newUrl : ""}
+                          defaultValue={newUrl !== null ? newUrl : ""}
                           placeholder="링크를 입력해주세요"
                           onBlur={getUrl}
                         ></Input>
@@ -202,10 +203,10 @@ const ModalD = (props) => {
                     </LinkBox>
                   ) : (
                     <AddFolder
-                    options={options}
-                    setAddFolderList={setAddFolderList}
-                    setOptions={setOptions}
-                    setFolder={setFolder}
+                      options={options}
+                      setAddFolderList={setAddFolderList}
+                      setOptions={setOptions}
+                      setFolder={setFolder}
                     />
                   )}
                 </>
@@ -221,20 +222,19 @@ const ModalD = (props) => {
 const Section = styled.div`
   position: fixed;
   top: 0;
-  box-sizing: border-box;
-  right: -500px;
-  width: 99999px;
-  height: 99999px;
-  z-index: 99;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  z-index: 1;
   background-color: rgba(0, 0, 0, 0.3);
 `;
 
 const MainModal = styled.div`
-  position: fixed;
   width: 390px;
   height: 398px;
-  top: 20vh;
-  left: 35vw;
+  margin: auto;
   padding: 20px 28px 24px 28px;
   background-color: white;
   border-radius: 12px;

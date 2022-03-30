@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router";
 import { registerAxios } from "../../redux/modules/User";
 
 import styled from "styled-components";
-import { FlexboxColumn } from "../../styles/flexbox";
+import { FlexboxColumn, FlexboxRow } from "../../styles/flexbox";
 import { Button, Title, Text } from "../../elements";
 
 import FavoriteD from "../../components/common/FavoriteD";
@@ -24,13 +24,13 @@ const UserFavoritesD = props => {
   const newList = [...checkedItems];
 
   const userInfo = {
-    kakaoId: location.state.kakaoId,
-    email: location.state.email,
-    memberName: location.state.nickname,
-    profileImage: location.state.profileImage,
-    hashtag1: newList[0],
-    hashtag2: newList[1] ? newList[1] : null,
-    hashtag3: newList[2] ? newList[2] : null,
+    // kakaoId: location.state.kakaoId,
+    // email: location.state.email,
+    // memberName: location.state.nickname,
+    // profileImage: location.state.profileImage,
+    // hashtag1: newList[0],
+    // hashtag2: newList[1] ? newList[1] : null,
+    // hashtag3: newList[2] ? newList[2] : null,
   };
 
   const handleChecked = e => {
@@ -57,7 +57,6 @@ const UserFavoritesD = props => {
         text: "관심분야를 최소 한개는 선택해주세요",
         icon: "warning",
         confirmButtonText: "확인",
-        confirmButtonColor: "#353C49",
       });
     } else {
       dispatch(registerAxios({ userInfo, navigate }));
@@ -67,6 +66,9 @@ const UserFavoritesD = props => {
   return (
     <React.Fragment>
       <BaseDiv>
+        <HeaderContainer>
+          <HeaderBox>GIF IMAGE</HeaderBox>
+        </HeaderContainer>
         <UserBox>
           <Topdiv>
             <TitleBox>
@@ -93,7 +95,7 @@ const UserFavoritesD = props => {
               </Favorites>
             </FavoritesBox>
           </Topdiv>
-        
+
           <Button
             _onClick={handleRegister}
             _fontSize={({ theme }) => theme.fontSizes.font20}
@@ -103,7 +105,7 @@ const UserFavoritesD = props => {
           >
             선택완료
           </Button>
-          </UserBox>
+        </UserBox>
       </BaseDiv>
     </React.Fragment>
   );
@@ -112,20 +114,30 @@ const UserFavoritesD = props => {
 // 스타일 컴포넌트 작성 위치
 
 const BaseDiv = styled.div`
-  width: 100%;
+  ${FlexboxRow};
+  width: 100vw;
   height: 100vh;
-  background-color: #c4c4c4;
-  display: inline-block;
-  text-align: right;
+`;
+
+const HeaderContainer = styled.div`
+  width: 43vw;
+  padding: 188px 0px;
+  background-color: ${({ theme }) => theme.colors.gray07};
+`;
+
+const HeaderBox = styled.div`
+  width: 400px;
+  height: 400px;
+  margin: auto;
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const UserBox = styled.div`
   height: 100vh;
-  width: 65%;
+  width: 57vw;
   background-color: #ffffff;
   display: inline-block;
   padding-left: 115px;
-
 `;
 
 const Topdiv = styled.div`
@@ -150,6 +162,5 @@ const Favorites = styled.div`
   justify-content: center;
   text-align: left;
 `;
-
 
 export default UserFavoritesD;

@@ -11,12 +11,11 @@ import RecommendListD from "../../components/mainpage/RecommendListD";
 import MainTopIsLoginD from "../../components/mainpage/MainTopIsLoginD";
 import MainPageFooterD from "../../components/mainpage/MainPageFooterD";
 
-const MainD = props => {
-  // const { isLogin } = props;
+const MainPageD = props => {
+  const { isLogin } = props;
   const memberInfo = useSelector(state => state.main.userInfo);
   const folderList = useSelector(state => state.main.folderList);
   const articleList = useSelector(state => state.main.articleList);
-  const isLogin = false;
 
   return (
     <React.Fragment>
@@ -42,8 +41,8 @@ const MainD = props => {
   );
 };
 
-MainD.defaultProps = {};
+MainPageD.defaultProps = {};
 
 const MainContainer = styled.div``;
 
-export default MainD;
+export default MainPageD;
