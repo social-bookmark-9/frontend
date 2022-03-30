@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
-import { Button, Text, Title } from "../../elements";
+import { Button, Text } from "../../elements";
 
 import lottie from "lottie-web";
 

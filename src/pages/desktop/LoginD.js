@@ -12,7 +12,9 @@ const LoginD = () => {
     <React.Fragment>
       <Container>
         <HeaderContainer>
-          <HeaderBox>GIF IMAGE</HeaderBox>
+          <HeaderBox>
+            <Image _src="/images/loginGif.gif" _width="400px" _height="400px" />
+          </HeaderBox>
         </HeaderContainer>
         <LoginContainer>
           <LoginBox>

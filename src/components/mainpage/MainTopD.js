@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
 import styled from "styled-components";
-import { Button, Image, Text, Title } from "../../elements";
+import { Button, Image, Text } from "../../elements";
 
 import lottie from "lottie-web";
 import { FlexboxRow } from "../../styles/flexbox";
@@ -81,7 +81,7 @@ const Container = styled.div`
 const TopBox = styled.div`
   ${FlexboxRow};
   align-items: center;
-  padding: 240px 261px;
+  padding: 240px 0px;
 `;
 
 const TitleContainer = styled.div`

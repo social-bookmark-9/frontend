@@ -13,6 +13,7 @@ import MainPageFooterD from "../../components/mainpage/MainPageFooterD";
 
 const MainPageD = props => {
   const { isLogin } = props;
+  console.log(props);
   const memberInfo = useSelector(state => state.main.userInfo);
   const folderList = useSelector(state => state.main.folderList);
   const articleList = useSelector(state => state.main.articleList);
