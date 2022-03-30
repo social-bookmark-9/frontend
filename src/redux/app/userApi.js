@@ -1,7 +1,7 @@
 import axios from "axios";
-import Swal from "sweetalert2";
-import { getToken, getTokens, getReToken } from "../../shared/utils";
+
 import { refreshTokensAxios } from "../modules/User";
+import { getToken, getTokens } from "../../shared/utils";
 export default class userApi {
   constructor() {
     this.base = process.env.REACT_APP_SERVER;
@@ -40,6 +40,23 @@ export default class userApi {
         if (err.message === "expired") {
           dispatch(refreshTokensAxios(getTokens));
         }
+      });
+  }
+
+  async checkMemberName(memberNameData) {
+    const checkMemberNameConfig = {
+      method: "POST",
+      url: `${this.base}/api/users/checkmembername`,
+      headers: { "content-type": "application/json" },
+      data: JSON.stringify(memberNameData),
+    };
+    return axios(checkMemberNameConfig)
+      .then(res => {
+        console.log(res);
+        return res.data;
+      })
+      .catch(err => {
+        console.log(err);
       });
   }
 

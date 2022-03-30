@@ -79,19 +79,19 @@ export default class ProfileApi {
       });
   }
 
-  async editProfileSnsUrl(urlList) {
+  async editProfileSnsUrl(urlData) {
     const editProfileSnsUrlConfig = {
       method: "PATCH",
       url: `${this.base}/api/mypage/snsurl`,
       headers: {
         "Content-Type": "application/json",
-        "X-AUTH-TOKEN": this.getToken,
+        "X-AUTH-TOKEN": getToken(),
       },
-      data: JSON.stringify(urlList),
+      data: JSON.stringify(urlData),
     };
     return axios(editProfileSnsUrlConfig)
       .then(res => {
-        console.log(res);
+        return res.data;
       })
       .catch(err => {
         console.log(err);

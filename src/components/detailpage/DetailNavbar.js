@@ -58,7 +58,6 @@ const DetailNavbar = props => {
       text: "저장하신 링크를 삭제하시겠습니까?",
       showCancelButton: true,
       confirmButtonText: "확인",
-      confirmButtonColor: "#353C49",
       cancelButtonText: "취소",
     }).then(result => {
       if (result.isConfirmed) {
@@ -81,7 +80,7 @@ const DetailNavbar = props => {
   const handleUpdate = () => {
     if (newTitleOg === undefined && folder === undefined) {
       Swal.fire({
-        text: "변경 할 내용이 없습니다.",
+        text: "변경 할 내용이 없습니다",
         confirmButtonText: "확인",
       });
     } else {
@@ -89,7 +88,6 @@ const DetailNavbar = props => {
         text: "변경하신 내용을 저장할까요?",
         showCancelButton: true,
         confirmButtonText: "확인",
-        confirmButtonColor: "#353C49",
         cancelButtonText: "취소",
       }).then(result => {
         if (result.isConfirmed) {

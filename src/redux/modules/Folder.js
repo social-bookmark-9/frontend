@@ -81,6 +81,24 @@ export const deleteFolderAxios = createAsyncThunk(
   },
 );
 
+export const addLikeAxios = createAsyncThunk(
+  "folder/addLike",
+  async folderId => {
+    const resp = await FolderApi.addLike(folderId);
+    console.log(resp);
+    return resp;
+  },
+);
+
+export const cancelLikeAios = createAsyncThunk(
+  "folder/addLike",
+  async folderId => {
+    const resp = await FolderApi.cancelLike(folderId);
+    console.log(resp);
+    return resp;
+  },
+);
+
 export const folderSlice = createSlice({
   name: "folder",
   initialState,

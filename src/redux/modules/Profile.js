@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 import profileApi from "../app/profileApi";
 import { setFolder } from "./Folder";
 
@@ -22,7 +23,7 @@ const initialState = {
 };
 
 export const getProfileAxios = createAsyncThunk(
-  "profile/getProfileAxios",
+  "profile/getProfile",
   async (memberId, { dispatch }) => {
     const resp = await ProfileApi.getProfile(memberId);
     dispatch(setProfile(resp.data));
@@ -33,7 +34,7 @@ export const getProfileAxios = createAsyncThunk(
 );
 
 export const getProfileWithAxios = createAsyncThunk(
-  "profile/getProfileAxios",
+  "profile/getProfileWith",
   async (memberId, { dispatch }) => {
     const resp = await ProfileApi.getProfileWith(memberId);
     dispatch(setProfile(resp.data));
@@ -44,7 +45,7 @@ export const getProfileWithAxios = createAsyncThunk(
 );
 
 export const editProfileUserDescAxios = createAsyncThunk(
-  "profile/editProfileUserDescAxios",
+  "profile/editProfileUserDesc",
   async ({ userDesc }) => {
     const resp = await ProfileApi.editProfileUserDesc({ userDesc });
     console.log(resp);
@@ -53,7 +54,7 @@ export const editProfileUserDescAxios = createAsyncThunk(
 );
 
 export const editProfileUserNameAxios = createAsyncThunk(
-  "profile/editProfileUserNameAxios",
+  "profile/editProfileUserName",
   async ({ nickname }) => {
     const resp = await ProfileApi.editProfileUserName({ nickname });
     console.log(resp);
@@ -62,7 +63,7 @@ export const editProfileUserNameAxios = createAsyncThunk(
 );
 
 export const editProfileImageAxios = createAsyncThunk(
-  "profile/editProfileImageAxios",
+  "profile/editProfileImage",
   async (formData, { getState }) => {
     const resp = await ProfileApi.editProfileImage(formData);
     console.log(resp);
@@ -71,7 +72,7 @@ export const editProfileImageAxios = createAsyncThunk(
 );
 
 export const editProfileHashtagAxios = createAsyncThunk(
-  "profile/editProfileHashtagAxios",
+  "profile/editProfileHashtag",
   async hashTag => {
     const resp = await ProfileApi.editProfileHashtag(hashTag);
     console.log(resp);
@@ -79,9 +80,20 @@ export const editProfileHashtagAxios = createAsyncThunk(
   },
 );
 
+export const editProfileSnsUrlAxios = createAsyncThunk(
+  "profile/editProfileSnsUrl",
+  async ({ urlData, memberId, navigate }) => {
+    const resp = await ProfileApi.editProfileSnsUrl(urlData);
+    console.log(resp);
+    Swal.fire({ text: "저장되었습니다", confirmButtonText: "확인" });
+    navigate(`/mypage/${memberId}`);
+    return resp;
+  },
+);
+
 export const editReminderEmailAxios = createAsyncThunk(
   "profile/editReminderEmailAxios",
-  async (remindEmail) => {
+  async remindEmail => {
     const res = await ProfileApi.editReminderEmail(remindEmail);
     return res;
   },

@@ -16,7 +16,6 @@ export const postArticleAxios = createAsyncThunk(
     Swal.fire({
       text: "링크가 저장되었습니다",
       confirmButtonText: "확인",
-      confirmButtonColor: "#353C49",
     });
     console.log(resp);
     return resp;
@@ -106,6 +105,10 @@ export const saveArticleAxios = createAsyncThunk(
   "article/saveArticle",
   async ({ articleId, navigate }, { dispatch }) => {
     const resp = await ArticleApi.saveArticle({ articleId, navigate });
+    Swal.fire({
+      text: "아티클이 저장되었습니다",
+      confirmButtonText: "확인",
+    });
     console.log(resp);
     return resp;
   },
@@ -118,18 +121,19 @@ export const saveAllArticleAxios = createAsyncThunk(
       folderId,
       articleFolderName,
     });
+    Swal.fire({
+      text: "모든 아티클이 저장되었습니다",
+      confirmButtonText: "확인",
+    });
     console.log(resp);
     return resp;
   },
 );
 
-export const getArticleReviewAxios = createAsyncThunk(
-  "reviews",
-  async () => {
-    const res = await ArticleApi.getArticleReview();
-    return (res.data)
-  },
-)
+export const getArticleReviewAxios = createAsyncThunk("reviews", async () => {
+  const res = await ArticleApi.getArticleReview();
+  return res.data;
+});
 
 export const updateReadCountAxios = createAsyncThunk(
   "article/updateHashtag",
@@ -168,7 +172,7 @@ export const articleSlice = createSlice({
     [getArticleReviewAxios.fulfilled]: (state, action) => {
       console.log(action.payload);
       state.reviewList = action.payload;
-    }
+    },
   },
 });
 

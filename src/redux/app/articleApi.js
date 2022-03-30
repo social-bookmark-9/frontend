@@ -96,7 +96,6 @@ export default class articleApi {
         Swal.fire({
           text: "링크를 삭제했습니다",
           confirmButtonText: "확인",
-          confirmButtonColor: "#353C49",
         }).then(res => {
           navigate("/", { replace: true });
         });
@@ -266,11 +265,10 @@ export default class articleApi {
     };
     return axios(getArticleReviewConfig)
       .then(res => {
-        return(res.data);
+        return res.data;
       })
       .catch(err => {
         console.log(err);
       });
   }
-
 }

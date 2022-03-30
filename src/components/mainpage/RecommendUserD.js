@@ -1,8 +1,12 @@
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { Button, Text, Title } from "../../elements";
 import { Circle } from "../../elements/ImageObj";
 
-const RecommendUserD = () => {
+const RecommendUserD = (props) => {
+  const { memberInfo } = props;
+
+  const navigate = useNavigate();
   const images = [
     { id: 0, image: "/images/icon100.png" },
     { id: 1, image: "/images/icon101.png" },
@@ -49,8 +53,8 @@ const RecommendUserD = () => {
           }}
         >
           <div style={{ display: "flex" }}>
-            {images.slice(0, 3).map(item => (
-              <div key={item.id}>
+            {memberInfo.slice(0, 3).map(member => (
+              <div key={member.memberId}>
                 <DesktopCard>
                   <ProfileBox>
                     {/*  그거... 동그라미 */}
@@ -59,13 +63,13 @@ const RecommendUserD = () => {
                     </CircleBoxDesktop>
                     <ProfileImageDesktop>
                       <img
-                        src={item.image}
+                        src={member.profileImage}
                         alt="profile"
                         style={{ zIndex: "3" }}
                       />
                     </ProfileImageDesktop>
                     <Title _padding="23px 15px 2px 15px" textAlign="center">
-                      김철수
+                      {member.memberName}
                     </Title>
                     <Text
                       _color="#3E3E3E"
@@ -73,10 +77,17 @@ const RecommendUserD = () => {
                       _padding="0 0 8px 0"
                       textAlign="center"
                     >
-                      글쓰는 UX디자이너
+                      {member.memberComment}
                     </Text>
                     <div style={{ display: "inline-block" }}>
-                      <Button _width="76px" _padding="6px" borderRadius="45px">
+                      <Button
+                        _width="76px"
+                        _padding="6px"
+                        borderRadius="45px"
+                        _onClick={() => {
+                          navigate(`/mypage/${member.memberId}`);
+                        }}  
+                      >
                         구경하기
                       </Button>
                     </div>
@@ -91,10 +102,10 @@ const RecommendUserD = () => {
       <svg width="0" height="0">
         <defs>
           <clipPath id="desktopClip">
-            <ellipse cx="44.8" cy="56" rx="44.8" ry="44" />
-            <ellipse cx="111" cy="56" rx="44.8" ry="44" />
-            <ellipse cx="25" cy="44" rx="44.8" ry="44" />
-            <ellipse cx="62" cy="24.5" rx="44.8" ry="44" />
+            <ellipse cx="36.5" cy="85.8" rx="36.5" ry="36.1" />
+            <ellipse cx="89.8" cy="85.8" rx="36.5" ry="36.1" />
+            <ellipse cx="36.5" cy="36.1" rx="36.5" ry="36.1" />
+            <ellipse cx="89.8" cy="36.1" rx="36.5" ry="36.1" />
           </clipPath>
         </defs>
       </svg>
@@ -129,13 +140,14 @@ const ProfileImageDesktop = styled.div`
   & img {
     position: absolute;
     width: 100%;
+    left:0;
   }
 `;
 
 const CircleBoxDesktop = styled.div`
   position: absolute;
-  top: 70px;
-  right: 30px;
+  top: 100px;
+  right: 27px;
   z-index: 3;
 `;
 
