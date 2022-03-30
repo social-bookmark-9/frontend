@@ -45,7 +45,7 @@ const Modal = () => {
   const [options, setOptions] = useState(myFolderList);
   const [isOpen, setIsOpen] = useState(false);
   const [addFolderList, setAddFolderList] = useState(true);
-  const [folder, setFolder] = useState(myFolderList && myFolderList[0]);
+  const [folder, setFolder] = useState("미분류 컬렉션");
   // 전달할 정보 세팅
   const [url, setUrl] = useState("");
   const [checkedRemind, setCheckedRemind] = useState(0);
@@ -285,7 +285,7 @@ const SelectIcon = styled.div`
   transform: rotate(90deg);
 `;
 const DropdownList = styled.ul`
-  position: relative;
+  position: absolute;
   width: 100%;
   height: 147px;
   overflow: scroll;
