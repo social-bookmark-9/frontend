@@ -5,8 +5,8 @@ import { useNavigate, useLocation } from "react-router";
 import { registerAxios } from "../../redux/modules/User";
 
 import styled from "styled-components";
-import { FlexboxColumn, FlexboxRow } from "../../styles/flexbox";
 import { Button, Title, Text } from "../../elements";
+import { FlexboxColumn, FlexboxRow } from "../../styles/flexbox";
 
 import FavoriteD from "../../components/common/FavoriteD";
 
@@ -24,13 +24,13 @@ const UserFavoritesD = props => {
   const newList = [...checkedItems];
 
   const userInfo = {
-    // kakaoId: location.state.kakaoId,
-    // email: location.state.email,
-    // memberName: location.state.nickname,
-    // profileImage: location.state.profileImage,
-    // hashtag1: newList[0],
-    // hashtag2: newList[1] ? newList[1] : null,
-    // hashtag3: newList[2] ? newList[2] : null,
+    kakaoId: location.state.kakaoId,
+    email: location.state.email,
+    memberName: location.state.nickname,
+    profileImage: location.state.profileImage,
+    hashtag1: newList[0],
+    hashtag2: newList[1] ? newList[1] : null,
+    hashtag3: newList[2] ? newList[2] : null,
   };
 
   const handleChecked = e => {

@@ -1,6 +1,7 @@
 import axios from "axios";
-import { getToken, getTokens } from "../../shared/utils";
+
 import { refreshTokensAxios } from "../modules/User";
+import { getToken, getTokens } from "../../shared/utils";
 export default class userApi {
   constructor() {
     this.base = process.env.REACT_APP_SERVER;

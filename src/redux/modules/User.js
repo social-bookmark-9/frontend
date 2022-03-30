@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 import userApi from "../app/userApi";
 
 const UserApi = new userApi();
@@ -45,6 +46,10 @@ export const registerAxios = createAsyncThunk(
     const user = await UserApi.register({ userInfo, navigate });
     if (user) {
       dispatch(setMyInfo(user.data));
+      Swal.fire({
+        text: "회원가입이 완료되었습니다!",
+        confirmButtonText: "확인",
+      });
       console.log(user);
       return user;
     }
