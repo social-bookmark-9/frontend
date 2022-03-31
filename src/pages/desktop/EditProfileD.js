@@ -14,6 +14,7 @@ import {
 import EditProfileLink from "../../components/editprofile/EditProfileLink";
 import EditNickname from "../../components/editprofile/EditNickname";
 import { Flexbox, FlexboxColumn, FlexboxRow } from "../../styles/flexbox";
+import EditNicknameD from "../../components/editprofile/EditNicknameD";
 
 const EditProfileD = props => {
   const userDescRef = useRef();
@@ -130,7 +131,10 @@ const EditProfileD = props => {
       <EditProfileLink {...myInfo} isDeskTop={isDeskTop} />
     </Container>
   ) : (
-    <EditNickname setIsEdit={setIsEdit} setNewNickname={setNewNickname} />
+    <EditNicknameD 
+      setIsEdit={setIsEdit}
+      setNewNickname={setNewNickname}
+    />
   );
 };
 
