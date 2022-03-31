@@ -26,58 +26,58 @@ const UserProfileD = props => {
 
   return (
     <React.Fragment>
-        <DProfileBox>
-          <ProfileHead>
-            <DProfileImage>
-              <img src={userInfo.profileImage} alt="profile" />
-            </DProfileImage>
-            <DCircleBox>
-              <Circle _width="28px" _height="28px" bgColor="black" />
-            </DCircleBox>
-            <DPropfileInfo>
-              {myOwnPage ? (
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                  onClick={goEditProfile}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "start",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Title>{userInfo.memberName}</Title>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "end",
-                      alignItems: "center",
-                      marginLeft: "5px",
-                    }}
-                  >
-                    <img
-                      src={`/images/edit.png`}
-                      width={"20px"}
-                      height={"20px"}
-                      alt=""
-                    />
-                  </div>
-                </div>
-              ) : (
+    <DProfileBox>
+      <ProfileHead>
+        <DProfileImage>
+          <img src={userInfo.profileImage} alt="profile" />
+        </DProfileImage>
+        <DCircleBox>
+          <Circle _width="28px" _height="28px" bgColor="black" />
+        </DCircleBox>
+        <DPropfileInfo>
+          {myOwnPage ? (
+            <div
+              style={{
+            display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+              onClick={goEditProfile}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "start",
+                  alignItems: "center",
+                }}
+              >
                 <Title>{userInfo.memberName}</Title>
-              )}
-              <Text _fontSize="13px" _padding="8px 0px">
-                {userInfo.memberComment}
-              </Text>
-            </DPropfileInfo>
-          </ProfileHead>
-        </DProfileBox>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "end",
+                  alignItems: "center",
+                  marginLeft: "5px",
+                }}
+              >
+                <img
+                  src={`/images/edit.png`}
+                  width={"20px"}
+                  height={"20px"}
+                  alt=""
+                />
+              </div>
+            </div>
+          ) : (
+            <Title>{userInfo.memberName}</Title>
+          )}
+          <Text _fontSize="13px" _padding="8px 0px">
+            {userInfo.memberComment}
+          </Text>
+        </DPropfileInfo>
+      </ProfileHead>
+    </DProfileBox>
 
       {/* 마법의 svg */}
       <svg width="0" height="0">
@@ -97,6 +97,7 @@ const UserProfileD = props => {
 const DProfileBox = styled.div`
   padding: 20px 0 28px 0;
   position: relative;
+  margin-top: 80px;
 `;
 
 const DProfileImage = styled.div`

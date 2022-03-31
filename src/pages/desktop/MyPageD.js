@@ -86,7 +86,7 @@ const MyPageD = props => {
         </FolderListContainer>
         <MyPageSuggest userInfo={userInfo} {...myInfo} isLogin={isLogin} />
         {modalOpen ? <AddCollection setModalOpen={setModalOpen} /> : null}
-        {/* <Modal isLogin={isLogin} /> */}
+
       </Container>
     </React.Fragment>
   );
