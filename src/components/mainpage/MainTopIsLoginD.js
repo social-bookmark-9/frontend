@@ -52,7 +52,7 @@ const MainTopIsLoginD = () => {
               >
                 <LinkInput
                   name="url입력"
-                  onChange={e => setNewUrl(newUrlRef.current.value)}
+                  onChange={() => setNewUrl(newUrlRef.current.value)}
                   placeholder="이곳에 링크를 붙여넣어 주세요"
                   ref={newUrlRef}
                 />

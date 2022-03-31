@@ -9,7 +9,6 @@ import {
 
 import styled from "styled-components";
 
-import NavbarD from "../../components/common/NavbarD";
 import ArticleFolder from "../../components/folderpage/ArticleFolder";
 import UserProfile from "../../components/mypage/UserProfile";
 import MyPageRemind from "../../components/mypage/MyPageRemind";
@@ -45,7 +44,6 @@ const MyPageD = props => {
 
   return (
     <React.Fragment>
-      <NavbarD />
       <DContainer>
         {/* ----- 프로필+이름 부분 ----- */}
         <UserProfile userInfo={userInfo} {...myInfo} />

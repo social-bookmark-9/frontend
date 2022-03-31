@@ -27,6 +27,7 @@ const ArticleListD = props => {
   const copyUrlRef = useRef();
 
   const folderId = params.id;
+  const likeCount = useSelector(state => state.folder.folderInfo.likeCount);
   const isMe = useSelector(state => state.folder.folderInfo.me);
   const folderInfo = useSelector(state => state.folder.folderInfo);
   const articleListData = useSelector(state => state.folder.articleList);
@@ -41,9 +42,7 @@ const ArticleListD = props => {
   }, [dispatch, folderId, isLogin]);
 
   const [modalOpen, setModalOpen] = useState(false);
-  const [likeCnt, setLikeCnt] = useState(
-    folderInfo && parseInt(folderInfo.likeCount),
-  );
+  const [likeCnt, setLikeCnt] = useState(folderInfo && parseInt(likeCount));
   const [userLiked, setUserLiked] = useState(false);
 
   const cancelLike = () => {
@@ -90,102 +89,124 @@ const ArticleListD = props => {
 
   return (
     <React.Fragment>
-      <FolderNavbar
-        title={folderInfo.folderName}
-        folderId={folderId}
-        isMe={isMe}
-      />
+      <Container>
+        <FolderBox>
+          <FolderNavbar
+            title={folderInfo.folderName}
+            folderId={folderId}
+            isMe={isMe}
+          />
 
-      <LikeBox isMe={isMe}>
-        {isMe ? (
-          <Text _fontSize={({ theme }) => theme.fontSizes.font14}>
-            {folderInfo.likeCount}명이 도움을 받았어요
-          </Text>
-        ) : userLiked ? (
-          <Button
-            _padding="8px 16px"
-            _color={({ theme }) => theme.colors.fontColor05}
-            bgColor={({ theme }) => theme.colors.pointPurple01}
-            borderColor={({ theme }) => theme.colors.pointPurple02}
-            _onClick={cancelLike}
-            isBorder
-          >
-            <Image _src="/images/icon7.png" _width="19px" _height="19px" />
-            유용해요 {likeCnt}
-          </Button>
-        ) : (
-          <Button
-            _padding="8px 16px"
-            _color={({ theme }) => theme.colors.fontColor05}
-            bgColor={({ theme }) => theme.colors.white}
-            isBorder
-            _onClick={addLike}
-          >
-            <Image _src="/images/icon7.png" _width="19px" _height="19px" />
-            유용해요 {likeCnt}
-          </Button>
-        )}
-      </LikeBox>
+          <LikeBox isMe={isMe}>
+            {isMe ? (
+              <Text _fontSize={({ theme }) => theme.fontSizes.font14}>
+                {likeCount}명이 도움을 받았어요
+              </Text>
+            ) : userLiked ? (
+              <Button
+                _padding="8px 16px"
+                _color={({ theme }) => theme.colors.fontColor05}
+                bgColor={({ theme }) => theme.colors.pointPurple01}
+                borderColor={({ theme }) => theme.colors.pointPurple02}
+                _onClick={cancelLike}
+                isBorder
+              >
+                <Image _src="/images/icon7.png" _width="19px" _height="19px" />
+                유용해요 {likeCnt}
+              </Button>
+            ) : (
+              <Button
+                _padding="8px 16px"
+                _color={({ theme }) => theme.colors.fontColor05}
+                bgColor={({ theme }) => theme.colors.white}
+                isBorder
+                _onClick={addLike}
+              >
+                <Image _src="/images/icon7.png" _width="19px" _height="19px" />
+                유용해요 {likeCnt}
+              </Button>
+            )}
+          </LikeBox>
 
-      <AlBox>
-        {articleListData &&
-          articleListData.map((article, idx) => {
-            return <ArticleCard key={idx} article={article} isMe={isMe} />;
-          })}
-      </AlBox>
-      <AlButton>
-        <Text
-          _padding="16px 0px"
-          _fontSize={({ theme }) => theme.fontSizes.font14}
-          _lineHeight="22px"
-        >
-          {isMe
-            ? "당신의 안목을 공유해 주세요"
-            : "아티클을 한번에 저장하고 싶다면?"}
-        </Text>
-        {isMe ? (
-          <>
-            <InputUrl
-              name="collectionUrl"
-              rows={10}
-              cols="50"
-              id="0"
-              ref={copyUrlRef}
-              defaultValue={collectionUrl}
-            />
-            <Button
-              _onClick={copyCollectionUrl}
-              _padding="12px"
-              bgColor={({ theme }) => theme.colors.white}
-              _color={({ theme }) => theme.colors.fontColor05}
-              isBorder
-              bold
+          <AlBox>
+            {articleListData &&
+              articleListData.map((article, idx) => {
+                return <ArticleCard key={idx} article={article} isMe={isMe} />;
+              })}
+          </AlBox>
+          <AlButton>
+            <Text
+              _padding="16px 0px"
+              _fontSize={({ theme }) => theme.fontSizes.font14}
+              _lineHeight="22px"
             >
-              컬렉션 링크 복사
-            </Button>
-          </>
-        ) : (
-          <Button
-            _onClick={openModal}
-            _padding="12px"
-            bgColor={({ theme }) => theme.colors.white}
-            _color={({ theme }) => theme.colors.fontColor05}
-            isBorder
-            bold
-          >
-            모두 저장하기
-          </Button>
-        )}
-      </AlButton>
-      {modalOpen ? (
-        <SelectFolder openModal={openModal} isMe={isMe} folderId={folderId} />
-      ) : null}
+              {isMe
+                ? "당신의 안목을 공유해 주세요"
+                : "아티클을 한번에 저장하고 싶다면?"}
+            </Text>
+            {isMe ? (
+              <>
+                <InputUrl
+                  name="collectionUrl"
+                  rows={10}
+                  cols="50"
+                  id="0"
+                  ref={copyUrlRef}
+                  defaultValue={collectionUrl}
+                />
+                <Button
+                  _width="359px"
+                  _onClick={copyCollectionUrl}
+                  _padding="12px"
+                  bgColor={({ theme }) => theme.colors.white}
+                  _color={({ theme }) => theme.colors.fontColor05}
+                  isBorder
+                  bold
+                >
+                  컬렉션 링크 복사
+                </Button>
+              </>
+            ) : (
+              <Button
+                _width="359px"
+                _onClick={openModal}
+                _padding="12px"
+                bgColor={({ theme }) => theme.colors.white}
+                _color={({ theme }) => theme.colors.fontColor05}
+                isBorder
+                bold
+              >
+                모두 저장하기
+              </Button>
+            )}
+          </AlButton>
+          {modalOpen ? (
+            <SelectFolder
+              openModal={openModal}
+              isMe={isMe}
+              folderId={folderId}
+            />
+          ) : null}
+        </FolderBox>
+      </Container>
     </React.Fragment>
   );
 };
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+`;
+const FolderBox = styled.div`
+  width: 1115px;
+  margin: auto;
+`;
 
 const AlBox = styled.div`
-  padding: 0px 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 20px;
+  align-items: start;
+  justify-content: center;
   color: ${({ theme }) => theme.colors.white};
 `;
 

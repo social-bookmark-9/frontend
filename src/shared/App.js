@@ -34,6 +34,7 @@ import MainPageD from "../pages/desktop/MainPageD";
 import ArticleListD from "../pages/desktop/ArticleListD";
 import UserNicknameD from "../pages/desktop/UserNicknameD";
 import UserFavoritesD from "../pages/desktop/UserFavoritesD";
+import NavbarD from "../components/common/NavbarD";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ function App(props) {
     <React.Fragment>
       <ErrorBoundary fallback={<Spinner />}>
         <Desktop>
+          <NavbarD isLogin={isLogin} memberId={myInfo.memberId} />
           <Routes>
             <Route
               path="/"

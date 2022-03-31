@@ -3,7 +3,6 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 
-import NavbarD from "../../components/common/NavbarD";
 import MainTopD from "../../components/mainpage/MainTopD";
 import CurationsD from "../../components/mainpage/CurationsD";
 import RecommendUserD from "../../components/mainpage/RecommendUserD";
@@ -21,8 +20,6 @@ const MainPageD = props => {
   return (
     <React.Fragment>
       <MainContainer>
-        <NavbarD {...props} />
-
         {/* 맨 위 영역 */}
         {isLogin ? <MainTopIsLoginD /> : <MainTopD />}
 

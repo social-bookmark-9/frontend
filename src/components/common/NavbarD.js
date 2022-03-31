@@ -7,7 +7,8 @@ import { Image, Text, Title } from "../../elements";
 
 const NavbarD = props => {
   const { isLogin, memberId } = props;
-  console.log(props);
+  console.log(memberId);
+
   const navigate = useNavigate();
 
   const handleMemoPage = () => {
@@ -50,6 +51,26 @@ const NavbarD = props => {
     }
   };
 
+  const handleMyPage = () => {
+    if (memberId === undefined) {
+      Swal.fire({
+        title: "잠깐!",
+        text: "로그인이 필요한 서비스에요",
+        icon: "warning",
+        showCancelButton: true,
+        cancelButtonColor: `${({ theme }) => theme.colors.error}`,
+        confirmButtonText: "로그인 하기",
+        cancelButtonText: "취소",
+      }).then(result => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    } else {
+      navigate(`/mypage/${memberId}`);
+    }
+  };
+
   return (
     <React.Fragment>
       <NavbarContainer>
@@ -82,11 +103,7 @@ const NavbarD = props => {
                   _height="24px"
                 />
               </ImageBox>
-              <ImageBox
-                onClick={() => {
-                  navigate(`/mypage/${memberId}`);
-                }}
-              >
+              <ImageBox onClick={handleMyPage}>
                 <Image _src="/images/iconMe.png" _width="30px" _height="30px" />
               </ImageBox>
             </MenuBox>
