@@ -113,7 +113,7 @@ const ArticleFolderD = props => {
           </TitleBox>
         
           <CardWrap>
-            {articleContents.length > 4 ? (
+            {articleContents && articleContents.length > 4 ? (
               <>
               {articleContents.slice(0, 3).map((content, idx) => 
                 <CardBox key={idx}>
@@ -149,13 +149,13 @@ const ArticleFolderD = props => {
               )}
               <MoreCard>
                 <div>
-                {articleContents.length - 3}개 더보기
+                  {articleContents.length - 3}개 더보기
                 </div>
               </MoreCard>
               </>
             ) : (
               <>
-              {articleContents.map((content, idx) => 
+              {articleContents && articleContents.map((content, idx) => 
                 <CardBox key={idx}>
                 <Card>
                   <CardTitle>
