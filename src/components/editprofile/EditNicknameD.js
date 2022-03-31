@@ -8,11 +8,10 @@ import { Button, Title } from "../../elements";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { checkMemberNameAxios } from "../../redux/modules/User";
+import { editProfileUserNameAxios } from "../../redux/modules/Profile";
 
 
 const EditNicknameD = props => {
-  const location = useLocation();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const checkMemberName = useSelector(
@@ -23,14 +22,26 @@ const EditNicknameD = props => {
   );
 
   const [words, setWords] = useState(0);
-  const [nickname, setNickname] = useState("");
+  const [nickName, setNickName] = useState("");
   const [activeMessage, setActiveMessage] = useState(false);
   const [checkCharsKor, setCheckCharsKor] = useState(false);
 
-  const handleFavorite = () => {
-    if (nickname) {
-      navigate("/user/favorites", {
-        state: { ...location.state, nickname },
+  const handleEdit = () => {
+    if (nickName) {
+      props.setIsEdit(false);
+      props.setNewNickname(nickName);
+      dispatch(editProfileUserNameAxios({ nickname: nickName }));
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top",
+        iconColor: "#DAF8F1",
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: false,
+      });
+      Toast.fire({
+        icon: "success",
+        title: "변경완료",
       });
     } else {
       Swal.fire({
@@ -42,7 +53,7 @@ const EditNicknameD = props => {
   };
 
   const memberNameData = {
-    memberName: nickname,
+    memberName: nickName,
   };
 
   const handleCheckMemberName = e => {
@@ -63,7 +74,7 @@ const EditNicknameD = props => {
         setCheckCharsKor(false);
       }
       setWords(checkChars.value.length);
-      setNickname(checkChars.value);
+      setNickName(checkChars.value);
     }
     if (checkChars.value.length > 16) {
       if (regExp.test(checkChars.value)) {
@@ -115,12 +126,12 @@ const EditNicknameD = props => {
             </UserArea>
             <ButtonBox>
               <Button
-                _onClick={handleFavorite}
+                _onClick={handleEdit}
                 _fontSize={({ theme }) => theme.fontSizes.font20}
                 borderRadius="0px"
                 _padding="18px 0px"
               >
-                다음
+                완료
               </Button>
             </ButtonBox>
           </UserBox>
