@@ -5,10 +5,11 @@ import userApi from "../app/userApi";
 const UserApi = new userApi();
 
 const initialState = {
-  userInfo: null,
-  myInfo: null,
-  isLogin: false,
   isMe: false,
+  myInfo: null,
+  userInfo: null,
+  memberId: null,
+  isLogin: false,
   register: {
     checkMemberName: "",
     usableMemberName: false,
@@ -107,8 +108,9 @@ export const userSlice = createSlice({
       sessionStorage.setItem("refreshToken", action.payload.token.refreshToken);
       const myInfo = action.payload.myInfo;
       state.myInfo = { ...myInfo };
-      state.isLogin = action.payload.login;
       state.isMe = action.payload.login;
+      state.isLogin = action.payload.login;
+      state.memberId = action.payload.myInfo.memberId;
     },
     deleteUserFromSession: (state, action) => {
       sessionStorage.removeItem("accessToken");
@@ -117,6 +119,7 @@ export const userSlice = createSlice({
     setUser: (state, action) => {
       const myInfo = action.payload.myInfo;
       state.myInfo = { ...myInfo };
+      state.memberId = action.payload.myInfo.memberId;
     },
   },
   extraReducers: {

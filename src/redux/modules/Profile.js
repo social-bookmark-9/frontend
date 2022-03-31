@@ -76,6 +76,10 @@ export const editProfileHashtagAxios = createAsyncThunk(
   async hashTag => {
     const resp = await ProfileApi.editProfileHashtag(hashTag);
     console.log(resp);
+    Swal.fire({
+      text: "관심분야가 변경되었습니다",
+      confirmButtonText: "확인",
+    });
     return resp;
   },
 );

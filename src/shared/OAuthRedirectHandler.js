@@ -9,6 +9,7 @@ const OAuthRedirectHandler = props => {
   const navigate = useNavigate();
 
   let code = new URL(window.location.href).searchParams.get("code");
+  console.log("인가코드: ", code);
 
   useEffect(() => {
     dispatch(kakaoLoginAxios({ code, navigate }));

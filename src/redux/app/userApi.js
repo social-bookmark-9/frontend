@@ -37,9 +37,9 @@ export default class userApi {
       })
       .catch(err => {
         console.log(err);
-        if (err.message === "expired") {
-          dispatch(refreshTokensAxios(getTokens));
-        }
+        // if (err.message === "expired") {
+        //   dispatch(refreshTokensAxios(getTokens));
+        // }
       });
   }
 
@@ -106,7 +106,10 @@ export default class userApi {
     };
     return axios(refreshTokensConfig)
       .then(res => {
+        sessionStorage.removeItem("accessToken");
+        sessionStorage.removeItem("refreshToken");
         console.log(res);
+        return res.data;
       })
       .catch(err => {
         console.log(err);

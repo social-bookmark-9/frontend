@@ -3,11 +3,12 @@ import { useLocation, useNavigate } from "react-router";
 
 import styled, { css } from "styled-components";
 import { FlexboxRow } from "../../styles/flexbox";
-import { Button, Image, Title } from "../../elements";
+import { Button, Title } from "../../elements";
 
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { checkMemberNameAxios } from "../../redux/modules/User";
+import BubbleAnimation from "../../components/common/BubbleAnimation";
 
 const UserNicknameD = props => {
   const location = useLocation();
@@ -75,11 +76,7 @@ const UserNicknameD = props => {
   return (
     <React.Fragment>
       <Container>
-        <HeaderContainer>
-          <HeaderBox>
-            <Image _src="/images/loginGif.gif" _width="400px" _height="400px" />
-          </HeaderBox>
-        </HeaderContainer>
+        <BubbleAnimation />
         <UserContainer>
           <UserBox>
             <UserArea>
@@ -138,19 +135,6 @@ const Container = styled.div`
   ${FlexboxRow};
   width: 100vw;
   height: 100vh;
-`;
-
-const HeaderContainer = styled.div`
-  width: 43vw;
-  padding: 188px 0px;
-  background-color: ${({ theme }) => theme.colors.gray07};
-`;
-
-const HeaderBox = styled.div`
-  width: 400px;
-  height: 400px;
-  margin: auto;
-  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const UserContainer = styled.div`

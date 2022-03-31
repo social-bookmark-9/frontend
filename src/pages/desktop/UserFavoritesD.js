@@ -5,12 +5,13 @@ import { useNavigate, useLocation } from "react-router";
 import { registerAxios } from "../../redux/modules/User";
 
 import styled from "styled-components";
-import { Button, Title, Text, Image } from "../../elements";
+import { Button, Title, Text } from "../../elements";
 import { FlexboxColumn, FlexboxRow } from "../../styles/flexbox";
 
 import FavoriteD from "../../components/common/FavoriteD";
 
 import Swal from "sweetalert2";
+import BubbleAnimation from "../../components/common/BubbleAnimation";
 
 const UserFavoritesD = props => {
   const navigate = useNavigate();
@@ -66,11 +67,7 @@ const UserFavoritesD = props => {
   return (
     <React.Fragment>
       <BaseDiv>
-        <HeaderContainer>
-          <HeaderBox>
-            <Image _src="/images/loginGif.gif" _width="400px" _height="400px" />
-          </HeaderBox>
-        </HeaderContainer>
+        <BubbleAnimation />
         <UserBox>
           <Topdiv>
             <TitleBox>
@@ -119,19 +116,6 @@ const BaseDiv = styled.div`
   ${FlexboxRow};
   width: 100vw;
   height: 100vh;
-`;
-
-const HeaderContainer = styled.div`
-  width: 43vw;
-  padding: 188px 0px;
-  background-color: ${({ theme }) => theme.colors.gray07};
-`;
-
-const HeaderBox = styled.div`
-  width: 400px;
-  height: 400px;
-  margin: auto;
-  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const UserBox = styled.div`
