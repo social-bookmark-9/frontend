@@ -22,7 +22,7 @@ import DetailRemindD from "../../components/detailpage/DetailRemindD";
 import RecommendCard from "../../components/detailpage/RecommendCard";
 
 import Swal from "sweetalert2";
-
+import NavbarD from "../../components/common/NavbarD";
 
 const ArticleDetailD = props => {
   const { memberId } = props;
@@ -112,99 +112,103 @@ const ArticleDetailD = props => {
 
   return (
     <React.Fragment>
-    <Container>
-      <DetailNavbar
-        article={article}
-        {...article}
-        title={article.articleFolderName}
-        articleId={articleId}
-        isMe={isMe}
-      />
-      <DetailContainer>
-        {/* 아티클 카드 */}
-        <div style={{width:"100%"}}>
-          <DetailCard article={article} articleId={articleId} />
-        </div>
-        <div>
-        {/* 아티클 저장 */}
-        {isMe ? null : (
-          <Button
-            _onClick={handleSave}
-            _padding="12px"
-            bgColor={({ theme }) => theme.colors.white}
-            _color={({ theme }) => theme.colors.fontColor05}
-            isBorder
-            bold
-          >
-            내 컬렉션에 저장
-          </Button>
-        )}
-        {/* 유저 메모 작성 */}
-        <MemoBox>
-          <MemoHead>
-            <Title
-              _fontSize={({ theme }) => theme.fontSizes.font20}
-              _lineHeight="24px"
-            >
-              {article.writerMemberName}의 메모
-            </Title>
-            {isMe ? (
-              <ImageBox onClick={handleMemoHide}>
-                <Image
-                  _src={`/images/${
-                    reviewHide && reviewHide ? "hide" : "show"
-                  }.png`}
-                  _width="20px"
-                  _height="20px"
-                />
-              </ImageBox>
-            ) : null}
-          </MemoHead>
-          {isMe ? (
-            <>
-              <TextAreaField
-                ref={memoRef}
-                name="userMemo"
-                defaultValue={article.review != null ? article.review : null}
-                placeholder="여기를 눌러 메모를 남겨보세요."
-                rows={5}
-                maxLength={200}
-                onKeyUp={handleKeyUp}
-                onBlur={updateUserMemo}
-              />
-              <InputCheck>{words}/200</InputCheck>
-            </>
-          ) : (
-            <TextBox>
-              <Text>{article.review}</Text>
-            </TextBox>
-          )}
-        </MemoBox>
-        <DetailRemindD {...article} />
-        </div>
-      </DetailContainer>
-    </Container>
-    <GoodToReadContainer>
+      <NavbarD {...props} />
       <Container>
-        <Title
-          _fontSize={({ theme }) => theme.fontSizes.font20}
-          _lineHeight="28px"
-          _padding="36px 0 26px 0"
-        >
-          함께 보면 좋은 글
-        </Title>
-        <ReCardBox>
-          <RecommendCard recommendList={recommendList} {...recommendList} />
-        </ReCardBox>
+        <DetailNavbar
+          article={article}
+          {...article}
+          title={article.articleFolderName}
+          articleId={articleId}
+          isMe={isMe}
+        />
+        <DetailContainer>
+          {/* 아티클 카드 */}
+          <div style={{ width: "100%" }}>
+            <DetailCard article={article} articleId={articleId} />
+          </div>
+          <div>
+            {/* 아티클 저장 */}
+            {isMe ? null : (
+              <Button
+                _onClick={handleSave}
+                _padding="12px"
+                bgColor={({ theme }) => theme.colors.white}
+                _color={({ theme }) => theme.colors.fontColor05}
+                isBorder
+                bold
+              >
+                내 컬렉션에 저장
+              </Button>
+            )}
+            {/* 유저 메모 작성 */}
+            <MemoBox>
+              <MemoHead>
+                <Title
+                  _fontSize={({ theme }) => theme.fontSizes.font20}
+                  _lineHeight="24px"
+                >
+                  {article.writerMemberName}의 메모
+                </Title>
+                {isMe ? (
+                  <ImageBox onClick={handleMemoHide}>
+                    <Image
+                      _src={`/images/${
+                        reviewHide && reviewHide ? "hide" : "show"
+                      }.png`}
+                      _width="20px"
+                      _height="20px"
+                    />
+                  </ImageBox>
+                ) : null}
+              </MemoHead>
+              {isMe ? (
+                <>
+                  <TextAreaField
+                    ref={memoRef}
+                    name="userMemo"
+                    defaultValue={
+                      article.review != null ? article.review : null
+                    }
+                    placeholder="여기를 눌러 메모를 남겨보세요."
+                    rows={5}
+                    maxLength={200}
+                    onKeyUp={handleKeyUp}
+                    onBlur={updateUserMemo}
+                  />
+                  <InputCheck>{words}/200</InputCheck>
+                </>
+              ) : (
+                <TextBox>
+                  <Text>{article.review}</Text>
+                </TextBox>
+              )}
+            </MemoBox>
+            <DetailRemindD {...article} />
+          </div>
+        </DetailContainer>
       </Container>
-    </GoodToReadContainer>
+      <GoodToReadContainer>
+        <Container>
+          <Title
+            _fontSize={({ theme }) => theme.fontSizes.font20}
+            _lineHeight="28px"
+            _padding="36px 0 26px 0"
+          >
+            함께 보면 좋은 글
+          </Title>
+          <ReCardBox>
+            <RecommendCard recommendList={recommendList} {...recommendList} />
+          </ReCardBox>
+        </Container>
+      </GoodToReadContainer>
     </React.Fragment>
   );
 };
 
 const Container = styled.div`
-  margin: 0 auto 0 auto;
-  width: 1220px;
+  padding-top: 82px;
+  margin: 0 auto;
+  width: 1119px;
 `;
 
 const GoodToReadContainer = styled.div`
@@ -274,6 +278,5 @@ const InputCheck = styled.p`
   line-height: 18px;
   letter-spacing: -0.0008em;
 `;
-
 
 export default ArticleDetailD;

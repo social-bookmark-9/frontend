@@ -7,6 +7,7 @@ import { kakaoLogoutAxios } from "../../redux/modules/User";
 import styled, { css } from "styled-components";
 import { Button, Image, Title } from "../../elements";
 
+import NavbarD from "../../components/common/NavbarD";
 import EditFavoritesD from "../../components/setting/EditFavoritesD";
 
 import Swal from "sweetalert2";
@@ -36,11 +37,12 @@ const SettingD = props => {
 
   return (
     <React.Fragment>
+      <NavbarD {...props} />
       {!isEdit ? (
         <Container>
           <UlTop>
             <Ul>
-              <Title _padding="0 0 57px 0">설정</Title>
+              <Title _padding="20px 0 57px 0">설정</Title>
 
               <Li
                 onClick={() => {
@@ -109,13 +111,13 @@ const UlTop = styled.div`
     const { colors } = theme;
     return css`
       background-color: ${colors.white};
-      height: 30vh;
+      height: 33vh;
     `;
   }}
 `;
 
 const UlBottom = styled.div`
-  height: 70vh;
+  height: 67vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

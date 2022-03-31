@@ -9,6 +9,7 @@ import RecommendUserD from "../../components/mainpage/RecommendUserD";
 import RecommendListD from "../../components/mainpage/RecommendListD";
 import MainTopIsLoginD from "../../components/mainpage/MainTopIsLoginD";
 import MainPageFooterD from "../../components/mainpage/MainPageFooterD";
+import NavbarD from "../../components/common/NavbarD";
 
 const MainPageD = props => {
   const { isLogin } = props;
@@ -19,6 +20,7 @@ const MainPageD = props => {
 
   return (
     <React.Fragment>
+      <NavbarD {...props} />
       <MainContainer>
         {/* 맨 위 영역 */}
         {isLogin ? <MainTopIsLoginD /> : <MainTopD />}

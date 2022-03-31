@@ -136,6 +136,7 @@ opacity: 0.5;
 const RemindContainer = styled.div`
   width: 100vw;
   height: 100vh;
+  padding-top: 82px;
 `;
 
 const KeyframeBox = styled.div`

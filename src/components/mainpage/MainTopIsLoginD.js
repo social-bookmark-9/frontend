@@ -14,7 +14,7 @@ const MainTopIsLoginD = () => {
         <div
           style={{
             margin: "auto",
-            width: "1220px",
+            width: "1119px",
             padding: "131px 0px 90px 0px",
             textAlign: "center",
           }}
