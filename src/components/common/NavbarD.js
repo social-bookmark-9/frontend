@@ -52,7 +52,9 @@ const NavbarD = props => {
   };
 
   const handleMyPage = () => {
-    if (memberId === undefined) {
+    if (isLogin) {
+      navigate(`/mypage/${memberId}`);
+    } else {
       Swal.fire({
         title: "잠깐!",
         text: "로그인이 필요한 서비스에요",
@@ -66,8 +68,6 @@ const NavbarD = props => {
           navigate("/login");
         }
       });
-    } else {
-      navigate(`/mypage/${memberId}`);
     }
   };
 

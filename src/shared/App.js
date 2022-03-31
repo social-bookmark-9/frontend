@@ -28,19 +28,19 @@ import UserNickname from "../pages/mobile/UserNickname";
 import UserFavorites from "../pages/mobile/UserFavorites";
 import ArticleDetail from "../pages/mobile/ArticleDetail";
 
+import NavbarD from "../components/common/NavbarD";
 import LoginD from "../pages/desktop/LoginD";
 import MyPageD from "../pages/desktop/MyPageD";
 import MainPageD from "../pages/desktop/MainPageD";
 import ArticleListD from "../pages/desktop/ArticleListD";
 import UserNicknameD from "../pages/desktop/UserNicknameD";
 import UserFavoritesD from "../pages/desktop/UserFavoritesD";
-import NavbarD from "../components/common/NavbarD";
 
 function App(props) {
   const dispatch = useDispatch();
+  const memberId = useSelector(state => state.user.memberId);
   const myInfo = useSelector(state => state.user.myInfo);
   const isLogin = useSelector(state => state.user.isLogin);
-  console.log(myInfo);
 
   useEffect(() => {
     if (getToken()) {
@@ -56,7 +56,7 @@ function App(props) {
     <React.Fragment>
       <ErrorBoundary fallback={<Spinner />}>
         <Desktop>
-          <NavbarD isLogin={isLogin} memberId={myInfo.memberId} />
+          <NavbarD isLogin={isLogin} memberId={memberId} />
           <Routes>
             <Route
               path="/"

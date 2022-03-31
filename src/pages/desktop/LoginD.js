@@ -4,6 +4,7 @@ import { KAKAO_AUTH_URL } from "../../shared/OAuth";
 import styled from "styled-components";
 import { FlexboxColumn, FlexboxRow } from "../../styles/flexbox";
 import { Button, Title, Text, Image } from "../../elements";
+import BubbleAnimation from "../../components/common/BubbleAnimation";
 
 // import { useSelector } from "react-redux";
 
@@ -11,11 +12,7 @@ const LoginD = () => {
   return (
     <React.Fragment>
       <Container>
-        <HeaderContainer>
-          <HeaderBox>
-            <Image _src="/images/loginGif.gif" _width="400px" _height="400px" />
-          </HeaderBox>
-        </HeaderContainer>
+        <BubbleAnimation />
         <LoginContainer>
           <LoginBox>
             <Topdiv>
@@ -72,19 +69,6 @@ const LoginD = () => {
 const Container = styled.div`
   ${FlexboxRow};
   width: 100vw;
-`;
-
-const HeaderContainer = styled.div`
-  width: 43vw;
-  padding: 188px 0px;
-  background-color: ${({ theme }) => theme.colors.gray07};
-`;
-
-const HeaderBox = styled.div`
-  width: 400px;
-  height: 400px;
-  margin: auto;
-  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const LoginContainer = styled.div`

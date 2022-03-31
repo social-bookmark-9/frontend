@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 
 import styled from "styled-components";
@@ -14,24 +14,25 @@ import {
 } from "../../redux/modules/Folder";
 
 import ArticleCard from "../../components/folderpage/ArticleCard";
-import SelectFolder from "../../components/folderpage/SelectFolder";
-import FolderNavbar from "../../components/folderpage/FolderNavbar";
+import FolderNavbarD from "../../components/folderpage/FolderNavbarD";
+import SelectFolderD from "../../components/folderpage/SelectFolderD";
 
 import Swal from "sweetalert2";
 
 const ArticleListD = props => {
   const { isLogin } = props;
-  // const location = useLocation();
-  const dispatch = useDispatch();
+
   const params = useParams();
   const copyUrlRef = useRef();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const folderId = params.id;
-  const likeCount = useSelector(state => state.folder.folderInfo.likeCount);
+  const collectionUrl = window.location.href;
   const isMe = useSelector(state => state.folder.folderInfo.me);
   const folderInfo = useSelector(state => state.folder.folderInfo);
   const articleListData = useSelector(state => state.folder.articleList);
-  const collectionUrl = window.location.href;
+  const likeCount = useSelector(state => state.folder.folderInfo.likeCount);
 
   useEffect(() => {
     if (isLogin) {
@@ -42,8 +43,8 @@ const ArticleListD = props => {
   }, [dispatch, folderId, isLogin]);
 
   const [modalOpen, setModalOpen] = useState(false);
-  const [likeCnt, setLikeCnt] = useState(folderInfo && parseInt(likeCount));
   const [userLiked, setUserLiked] = useState(false);
+  const [likeCnt, setLikeCnt] = useState(folderInfo && parseInt(likeCount));
 
   const cancelLike = () => {
     dispatch(cancelLikeAios(folderId));
@@ -65,7 +66,7 @@ const ArticleListD = props => {
       const Toast = Swal.mixin({
         toast: true,
         position: "top",
-        iconColor: "#DAF8F1",
+        iconColor: `${({ theme }) => theme.colors.pointGreen02}`,
         showConfirmButton: false,
         timer: 1500,
         timerProgressBar: false,
@@ -78,6 +79,21 @@ const ArticleListD = props => {
   };
 
   const openModal = () => {
+    if (isLogin === false) {
+      Swal.fire({
+        title: "잠깐!",
+        text: "로그인이 필요한 서비스에요",
+        icon: "warning",
+        showCancelButton: true,
+        cancelButtonColor: `${({ theme }) => theme.colors.error}`,
+        confirmButtonText: "로그인 하기",
+        cancelButtonText: "취소",
+      }).then(result => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
     if (modalOpen === false) {
       setModalOpen(true);
       document.body.style.cssText = `overflow: hidden; touch-action: none;`;
@@ -91,9 +107,10 @@ const ArticleListD = props => {
     <React.Fragment>
       <Container>
         <FolderBox>
-          <FolderNavbar
+          <FolderNavbarD
             title={folderInfo.folderName}
             folderId={folderId}
+            folderName={folderInfo.folderName}
             isMe={isMe}
           />
 
@@ -181,7 +198,7 @@ const ArticleListD = props => {
             )}
           </AlButton>
           {modalOpen ? (
-            <SelectFolder
+            <SelectFolderD
               openModal={openModal}
               isMe={isMe}
               folderId={folderId}
