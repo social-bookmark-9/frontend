@@ -51,6 +51,7 @@ const MyPageD = props => {
       <Container>
         {/* <NavbarD {...props} /> */}
         <ModalD />
+
         {/* ----- 프로필+이름 부분 ----- */}
         <UserProfileD userInfo={userInfo} {...myInfo} />
 

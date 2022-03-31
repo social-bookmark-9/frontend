@@ -80,7 +80,7 @@ const Container = styled.div`
 const TopBox = styled.div`
   ${FlexboxRow};
   align-items: center;
-  padding: 240px 0px;
+  padding: 267px 0px 240px 0px;
 `;
 
 const TitleContainer = styled.div`

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { DesignObj, Circle } from "../../elements/ImageObj";
 import { Image, Label } from "../../elements";
 import { FlexboxSpace } from "../../styles/flexbox";
@@ -141,6 +141,10 @@ const ImageBox = styled.div`
 `;
 
 const ArticleCardBox = styled.div`
+  @media screen and (min-width: 1194px) {
+    margin-bottom: 12px;
+  }
+
   width: 100%;
   ${props =>
     props.isRead

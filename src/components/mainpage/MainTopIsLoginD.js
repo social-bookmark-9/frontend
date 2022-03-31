@@ -14,9 +14,9 @@ const MainTopIsLoginD = (props) => {
       <div style={{ backgroundColor: "#fafbfb" }}>
         <div
           style={{
-            margin: "0 auto 0 auto",
+            margin: "auto",
             width: "1220px",
-            padding: "74px 0 90px 0",
+            padding: "131px 0px 90px 0px",
             textAlign: "center",
           }}
         >
@@ -40,7 +40,7 @@ const MainTopIsLoginD = (props) => {
           >
             잊지 않도록 버블드가 리마인드 해드릴게요 :)
           </Text>
-          <div style={{ display: "inline-block" }}>
+          <div style={{ display: "inline-block", backgroundColor: "white" }}>
             <Input>
               <div
                 style={{
@@ -53,7 +53,7 @@ const MainTopIsLoginD = (props) => {
               >
                 <LinkInput
                   name="url입력"
-                  onChange={e => setNewUrl(newUrlRef.current.value)}
+                  onChange={() => setNewUrl(newUrlRef.current.value)}
                   placeholder="이곳에 링크를 붙여넣어 주세요"
                   ref={newUrlRef}
                 />
