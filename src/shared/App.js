@@ -37,6 +37,7 @@ import ArticleListD from "../pages/desktop/ArticleListD";
 import UserNicknameD from "../pages/desktop/UserNicknameD";
 import UserFavoritesD from "../pages/desktop/UserFavoritesD";
 import ArticleDetailD from "../pages/desktop/ArticleDetailD";
+import MyReviewD from "../pages/desktop/MyReviewD";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -72,6 +73,7 @@ function App(props) {
             <Route path="/user/nickname" element={<UserNicknameD />} />
             <Route path="/user/favorites" element={<UserFavoritesD />} />
             <Route path="/api/users/login" element={<OAuthRedirectHandler />} />
+            <Route path="/myreview" element={<MyReviewD />} />
             <Route
               path="/articles/:id"
               element={<ArticleListD {...myInfo} isLogin={isLogin} />}
