@@ -9,12 +9,13 @@ import {
 
 import styled from "styled-components";
 
-import NavbarD from "../../components/common/NavbarD";
-import ArticleFolder from "../../components/folderpage/ArticleFolder";
-import UserProfile from "../../components/mypage/UserProfile";
-import MyPageRemind from "../../components/mypage/MyPageRemind";
-import MyPageSuggest from "../../components/mypage/MyPageSuggest";
+// import NavbarD from "../../components/common/NavbarD";
+import ArticleFolderD from "../../components/folderpage/ArticleFolderD";
+import UserProfileD from "../../components/mypage/UserProfileD";
 import AddCollection from "../../components/mypage/AddCollection";
+import MyPageRemindD from "../../components/mypage/MyPageRemindD";
+import MyPageSuggest from "../../components/mypage/MyPageSuggest";
+import ModalD from "../../components/modal/ModalD";
 
 const MyPageD = props => {
   const { isLogin } = props;
@@ -33,24 +34,28 @@ const MyPageD = props => {
   // ----- 폴더 리스트 ----- //
   const folderList = useSelector(state => state.profile.folderInfo);
   const defaultFolder = useSelector(state => state.profile.defaultFolder);
+
   // ----- 유저 정보 ----- //
   const userInfo = useSelector(state => state.profile.memberInfo);
   const myInfo = useSelector(state => state.user.myInfo);
+
   // 모달 열고 닫기
   const [modalOpen, setModalOpen] = useState(false);
-
+  // 모달 열고 닫기 펑션
   const openModal = () => {
     setModalOpen(true);
   };
 
   return (
     <React.Fragment>
-      <NavbarD />
-      <DContainer>
+      <Container>
+        {/* <NavbarD {...props} /> */}
+        <ModalD />
         {/* ----- 프로필+이름 부분 ----- */}
-        <UserProfile userInfo={userInfo} {...myInfo} />
-        {/* ----- 리마인드 부분 ----- */}
-        <MyPageRemind
+        <UserProfileD userInfo={userInfo} {...myInfo} />
+
+        {/* ----- 리마인드, 디폴트 폴더 ----- */}
+        <MyPageRemindD
           defaultFolder={defaultFolder}
           folderList={folderList}
           openModal={openModal}
@@ -58,10 +63,16 @@ const MyPageD = props => {
           {...myInfo}
         />
         {/* 폴더리스트 시작 */}
-        {folderList &&
-          folderList.map((folder, idx) => (
-            <FolderContainer key={idx}>
-              <ArticleFolder
+        <FolderListContainer>
+          <ArticleFolderD
+            folderColor="default"
+            folder={defaultFolder}
+            {...defaultFolder}
+          />
+          {folderList &&
+            folderList.map((folder, idx) => (
+            <div key={idx}>
+              <ArticleFolderD
                 folder={folder}
                 {...folder}
                 key={idx}
@@ -69,56 +80,28 @@ const MyPageD = props => {
                   idx % 3 === 0 ? "green" : idx % 3 === 1 ? "purple" : "blue"
                 }
               />
-            </FolderContainer>
+            </div>
           ))}
+        </FolderListContainer>
         <MyPageSuggest userInfo={userInfo} {...myInfo} isLogin={isLogin} />
         {modalOpen ? <AddCollection setModalOpen={setModalOpen} /> : null}
         {/* <Modal isLogin={isLogin} /> */}
-      </DContainer>
+      </Container>
     </React.Fragment>
   );
 };
 
-const DContainer = styled.div`
-  width: 1115px;
-  margin: auto;
+const Container = styled.div`
+  margin: 0px auto 85px auto;
+  top: 0;
+  width: 1220px;
 `;
 
-const FolderContainer = styled.div`
-  padding: 8px 16px;
+const FolderListContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
 `;
 
-// const Qheader = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
-// `;
-
-// const LabelBox = styled.div`
-//   ${Flexbox};
-//   padding-right: 20px;
-// `;
-// const AlertBox = styled.div`
-//   padding: 16px;
-// `;
-
-// const RemindAlert = styled.div`
-//   display: flex;
-//   height: 82px;
-//   border: 1px solid #f2f3f4;
-//   border-radius: 16px;
-//   padding: 19px 22px;
-// `;
-
-// const TextPoint = styled.span`
-//   ${({ theme }) => {
-//     const { colors, fontWeight } = theme;
-//     return css`
-//       display: inline-block;
-//       color: ${colors.fontPurple};
-//       font-weight: ${fontWeight.semiBold};
-//     `;
-//   }}
-// `;
 
 export default MyPageD;
