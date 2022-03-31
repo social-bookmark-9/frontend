@@ -203,7 +203,7 @@ const ArticleDetailD = props => {
 };
 
 const Container = styled.div`
-  margin: 0 auto 0 auto;
+  margin: 80px auto 0 auto;
   width: 1220px;
 `;
 

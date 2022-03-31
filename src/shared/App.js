@@ -36,6 +36,7 @@ import MainPageD from "../pages/desktop/MainPageD";
 import ArticleListD from "../pages/desktop/ArticleListD";
 import UserNicknameD from "../pages/desktop/UserNicknameD";
 import UserFavoritesD from "../pages/desktop/UserFavoritesD";
+import ArticleDetailD from "../pages/desktop/ArticleDetailD";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -74,6 +75,10 @@ function App(props) {
             <Route
               path="/articles/:id"
               element={<ArticleListD {...myInfo} isLogin={isLogin} />}
+            />
+            <Route
+              path="/article/:id"
+              element={<ArticleDetailD {...myInfo} isLogin={isLogin} />}
             />
             <Route path="/setting" element={<SettingD />} />
             <Route element={<NotFound />} />
