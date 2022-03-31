@@ -103,7 +103,6 @@ const ModalD = props => {
 
   return (
     <>
-      {/* 아직 버튼 모양은 안 잡아서 기본으로! */}
       {!mainPage ? (
         <MainPageLinkButtonBox>
           <Button borderRadius="10px" _fontSize="28px" _onClick={openModal}>
