@@ -9,7 +9,7 @@ import { saveAllArticleAxios } from "../../redux/modules/Article";
 // import { useNavigate } from "react-router";
 
 const SelectFolderD = props => {
-  const { openModal, folderId } = props;
+  const { openModal, folderId, setModalOpen } = props;
 
   const dispatch = useDispatch();
   // const navigate = useNavigate();
@@ -41,6 +41,7 @@ const SelectFolderD = props => {
 
   const saveCollection = () => {
     dispatch(saveAllArticleAxios({ folderId, articleFolderName }));
+    setModalOpen(false);
   };
 
   return (

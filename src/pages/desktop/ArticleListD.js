@@ -202,6 +202,7 @@ const ArticleListD = props => {
               openModal={openModal}
               isMe={isMe}
               folderId={folderId}
+              setModalOpen={setModalOpen}
             />
           ) : null}
         </FolderBox>
