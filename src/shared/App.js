@@ -38,6 +38,7 @@ import UserNicknameD from "../pages/desktop/UserNicknameD";
 import UserFavoritesD from "../pages/desktop/UserFavoritesD";
 import ArticleDetailD from "../pages/desktop/ArticleDetailD";
 import MyReviewD from "../pages/desktop/MyReviewD";
+import EditProfileD from "../pages/desktop/EditProfileD";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -74,6 +75,7 @@ function App(props) {
             <Route path="/user/favorites" element={<UserFavoritesD />} />
             <Route path="/api/users/login" element={<OAuthRedirectHandler />} />
             <Route path="/myreview" element={<MyReviewD />} />
+            <Route path="/editprofile" element={<EditProfileD {...myInfo} />} />
             <Route
               path="/articles/:id"
               element={<ArticleListD {...myInfo} isLogin={isLogin} />}
