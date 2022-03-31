@@ -16,7 +16,7 @@ import {
   updateReviewAxios,
 } from "../../redux/modules/Article";
 
-import DetailNavbar from "../../components/detailpage/DetailNavbar";
+import DetailNavbarD from "../../components/detailpage/DetailNavbarD";
 import DetailCard from "../../components/detailpage/DetailCard";
 import DetailRemindD from "../../components/detailpage/DetailRemindD";
 import RecommendCard from "../../components/detailpage/RecommendCard";
@@ -113,7 +113,7 @@ const ArticleDetailD = props => {
   return (
     <React.Fragment>
     <Container>
-      <DetailNavbar
+      <DetailNavbarD
         article={article}
         {...article}
         title={article.articleFolderName}
@@ -232,7 +232,7 @@ const MemoHead = styled.div`
 const TextAreaField = styled.textarea`
   width: 100%;
   height: 180px;
-  padding: 26px;
+  padding: 65px 26px;
   border-radius: 8px;
   text-align: center;
   background-color: ${({ theme }) => theme.colors.gray01};
@@ -244,7 +244,7 @@ const TextAreaField = styled.textarea`
     text-align: center;
     font-size: ${({ theme }) => theme.fontSizes.font13};
     letter-spacing: -0.0008em;
-    line-height: 120px;
+    line-height: 25px;
   }
 `;
 
