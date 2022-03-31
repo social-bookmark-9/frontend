@@ -117,6 +117,8 @@ const NavbarD = props => {
 NavbarD.defaultProps = {};
 const NavContainer = styled.div`
   width: 100%;
+  position: absolute;
+  top: 0;
 `;
 
 const NavBox = styled.div`

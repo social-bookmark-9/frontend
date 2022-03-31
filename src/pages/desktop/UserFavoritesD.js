@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router";
 import { registerAxios } from "../../redux/modules/User";
 
 import styled from "styled-components";
-import { Button, Title, Text, Image } from "../../elements";
+import { Button, Title, Text } from "../../elements";
 import { FlexboxColumn, FlexboxRow } from "../../styles/flexbox";
 
 import FavoriteD from "../../components/common/FavoriteD";

@@ -28,9 +28,10 @@ import UserNickname from "../pages/mobile/UserNickname";
 import UserFavorites from "../pages/mobile/UserFavorites";
 import ArticleDetail from "../pages/mobile/ArticleDetail";
 
-import NavbarD from "../components/common/NavbarD";
 import LoginD from "../pages/desktop/LoginD";
 import MyPageD from "../pages/desktop/MyPageD";
+import SettingD from "../pages/desktop/SettingD";
+import NavbarD from "../components/common/NavbarD";
 import MainPageD from "../pages/desktop/MainPageD";
 import ArticleListD from "../pages/desktop/ArticleListD";
 import UserNicknameD from "../pages/desktop/UserNicknameD";
@@ -74,6 +75,7 @@ function App(props) {
               path="/articles/:id"
               element={<ArticleListD {...myInfo} isLogin={isLogin} />}
             />
+            <Route path="/setting" element={<SettingD />} />
             <Route element={<NotFound />} />
           </Routes>
         </Desktop>
