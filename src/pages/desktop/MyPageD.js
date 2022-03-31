@@ -50,8 +50,6 @@ const MyPageD = props => {
     <React.Fragment>
       <NavbarD {...props} />
       <Container>
-        <ModalD />
-
         {/* ----- 프로필+이름 부분 ----- */}
         <UserProfileD userInfo={userInfo} {...myInfo} />
 
@@ -85,6 +83,7 @@ const MyPageD = props => {
             ))}
         </FolderListContainer>
         <MyPageSuggest userInfo={userInfo} {...myInfo} isLogin={isLogin} />
+        <ModalD />
         {modalOpen ? <AddCollection setModalOpen={setModalOpen} /> : null}
         {/* <Modal isLogin={isLogin} /> */}
       </Container>

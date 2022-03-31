@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { DesignObj, Circle } from "../../elements/ImageObj";
 import { Image, Label } from "../../elements";
 import { FlexboxSpace } from "../../styles/flexbox";
