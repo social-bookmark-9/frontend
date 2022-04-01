@@ -133,7 +133,7 @@ const Reminder = styled.div`
 
 const RemindSelection = styled.div`
   ${FlexboxRow}
-  margin-left: 180px;
+  margin-left: 140px;
 `;
 
 const RemindLabel = styled.label``;
