@@ -27,6 +27,7 @@ import EditProfile from "../pages/mobile/EditProfile";
 import UserNickname from "../pages/mobile/UserNickname";
 import UserFavorites from "../pages/mobile/UserFavorites";
 import ArticleDetail from "../pages/mobile/ArticleDetail";
+import SearchPage from "../pages/mobile/SearchPage";
 
 import LoginD from "../pages/desktop/LoginD";
 import MyPageD from "../pages/desktop/MyPageD";
@@ -40,6 +41,7 @@ import UserNicknameD from "../pages/desktop/UserNicknameD";
 import UserFavoritesD from "../pages/desktop/UserFavoritesD";
 import ArticleDetailD from "../pages/desktop/ArticleDetailD";
 import MyReminderD from "../pages/desktop/MyReminderD";
+
 
 function App(props) {
   const dispatch = useDispatch();
@@ -129,6 +131,7 @@ function App(props) {
               path="/setting/remindEmail"
               element={<RemindEmail {...myInfo} />}
             />
+            <Route path="/search" element={<SearchPage {...myInfo} />} />
             <Route element={<NotFound />} />
           </Routes>
         </Mobile>
