@@ -12,7 +12,7 @@ const RecommendUser = props => {
 
   const navigate = useNavigate();
 
-  const mobileSettings = {
+  const settings = {
     infinite: false,
     speed: 500,
     slidesToShow: 2,
@@ -39,7 +39,7 @@ const RecommendUser = props => {
             marginLeft: "-58px",
           }}
         >
-          <Slider {...mobileSettings}>
+          <Slider {...settings}>
             {memberInfo.map(member => {
               return (
                 <div key={member.memberId}>
@@ -60,7 +60,11 @@ const RecommendUser = props => {
                           style={{ zIndex: "3" }}
                         />
                       </ProfileImage>
-                      <Title _padding="23px 15px 2px 15px" textAlign="center">
+                      <Title
+                        _padding="23px 0 2px 0"
+                        textAlign="center"
+                        _fontSize={({ theme }) => theme.fontSizes.font16}
+                      >
                         {member.memberName}
                       </Title>
                       <Text

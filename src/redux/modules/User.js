@@ -41,6 +41,7 @@ export const checkMemberNameAxios = createAsyncThunk(
 export const registerAxios = createAsyncThunk(
   "user/register",
   async ({ userInfo, navigate }, { dispatch }) => {
+    console.log(userInfo);
     const user = await UserApi.register({ userInfo, navigate });
     if (user) {
       dispatch(setMyInfo(user.data));
