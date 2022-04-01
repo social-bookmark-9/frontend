@@ -9,6 +9,7 @@ import {
 
 import styled from "styled-components";
 
+import ModalD from "../../components/modal/ModalD";
 import NavbarD from "../../components/common/NavbarD";
 import UserProfileD from "../../components/mypage/UserProfileD";
 import MyPageRemindD from "../../components/mypage/MyPageRemindD";
@@ -83,6 +84,7 @@ const MyPageD = props => {
         </FolderListContainer>
         <MyPageSuggest userInfo={userInfo} {...myInfo} isLogin={isLogin} />
         {modalOpen ? <AddCollectionD setModalOpen={setModalOpen} /> : null}
+        <ModalD />
       </Container>
     </React.Fragment>
   );

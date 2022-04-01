@@ -70,9 +70,6 @@ function App(props) {
     <React.Fragment>
       <ErrorBoundary fallback={<Spinner />}>
         <Suspense fallback={<Spinner />}>
-          <Routes>
-            <Route path="/api/users/login" element={<OAuthRedirectHandler />} />
-          </Routes>
           <Desktop>
             <Routes>
               <Route path="/" element={<MainPageD {...myInfo} />} />
@@ -109,6 +106,10 @@ function App(props) {
                 path="/setting/reminder"
                 element={<MyReminderD {...myInfo} isLogin={isLogin} />}
               />
+              <Route
+                path="/api/users/login"
+                element={<OAuthRedirectHandler />}
+              />
               <Route element={<NotFound />} />
             </Routes>
           </Desktop>
@@ -143,6 +144,10 @@ function App(props) {
               <Route
                 path="/setting/remindEmail"
                 element={<RemindEmail {...myInfo} />}
+              />
+              <Route
+                path="/api/users/login"
+                element={<OAuthRedirectHandler />}
               />
               <Route element={<NotFound />} />
             </Routes>

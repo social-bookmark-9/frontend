@@ -32,7 +32,6 @@ const ChangeTag = props => {
     }).then(result => {
       if (result.isConfirmed) {
         dispatch(updateHashtagAxios({ articleId, tagData }));
-        Swal.fire({ text: "변경되었습니다", confirmButtonText: "확인" });
       }
     });
   };
