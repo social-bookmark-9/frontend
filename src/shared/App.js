@@ -32,12 +32,13 @@ import LoginD from "../pages/desktop/LoginD";
 import MyPageD from "../pages/desktop/MyPageD";
 import SettingD from "../pages/desktop/SettingD";
 import MainPageD from "../pages/desktop/MainPageD";
+import MyReviewD from "../pages/desktop/MyReviewD";
+import RemindEmailD from "../pages/desktop/RemindEmailD";
+import EditProfileD from "../pages/desktop/EditProfileD";
 import ArticleListD from "../pages/desktop/ArticleListD";
 import UserNicknameD from "../pages/desktop/UserNicknameD";
 import UserFavoritesD from "../pages/desktop/UserFavoritesD";
 import ArticleDetailD from "../pages/desktop/ArticleDetailD";
-import MyReviewD from "../pages/desktop/MyReviewD";
-import EditProfileD from "../pages/desktop/EditProfileD";
 import MyReminderD from "../pages/desktop/MyReminderD";
 
 function App(props) {
@@ -87,6 +88,11 @@ function App(props) {
               element={<SettingD {...myInfo} isLogin={isLogin} />}
             />
             <Route
+              path="/setting/remindEmail"
+              element={<RemindEmailD {...myInfo} />}
+            />
+              
+            <Routs
               path="/setting/reminder"
               element={<MyReminderD {...myInfo}
               isLogin={isLogin} />}
