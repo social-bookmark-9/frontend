@@ -9,13 +9,12 @@ import {
 
 import styled from "styled-components";
 
-import ModalD from "../../components/modal/ModalD";
 import NavbarD from "../../components/common/NavbarD";
 import UserProfileD from "../../components/mypage/UserProfileD";
 import MyPageRemindD from "../../components/mypage/MyPageRemindD";
 import MyPageSuggest from "../../components/mypage/MyPageSuggest";
-import ModalD from "../../components/modal/ModalD";
 import AddCollectionD from "../../components/mypage/AddCollectionD";
+import ArticleFolderD from "../../components/folderpage/ArticleFolderD";
 
 const MyPageD = props => {
   const { isLogin } = props;

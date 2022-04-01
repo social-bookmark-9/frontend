@@ -50,8 +50,7 @@ const EditProfileLink = props => {
   const [blog, setBlog] = useState("");
   const [website, setWebsite] = useState("");
 
-  const handleAddUrl = (props) => {
-    const {isDeskTop} = props
+  const handleAddUrl = props => {
     const url = [channelList[tempId].channelAddress, urlInput].join("");
     if (addUrl.length < 1) {
       setAddUrl([
@@ -219,7 +218,9 @@ const EditProfileLink = props => {
                               width={"12px"}
                               alt={`icon10${url.img}`}
                             />
-                            <span style={{ fontSize: "12px", marginLeft: "8px" }}>
+                            <span
+                              style={{ fontSize: "12px", marginLeft: "8px" }}
+                            >
                               {url.channelName}
                             </span>
                           </ProfileChannel>
@@ -259,22 +260,26 @@ const SnsContainer = styled.div`
   min-width: 390px;
   margin: auto;
   padding: 16px;
-  ${({ isDeskTop }) => 
-  isDeskTop ? `
+  ${({ isDeskTop }) =>
+    isDeskTop
+      ? `
   width:750px;
- `:`
+ `
+      : `
  `}
 `;
 
 const ProfileLinkDiv = styled.div`
- ${({ isDeskTop }) => 
- isDeskTop ? `
+  ${({ isDeskTop }) =>
+    isDeskTop
+      ? `
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
- `:`
+ `
+      : `
  `}
-`
+`;
 
 const ProfileLinkBox = styled.div`
   width: 100%;

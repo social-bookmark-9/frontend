@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 
 import RemindCard from "./RemindCard";
 
@@ -8,7 +8,6 @@ const MyPageSuggest = props => {
 
   const [myOwnPage, setMyOwnPage] = useState(false);
   const params = useParams();
-  const navigate = useNavigate();
   const isNew = true;
 
   useEffect(() => {

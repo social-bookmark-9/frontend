@@ -4,13 +4,10 @@ import styled from "styled-components";
 import { Image, Text, Title } from "../../elements";
 import ModalD from "../modal/ModalD";
 
-const MainTopIsLoginD = (props) => {
-  const {isMain} = props;
+const MainTopIsLoginD = props => {
+  const { isMain } = props;
   const newUrlRef = useRef();
   const [newUrl, setNewUrl] = useState("");
-
-  // 메인페이지에서 사용되는지 구분
-  const [mainPage, setMainPage] = useState(true);
 
   return (
     <>
