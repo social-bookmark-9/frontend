@@ -21,6 +21,7 @@ import OAuthRedirectHandler from "../shared/OAuthRedirectHandler";
 import Login from "../pages/mobile/Login";
 import Setting from "../pages/mobile/Setting";
 import MyReview from "../pages/mobile/MyReview";
+import SearchPage from "../pages/mobile/SearchPage";
 import MyReminder from "../pages/mobile/MyReminder";
 import RemindEmail from "../pages/mobile/RemindEmail";
 import EditProfile from "../pages/mobile/EditProfile";
@@ -48,6 +49,7 @@ const MyPageD = lazy(() => import("../pages/desktop/MyPageD"));
 const MainPageD = lazy(() => import("../pages/desktop/MainPageD"));
 const ArticleListD = lazy(() => import("../pages/desktop/ArticleListD"));
 const ArticleDetailD = lazy(() => import("../pages/desktop/ArticleDetailD"));
+
 
 function App(props) {
   const dispatch = useDispatch();
@@ -125,6 +127,7 @@ function App(props) {
               <Route path="/setting" element={<Setting {...myInfo} />} />
               <Route path="/setting/reminder" element={<MyReminder />} />
               <Route path="/myreview" element={<MyReview />} />
+              <Route path="/search" element={<SearchPage {...myInfo} />} />
               <Route
                 path="/editprofile"
                 element={<EditProfile {...myInfo} />}
