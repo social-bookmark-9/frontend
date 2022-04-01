@@ -72,30 +72,25 @@ function App(props) {
         <Suspense fallback={<Spinner />}>
           <Desktop>
             <Routes>
-              <Route path="/" element={<MainPageD {...myInfo} />} />
-              <Route
-                path="/mypage/:id"
-                element={<MyPageD {...myInfo} isLogin={isLogin} />}
-              />
+              <Route element={<NotFound />} />
               <Route path="/login" element={<LoginD />} />
-              <Route path="/user/nickname" element={<UserNicknameD />} />
-              <Route path="/user/favorites" element={<UserFavoritesD />} />
               <Route path="/myreview" element={<MyReviewD />} />
+              <Route path="/" element={<MainPageD {...myInfo} />} />
+              <Route path="/user/nickname" element={<UserNicknameD />} />
+              <Route path="/setting" element={<SettingD {...myInfo} />} />
+              <Route path="/user/favorites" element={<UserFavoritesD />} />
+              <Route path="/mypage/:id" element={<MyPageD {...myInfo} />} />
               <Route
                 path="/editprofile"
                 element={<EditProfileD {...myInfo} />}
               />
               <Route
                 path="/article/:id"
-                element={<ArticleDetailD {...myInfo} isLogin={isLogin} />}
+                element={<ArticleDetailD {...myInfo} />}
               />
               <Route
                 path="/articles/:id"
-                element={<ArticleListD {...myInfo} isLogin={isLogin} />}
-              />
-              <Route
-                path="/setting"
-                element={<SettingD {...myInfo} isLogin={isLogin} />}
+                element={<ArticleListD {...myInfo} />}
               />
               <Route
                 path="/setting/remindEmail"
@@ -104,36 +99,29 @@ function App(props) {
 
               <Route
                 path="/setting/reminder"
-                element={<MyReminderD {...myInfo} isLogin={isLogin} />}
+                element={<MyReminderD {...myInfo} />}
               />
               <Route
                 path="/api/users/login"
                 element={<OAuthRedirectHandler />}
               />
-              <Route element={<NotFound />} />
             </Routes>
           </Desktop>
           <Mobile>
             <Routes>
-              <Route
-                path="/"
-                element={<MainPage {...myInfo} isLogin={isLogin} />}
-              />
+              <Route path="/" element={<MainPage {...myInfo} />} />
               <Route path="/login" element={<Login />} />
               <Route path="/user/nickname" element={<UserNickname />} />
               <Route path="/user/favorites" element={<UserFavorites />} />
               <Route
                 path="/articles/:id"
-                element={<ArticleList {...myInfo} isLogin={isLogin} />}
+                element={<ArticleList {...myInfo} />}
               />
               <Route
                 path="/article/:id"
-                element={<ArticleDetail {...myInfo} isLogin={isLogin} />}
+                element={<ArticleDetail {...myInfo} />}
               />
-              <Route
-                path="/mypage/:id"
-                element={<MyPage {...myInfo} isLogin={isLogin} />}
-              />
+              <Route path="/mypage/:id" element={<MyPage {...myInfo} />} />
               <Route path="/setting" element={<Setting {...myInfo} />} />
               <Route path="/setting/reminder" element={<MyReminder />} />
               <Route path="/myreview" element={<MyReview />} />
