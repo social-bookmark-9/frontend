@@ -44,8 +44,6 @@ const UserNickname = props => {
     memberName: nickname,
   };
 
-  console.log(memberNameData);
-
   const handleCheckMemberName = e => {
     e.preventDefault();
     dispatch(checkMemberNameAxios(memberNameData));

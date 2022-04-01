@@ -25,7 +25,7 @@ const MainPageD = props => {
       <NavbarD {...props} />
       <MainContainer>
         {/* 맨 위 영역 */}
-        {isLogin ? <MainTopIsLoginD isMain = {isMain} /> : <MainTopD />}
+        {isLogin ? <MainTopIsLoginD isMain={isMain} /> : <MainTopD />}
 
         {/* 추천아티클 */}
         <RecommendListD articleList={articleList} />
