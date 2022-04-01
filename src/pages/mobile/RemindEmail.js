@@ -1,17 +1,16 @@
-import React,{ useRef } from "react";
+import React, { useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import { Button, Image, Text, Title } from "../../elements";
 import { useDispatch } from "react-redux";
 import { editReminderEmailAxios } from "../../redux/modules/Profile";
 
-
 const RemindEmail = props => {
   const emailRef = useRef(null);
   const dispatch = useDispatch();
   const handleRemindEmail = () => {
-    const remindEmail = {"email" : emailRef.current.value}
+    const remindEmail = { email: emailRef.current.value };
     dispatch(editReminderEmailAxios(remindEmail));
-  }
+  };
 
   return (
     <React.Fragment>
@@ -62,8 +61,16 @@ const RemindEmail = props => {
         </KeyframeBox>
         <EmailInputBox>
           <Title _lineHeight="28px">리마인드 수신 메일</Title>
-          <EmailInput ref={emailRef} type="text" placeholder="bubbled@bubbled.com" />
-          <Button _fontSize="14px" _padding="15px 0px" _onClick={handleRemindEmail} >
+          <EmailInput
+            ref={emailRef}
+            type="text"
+            placeholder="bubbled@bubbled.com"
+          />
+          <Button
+            _fontSize="14px"
+            _padding="15px 0px"
+            _onClick={handleRemindEmail}
+          >
             저장
           </Button>
         </EmailInputBox>
@@ -71,59 +78,22 @@ const RemindEmail = props => {
     </React.Fragment>
   );
 };
-
-const textAnimation = keyframes`
-0% {
-    opacity: 0;
-}
-10% {
-    opacity: 0.5;
-}
-20% {
-    opacity: 1;
-}
-30% {
-    opacity: 0.5;
-}
-40% {
-    opacity: 0;
-}
-60% {
-    opacity: 0;
-}
-80% {
-    opacity: 0;
-}
-100% {
-    opacity: 0;
-}
-`;
-
-const reTextAnimation = keyframes`
-0% {
-    opacity: 0;
-}
-20% {
-    opacity: 0;
-}
-40% {
-    opacity: 0;
-}
-55% {
-opacity: 0;
-}
-65%{
-opacity: 0.5;
-}
-75% {
-    opacity: 1;
-}
-85% {
-    opacity: 0.5;
-}
-100% {
-    opacity: 0;
-}
+const TextAnimation = keyframes`
+    0% {
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    40% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
 `;
 
 const RemindContainer = styled.div`
@@ -139,14 +109,24 @@ const KeyframeBox = styled.div`
 const KeyframeTitleBox = styled.div`
   height: 200px;
   position: relative;
-  animation: ${textAnimation} 8s linear infinite;
+  opacity: 0;
+  animation: ${TextAnimation};
+  animation-delay: 500ms;
+  animation-duration: 10s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 `;
 
 const ReKeyframeTitleBox = styled.div`
   height: 200px;
   position: absolute;
   top: 81px;
-  animation: ${reTextAnimation} 8s linear infinite;
+  opacity: 0;
+  animation: ${TextAnimation};
+  animation-delay: 5s;
+  animation-duration: 10s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 `;
 
 const FrameTitle = styled.div`

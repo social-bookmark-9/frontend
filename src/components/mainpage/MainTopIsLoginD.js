@@ -8,13 +8,16 @@ const MainTopIsLoginD = () => {
   const newUrlRef = useRef();
   const [newUrl, setNewUrl] = useState("");
 
+  // 메인페이지에서 사용되는지 구분
+  const [mainPage, setMainPage] = useState(true);
+
   return (
     <>
       <div style={{ backgroundColor: "#fafbfb" }}>
         <div
           style={{
             margin: "auto",
-            width: "1220px",
+            width: "1119px",
             padding: "131px 0px 90px 0px",
             textAlign: "center",
           }}
@@ -65,7 +68,11 @@ const MainTopIsLoginD = () => {
                   marginLeft: "-65px",
                 }}
               >
-                <ModalD newUrl={newUrl} />
+                <ModalD
+                  newUrl={newUrl}
+                  mainPage={mainPage}
+                  setMainPage={setMainPage}
+                />
               </div>
             </Input>
           </div>

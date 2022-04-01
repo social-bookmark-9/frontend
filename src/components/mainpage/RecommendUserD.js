@@ -3,17 +3,10 @@ import styled from "styled-components";
 import { Button, Text, Title } from "../../elements";
 import { Circle } from "../../elements/ImageObj";
 
-const RecommendUserD = (props) => {
+const RecommendUserD = props => {
   const { memberInfo } = props;
 
   const navigate = useNavigate();
-  const images = [
-    { id: 0, image: "/images/icon100.png" },
-    { id: 1, image: "/images/icon101.png" },
-    { id: 2, image: "/images/icon102.png" },
-    { id: 3, image: "/images/icon103.png" },
-    { id: 4, image: "/images/icon104.png" },
-  ];
 
   return (
     <>
@@ -86,7 +79,7 @@ const RecommendUserD = (props) => {
                         borderRadius="45px"
                         _onClick={() => {
                           navigate(`/mypage/${member.memberId}`);
-                        }}  
+                        }}
                       >
                         구경하기
                       </Button>
@@ -140,7 +133,7 @@ const ProfileImageDesktop = styled.div`
   & img {
     position: absolute;
     width: 100%;
-    left:0;
+    left: 0;
   }
 `;
 
