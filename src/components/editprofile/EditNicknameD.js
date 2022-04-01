@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router";
 
 import styled, { css } from "styled-components";
 import { FlexboxRow } from "../../styles/flexbox";
@@ -9,7 +8,6 @@ import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { checkMemberNameAxios } from "../../redux/modules/User";
 import { editProfileUserNameAxios } from "../../redux/modules/Profile";
-
 
 const EditNicknameD = props => {
   const dispatch = useDispatch();
@@ -87,7 +85,7 @@ const EditNicknameD = props => {
   return (
     <React.Fragment>
       <Container>
-        <div style={{width:"45vw", height:"100%"}} />
+        <div style={{ width: "45vw", height: "100%" }} />
         <UserContainer>
           <UserBox>
             <UserArea>

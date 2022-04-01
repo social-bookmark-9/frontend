@@ -14,6 +14,7 @@ import UserProfileD from "../../components/mypage/UserProfileD";
 import MyPageRemindD from "../../components/mypage/MyPageRemindD";
 import MyPageSuggest from "../../components/mypage/MyPageSuggest";
 import AddCollectionD from "../../components/mypage/AddCollectionD";
+import ArticleFolderD from "../../components/folderpage/ArticleFolderD";
 
 const MyPageD = props => {
   const { isLogin } = props;

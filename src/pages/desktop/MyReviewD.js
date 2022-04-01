@@ -5,9 +5,7 @@ import styled from "styled-components";
 
 import { getArticleReviewAxios } from "../../redux/modules/Article";
 
-import Navbar from "../../components/common/Navbar";
 import MyReviewListD from "../../components/setting/MyReviewListD";
-
 
 const MyReviewD = () => {
   const dispatch = useDispatch();
