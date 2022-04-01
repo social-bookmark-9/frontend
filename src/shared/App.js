@@ -38,6 +38,7 @@ import UserFavoritesD from "../pages/desktop/UserFavoritesD";
 import ArticleDetailD from "../pages/desktop/ArticleDetailD";
 import MyReviewD from "../pages/desktop/MyReviewD";
 import EditProfileD from "../pages/desktop/EditProfileD";
+import MyReminderD from "../pages/desktop/MyReminderD";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -84,6 +85,11 @@ function App(props) {
             <Route
               path="/setting"
               element={<SettingD {...myInfo} isLogin={isLogin} />}
+            />
+            <Route
+              path="/setting/reminder"
+              element={<MyReminderD {...myInfo}
+              isLogin={isLogin} />}
             />
             <Route element={<NotFound />} />
           </Routes>

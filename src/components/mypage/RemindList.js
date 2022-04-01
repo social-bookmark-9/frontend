@@ -7,57 +7,113 @@ import LinesEllipsis from "react-lines-ellipsis";
 import { HashTagMap } from "./HashTagMap";
 
 const RemindList = props => {
-  const { remindData } = props;
+  const { remindData, isDeskTop } = props;
 
   const navigate = useNavigate();
 
   return (
     <React.Fragment>
-      {remindData &&
-        remindData.map((data, idx) => (
-          <ArticleCardBox
-            onClick={() => {
-              navigate(`/article/${data.articleId}`);
-            }}
-            key={idx}
-            imgUrl={data.imgOg}
-          >
-            <ArticleCardContent>
-              <LabelBox>
-                <HashTagMap {...data} />
-              </LabelBox>
-              <Title>
-                {data.titleOg !== null ? (
-                  <LinesEllipsis
-                    text={data.titleOg}
-                    maxLine="2"
-                    ellipsis="..."
-                    trimRight
-                    basedOn="letters"
-                  />
-                ) : (
-                  "제목없음"
-                )}
-              </Title>
-              <Text>
-                {data.contentOg !== null ? (
-                  <LinesEllipsis
-                    text={data.contentOg}
-                    maxLine="2"
-                    ellipsis="..."
-                    trimRight
-                    basedOn="letters"
-                  />
-                ) : (
-                  "미리보기 내용을 불러올 수 없습니다"
-                )}
-              </Text>
-            </ArticleCardContent>
-          </ArticleCardBox>
-        ))}
+      {isDeskTop ? (
+        <Container>
+        {remindData &&
+          remindData.map((data, idx) => (
+            <ArticleCardBoxDesktop
+              onClick={() => {
+                navigate(`/article/${data.articleId}`);
+              }}
+              key={idx}
+              imgUrl={data.imgOg}
+            >
+              <ArticleCardContent>
+                <LabelBox>
+                  <HashTagMap {...data} />
+                </LabelBox>
+                <Title>
+                  {data.titleOg !== null ? (
+                    <LinesEllipsis
+                      text={data.titleOg}
+                      maxLine="2"
+                      ellipsis="..."
+                      trimRight
+                      basedOn="letters"
+                    />
+                  ) : (
+                    "제목없음"
+                  )}
+                </Title>
+                <Text>
+                  {data.contentOg !== null ? (
+                    <LinesEllipsis
+                      text={data.contentOg}
+                      maxLine="2"
+                      ellipsis="..."
+                      trimRight
+                      basedOn="letters"
+                    />
+                  ) : (
+                    "미리보기 내용을 불러올 수 없습니다"
+                  )}
+                </Text>
+              </ArticleCardContent>
+            </ArticleCardBoxDesktop>
+          ))}
+        </Container>
+      ) : (
+        <>
+        {remindData &&
+          remindData.map((data, idx) => (
+            <ArticleCardBox
+              onClick={() => {
+                navigate(`/article/${data.articleId}`);
+              }}
+              key={idx}
+              imgUrl={data.imgOg}
+            >
+              <ArticleCardContent>
+                <LabelBox>
+                  <HashTagMap {...data} />
+                </LabelBox>
+                <Title>
+                  {data.titleOg !== null ? (
+                    <LinesEllipsis
+                      text={data.titleOg}
+                      maxLine="2"
+                      ellipsis="..."
+                      trimRight
+                      basedOn="letters"
+                    />
+                  ) : (
+                    "제목없음"
+                  )}
+                </Title>
+                <Text>
+                  {data.contentOg !== null ? (
+                    <LinesEllipsis
+                      text={data.contentOg}
+                      maxLine="2"
+                      ellipsis="..."
+                      trimRight
+                      basedOn="letters"
+                    />
+                  ) : (
+                    "미리보기 내용을 불러올 수 없습니다"
+                  )}
+                </Text>
+              </ArticleCardContent>
+            </ArticleCardBox>
+          ))}
+        </>
+      )}
     </React.Fragment>
   );
 };
+
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  padding: 20px 0 0 0;
+`;
 
 const ArticleCardContent = styled.div`
   width: 270px;
@@ -103,5 +159,9 @@ const ArticleCardBox = styled.div`
   height: 288px`
       : "height: 240px"};
 `;
+
+const ArticleCardBoxDesktop = styled(ArticleCardBox)`
+  margin-bottom: -6px;
+`
 
 export default RemindList;
