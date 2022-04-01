@@ -51,23 +51,25 @@ const RemindCard = props => {
         </DReCardBox>
       </Desktop>
       <Tablet>
-        <ReCardBox>
-          <ReCard>
-            <Title
-              _fontSize={({ theme }) => theme.fontSizes.font16}
-              _color="white"
-              _lineHeight="22px"
-            >
-              {_title}
-            </Title>
-            <Text
-              _fontSize={({ theme }) => theme.fontSizes.font13}
-              _color="white"
-              _lineHeight="18px"
-              _padding="8px 0px"
-            >
-              {_text}
-            </Text>
+        <DReCardBox>
+          <DReCard>
+            <DTextBox>
+              <Title
+                _fontSize={({ theme }) => theme.fontSizes.font16}
+                _color="white"
+                _lineHeight="22px"
+              >
+                {_title}
+              </Title>
+              <Text
+                _fontSize={({ theme }) => theme.fontSizes.font13}
+                _color="white"
+                _lineHeight="18px"
+                _padding="8px 0px"
+              >
+                {_text}
+              </Text>
+            </DTextBox>
             <ButtonBox>
               <Button
                 _padding="7px 14px"
@@ -79,8 +81,8 @@ const RemindCard = props => {
                 {_button}
               </Button>
             </ButtonBox>
-          </ReCard>
-        </ReCardBox>
+          </DReCard>
+        </DReCardBox>
       </Tablet>
       <Mobile>
         <ReCardBox>

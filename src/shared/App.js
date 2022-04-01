@@ -42,6 +42,7 @@ import UserFavoritesD from "../pages/desktop/UserFavoritesD";
 import LoginT from "../pages/tablet/LoginT";
 import UserNicknameT from "../pages/tablet/UserNicknameT";
 import UserFavoritesT from "../pages/tablet/UserFavoritesT";
+import MyPageT from "../pages/tablet/MyPageT";
 
 // 모바일 페이지 lazy 적용
 const MyPage = lazy(() => import("../pages/mobile/MyPage"));
@@ -119,6 +120,7 @@ function App(props) {
               <Route path="/login" element={<LoginT />} />
               <Route path="/user/nickname" element={<UserNicknameT />} />
               <Route path="/user/favorites" element={<UserFavoritesT />} />
+              <Route path="/mypage/:id" element={<MyPageT {...myInfo} />} />
             </Routes>
           </Tablet>
           <Mobile>
