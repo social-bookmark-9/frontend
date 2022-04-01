@@ -18,6 +18,7 @@ import FolderNavbarD from "../../components/folderpage/FolderNavbarD";
 import SelectFolderD from "../../components/folderpage/SelectFolderD";
 
 import Swal from "sweetalert2";
+import NavbarD from "../../components/common/NavbarD";
 
 const ArticleListD = props => {
   const { isLogin } = props;
@@ -105,6 +106,7 @@ const ArticleListD = props => {
 
   return (
     <React.Fragment>
+      <NavbarD {...props} />
       <Container>
         <FolderBox>
           <FolderNavbarD
@@ -213,6 +215,7 @@ const ArticleListD = props => {
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
+  padding-top: 82px;
 `;
 const FolderBox = styled.div`
   width: 1115px;

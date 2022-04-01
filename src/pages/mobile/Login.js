@@ -1,5 +1,6 @@
 import React from "react";
 import { KAKAO_AUTH_URL } from "../../shared/OAuth";
+import { getToken } from "../../shared/utils";
 
 import styled from "styled-components";
 import { FlexboxColumn } from "../../styles/flexbox";
@@ -37,7 +38,7 @@ const Login = () => {
           </TitleBox>
         </Topdiv>
         <Bottomdiv>
-          <a href={KAKAO_AUTH_URL}>
+          <a href={getToken() ? "/" : KAKAO_AUTH_URL}>
             <Button
               _padding="14px 0px"
               bgColor={({ theme }) => theme.colors.kakao}

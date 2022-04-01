@@ -22,7 +22,7 @@ import DetailRemindD from "../../components/detailpage/DetailRemindD";
 import RecommendCard from "../../components/detailpage/RecommendCard";
 
 import Swal from "sweetalert2";
-
+import NavbarD from "../../components/common/NavbarD";
 
 const ArticleDetailD = props => {
   const { memberId } = props;
@@ -112,6 +112,7 @@ const ArticleDetailD = props => {
 
   return (
     <React.Fragment>
+    <NavbarD {...props} />
     <Container>
       <DetailNavbarD
         article={article}
@@ -185,26 +186,27 @@ const ArticleDetailD = props => {
       </DetailContainer>
     </Container>
     <GoodToReadContainer>
-      <Container>
-        <Title
-          _fontSize={({ theme }) => theme.fontSizes.font20}
-          _lineHeight="28px"
-          _padding="36px 0 26px 0"
-        >
-          함께 보면 좋은 글
-        </Title>
-        <ReCardBox>
-          <RecommendCard recommendList={recommendList} {...recommendList} />
-        </ReCardBox>
-      </Container>
-    </GoodToReadContainer>
+        <Container>
+          <Title
+            _fontSize={({ theme }) => theme.fontSizes.font20}
+            _lineHeight="28px"
+            _padding="36px 0 26px 0"
+          >
+            함께 보면 좋은 글
+          </Title>
+          <ReCardBox>
+            <RecommendCard recommendList={recommendList} {...recommendList} />
+          </ReCardBox>
+        </Container>
+      </GoodToReadContainer>
     </React.Fragment>
   );
 };
 
 const Container = styled.div`
-  margin: 80px auto 0 auto;
-  width: 1220px;
+  padding-top: 82px;
+  margin: 0 auto;
+  width: 1119px;
 `;
 
 const GoodToReadContainer = styled.div`
@@ -274,6 +276,5 @@ const InputCheck = styled.p`
   line-height: 18px;
   letter-spacing: -0.0008em;
 `;
-
 
 export default ArticleDetailD;

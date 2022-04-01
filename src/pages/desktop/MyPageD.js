@@ -9,8 +9,8 @@ import {
 
 import styled from "styled-components";
 
-// import NavbarD from "../../components/common/NavbarD";
-import ArticleFolderD from "../../components/folderpage/ArticleFolderD";
+import ModalD from "../../components/modal/ModalD";
+import NavbarD from "../../components/common/NavbarD";
 import UserProfileD from "../../components/mypage/UserProfileD";
 import MyPageRemindD from "../../components/mypage/MyPageRemindD";
 import MyPageSuggest from "../../components/mypage/MyPageSuggest";
@@ -48,10 +48,8 @@ const MyPageD = props => {
 
   return (
     <React.Fragment>
+      <NavbarD {...props} />
       <Container>
-        {/* <NavbarD {...props} /> */}
-        <ModalD />
-
         {/* ----- 프로필+이름 부분 ----- */}
         <UserProfileD userInfo={userInfo} {...myInfo} />
 
@@ -72,30 +70,29 @@ const MyPageD = props => {
           />
           {folderList &&
             folderList.map((folder, idx) => (
-            <div key={idx}>
-              <ArticleFolderD
-                folder={folder}
-                {...folder}
-                key={idx}
-                folderColor={
-                  idx % 3 === 0 ? "green" : idx % 3 === 1 ? "purple" : "blue"
-                }
-              />
-            </div>
-          ))}
+              <div key={idx}>
+                <ArticleFolderD
+                  folder={folder}
+                  {...folder}
+                  key={idx}
+                  folderColor={
+                    idx % 3 === 0 ? "green" : idx % 3 === 1 ? "purple" : "blue"
+                  }
+                />
+              </div>
+            ))}
         </FolderListContainer>
         <MyPageSuggest userInfo={userInfo} {...myInfo} isLogin={isLogin} />
         {modalOpen ? <AddCollectionD setModalOpen={setModalOpen} /> : null}
-
       </Container>
     </React.Fragment>
   );
 };
 
 const Container = styled.div`
-  margin: 0px auto 85px auto;
-  top: 0;
-  width: 1220px;
+  margin: 0 auto;
+  padding-top: 82px;
+  width: 1119px;
 `;
 
 const FolderListContainer = styled.div`
@@ -103,6 +100,5 @@ const FolderListContainer = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 22px;
 `;
-
 
 export default MyPageD;

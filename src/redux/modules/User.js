@@ -19,12 +19,11 @@ const initialState = {
 export const kakaoLoginAxios = createAsyncThunk(
   "user/kakaoLogin",
   async ({ code, navigate }, { dispatch }) => {
-    const user = await UserApi.kakaoLogin({ code, navigate, dispatch });
-    if (user) {
-      dispatch(setMyInfo(user.data));
-      console.log(user);
-      return user;
-    }
+    console.log(code);
+    console.log(navigate);
+    await UserApi.kakaoLogin({ code, navigate }, data => {
+      dispatch(setMyInfo(data));
+    });
   },
 );
 
@@ -33,9 +32,9 @@ export const checkMemberNameAxios = createAsyncThunk(
   async (memberNameData, { dispatch }) => {
     console.log(memberNameData);
     const user = await UserApi.checkMemberName(memberNameData);
+    console.log(user);
     if (user) {
       dispatch(setMessage(user.message));
-      console.log(user);
       return user;
     }
   },
@@ -51,7 +50,6 @@ export const registerAxios = createAsyncThunk(
         text: "회원가입이 완료되었습니다!",
         confirmButtonText: "확인",
       });
-      console.log(user);
       return user;
     }
   },
@@ -83,9 +81,9 @@ export const refreshTokensAxios = createAsyncThunk(
 
 export const kakaoLogoutAxios = createAsyncThunk(
   "user/logout",
-  async navigate => {
+  async (navigate, { dispatch }) => {
     const user = await UserApi.kakaoLogout(navigate);
-    // dispatch(deleteUserFromSession());
+    dispatch(deleteUserFromSession());
     console.log(user);
     return user;
   },

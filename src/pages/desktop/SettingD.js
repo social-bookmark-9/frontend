@@ -3,13 +3,13 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 
 import { kakaoLogoutAxios } from "../../redux/modules/User";
+import { KAKAO_AUTH_LOGOUT_URL } from "../../shared/OAuth";
 
 import styled, { css } from "styled-components";
 import { Button, Image, Title } from "../../elements";
 
+import NavbarD from "../../components/common/NavbarD";
 import EditFavoritesD from "../../components/setting/EditFavoritesD";
-
-import Swal from "sweetalert2";
 
 const SettingD = props => {
   const navigate = useNavigate();
@@ -22,25 +22,17 @@ const SettingD = props => {
   };
 
   const handleLogout = () => {
-    Swal.fire({
-      text: "로그아웃 하시겠습니까?",
-      showCancelButton: true,
-      confirmButtonText: "확인",
-      cancelButtonText: "취소",
-    }).then(result => {
-      if (result.isConfirmed) {
-        dispatch(kakaoLogoutAxios(navigate));
-      }
-    });
+    dispatch(kakaoLogoutAxios(navigate));
   };
 
   return (
     <React.Fragment>
+      <NavbarD {...props} />
       {!isEdit ? (
         <Container>
           <UlTop>
             <Ul>
-              <Title _padding="0 0 57px 0">설정</Title>
+              <Title _padding="20px 0 57px 0">설정</Title>
 
               <Li
                 onClick={() => {
@@ -79,15 +71,16 @@ const SettingD = props => {
                 문의하기
               </Li>
             </Ul>
-            <ButtonBox>
-              <Button
-                bgColor={({ theme }) => theme.colors.gray03}
-                _color={({ theme }) => theme.colors.fontColor04}
-                _padding="15px"
-                _onClick={handleLogout}
-              >
-                로그아웃
-              </Button>
+            <ButtonBox onClick={handleLogout}>
+              <a href={KAKAO_AUTH_LOGOUT_URL}>
+                <Button
+                  bgColor={({ theme }) => theme.colors.gray03}
+                  _color={({ theme }) => theme.colors.fontColor04}
+                  _padding="15px"
+                >
+                  로그아웃
+                </Button>
+              </a>
             </ButtonBox>
           </UlBottom>
         </Container>
@@ -109,13 +102,13 @@ const UlTop = styled.div`
     const { colors } = theme;
     return css`
       background-color: ${colors.white};
-      height: 30vh;
+      height: 33vh;
     `;
   }}
 `;
 
 const UlBottom = styled.div`
-  height: 70vh;
+  height: 67vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

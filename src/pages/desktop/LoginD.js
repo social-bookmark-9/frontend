@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { FlexboxColumn, FlexboxRow } from "../../styles/flexbox";
 import { Button, Title, Text, Image } from "../../elements";
 import BubbleAnimation from "../../components/common/BubbleAnimation";
+import { getToken } from "../../shared/utils";
 
 // import { useSelector } from "react-redux";
 
@@ -39,7 +40,7 @@ const LoginD = () => {
               </TitleBox>
             </Topdiv>
             <Bottomdiv>
-              <a href={KAKAO_AUTH_URL}>
+              <a href={getToken() ? "/" : KAKAO_AUTH_URL}>
                 <Button
                   _padding="14px 0px"
                   bgColor={({ theme }) => theme.colors.kakao}

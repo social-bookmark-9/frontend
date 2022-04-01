@@ -31,7 +31,6 @@ import ArticleDetail from "../pages/mobile/ArticleDetail";
 import LoginD from "../pages/desktop/LoginD";
 import MyPageD from "../pages/desktop/MyPageD";
 import SettingD from "../pages/desktop/SettingD";
-import NavbarD from "../components/common/NavbarD";
 import MainPageD from "../pages/desktop/MainPageD";
 import ArticleListD from "../pages/desktop/ArticleListD";
 import UserNicknameD from "../pages/desktop/UserNicknameD";
@@ -42,7 +41,6 @@ import EditProfileD from "../pages/desktop/EditProfileD";
 
 function App(props) {
   const dispatch = useDispatch();
-  const memberId = useSelector(state => state.user.memberId);
   const myInfo = useSelector(state => state.user.myInfo);
   const isLogin = useSelector(state => state.user.isLogin);
 
@@ -60,7 +58,6 @@ function App(props) {
     <React.Fragment>
       <ErrorBoundary fallback={<Spinner />}>
         <Desktop>
-          <NavbarD isLogin={isLogin} memberId={memberId} />
           <Routes>
             <Route
               path="/"
@@ -77,14 +74,17 @@ function App(props) {
             <Route path="/myreview" element={<MyReviewD />} />
             <Route path="/editprofile" element={<EditProfileD {...myInfo} />} />
             <Route
+              path="/article/:id"
+              element={<ArticleDetailD {...myInfo} isLogin={isLogin} />}
+            />
+            <Route
               path="/articles/:id"
               element={<ArticleListD {...myInfo} isLogin={isLogin} />}
             />
             <Route
-              path="/article/:id"
-              element={<ArticleDetailD {...myInfo} isLogin={isLogin} />}
+              path="/setting"
+              element={<SettingD {...myInfo} isLogin={isLogin} />}
             />
-            <Route path="/setting" element={<SettingD />} />
             <Route element={<NotFound />} />
           </Routes>
         </Desktop>

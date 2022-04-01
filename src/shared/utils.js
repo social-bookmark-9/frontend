@@ -22,17 +22,3 @@ export const getReToken = () => {
     return null;
   }
 };
-
-export const getTokens = () => {
-  const accessToken = sessionStorage.getItem("accessToken");
-  const refreshToken = sessionStorage.getItem("refreshToken");
-  const tokens = {
-    accessToken,
-    refreshToken,
-  };
-  if (tokens) {
-    return tokens;
-  } else {
-    return null;
-  }
-};
