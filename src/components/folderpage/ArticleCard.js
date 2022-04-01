@@ -14,7 +14,7 @@ const ArticleCard = props => {
   const navigate = useNavigate();
 
   const isRead = article.read;
-  // 해시태스 리스트
+  // 해시태그 리스트
   const _hashTag = [article.hashtag1, article.hashtag2, article.hashtag3];
   const hashTag = _hashTag.filter((el, i) => el !== null);
 
@@ -115,6 +115,11 @@ const ArticleCardContent = styled.div`
   position: absolute;
   bottom: 28px;
   left: 28px;
+  @media screen and (min-width: 768px) and (max-width: 1195px) {
+    width: 100%;
+    padding: 0px 10px;
+    left: 0;
+  }
 `;
 
 const Title = styled.div`
