@@ -97,7 +97,6 @@ const UserProfileD = props => {
 const DProfileBox = styled.div`
   padding: 20px 0 28px 0;
   position: relative;
-  margin-top: 80px;
 `;
 
 const DProfileImage = styled.div`
