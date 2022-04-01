@@ -39,6 +39,7 @@ import ArticleListD from "../pages/desktop/ArticleListD";
 import UserNicknameD from "../pages/desktop/UserNicknameD";
 import UserFavoritesD from "../pages/desktop/UserFavoritesD";
 import ArticleDetailD from "../pages/desktop/ArticleDetailD";
+import MyReminderD from "../pages/desktop/MyReminderD";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -89,6 +90,12 @@ function App(props) {
             <Route
               path="/setting/remindEmail"
               element={<RemindEmailD {...myInfo} />}
+            />
+              
+            <Routs
+              path="/setting/reminder"
+              element={<MyReminderD {...myInfo}
+              isLogin={isLogin} />}
             />
             <Route element={<NotFound />} />
           </Routes>
