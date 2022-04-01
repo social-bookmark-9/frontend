@@ -13,7 +13,6 @@ import {
   getFolderWithAxios,
 } from "../../redux/modules/Folder";
 
-import Navbar from "../../components/common/Navbar";
 import ArticleCard from "../../components/folderpage/ArticleCard";
 import FolderNavbarD from "../../components/folderpage/FolderNavbarD";
 import SelectFolderD from "../../components/folderpage/SelectFolderD";
@@ -106,7 +105,6 @@ const ArticleListT = props => {
 
   return (
     <React.Fragment>
-      <Navbar {...props} />
       <Container>
         <FolderBox>
           <FolderNavbarD
@@ -228,6 +226,10 @@ const AlBox = styled.div`
   align-items: start;
   justify-content: center;
   color: ${({ theme }) => theme.colors.white};
+  @media screen and (min-width: 768px) and (max-width: 919px) {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 20px;
+  }
 `;
 
 const LikeBox = styled.div`

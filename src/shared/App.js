@@ -41,6 +41,7 @@ import UserFavoritesD from "../pages/desktop/UserFavoritesD";
 // 테블릿 페이지 lazy 적용
 const MainPageT = lazy(() => import("../pages/tablet/MainPageT"));
 const ArticleListT = lazy(() => import("../pages/tablet/ArticleListT"));
+const ArticleDetailT = lazy(() => import("../pages/tablet/ArticleDetailT"));
 
 // 모바일 페이지 lazy 적용
 const MyPage = lazy(() => import("../pages/mobile/MyPage"));
@@ -118,6 +119,10 @@ function App(props) {
               <Route
                 path="/articles/:id"
                 element={<ArticleListT {...myInfo} />}
+              />
+              <Route
+                path="/article/:id"
+                element={<ArticleDetailT {...myInfo} />}
               />
             </Routes>
           </Tablet>
