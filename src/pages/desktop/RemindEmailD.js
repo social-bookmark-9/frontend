@@ -4,7 +4,7 @@ import { Button, Image, Text, Title } from "../../elements";
 import { useDispatch } from "react-redux";
 import { editReminderEmailAxios } from "../../redux/modules/Profile";
 
-const RemindEmail = props => {
+const RemindEmailD = props => {
   const emailRef = useRef(null);
   const dispatch = useDispatch();
   const handleRemindEmail = () => {
@@ -95,10 +95,10 @@ const TextAnimation = keyframes`
       opacity: 0;
     }
 `;
-
 const RemindContainer = styled.div`
   width: 100vw;
   height: 100vh;
+  padding-top: 82px;
 `;
 
 const KeyframeBox = styled.div`
@@ -177,4 +177,4 @@ const EmailInput = styled.input`
   margin: 11px 0px;
 `;
 
-export default RemindEmail;
+export default RemindEmailD;

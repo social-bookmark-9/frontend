@@ -5,10 +5,11 @@ import userApi from "../app/userApi";
 const UserApi = new userApi();
 
 const initialState = {
-  userInfo: null,
-  myInfo: null,
-  isLogin: false,
   isMe: false,
+  myInfo: null,
+  userInfo: null,
+  memberId: null,
+  isLogin: false,
   register: {
     checkMemberName: "",
     usableMemberName: false,
@@ -18,12 +19,11 @@ const initialState = {
 export const kakaoLoginAxios = createAsyncThunk(
   "user/kakaoLogin",
   async ({ code, navigate }, { dispatch }) => {
-    const user = await UserApi.kakaoLogin({ code, navigate, dispatch });
-    if (user) {
-      dispatch(setMyInfo(user.data));
-      console.log(user);
-      return user;
-    }
+    console.log(code);
+    console.log(navigate);
+    await UserApi.kakaoLogin({ code, navigate }, data => {
+      dispatch(setMyInfo(data));
+    });
   },
 );
 
@@ -32,9 +32,9 @@ export const checkMemberNameAxios = createAsyncThunk(
   async (memberNameData, { dispatch }) => {
     console.log(memberNameData);
     const user = await UserApi.checkMemberName(memberNameData);
+    console.log(user);
     if (user) {
       dispatch(setMessage(user.message));
-      console.log(user);
       return user;
     }
   },
@@ -50,7 +50,6 @@ export const registerAxios = createAsyncThunk(
         text: "회원가입이 완료되었습니다!",
         confirmButtonText: "확인",
       });
-      console.log(user);
       return user;
     }
   },
@@ -82,9 +81,9 @@ export const refreshTokensAxios = createAsyncThunk(
 
 export const kakaoLogoutAxios = createAsyncThunk(
   "user/logout",
-  async navigate => {
+  async (navigate, { dispatch }) => {
     const user = await UserApi.kakaoLogout(navigate);
-    // dispatch(deleteUserFromSession());
+    dispatch(deleteUserFromSession());
     console.log(user);
     return user;
   },
@@ -107,8 +106,9 @@ export const userSlice = createSlice({
       sessionStorage.setItem("refreshToken", action.payload.token.refreshToken);
       const myInfo = action.payload.myInfo;
       state.myInfo = { ...myInfo };
-      state.isLogin = action.payload.login;
       state.isMe = action.payload.login;
+      state.isLogin = action.payload.login;
+      state.memberId = action.payload.myInfo.memberId;
     },
     deleteUserFromSession: (state, action) => {
       sessionStorage.removeItem("accessToken");
@@ -117,6 +117,7 @@ export const userSlice = createSlice({
     setUser: (state, action) => {
       const myInfo = action.payload.myInfo;
       state.myInfo = { ...myInfo };
+      state.memberId = action.payload.myInfo.memberId;
     },
   },
   extraReducers: {

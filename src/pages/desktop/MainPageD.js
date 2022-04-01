@@ -3,27 +3,29 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 
-import NavbarD from "../../components/common/NavbarD";
 import MainTopD from "../../components/mainpage/MainTopD";
 import CurationsD from "../../components/mainpage/CurationsD";
 import RecommendUserD from "../../components/mainpage/RecommendUserD";
 import RecommendListD from "../../components/mainpage/RecommendListD";
 import MainTopIsLoginD from "../../components/mainpage/MainTopIsLoginD";
 import MainPageFooterD from "../../components/mainpage/MainPageFooterD";
+import NavbarD from "../../components/common/NavbarD";
 
 const MainPageD = props => {
   const { isLogin } = props;
+
   const memberInfo = useSelector(state => state.main.userInfo);
   const folderList = useSelector(state => state.main.folderList);
   const articleList = useSelector(state => state.main.articleList);
 
+  const isMain = true;
+
   return (
     <React.Fragment>
+      <NavbarD {...props} />
       <MainContainer>
-        <NavbarD {...props} />
-
         {/* 맨 위 영역 */}
-        {isLogin ? <MainTopIsLoginD /> : <MainTopD />}
+        {isLogin ? <MainTopIsLoginD isMain = {isMain} /> : <MainTopD />}
 
         {/* 추천아티클 */}
         <RecommendListD articleList={articleList} />

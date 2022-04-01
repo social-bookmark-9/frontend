@@ -4,14 +4,14 @@ import { useDispatch } from "react-redux";
 import { editProfileHashtagAxios } from "../../redux/modules/Profile";
 
 import styled from "styled-components";
-import { FlexboxColumn } from "../../styles/flexbox";
-import { Button, Title, Text } from "../../elements";
+import { FlexboxColumn, FlexboxRow } from "../../styles/flexbox";
+import { Button, Title, Text, Image } from "../../elements";
 
-import Favorite from "../common/Favorite";
+import FavoriteD from "../common/FavoriteD";
 
 import Swal from "sweetalert2";
 
-const EditFavorites = props => {
+const EditFavoritesD = props => {
   const dispatch = useDispatch();
 
   // 다중 체크 아이템
@@ -52,10 +52,6 @@ const EditFavorites = props => {
         confirmButtonText: "확인",
       });
     } else {
-      Swal.fire({
-        text: "관심분야가 변경되었습니다",
-        confirmButtonText: "확인",
-      });
       props.setIsEdit(false);
       dispatch(editProfileHashtagAxios(hashTag));
     }
@@ -67,94 +63,102 @@ const EditFavorites = props => {
 
   return (
     <React.Fragment>
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <div
-          style={{ display: "flex", width: "80%", justifyContent: "start" }}
-        />
-        <div
-          style={{
-            display: "flex",
-            width: "20%",
-            justifyContent: "end",
-            padding: "14px 14px 0 0",
-          }}
-        >
-          <img
-            src="/images/close.png"
-            width="24px"
-            height="24px"
-            alt=""
-            onClick={handleExit}
-          />
-        </div>
-      </div>
-      <UserBox>
-        <UserArea>
-          <TitleBox>
-            <Title
-              textAlign="center"
-              _fontSize={({ theme }) => theme.fontSizes.font24}
-              _lineHeight="38px"
-              _padding="15px 0px"
-            >
-              관심있는 분야를
-              <br />
-              선택해주세요
-            </Title>
-            <Text textAlign="center">최대 3개까지 선택 가능해요</Text>
-          </TitleBox>
-          <FavoritesBox>
-            <Favorites onChange={handleChecked}>
-              <Favorite />
-            </Favorites>
-          </FavoritesBox>
-        </UserArea>
-        <ButtonBox>
+      <BaseDiv>
+        <div style={{backgroundColor:"#c4c4c4", height:"100vh", width:"45vw"}} />
+        <UserBox>
+          <CloseButtonBox onClick={handleExit}>
+            <Image
+              _src="/images/close.png"
+              _width="30px"
+              _height="30px"
+              _marginR="0px"
+            />
+          </CloseButtonBox>
+          <Topdiv>
+            <TitleBox>
+              <Title
+                textAlign="left"
+                _fontSize={({ theme }) => theme.fontSizes.font24}
+                _lineHeight="38px"
+              >
+                관심있는 분야를 선택해주세요.
+              </Title>
+              <Text
+                textAlign="left"
+                _padding="22px 0px"
+                _color={({ theme }) => theme.colors.fontColor02}
+                _fontSize={({ theme }) => theme.fontSizes.font16}
+                _lineHeight="22px"
+              >
+                최대 3개까지 선택 가능해요
+              </Text>
+            </TitleBox>
+            <FavoritesBox>
+              <Favorites onChange={handleChecked}>
+                <FavoriteD />
+              </Favorites>
+            </FavoritesBox>
+          </Topdiv>
+
           <Button
             _onClick={handleRegister}
             _fontSize={({ theme }) => theme.fontSizes.font20}
             borderRadius="0px"
-            _padding="18px 0px"
+            _padding="19px 0px"
+            _width="547px"
           >
             선택완료
           </Button>
-        </ButtonBox>
-      </UserBox>
+        </UserBox>
+      </BaseDiv>
     </React.Fragment>
   );
 };
 
 // 스타일 컴포넌트 작성 위치
-const UserBox = styled.div`
-  ${FlexboxColumn}
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
+
+const CloseButtonBox = styled.div`
+  position: absolute;
+  top: 125px;
+  left: 635px;
 `;
 
-const UserArea = styled.div`
-  padding: 0px 36px;
+const BaseDiv = styled.div`
+  ${FlexboxRow};
+  width: 100vw;
+  height: 100vh;
+  padding-top: 82px;
+  background-color: #ffffff;
+`;
+
+const UserBox = styled.div`
+  width: 57vw;
+  display: inline-block;
+  position: relative;
+  padding-left: 115px;
+`;
+
+const Topdiv = styled.div`
+  ${FlexboxColumn}
+  align-items: left;
+  text-align: left;
+  height: 75vh;
 `;
 
 const TitleBox = styled.div`
-  padding: 65px 0px;
+  padding: 28px 0px;
+  text-align: left;
 `;
 
 const FavoritesBox = styled.div`
   width: 100%;
+  text-align: left;
 `;
 
 const Favorites = styled.div`
-  margin: auto;
-  width: 317px;
+  width: 472px;
   justify-content: center;
-  text-align: center;
+  text-align: left;
 `;
 
-const ButtonBox = styled.div`
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-`;
-
-export default EditFavorites;
+export default EditFavoritesD;

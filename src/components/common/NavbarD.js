@@ -6,7 +6,9 @@ import Swal from "sweetalert2";
 import { Image, Text, Title } from "../../elements";
 
 const NavbarD = props => {
-  const { isLogin } = props;
+  const { isLogin, memberId } = props;
+  console.log(memberId);
+
   const navigate = useNavigate();
 
   const handleMemoPage = () => {
@@ -32,6 +34,26 @@ const NavbarD = props => {
   const handleSettingPage = () => {
     if (isLogin) {
       navigate("/setting");
+    } else {
+      Swal.fire({
+        title: "잠깐!",
+        text: "로그인이 필요한 서비스에요",
+        icon: "warning",
+        showCancelButton: true,
+        cancelButtonColor: `${({ theme }) => theme.colors.error}`,
+        confirmButtonText: "로그인 하기",
+        cancelButtonText: "취소",
+      }).then(result => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  };
+
+  const handleMyPage = () => {
+    if (isLogin) {
+      navigate(`/mypage/${memberId}`);
     } else {
       Swal.fire({
         title: "잠깐!",
@@ -81,11 +103,7 @@ const NavbarD = props => {
                   _height="24px"
                 />
               </ImageBox>
-              <ImageBox
-                onClick={() => {
-                  navigate("/mypage");
-                }}
-              >
+              <ImageBox onClick={handleMyPage}>
                 <Image _src="/images/iconMe.png" _width="30px" _height="30px" />
               </ImageBox>
             </MenuBox>
@@ -99,6 +117,8 @@ const NavbarD = props => {
 NavbarD.defaultProps = {};
 const NavContainer = styled.div`
   width: 100%;
+  position: absolute;
+  top: 0;
 `;
 
 const NavBox = styled.div`

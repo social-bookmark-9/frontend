@@ -1,22 +1,20 @@
 import axios from "axios";
+import { instance } from "./instance";
 
-import { refreshTokensAxios } from "../modules/User";
-import { getToken, getTokens } from "../../shared/utils";
+import { getToken, getReToken } from "../../shared/utils";
+import Swal from "sweetalert2";
 export default class userApi {
   constructor() {
     this.base = process.env.REACT_APP_SERVER;
   }
 
-  async kakaoLogin({ code, navigate, dispatch }) {
-    const kakaoLoginConfig = {
-      method: "GET",
-      url: `${this.base}${process.env.REACT_APP_KAKAO_URI}?code=${code}`,
-    };
-    return axios(kakaoLoginConfig)
+  async kakaoLogin({ code, navigate }, callback) {
+    await instance
+      .get(`${process.env.REACT_APP_KAKAO_URI}?code=${code}`)
       .then(res => {
         if (res.data.data.login === true) {
           navigate("/", { replace: true });
-          return res.data;
+          callback(res.data.data);
         }
         if (res.data.data.login === false) {
           navigate(
@@ -37,9 +35,6 @@ export default class userApi {
       })
       .catch(err => {
         console.log(err);
-        if (err.message === "expired") {
-          dispatch(refreshTokensAxios(getTokens));
-        }
       });
   }
 
@@ -95,40 +90,23 @@ export default class userApi {
       });
   }
 
-  async refreshTokens({ tokens, navigate }) {
-    const refreshTokensConfig = {
-      method: "POST",
-      url: `${this.base}/api/users/token`,
-      headers: {
-        "content-type": "application/json",
-      },
-      data: JSON.stringify(tokens),
-    };
-    return axios(refreshTokensConfig)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
   async kakaoLogout(navigate) {
     const logoutConfig = {
-      method: "GET",
-      url: `https://kauth.kakao.com/oauth/logout?client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&logout_redirect_uri=http://localhost:3000`,
+      method: "POST",
+      url: `${this.base}/api/users/logout`,
+      headers: { "content-type": "application/json" },
+      data: JSON.stringify(getReToken()),
     };
     return axios(logoutConfig)
       .then(res => {
         console.log(res);
-        // Swal.fire({
-        //   text: "로그아웃 되었습니다",
-        //   confirmButtonText: "확인",
-        //   confirmButtonColor: "#353C49",
-        // }).then(res => {
-        //   navigate("/", { replace: true });
-        // });
-        // return res;
+        Swal.fire({
+          text: "로그아웃 되었습니다",
+          confirmButtonText: "확인",
+        }).then(res => {
+          navigate("/", { replace: true });
+        });
+        return res;
       })
       .catch(err => {
         console.log(err);

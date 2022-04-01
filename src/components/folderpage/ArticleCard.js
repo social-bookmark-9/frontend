@@ -141,6 +141,10 @@ const ImageBox = styled.div`
 `;
 
 const ArticleCardBox = styled.div`
+  @media screen and (min-width: 1194px) {
+    margin-bottom: 12px;
+  }
+
   width: 100%;
   ${props =>
     props.isRead

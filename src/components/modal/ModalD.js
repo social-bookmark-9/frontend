@@ -13,7 +13,7 @@ import AddFolder from "./AddFolder";
 import CheckRemind from "./CheckRemind";
 
 const ModalD = props => {
-  const { newUrl } = props;
+  const { newUrl, isMain } = props;
 
   const dispatch = useDispatch();
 
@@ -24,9 +24,6 @@ const ModalD = props => {
   const toggleAddFolderList = () => {
     setAddFolderList(!addFolderList);
   };
-
-  // 메인페이지에서 사용되는지 구분
-  const [mainPage, setMainPage] = useState(false);
 
   const folderList = useSelector(state => state.folder.myFolderList);
   const myFolderList =
@@ -52,7 +49,7 @@ const ModalD = props => {
   const [addFolderList, setAddFolderList] = useState(true);
   const [folder, setFolder] = useState("미분류 컬렉션");
   // 전달할 정보 세팅
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState(newUrl);
   const [checkedRemind, setCheckedRemind] = useState(0);
 
   const linkData = {
@@ -66,6 +63,7 @@ const ModalD = props => {
   const openModal = () => {
     if (modalOpen === false) {
       setModalOpen(true);
+      setUrl(newUrl);
       document.body.style.cssText = `overflow: hidden; touch-action: none;`;
     } else {
       setModalOpen(false);
@@ -100,7 +98,7 @@ const ModalD = props => {
   return (
     <>
       {/* 아직 버튼 모양은 안 잡아서 기본으로! */}
-      {!mainPage ? (
+      {isMain ? (
         <MainPageLinkButtonBox>
           <Button borderRadius="10px" _fontSize="28px" _onClick={openModal}>
             +

@@ -1,35 +1,27 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 import styled from "styled-components";
 import { Label, Image, Title } from "../../elements";
 
+import LinesEllipsis from "react-lines-ellipsis";
+
 const ArticleFolderD = props => {
-  const {
-    folderColor,
-    folderId,
-    folderName,
-    completeRate,
-    likeCnt,
-    isMe,
-    isDefault,
-    articleList,
-  } = props;
+  const { folder, folderColor } = props;
 
   const navigate = useNavigate();
+  const isMe = useSelector(state => state.user.isMe);
+  const isDefault = folder.isdDeleteable;
+  const articleContents = folder.articleListDtoList;
+
   // 해시태스 리스트
-  const hashTag = [props.hashTag1, props.hashTag2, props.hashTag3];
-  // 아티클 리스트 데이터
-  const folderData = {
-    articleList: articleList,
-    folderName: folderName,
-    isMe: isMe,
-    likeCnt: likeCnt,
-    isDefault: isDefault,
-  };
+  const _hashTag = [props.hashTag1, props.hashTag2, props.hashTag3];
+  const hashTag = _hashTag.filter(el => el !== null);
+
   // 폴더 별 색상 (폰트, 라벨, 해시태그)
   const propsColor = () => {
-    switch (props.folderColor) {
+    switch (folderColor) {
       case "purple":
         return "#7881F5";
       case "blue":
@@ -41,19 +33,19 @@ const ArticleFolderD = props => {
     }
   };
 
+
   return (
     <React.Fragment>
-      <CurationBox
-        folderColor={folderColor}
-        isMe={isMe}
-        isDefault={isDefault}
+      <Container
         onClick={() => {
-          navigate(`/articles/${folderId}`, {
-            state: folderData,
-          });
+          navigate(`/articles/${folder.folderId}`);
         }}
       >
-        <Container>
+        <CurationBox
+          folderColor={folderColor}
+          isMe={isMe}
+          isDefault={isDefault}
+        >
           {isMe || isDefault ? (
             <LabelBox>
               <Label
@@ -61,7 +53,7 @@ const ArticleFolderD = props => {
                 borderColor={propsColor}
                 bgColor="none"
               >
-                완독률 {completeRate}%
+                완독률 {props.completeRate}%
               </Label>
             </LabelBox>
           ) : (
@@ -85,12 +77,12 @@ const ArticleFolderD = props => {
               _lineHeight="24px"
               _color={propsColor}
             >
-              {isDefault ? "미분류 컬렉션" : folderName}
+              {props.folderName}
             </Title>
             {isMe || isDefault ? (
               <Label bgColor="white" _padding="7px" borderColor="white">
                 <Image
-                  _src="/images/hide.png"
+                  _src={`/images/${props.hide ? "show" : "hide"}.png`}
                   _marginR="0px"
                   _width="20px"
                   _height="20px"
@@ -115,30 +107,105 @@ const ArticleFolderD = props => {
                   _width="11px"
                   _height="11px"
                 />
-                {likeCnt}
+                {props.likeCount}
               </Label>
             )}
           </TitleBox>
-        </Container>
-        <div style={{ display: "inline-block", marginLeft: "8px" }}>
-          <ArticleCard>애자일이란 무엇인가</ArticleCard>
-          <ArticleCard>애자일이란 무엇인가</ArticleCard>
-          <ArticleCard>애자일이란 무엇인가</ArticleCard>
-          <ArticleCard>애자일이란 무엇인가</ArticleCard>
-        </div>
-      </CurationBox>
+        
+          <CardWrap>
+            {articleContents && articleContents.length > 4 ? (
+              <>
+              {articleContents.slice(0, 3).map((content, idx) => 
+                <CardBox key={idx}>
+                <Card>
+                  <CardTitle>
+                    {content.title !== null ? (
+                      <LinesEllipsis
+                        text={content.title}
+                        maxLine="2"
+                        ellipsis="..."
+                        trimRight
+                        basedOn="words"
+                      />
+                    ) : (
+                      "제목없음"
+                    )}
+                  </CardTitle>
+                  <CardContents>
+                    {content.content !== null ? (
+                      <LinesEllipsis
+                        text={content.content}
+                        maxLine="2"
+                        ellipsis="..."
+                        trimRight
+                        basedOn="letters"
+                      />
+                    ) : (
+                      "미리보기 내용을 불러올 수 없습니다"
+                    )}
+                  </CardContents>
+                </Card>
+              </CardBox>
+              )}
+              <MoreCard>
+                <div>
+                  {articleContents.length - 3}개 더보기
+                </div>
+              </MoreCard>
+              </>
+            ) : (
+              <>
+              {articleContents && articleContents.map((content, idx) => 
+                <CardBox key={idx}>
+                <Card>
+                  <CardTitle>
+                    {content.title !== null ? (
+                      <LinesEllipsis
+                        text={content.title}
+                        maxLine="2"
+                        ellipsis="..."
+                        trimRight
+                        basedOn="words"
+                      />
+                    ) : (
+                      "제목없음"
+                    )}
+                  </CardTitle>
+                  <CardContents>
+                    {content.content !== null ? (
+                      <LinesEllipsis
+                        text={content.content}
+                        maxLine="2"
+                        ellipsis="..."
+                        trimRight
+                        basedOn="letters"
+                      />
+                    ) : (
+                      "미리보기 내용을 불러올 수 없습니다"
+                    )}
+                  </CardContents>
+                </Card>
+              </CardBox>
+              )}
+              </>
+            )}
+          </CardWrap>
+        </CurationBox>
+      </Container>
     </React.Fragment>
   );
 };
 const Container = styled.div`
-  padding: 24px 32px 36px 22px;
+  width: 100%;
+  height: 450px;
 `;
 
 const CurationBox = styled.div`
   position: relative;
-  width: 736px;
-  height: 450px;
+  width: 100%;
+  height: 100%;
   border-radius: 20px;
+  padding: 24px 30px 0 22px;
   margin-bottom: 20px;
   overflow: hidden;
   ${props => props.folderColor === "green" && "background-color: #F2FDFA"};
@@ -158,15 +225,52 @@ const TitleBox = styled.div`
   justify-content: space-between;
 `;
 
-const ArticleCard = styled.div`
-  display: inline-block;
-  width: 336px;
+const CardWrap = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 36px 0 0 0;
+`;
+
+const CardBox = styled.div`
+  width: 100%;
   height: 146px;
-  padding: 20px 24px 0 22px;
-  margin: 0 0 12px 12px;
-  background-color: #ffffff;
-  border-radius: 10px;
+`;
+
+const Card = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 20px;
   border: 1px solid #f2f4f6;
+  border-radius: 10px;
+  background-color: #ffffff;
+  overflow: hidden;
+  & img {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+`;
+
+const MoreCard = styled(Card)`
+  background-color: rgb(53, 60, 73, 0.025);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const CardTitle = styled.div`
+  padding: 0px 2px 6px 2px;
+  color: ${({ theme }) => theme.colors.fontColor04};
+  font-size: ${({ theme }) => theme.fontSizes.font14};
+  font-weight: ${({ theme }) => theme.fontWeight.semiBold};
+  line-height: 20px;
+`;
+
+const CardContents = styled.div`
+  color: ${({ theme }) => theme.colors.fontColor03};
+  font-size: ${({ theme }) => theme.fontSizes.font12};
+  line-height: 16px;
 `;
 
 export default ArticleFolderD;

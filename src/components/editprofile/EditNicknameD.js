@@ -8,11 +8,10 @@ import { Button, Title } from "../../elements";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { checkMemberNameAxios } from "../../redux/modules/User";
-import BubbleAnimation from "../../components/common/BubbleAnimation";
+import { editProfileUserNameAxios } from "../../redux/modules/Profile";
 
-const UserNicknameD = props => {
-  const location = useLocation();
-  const navigate = useNavigate();
+
+const EditNicknameD = props => {
   const dispatch = useDispatch();
 
   const checkMemberName = useSelector(
@@ -23,14 +22,26 @@ const UserNicknameD = props => {
   );
 
   const [words, setWords] = useState(0);
-  const [nickname, setNickname] = useState("");
+  const [nickName, setNickName] = useState("");
   const [activeMessage, setActiveMessage] = useState(false);
   const [checkCharsKor, setCheckCharsKor] = useState(false);
 
-  const handleFavorite = () => {
-    if (nickname) {
-      navigate("/user/favorites", {
-        state: { ...location.state, nickname },
+  const handleEdit = () => {
+    if (nickName) {
+      props.setIsEdit(false);
+      props.setNewNickname(nickName);
+      dispatch(editProfileUserNameAxios({ nickname: nickName }));
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top",
+        iconColor: "#DAF8F1",
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: false,
+      });
+      Toast.fire({
+        icon: "success",
+        title: "변경완료",
       });
     } else {
       Swal.fire({
@@ -42,7 +53,7 @@ const UserNicknameD = props => {
   };
 
   const memberNameData = {
-    memberName: nickname,
+    memberName: nickName,
   };
 
   const handleCheckMemberName = e => {
@@ -63,7 +74,7 @@ const UserNicknameD = props => {
         setCheckCharsKor(false);
       }
       setWords(checkChars.value.length);
-      setNickname(checkChars.value);
+      setNickName(checkChars.value);
     }
     if (checkChars.value.length > 16) {
       if (regExp.test(checkChars.value)) {
@@ -76,7 +87,7 @@ const UserNicknameD = props => {
   return (
     <React.Fragment>
       <Container>
-        <BubbleAnimation />
+        <div style={{width:"45vw", height:"100%"}} />
         <UserContainer>
           <UserBox>
             <UserArea>
@@ -115,12 +126,12 @@ const UserNicknameD = props => {
             </UserArea>
             <ButtonBox>
               <Button
-                _onClick={handleFavorite}
+                _onClick={handleEdit}
                 _fontSize={({ theme }) => theme.fontSizes.font20}
                 borderRadius="0px"
                 _padding="18px 0px"
               >
-                다음
+                완료
               </Button>
             </ButtonBox>
           </UserBox>
@@ -135,16 +146,20 @@ const Container = styled.div`
   ${FlexboxRow};
   width: 100vw;
   height: 100vh;
+  background-color: #c4c4c4;
 `;
 
 const UserContainer = styled.div`
-  width: 57vw;
-  padding: 0px 115px;
+  width: 55vw;
+  height: 100vh;
+  padding-left: 115px;
+  background-color: #ffffff;
 `;
 
 const UserBox = styled.div`
-  width: 547px;
+  width: 80%;
   position: relative;
+  background-color: #ffffff;
 `;
 
 const UserArea = styled.div`
@@ -240,6 +255,6 @@ const ConfirmMessage = styled.p`
 `;
 
 // default props 작성 위치
-UserNicknameD.defaultProps = {};
+EditNicknameD.defaultProps = {};
 
-export default UserNicknameD;
+export default EditNicknameD;

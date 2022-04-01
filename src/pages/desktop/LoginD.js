@@ -4,6 +4,8 @@ import { KAKAO_AUTH_URL } from "../../shared/OAuth";
 import styled from "styled-components";
 import { FlexboxColumn, FlexboxRow } from "../../styles/flexbox";
 import { Button, Title, Text, Image } from "../../elements";
+import BubbleAnimation from "../../components/common/BubbleAnimation";
+import { getToken } from "../../shared/utils";
 
 // import { useSelector } from "react-redux";
 
@@ -11,9 +13,7 @@ const LoginD = () => {
   return (
     <React.Fragment>
       <Container>
-        <HeaderContainer>
-          <HeaderBox>GIF IMAGE</HeaderBox>
-        </HeaderContainer>
+        <BubbleAnimation />
         <LoginContainer>
           <LoginBox>
             <Topdiv>
@@ -40,7 +40,7 @@ const LoginD = () => {
               </TitleBox>
             </Topdiv>
             <Bottomdiv>
-              <a href={KAKAO_AUTH_URL}>
+              <a href={getToken() ? "/" : KAKAO_AUTH_URL}>
                 <Button
                   _padding="14px 0px"
                   bgColor={({ theme }) => theme.colors.kakao}
@@ -70,19 +70,6 @@ const LoginD = () => {
 const Container = styled.div`
   ${FlexboxRow};
   width: 100vw;
-`;
-
-const HeaderContainer = styled.div`
-  width: 43vw;
-  padding: 188px 0px;
-  background-color: ${({ theme }) => theme.colors.gray07};
-`;
-
-const HeaderBox = styled.div`
-  width: 400px;
-  height: 400px;
-  margin: auto;
-  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const LoginContainer = styled.div`
