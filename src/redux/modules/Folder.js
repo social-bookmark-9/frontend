@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 import folderApi from "../app/folderApi";
 import { postArticleAxios } from "./Article";
 // import { postArticleAxios } from "./Article";
@@ -54,6 +55,8 @@ export const createFolderAxios = createAsyncThunk(
   "folder/createFolder",
   async ({ folderData, navigate }, { dispatch }) => {
     const resp = await FolderApi.createFolder({ folderData, navigate });
+    Swal.fire({ text: "폴더가 생성되었습니다", confirmButtonText: "확인" });
+    dispatch(getFolderListAxios());
     console.log(resp);
     return resp;
   },

@@ -19,8 +19,6 @@ const initialState = {
 export const kakaoLoginAxios = createAsyncThunk(
   "user/kakaoLogin",
   async ({ code, navigate }, { dispatch }) => {
-    console.log(code);
-    console.log(navigate);
     await UserApi.kakaoLogin({ code, navigate }, data => {
       dispatch(setMyInfo(data));
     });

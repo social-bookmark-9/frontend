@@ -98,6 +98,7 @@ export const updateHashtagAxios = createAsyncThunk(
   "article/updateHashtag",
   async ({ articleId, tagData }, { dispatch }) => {
     const resp = await ArticleApi.updateHashtag({ articleId, tagData });
+    Swal.fire({ text: "변경되었습니다", confirmButtonText: "확인" });
     console.log(resp);
     return resp;
   },
