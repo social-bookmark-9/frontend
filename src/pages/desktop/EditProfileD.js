@@ -12,7 +12,6 @@ import {
 } from "../../redux/modules/Profile";
 
 import EditProfileLink from "../../components/editprofile/EditProfileLink";
-import EditNickname from "../../components/editprofile/EditNickname";
 import { Flexbox, FlexboxColumn, FlexboxRow } from "../../styles/flexbox";
 import EditNicknameD from "../../components/editprofile/EditNicknameD";
 
@@ -131,10 +130,7 @@ const EditProfileD = props => {
       <EditProfileLink {...myInfo} isDeskTop={isDeskTop} />
     </Container>
   ) : (
-    <EditNicknameD 
-      setIsEdit={setIsEdit}
-      setNewNickname={setNewNickname}
-    />
+    <EditNicknameD setIsEdit={setIsEdit} setNewNickname={setNewNickname} />
   );
 };
 
