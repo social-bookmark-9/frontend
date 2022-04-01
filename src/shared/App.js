@@ -91,11 +91,10 @@ function App(props) {
               path="/setting/remindEmail"
               element={<RemindEmailD {...myInfo} />}
             />
-              
-            <Routs
+
+            <Route
               path="/setting/reminder"
-              element={<MyReminderD {...myInfo}
-              isLogin={isLogin} />}
+              element={<MyReminderD {...myInfo} isLogin={isLogin} />}
             />
             <Route element={<NotFound />} />
           </Routes>
