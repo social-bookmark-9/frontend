@@ -78,59 +78,22 @@ const RemindEmail = props => {
     </React.Fragment>
   );
 };
-
-const textAnimation = keyframes`
-0% {
-    opacity: 0;
-}
-10% {
-    opacity: 0.5;
-}
-20% {
-    opacity: 1;
-}
-30% {
-    opacity: 0.5;
-}
-40% {
-    opacity: 0;
-}
-60% {
-    opacity: 0;
-}
-80% {
-    opacity: 0;
-}
-100% {
-    opacity: 0;
-}
-`;
-
-const reTextAnimation = keyframes`
-0% {
-    opacity: 0;
-}
-20% {
-    opacity: 0;
-}
-40% {
-    opacity: 0;
-}
-55% {
-opacity: 0;
-}
-65%{
-opacity: 0.5;
-}
-75% {
-    opacity: 1;
-}
-85% {
-    opacity: 0.5;
-}
-100% {
-    opacity: 0;
-}
+const TextAnimation = keyframes`
+    0% {
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    40% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
 `;
 
 const RemindContainer = styled.div`
@@ -146,14 +109,24 @@ const KeyframeBox = styled.div`
 const KeyframeTitleBox = styled.div`
   height: 200px;
   position: relative;
-  animation: ${textAnimation} 8s linear infinite;
+  opacity: 0;
+  animation: ${TextAnimation};
+  animation-delay: 500ms;
+  animation-duration: 10s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 `;
 
 const ReKeyframeTitleBox = styled.div`
   height: 200px;
   position: absolute;
   top: 81px;
-  animation: ${reTextAnimation} 8s linear infinite;
+  opacity: 0;
+  animation: ${TextAnimation};
+  animation-delay: 5s;
+  animation-duration: 10s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 `;
 
 const FrameTitle = styled.div`
