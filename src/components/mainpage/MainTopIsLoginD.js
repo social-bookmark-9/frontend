@@ -4,7 +4,8 @@ import styled from "styled-components";
 import { Image, Text, Title } from "../../elements";
 import ModalD from "../modal/ModalD";
 
-const MainTopIsLoginD = () => {
+const MainTopIsLoginD = (props) => {
+  const {isMain} = props;
   const newUrlRef = useRef();
   const [newUrl, setNewUrl] = useState("");
 
@@ -68,11 +69,7 @@ const MainTopIsLoginD = () => {
                   marginLeft: "-65px",
                 }}
               >
-                <ModalD
-                  newUrl={newUrl}
-                  mainPage={mainPage}
-                  setMainPage={setMainPage}
-                />
+                <ModalD newUrl={newUrl} isMain={isMain} />
               </div>
             </Input>
           </div>

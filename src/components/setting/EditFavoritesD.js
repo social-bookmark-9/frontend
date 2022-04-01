@@ -8,7 +8,6 @@ import { FlexboxColumn, FlexboxRow } from "../../styles/flexbox";
 import { Button, Title, Text, Image } from "../../elements";
 
 import FavoriteD from "../common/FavoriteD";
-import BubbleAnimation from "../common/BubbleAnimation";
 
 import Swal from "sweetalert2";
 
@@ -65,7 +64,7 @@ const EditFavoritesD = props => {
   return (
     <React.Fragment>
       <BaseDiv>
-        <BubbleAnimation />
+        <div style={{backgroundColor:"#c4c4c4", height:"100vh", width:"45vw"}} />
         <UserBox>
           <CloseButtonBox onClick={handleExit}>
             <Image
@@ -129,11 +128,11 @@ const BaseDiv = styled.div`
   width: 100vw;
   height: 100vh;
   padding-top: 82px;
+  background-color: #ffffff;
 `;
 
 const UserBox = styled.div`
   width: 57vw;
-  background-color: #ffffff;
   display: inline-block;
   position: relative;
   padding-left: 115px;

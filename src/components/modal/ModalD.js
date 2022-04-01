@@ -13,7 +13,7 @@ import AddFolder from "./AddFolder";
 import CheckRemind from "./CheckRemind";
 
 const ModalD = props => {
-  const { newUrl } = props;
+  const { newUrl, isMain } = props;
 
   const dispatch = useDispatch();
 
@@ -24,9 +24,6 @@ const ModalD = props => {
   const toggleAddFolderList = () => {
     setAddFolderList(!addFolderList);
   };
-
-  // 메인페이지에서 사용되는지 구분
-  const [mainPage, setMainPage] = useState(false);
 
   const folderList = useSelector(state => state.folder.myFolderList);
   const myFolderList =
@@ -61,9 +58,6 @@ const ModalD = props => {
     reminderDate: +checkedRemind,
     articleFolderName: folder,
   };
-
-  console.log(newUrl);
-  console.log(linkData);
 
   // 모달 열고 닫기 펑션
   const openModal = () => {
@@ -103,7 +97,8 @@ const ModalD = props => {
 
   return (
     <>
-      {!mainPage ? (
+      {/* 아직 버튼 모양은 안 잡아서 기본으로! */}
+      {isMain ? (
         <MainPageLinkButtonBox>
           <Button borderRadius="10px" _fontSize="28px" _onClick={openModal}>
             +

@@ -13,17 +13,19 @@ import NavbarD from "../../components/common/NavbarD";
 
 const MainPageD = props => {
   const { isLogin } = props;
-  console.log(props);
+
   const memberInfo = useSelector(state => state.main.userInfo);
   const folderList = useSelector(state => state.main.folderList);
   const articleList = useSelector(state => state.main.articleList);
+
+  const isMain = true;
 
   return (
     <React.Fragment>
       <NavbarD {...props} />
       <MainContainer>
         {/* 맨 위 영역 */}
-        {isLogin ? <MainTopIsLoginD /> : <MainTopD />}
+        {isLogin ? <MainTopIsLoginD isMain = {isMain} /> : <MainTopD />}
 
         {/* 추천아티클 */}
         <RecommendListD articleList={articleList} />

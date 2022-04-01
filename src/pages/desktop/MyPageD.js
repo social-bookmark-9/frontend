@@ -12,10 +12,10 @@ import styled from "styled-components";
 import ModalD from "../../components/modal/ModalD";
 import NavbarD from "../../components/common/NavbarD";
 import UserProfileD from "../../components/mypage/UserProfileD";
-import AddCollection from "../../components/mypage/AddCollection";
 import MyPageRemindD from "../../components/mypage/MyPageRemindD";
 import MyPageSuggest from "../../components/mypage/MyPageSuggest";
-import ArticleFolderD from "../../components/folderpage/ArticleFolderD";
+import ModalD from "../../components/modal/ModalD";
+import AddCollectionD from "../../components/mypage/AddCollectionD";
 
 const MyPageD = props => {
   const { isLogin } = props;
@@ -83,9 +83,7 @@ const MyPageD = props => {
             ))}
         </FolderListContainer>
         <MyPageSuggest userInfo={userInfo} {...myInfo} isLogin={isLogin} />
-        <ModalD />
-        {modalOpen ? <AddCollection setModalOpen={setModalOpen} /> : null}
-        {/* <Modal isLogin={isLogin} /> */}
+        {modalOpen ? <AddCollectionD setModalOpen={setModalOpen} /> : null}
       </Container>
     </React.Fragment>
   );
