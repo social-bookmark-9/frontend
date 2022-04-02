@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 
 import styled, { css } from "styled-components";
@@ -27,6 +28,8 @@ const MyPageRemindD = props => {
     }
   }, [memberId, params.id]);
 
+  const reminderData = useSelector(state => state.reminder);
+
   return (
     <>
       {myOwnPage ? (
@@ -40,88 +43,33 @@ const MyPageRemindD = props => {
           />
 
           <CurationDiv>
-            {folderList && folderList.length > 0 ? (
-            <>
-              <AlertBox onClick={openModal}>
-                <RemindAlert>
-                  <div style={{margin: "0 auto 0 auto", display:"flex"}}>
-                    <ImageBox>
-                      <Image
-                        _src="/images/add.png"
-                        _width="20px"
-                        _height="20px"
-                      />
-                    </ImageBox>
-                    <TextBox>
-                      <Title
-                        _fontSize={({ theme }) => theme.fontSizes.font16}
-                        _lineHeight="22px"
-                      >
-                        새 컬렉션 만들기
-                      </Title>
-                      <Text
-                        _fontSize={({ theme }) => theme.fontSizes.font13}
-                        _lineHeight="18px"
-                      >
-                        컬렉션을 만들어 링크를 분류해 보세요
-                      </Text>
-                    </TextBox>
-                  </div>
-                </RemindAlert>
-              </AlertBox>
-              <AlertBox>
-                <RemindAlert>
-                  <div style={{margin: "0 auto 0 auto", display:"flex"}}>
-                    <ImageBox>
-                      <Image
-                        _src="/images/remind.png"
-                        _width="20px"
-                        _height="19px"
-                      />
-                    </ImageBox>
-                    <TextBox>
-                      <Title
-                        _fontSize={({ theme }) => theme.fontSizes.font16}
-                        _lineHeight="22px"
-                      >
-                        아티클 리마인드
-                      </Title>
-                      <Text
-                        _fontSize={({ theme }) => theme.fontSizes.font13}
-                        _lineHeight="18px"
-                      >
-                        아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
-                      </Text>
-                    </TextBox>
-                  </div>
-                </RemindAlert>
-              </AlertBox>
-            </>
-            ) : (
-            <AlertBox onClick={openModal}>
+            <AlertBox>
               <RemindAlert>
                 <div style={{margin: "0 auto 0 auto", display:"flex"}}>
                   <ImageBox>
-                    <Image _src="/images/add.png" _width="20px" _height="20px" />
+                    <Image
+                      _src="/images/remind.png"
+                      _width="20px"
+                      _height="19px"
+                    />
                   </ImageBox>
                   <TextBox>
                     <Title
                       _fontSize={({ theme }) => theme.fontSizes.font16}
                       _lineHeight="22px"
                     >
-                      새 컬렉션 만들기
+                      아티클 리마인드
                     </Title>
                     <Text
                       _fontSize={({ theme }) => theme.fontSizes.font13}
                       _lineHeight="18px"
                     >
-                      컬렉션을 만들어 링크를 분류해 보세요
+                      아직 읽지 않은 아티클 <TextPoint>{reminderData.remindData.length}개</TextPoint>가 있어요
                     </Text>
                   </TextBox>
                 </div>
               </RemindAlert>
             </AlertBox>
-            )}
           </CurationDiv>
 
           <Qheader>

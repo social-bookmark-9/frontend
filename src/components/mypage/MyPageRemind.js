@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { useSelector } from "react-redux";
 
 import styled, { css } from "styled-components";
 import { Label, Title, Image, Text } from "../../elements";
@@ -28,6 +29,8 @@ const MyPageRemind = props => {
       setMyOwnPage(false);
     }
   }, [memberId, params.id]);
+
+  const reminderData = useSelector(state => state.reminder);
 
   return (
     <>
@@ -60,33 +63,8 @@ const MyPageRemind = props => {
               {...defaultFolder}
             />
           </FolderContainer>
-          {folderList && folderList.length > 0 ? (
+          {reminderData.remindData && reminderData.remindData.length > 0 ? (
             <>
-              <AlertBox onClick={openModal}>
-                <RemindAlert>
-                  <ImageBox>
-                    <Image
-                      _src="/images/add.png"
-                      _width="20px"
-                      _height="20px"
-                    />
-                  </ImageBox>
-                  <TextBox>
-                    <Title
-                      _fontSize={({ theme }) => theme.fontSizes.font16}
-                      _lineHeight="22px"
-                    >
-                      새 컬렉션 만들기
-                    </Title>
-                    <Text
-                      _fontSize={({ theme }) => theme.fontSizes.font13}
-                      _lineHeight="18px"
-                    >
-                      컬렉션을 만들어 링크를 분류해 보세요
-                    </Text>
-                  </TextBox>
-                </RemindAlert>
-              </AlertBox>
               <AlertBox>
                 <RemindAlert>
                   <ImageBox>
@@ -107,7 +85,7 @@ const MyPageRemind = props => {
                       _fontSize={({ theme }) => theme.fontSizes.font13}
                       _lineHeight="18px"
                     >
-                      아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
+                      아직 읽지 않은 아티클 <TextPoint>{reminderData.remindData.length}개</TextPoint>가 있어요
                     </Text>
                   </TextBox>
                 </RemindAlert>
