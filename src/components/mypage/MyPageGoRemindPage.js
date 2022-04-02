@@ -17,8 +17,8 @@ const MyPageGoRemindPage = props => {
     }
   }, [memberId, params.id]);
 
-  return (
-    <>
+  return(
+    <div style={{padding:"0 16px"}}>
       {myOwnPage ? (
         <RemindCard
           _title="저장한 글, 다시 읽고 계신가요?"
@@ -27,9 +27,10 @@ const MyPageGoRemindPage = props => {
           }
           _button="리마인드 받기"
         />
-      ) : null}
-    </>
-  );
-};
+      ) : null
+      }
+    </div>  
+  )
+}
 
 export default MyPageGoRemindPage;

@@ -40,8 +40,13 @@ import UserFavoritesD from "../pages/desktop/UserFavoritesD";
 
 // 테블릿 페이지
 import LoginT from "../pages/tablet/LoginT";
+import SettingT from "../pages/tablet/SettingT";
+import MyReviewT from "../pages/tablet/MyReviewT";
+import MyReminderT from "../pages/tablet/MyReminderT";
+import EditProfileT from "../pages/tablet/EditProfileT";
 import UserNicknameT from "../pages/tablet/UserNicknameT";
 import UserFavoritesT from "../pages/tablet/UserFavoritesT";
+
 
 // 모바일 페이지 lazy 적용
 const MyPage = lazy(() => import("../pages/mobile/MyPage"));
@@ -125,9 +130,11 @@ function App(props) {
               <Route path="/" element={<MainPageT {...myInfo} />} />
               <Route path="/setting" element={<Setting {...myInfo} />} />
               <Route path="/user/nickname" element={<UserNicknameT />} />
+              <Route path="/setting/reminder" element={<MyReminderT />} />
               <Route path="/search" element={<SearchPage {...myInfo} />} />
               <Route path="/user/favorites" element={<UserFavoritesT />} />
               <Route path="/mypage/:id" element={<MyPageT {...myInfo} />} />
+              <Route path="/myreview" element={<MyReviewT {...myInfo} />} />
               <Route
                 path="/api/users/login"
                 element={<OAuthRedirectHandler />}
@@ -135,6 +142,10 @@ function App(props) {
               <Route
                 path="/articles/:id"
                 element={<ArticleListT {...myInfo} />}
+              />
+              <Route
+                path="/editprofile"
+                element={<EditProfileT {...myInfo} />}
               />
               <Route
                 path="/setting/remindEmail"

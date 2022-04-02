@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 
 import styled, { css } from "styled-components";
@@ -17,6 +18,8 @@ const MyPageRemindT = props => {
       setMyOwnPage(false);
     }
   }, [memberId, params.id]);
+
+  const reminderData = useSelector(state => state.reminder);
 
   return (
     <>
@@ -54,7 +57,6 @@ const MyPageRemindT = props => {
                   </RemindAlert>
                 </AlertBox>
               </>
-            ) : null}
           </CurationDiv>
         </>
       ) : null}
@@ -106,6 +108,7 @@ const TextBox = styled.div`
 const CurationDiv = styled.div`
   display: inline-block;
   width: 100%;
+  padding: 0 16px;
 `;
 
 export default MyPageRemindT;
