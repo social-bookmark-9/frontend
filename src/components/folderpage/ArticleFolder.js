@@ -1,15 +1,19 @@
 import React from "react";
-import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 import styled from "styled-components";
 import { Label, Image, Title } from "../../elements";
-import CarouselT from "../../elements/CarouselT";
+
+import Carousel from "../../elements/Carousel";
 
 const ArticleFolder = props => {
   const { folder, folderColor } = props;
+  console.log(props);
 
   const navigate = useNavigate();
+
+  // 내 아이디와 폴더 유저 아이디로 비교해야함
   const isMe = useSelector(state => state.user.isMe);
   const isDefault = folder.isdDeleteable;
   const articleContents = folder.articleListDtoList;
@@ -44,7 +48,7 @@ const ArticleFolder = props => {
           isMe={isMe}
           isDefault={isDefault}
         >
-          {isMe || isDefault ? (
+          {isMe ? (
             <LabelBox>
               <Label
                 _color={propsColor}
@@ -77,10 +81,10 @@ const ArticleFolder = props => {
             >
               {props.folderName}
             </Title>
-            {isMe || isDefault ? (
+            {isMe ? (
               <Label bgColor="white" _padding="7px" borderColor="white">
                 <Image
-                  _src={`/images/${props.hide ? "show" : "hide"}.png`}
+                  _src={`/images/${props.hide ? "hide" : "show"}.png`}
                   _width="20px"
                   _height="20px"
                   _marginR="0px"
@@ -110,7 +114,7 @@ const ArticleFolder = props => {
             )}
           </TitleBox>
           <CarouselBox>
-            <CarouselT articleContents={articleContents} {...articleContents} />
+            <Carousel articleContents={articleContents} {...articleContents} />
           </CarouselBox>
         </CurationBox>
       </Container>
@@ -125,12 +129,12 @@ const CurationBox = styled.div`
   position: relative;
   width: 100%;
   height: 290px;
-  border-radius: 20px;
-  padding: 28px 20px;
   overflow: hidden;
+  padding: 28px 20px;
+  border-radius: 20px;
+  ${props => props.folderColor === "blue" && "background-color: #F0F7FB"};
   ${props => props.folderColor === "green" && "background-color: #F2FDFA"};
   ${props => props.folderColor === "purple" && "background-color: #F7F7FD"};
-  ${props => props.folderColor === "blue" && "background-color: #F0F7FB"};
   ${props => props.folderColor === "default" && "background-color: #fafbfb"};
 `;
 

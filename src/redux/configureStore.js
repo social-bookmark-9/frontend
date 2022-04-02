@@ -1,23 +1,25 @@
 import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
 
+import mainReducer from "./modules/Main";
 import userReducer from "./modules/User";
-import articleReducer from "./modules/Article";
+import searchReducer from "./modules/Search";
 import folderReducer from "./modules/Folder";
 import profileReducer from "./modules/Profile";
+import articleReducer from "./modules/Article";
+import reminderReducer from "./modules/Reminder";
 import localDataReducer from "./modules/LocalData";
-import mainReducer from "./modules/Main";
-import reminderReducer from "./modules/Reminder"
 
 export const store = configureStore({
   reducer: {
     main: mainReducer,
     user: userReducer,
-    article: articleReducer,
+    search: searchReducer,
     folder: folderReducer,
     profile: profileReducer,
-    localData: localDataReducer,
+    article: articleReducer,
     reminder: reminderReducer,
+    localData: localDataReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({ serializableCheck: false }).concat(logger),
