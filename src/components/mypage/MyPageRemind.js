@@ -10,14 +10,7 @@ import RemindCard from "./RemindCard";
 import ArticleFolder from "../folderpage/ArticleFolder";
 
 const MyPageRemind = props => {
-  const {
-    defaultFolder,
-    folderList,
-    userInfo,
-    completeRate,
-    memberId,
-    openModal,
-  } = props;
+  const { defaultFolder, userInfo, completeRate, memberId, openModal } = props;
 
   const [myOwnPage, setMyOwnPage] = useState(false);
   const params = useParams();
@@ -85,7 +78,9 @@ const MyPageRemind = props => {
                       _fontSize={({ theme }) => theme.fontSizes.font13}
                       _lineHeight="18px"
                     >
-                      아직 읽지 않은 아티클 <TextPoint>{reminderData.remindData.length}개</TextPoint>가 있어요
+                      아직 읽지 않은 아티클{" "}
+                      <TextPoint>{reminderData.remindData.length}개</TextPoint>
+                      가 있어요
                     </Text>
                   </TextBox>
                 </RemindAlert>

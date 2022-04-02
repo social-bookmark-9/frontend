@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { Button, Image, Text, Title } from "../../elements";
 import { useDispatch } from "react-redux";
 import { editReminderEmailAxios } from "../../redux/modules/Profile";
