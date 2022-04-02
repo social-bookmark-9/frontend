@@ -66,6 +66,9 @@ const Navbar = props => {
                   <Link to={isLogin ? "/myreview" : "/login"}>
                     <li>내가 작성한 메모</li>
                   </Link>
+                  <Link to={isLogin ? "/setting/reminder" : "/login"}>
+                    <li>내 리마인드 목록</li>
+                  </Link>
                 </MenuBox>
               </div>
               <Button
