@@ -38,10 +38,10 @@ import EditProfileD from "../pages/desktop/EditProfileD";
 import UserNicknameD from "../pages/desktop/UserNicknameD";
 import UserFavoritesD from "../pages/desktop/UserFavoritesD";
 
-// 테블릿 페이지 lazy 적용
-const MainPageT = lazy(() => import("../pages/tablet/MainPageT"));
-const ArticleListT = lazy(() => import("../pages/tablet/ArticleListT"));
-const ArticleDetailT = lazy(() => import("../pages/tablet/ArticleDetailT"));
+// 테블릿 페이지
+import LoginT from "../pages/tablet/LoginT";
+import UserNicknameT from "../pages/tablet/UserNicknameT";
+import UserFavoritesT from "../pages/tablet/UserFavoritesT";
 
 // 모바일 페이지 lazy 적용
 const MyPage = lazy(() => import("../pages/mobile/MyPage"));
@@ -54,6 +54,11 @@ const MyPageD = lazy(() => import("../pages/desktop/MyPageD"));
 const MainPageD = lazy(() => import("../pages/desktop/MainPageD"));
 const ArticleListD = lazy(() => import("../pages/desktop/ArticleListD"));
 const ArticleDetailD = lazy(() => import("../pages/desktop/ArticleDetailD"));
+
+// 테블릿 페이지 lazy 적용
+const MainPageT = lazy(() => import("../pages/tablet/MainPageT"));
+const ArticleListT = lazy(() => import("../pages/tablet/ArticleListT"));
+const ArticleDetailT = lazy(() => import("../pages/tablet/ArticleDetailT"));
 
 function App(props) {
   const dispatch = useDispatch();
@@ -124,6 +129,10 @@ function App(props) {
                 path="/article/:id"
                 element={<ArticleDetailT {...myInfo} />}
               />
+              <Route path="/login" element={<LoginT />} />
+              <Route path="/user/nickname" element={<UserNicknameT />} />
+              <Route path="/user/favorites" element={<UserFavoritesT />} />
+              <Route path="/mypage/:id" element={<MyPageT {...myInfo} />} />
             </Routes>
           </Tablet>
           <Mobile>
