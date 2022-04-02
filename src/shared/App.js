@@ -44,6 +44,7 @@ import SettingT from "../pages/tablet/SettingT";
 import UserNicknameT from "../pages/tablet/UserNicknameT";
 import UserFavoritesT from "../pages/tablet/UserFavoritesT";
 import MyReminderT from "../pages/tablet/MyReminderT";
+import MyReviewT from "../pages/tablet/MyReviewT";
 
 
 // 모바일 페이지 lazy 적용
@@ -139,6 +140,7 @@ function App(props) {
               <Route path="/mypage/:id" element={<MyPageT {...myInfo} />} />
               <Route path="/setting" element={<SettingT {...myInfo} />} />
               <Route path="/setting/reminder" element={<MyReminderT />} />
+              <Route path="/myreview" element={<MyReviewT {...myInfo} />} />
               <Route
                 path="/api/users/login"
                 element={<OAuthRedirectHandler />}

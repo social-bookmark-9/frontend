@@ -12,6 +12,7 @@ import Navbar from "../../components/common/Navbar";
 import EditFavoritesT from "../../components/setting/EditFavoritesT";
 
 const SettingT = props => {
+  const { isLogin } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // const isLogin = useSelector(state => state.user.isLogin);
