@@ -40,6 +40,7 @@ import UserFavoritesD from "../pages/desktop/UserFavoritesD";
 
 // 테블릿 페이지
 import LoginT from "../pages/tablet/LoginT";
+import MyPageT from "../pages/tablet/MyPageT";
 import UserNicknameT from "../pages/tablet/UserNicknameT";
 import UserFavoritesT from "../pages/tablet/UserFavoritesT";
 
