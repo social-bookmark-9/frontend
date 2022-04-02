@@ -2,13 +2,13 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
-import Modal from "../../components/modal/Modal";
 import Navbar from "../../components/common/Navbar";
 import Search from "../../components/mainpage/Search";
 import MainTop from "../../components/mainpage/MainTop";
 import Curations from "../../components/mainpage/Curations";
 import RecommendList from "../../components/mainpage/RecommendList";
 import RecommendUserT from "../../components/mainpage/RecommendUserT";
+import ModalD from "../../components/modal/ModalD";
 
 const MainPageT = props => {
   const { isLogin } = props;
@@ -30,7 +30,7 @@ const MainPageT = props => {
         <RecommendUserT memberInfo={memberInfo} />
         {/* 검색 */}
         <Search />
-        {isLogin ? <Modal /> : null}
+        <ModalD />
       </MainContainer>
     </React.Fragment>
   );
