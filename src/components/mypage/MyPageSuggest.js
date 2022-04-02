@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import styled from "styled-components";
+import { Image, Text, Title } from "../../elements";
 
 import RemindCard from "./RemindCard";
 
 const MyPageSuggest = props => {
-  const { userInfo, memberId, isLogin, isTablet } = props;
+  const { userInfo, memberId, isLogin, isTablet, openModal } = props;
 
   const [myOwnPage, setMyOwnPage] = useState(false);
   const params = useParams();
@@ -22,7 +23,7 @@ const MyPageSuggest = props => {
   return (
     <>
       {!myOwnPage ? (
-        <CardWrap isTablet={isTablet}>
+        <CardWrap>
           <RemindCard
             memberId={memberId}
             isLogin={isLogin}
@@ -34,19 +35,69 @@ const MyPageSuggest = props => {
             isNew={isNew}
           />
         </CardWrap>
+      ) : isTablet ? (
+        <AlertBox onClick={openModal}>
+          <RemindAlert>
+            <div style={{ margin: "0 auto 0 auto", display: "flex" }}>
+              <ImageBox>
+                <Image _src="/images/add.png" _width="20px" _height="20px" />
+              </ImageBox>
+              <TextBox>
+                <Title
+                  _fontSize={({ theme }) => theme.fontSizes.font16}
+                  _lineHeight="22px"
+                >
+                  새 컬렉션 만들기
+                </Title>
+                <Text
+                  _fontSize={({ theme }) => theme.fontSizes.font13}
+                  _lineHeight="18px"
+                >
+                  컬렉션을 만들어 링크를 분류해 보세요
+                </Text>
+              </TextBox>
+            </div>
+          </RemindAlert>
+        </AlertBox>
       ) : null}
     </>
   );
 };
 
 const CardWrap = styled.div`
-  ${({ isTablet }) =>
-    isTablet
-    ? `
-    padding: 0 16px;
-  `
-    : `
-  `}
+  @media screen and (min-width: 768px) and (max-width: 1194px) {
+    padding: 0px 16px;
+  }
+`;
+
+const AlertBox = styled.div`
+  padding: 8px 0px;
+  width: 100%;
+  @media screen and (min-width: 768px) and (max-width: 1194px) {
+    padding: 0px 16px;
+  }
+`;
+
+const RemindAlert = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 82px;
+  border: 1px solid #f2f3f4;
+  border-radius: 16px;
+  padding: 19px 22px;
+  text-align: center;
+  cursor: pointer;
+`;
+
+const ImageBox = styled.div`
+  display: flex;
+`;
+
+const TextBox = styled.div`
+  display: block;
+  & h1 {
+    padding-bottom: 2px;
+  }
 `;
 
 export default MyPageSuggest;

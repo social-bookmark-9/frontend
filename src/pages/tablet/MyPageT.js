@@ -16,9 +16,9 @@ import UserProfile from "../../components/mypage/UserProfile";
 import AddCollection from "../../components/mypage/AddCollection";
 import MyPageSuggest from "../../components/mypage/MyPageSuggest";
 import MyPageRemindT from "../../components/mypage/MyPageRemindT";
-import RemindCard from "../../components/mypage/RemindCard";
 import ModalD from "../../components/modal/ModalD";
 import MyPageGoRemindPage from "../../components/mypage/MyPageGoRemindPage";
+import AddCollectionD from "../../components/mypage/AddCollectionD";
 
 const MyPageT = props => {
   const { isLogin } = props;
@@ -54,48 +54,36 @@ const MyPageT = props => {
       <Container>
         <Navbar {...props} />
         {/* ----- 프로필+이름 부분 ----- */}
-        <UserProfile
-          userInfo={userInfo}
-          isTablet={isTablet}
-          {...myInfo}
-        />
+        <UserProfile userInfo={userInfo} isTablet={isTablet} {...myInfo} />
         {/* ----- 리마인드, 디폴트 폴더 ----- */}
         <MyPageGoRemindPage {...myInfo} />
-
-        <Title
-          _fontSize="20px"
-          _padding="30px 0 18px 30px"
-          _lineHeight="28px"
-        >
+        <Title _fontSize="20px" _padding="30px 0 18px 30px" _lineHeight="28px">
           {userInfo.memberName}님의 큐레이션
         </Title>
-        
         {/* 폴더리스트 시작 */}
         <FolderListContainer>
-
-            <FolderContainer>
-              <ArticleFolder
-                folderColor="default"
-                folder={defaultFolder}
-                {...defaultFolder}
-              />
-            </FolderContainer>
+          <FolderContainer>
+            <ArticleFolder
+              folderColor="default"
+              folder={defaultFolder}
+              {...defaultFolder}
+            />
+          </FolderContainer>
 
           {folderList &&
-            folderList.slice(0,1).map((folder, idx) => (
-                <FolderContainer key={idx}>
-                  <ArticleFolder
-                    folder={folder}
-                    {...folder}
-                    key={idx}
-                    folderColor={
-                      idx % 3 === 0 ? "green" : idx % 3 === 1 ? "purple" : "blue"
-                    }
-                  />
-                </FolderContainer>
+            folderList.slice(0, 1).map((folder, idx) => (
+              <FolderContainer key={idx}>
+                <ArticleFolder
+                  folder={folder}
+                  {...folder}
+                  key={idx}
+                  folderColor={
+                    idx % 3 === 0 ? "green" : idx % 3 === 1 ? "purple" : "blue"
+                  }
+                />
+              </FolderContainer>
             ))}
         </FolderListContainer>
-
         <MyPageRemindT
           defaultFolder={defaultFolder}
           folderList={folderList}
@@ -103,20 +91,19 @@ const MyPageT = props => {
           userInfo={userInfo}
           {...myInfo}
         />
-
         <FolderListContainer>
           {folderList &&
-            folderList.slice(1,3).map((folder, idx) => (
-                <FolderContainer key={idx}>
-                  <ArticleFolder
-                    folder={folder}
-                    {...folder}
-                    key={idx}
-                    folderColor={
-                      idx % 3 === 0 ? "purple" : idx % 3 === 1 ? "blue" : "green"
-                    }
-                  />
-                </FolderContainer>
+            folderList.slice(1, 3).map((folder, idx) => (
+              <FolderContainer key={idx}>
+                <ArticleFolder
+                  folder={folder}
+                  {...folder}
+                  key={idx}
+                  folderColor={
+                    idx % 3 === 0 ? "purple" : idx % 3 === 1 ? "blue" : "green"
+                  }
+                />
+              </FolderContainer>
             ))}
         </FolderListContainer>
 
@@ -124,10 +111,11 @@ const MyPageT = props => {
           userInfo={userInfo}
           isLogin={isLogin}
           isTablet={isTablet}
+          openModal={openModal}
           {...myInfo}
         />
-        
-        {modalOpen ? <AddCollection setModalOpen={setModalOpen} /> : null}
+
+        {modalOpen ? <AddCollectionD setModalOpen={setModalOpen} /> : null}
         <ModalD isLogin={isLogin} />
       </Container>
     </React.Fragment>

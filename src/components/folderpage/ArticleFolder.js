@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 import styled from "styled-components";
 import { Label, Image, Title } from "../../elements";
-import Carousel from "../../elements/Carousel";
+import CarouselT from "../../elements/CarouselT";
 
 const ArticleFolder = props => {
   const { folder, folderColor } = props;
@@ -110,7 +110,7 @@ const ArticleFolder = props => {
             )}
           </TitleBox>
           <CarouselBox>
-            <Carousel articleContents={articleContents} {...articleContents} />
+            <CarouselT articleContents={articleContents} {...articleContents} />
           </CarouselBox>
         </CurationBox>
       </Container>

@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { Button, Image, Text, Title } from "../../elements";
 import { useDispatch } from "react-redux";
 import { editReminderEmailAxios } from "../../redux/modules/Profile";
@@ -99,23 +99,23 @@ const RemindEmailD = props => {
     </React.Fragment>
   );
 };
-const TextAnimation = keyframes`
-    0% {
-      opacity: 0;
-    }
-    20% {
-      opacity: 1;
-    }
-    40% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 0;
-    }
-`;
+// const TextAnimation = keyframes`
+//     0% {
+//       opacity: 0;
+//     }
+//     20% {
+//       opacity: 1;
+//     }
+//     40% {
+//       opacity: 1;
+//     }
+//     50% {
+//       opacity: 0;
+//     }
+//     100% {
+//       opacity: 0;
+//     }
+// `;
 
 const RemindContainer = styled.div`
   width: 100vw;
@@ -124,6 +124,7 @@ const RemindContainer = styled.div`
 const KeyframeContainer = styled.div`
   width: 100vw;
   background: ${({ theme }) => theme.colors.pointPurple02};
+  overflow: hidden;
 `;
 
 const KeyframeBox = styled.div`
@@ -132,6 +133,10 @@ const KeyframeBox = styled.div`
   margin: auto;
   padding-top: 90px;
   background: ${({ theme }) => theme.colors.pointPurple02};
+  @media screen and (min-width: 768px) and (max-width: 1194px) {
+    width: 100%;
+    padding: 64px 44px;
+  }
 `;
 
 const KeyframeTitleBox = styled.div`
@@ -140,7 +145,6 @@ const KeyframeTitleBox = styled.div`
   height: 200px;
   position: relative;
   opacity: 0;
-  animation: ${TextAnimation};
   animation-delay: 500ms;
   animation-duration: 10s;
   animation-timing-function: ease-in-out;
@@ -151,10 +155,9 @@ const ReKeyframeTitleBox = styled.div`
   ${FlexboxSpace};
   flex-direction: row;
   height: 200px;
-  position: absolute;
-  top: 81px;
-  opacity: 0;
-  animation: ${TextAnimation};
+  position: relative;
+  top: -200px;
+  opacity: 1;
   animation-delay: 5s;
   animation-duration: 10s;
   animation-timing-function: ease-in-out;
@@ -181,11 +184,18 @@ const ImageBox = styled.div`
 
 const ReImageBox = styled.div`
   position: absolute;
-  top: 48px;
-  left: 520px;
+  top: 39px;
+  right: 0;
+  @media screen and (min-width: 768px) and (max-width: 1194px) {
+    top: 65px;
+    right: -95px;
+  }
 `;
 
 const KeyframeTipBox = styled.div`
+  display: inline-block;
+  position: relative;
+  top: -160px;
   & p {
     font-size: 13px;
     line-height: 18px;

@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 
 import styled, { css } from "styled-components";
 import { Title, Image, Text } from "../../elements";
 
 const MyPageRemindT = props => {
-  const {
-    folderList,
-    memberId,
-  } = props;
+  const { folderList, memberId } = props;
 
   const [myOwnPage, setMyOwnPage] = useState(false);
   const params = useParams();
@@ -21,55 +19,60 @@ const MyPageRemindT = props => {
     }
   }, [memberId, params.id]);
 
+  const reminderData = useSelector(state => state.reminder);
+
   return (
     <>
       {myOwnPage ? (
         <>
           <CurationDiv>
             {folderList && folderList.length > 0 ? (
-            <>
-              <AlertBox>
-                <RemindAlert>
-                  <div style={{margin: "0 auto 0 auto", display:"flex"}}>
-                    <ImageBox>
-                      <Image
-                        _src="/images/remind.png"
-                        _width="20px"
-                        _height="19px"
-                      />
-                    </ImageBox>
-                    <TextBox>
-                      <Title
-                        _fontSize={({ theme }) => theme.fontSizes.font16}
-                        _lineHeight="22px"
-                      >
-                        아티클 리마인드
-                      </Title>
-                      <Text
-                        _fontSize={({ theme }) => theme.fontSizes.font13}
-                        _lineHeight="18px"
-                      >
-                        아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
-                      </Text>
-                    </TextBox>
-                  </div>
-                </RemindAlert>
-              </AlertBox>
-            </>
-            ) : (
-              null
-            )}
+              <>
+                <AlertBox>
+                  <RemindAlert>
+                    <div style={{ margin: "0 auto 0 auto", display: "flex" }}>
+                      <ImageBox>
+                        <Image
+                          _src="/images/remind.png"
+                          _width="20px"
+                          _height="19px"
+                        />
+                      </ImageBox>
+                      <TextBox>
+                        <Title
+                          _fontSize={({ theme }) => theme.fontSizes.font16}
+                          _lineHeight="22px"
+                        >
+                          아티클 리마인드
+                        </Title>
+                        <Text
+                          _fontSize={({ theme }) => theme.fontSizes.font13}
+                          _lineHeight="18px"
+                        >
+                          아직 읽지 않은 아티클{" "}
+                          <TextPoint>
+                            {reminderData.remindData.length}개
+                          </TextPoint>
+                          가 있어요
+                        </Text>
+                      </TextBox>
+                    </div>
+                  </RemindAlert>
+                </AlertBox>
+              </>
+            ) : null}
           </CurationDiv>
         </>
       ) : null}
     </>
   );
 };
-
-
 const AlertBox = styled.div`
-  padding: 8px 0 8px 0;
+  padding: 8px 0px;
   width: 100%;
+  @media screen and (min-width: 768px) and (max-width: 1194px) {
+    padding: 0px 16px;
+  }
 `;
 
 const RemindAlert = styled.div`
@@ -108,7 +111,7 @@ const TextBox = styled.div`
 const CurationDiv = styled.div`
   display: inline-block;
   width: 100%;
+  padding: 0 16px;
 `;
-
 
 export default MyPageRemindT;

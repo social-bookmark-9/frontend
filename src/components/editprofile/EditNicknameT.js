@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router";
 
 import styled, { css } from "styled-components";
 import { FlexboxColumn } from "../../styles/flexbox";
@@ -8,10 +7,9 @@ import { Button, Title } from "../../elements";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { checkMemberNameAxios } from "../../redux/modules/User";
+import { editProfileUserNameAxios } from "../../redux/modules/Profile";
 
-const UserNickname = props => {
-  const location = useLocation();
-  const navigate = useNavigate();
+const EditNicknameT = props => {
   const dispatch = useDispatch();
 
   const checkMemberName = useSelector(
@@ -22,14 +20,26 @@ const UserNickname = props => {
   );
 
   const [words, setWords] = useState(0);
-  const [nickname, setNickname] = useState("");
+  const [nickName, setNickName] = useState("");
   const [activeMessage, setActiveMessage] = useState(false);
   const [checkCharsKor, setCheckCharsKor] = useState(false);
 
-  const handleFavorite = () => {
-    if (nickname) {
-      navigate("/user/favorites", {
-        state: { ...location.state, nickname },
+  const handleEdit = () => {
+    if (nickName) {
+      props.setIsEdit(false);
+      props.setNewNickname(nickName);
+      dispatch(editProfileUserNameAxios({ nickname: nickName }));
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top",
+        iconColor: "#DAF8F1",
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: false,
+      });
+      Toast.fire({
+        icon: "success",
+        title: "변경완료",
       });
     } else {
       Swal.fire({
@@ -41,7 +51,7 @@ const UserNickname = props => {
   };
 
   const memberNameData = {
-    memberName: nickname,
+    memberName: nickName,
   };
 
   const handleCheckMemberName = e => {
@@ -62,7 +72,7 @@ const UserNickname = props => {
         setCheckCharsKor(false);
       }
       setWords(checkChars.value.length);
-      setNickname(checkChars.value);
+      setNickName(checkChars.value);
     }
     if (checkChars.value.length > 16) {
       if (regExp.test(checkChars.value)) {
@@ -92,7 +102,9 @@ const UserNickname = props => {
               maxLength={16}
               onKeyUp={handleCheckChars}
             />
-            <CheckButton onClick={handleCheckMemberName}>중복확인</CheckButton>
+            <CheckBox>
+              <CheckButton onClick={handleCheckMemberName}>중복확인</CheckButton>
+            </CheckBox>
             <MessageBox>
               {activeMessage ? (
                 usableMemberName ? (
@@ -111,12 +123,12 @@ const UserNickname = props => {
         </UserArea>
         <ButtonBox>
           <Button
-            _onClick={handleFavorite}
+            _onClick={handleEdit}
             _fontSize={({ theme }) => theme.fontSizes.font20}
             borderRadius="0px"
             _padding="18px 0px"
           >
-            다음
+            완료
           </Button>
         </ButtonBox>
       </UserBox>
@@ -140,11 +152,10 @@ const UserArea = styled.div`
 const TitleBox = styled.div`
   width: 547px;
   margin-bottom: 110px;
-`;
+`
 
 const InputBox = styled.div`
   width: 547px;
-  position: relative;
 `;
 
 const UserInput = styled.input`
@@ -176,7 +187,10 @@ const ButtonBox = styled.div`
   width: 547px;
   text-align: center;
   display: inline-block;
-  position: relative;
+`;
+
+const CheckBox = styled.div`
+  text-align: right;
 `;
 
 const CheckButton = styled.button`
@@ -192,8 +206,9 @@ const CheckButton = styled.button`
       padding: 6px 17px;
       border-radius: 45px;
       display: inline-block;
-      position: absolute;
-      right: 0;
+      position: relative;
+      right: 0px;
+      top: -36px;
     `;
   }}
 `;
@@ -232,6 +247,6 @@ const ConfirmMessage = styled.p`
 `;
 
 // default props 작성 위치
-UserNickname.defaultProps = {};
+EditNicknameT.defaultProps = {};
 
-export default UserNickname;
+export default EditNicknameT;

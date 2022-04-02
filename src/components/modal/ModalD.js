@@ -11,13 +11,16 @@ import { FlexboxRow, FlexboxSpace } from "../../styles/flexbox";
 import AddLinkTagD from "./AddLinkTagD";
 import AddFolder from "./AddFolder";
 import CheckRemind from "./CheckRemind";
+import { getToken } from "../../shared/utils";
 
 const ModalD = props => {
   const { newUrl, isMain } = props;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getFolderListAxios());
+    if (getToken()) {
+      dispatch(getFolderListAxios());
+    }
   }, [dispatch]);
 
   const toggleAddFolderList = () => {

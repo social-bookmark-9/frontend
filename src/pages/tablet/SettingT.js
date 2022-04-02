@@ -8,10 +8,10 @@ import { KAKAO_AUTH_LOGOUT_URL } from "../../shared/OAuth";
 import styled, { css } from "styled-components";
 import { Button, Image, Title } from "../../elements";
 
-import NavbarD from "../../components/common/NavbarD";
-import EditFavoritesD from "../../components/setting/EditFavoritesD";
+import Navbar from "../../components/common/Navbar";
+import EditFavoritesT from "../../components/setting/EditFavoritesT";
 
-const SettingD = props => {
+const SettingT = props => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // const isLogin = useSelector(state => state.user.isLogin);
@@ -27,7 +27,7 @@ const SettingD = props => {
 
   return (
     <React.Fragment>
-      <NavbarD {...props} />
+      <Navbar {...props} />
       {!isEdit ? (
         <Container>
           <UlTop>
@@ -85,7 +85,7 @@ const SettingD = props => {
           </UlBottom>
         </Container>
       ) : (
-        <EditFavoritesD setIsEdit={setIsEdit} />
+        <EditFavoritesT setIsEdit={setIsEdit} />
       )}
     </React.Fragment>
   );
@@ -98,25 +98,27 @@ const Container = styled.div`
 `;
 
 const UlTop = styled.div`
+  padding-left: 20%;
   ${({ theme }) => {
     const { colors } = theme;
     return css`
       background-color: ${colors.white};
-      height: 40vh;
+      height: 33vh;
     `;
   }}
 `;
 
 const UlBottom = styled.div`
-  height: 60vh;
+  height: 67vh;
+  padding: 0 20%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
 
 const Ul = styled.ul`
-  width: 1119px;
-  padding-top: 82px;
+  width: 100%;
+  padding-top: 50px;
   margin: 0 auto;
 `;
 
@@ -130,8 +132,8 @@ const Li = styled.li`
 `;
 
 const ButtonBox = styled.div`
-  width: 1119px;
+  width: 100%;
   margin: 0 auto;
-  padding: 60px 0px;
+  padding: 124px 0px;
 `;
-export default SettingD;
+export default SettingT;
