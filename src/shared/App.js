@@ -117,12 +117,16 @@ function App(props) {
                 path="/api/users/login"
                 element={<OAuthRedirectHandler />}
               />
-              <Route element={<NotFound />} />
             </Routes>
           </Desktop>
           <Tablet>
             <Routes>
+              <Route element={<NotFound />} />
+              <Route path="/login" element={<LoginT />} />
               <Route path="/" element={<MainPageT {...myInfo} />} />
+              <Route path="/user/nickname" element={<UserNicknameT />} />
+              <Route path="/user/favorites" element={<UserFavoritesT />} />
+              <Route path="/mypage/:id" element={<MyPageT {...myInfo} />} />
               <Route
                 path="/articles/:id"
                 element={<ArticleListT {...myInfo} />}
@@ -131,15 +135,14 @@ function App(props) {
                 path="/article/:id"
                 element={<ArticleDetailT {...myInfo} />}
               />
-              <Route path="/login" element={<LoginT />} />
-              <Route path="/user/nickname" element={<UserNicknameT />} />
-              <Route path="/user/favorites" element={<UserFavoritesT />} />
-              <Route path="/mypage/:id" element={<MyPageT {...myInfo} />} />
               <Route
                 path="/api/users/login"
                 element={<OAuthRedirectHandler />}
               />
-              <Route element={<NotFound />} />
+              <Route
+                path="/setting/remindEmail"
+                element={<RemindEmailD {...myInfo} />}
+              />
             </Routes>
           </Tablet>
           <Mobile>
