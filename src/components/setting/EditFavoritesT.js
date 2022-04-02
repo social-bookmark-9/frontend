@@ -5,7 +5,7 @@ import { editProfileHashtagAxios } from "../../redux/modules/Profile";
 
 import styled from "styled-components";
 import { FlexboxColumn } from "../../styles/flexbox";
-import { Button, Title, Text, Image  } from "../../elements";
+import { Button, Title, Text } from "../../elements";
 
 import Favorite from "../../components/common/Favorite";
 
@@ -57,9 +57,9 @@ const UserFavoritesT = props => {
     }
   };
 
-  const handleExit = () => {
-    props.setIsEdit(false);
-  };
+  // const handleExit = () => {
+  //   props.setIsEdit(false);
+  // };
 
   return (
     <React.Fragment>

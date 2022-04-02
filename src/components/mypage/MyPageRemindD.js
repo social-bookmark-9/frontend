@@ -9,13 +9,7 @@ import { Flexbox } from "../../styles/flexbox";
 import RemindCard from "./RemindCard";
 
 const MyPageRemindD = props => {
-  const {
-    folderList,
-    userInfo,
-    completeRate,
-    memberId,
-    openModal,
-  } = props;
+  const { userInfo, completeRate, memberId } = props;
 
   const [myOwnPage, setMyOwnPage] = useState(false);
   const params = useParams();
@@ -45,7 +39,7 @@ const MyPageRemindD = props => {
           <CurationDiv>
             <AlertBox>
               <RemindAlert>
-                <div style={{margin: "0 auto 0 auto", display:"flex"}}>
+                <div style={{ margin: "0 auto 0 auto", display: "flex" }}>
                   <ImageBox>
                     <Image
                       _src="/images/remind.png"
@@ -64,7 +58,9 @@ const MyPageRemindD = props => {
                       _fontSize={({ theme }) => theme.fontSizes.font13}
                       _lineHeight="18px"
                     >
-                      아직 읽지 않은 아티클 <TextPoint>{reminderData.remindData.length}개</TextPoint>가 있어요
+                      아직 읽지 않은 아티클{" "}
+                      <TextPoint>{reminderData.remindData.length}개</TextPoint>
+                      가 있어요
                     </Text>
                   </TextBox>
                 </div>
@@ -144,6 +140,5 @@ const CurationDiv = styled.div`
   display: inline-block;
   width: 100%;
 `;
-
 
 export default MyPageRemindD;

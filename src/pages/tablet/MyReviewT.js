@@ -8,8 +8,7 @@ import { getArticleReviewAxios } from "../../redux/modules/Article";
 import MyReviewListD from "../../components/setting/MyReviewListD";
 import Navbar from "../../components/common/Navbar";
 
-const MyReviewT = (props) => {
-  const { isLogin } = props
+const MyReviewT = props => {
   const dispatch = useDispatch();
 
   useEffect(() => {
