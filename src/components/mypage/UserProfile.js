@@ -6,7 +6,7 @@ import { Title, Text } from "../../elements";
 import { Circle } from "../../elements/ImageObj";
 
 const UserProfile = props => {
-  const { userInfo, memberId } = props;
+  const { userInfo, memberId, isTablet } = props;
   const navigate = useNavigate();
 
   const [myOwnPage, setMyOwnPage] = useState(false);
@@ -26,7 +26,7 @@ const UserProfile = props => {
 
   return (
     <React.Fragment>
-      <ProfileBox>
+      <ProfileBox isTablet={isTablet}>
         <ProfileHead>
           <ProfileImage>
             <img src={userInfo.profileImage} alt="profile" />
@@ -99,6 +99,13 @@ const UserProfile = props => {
 const ProfileBox = styled.div`
   width: 100vw;
   height: 150px;
+  ${({ isTablet }) =>
+    isTablet
+      ? `
+  padding-left: 38px;
+ `
+      : `
+ `}
 `;
 
 const ProfileHead = styled.div`
