@@ -110,7 +110,9 @@ const MyPageRemind = props => {
             </AlertBox>
           )}
         </>
-      ) : null}
+      ) : (
+        <Title _padding="20px">{userInfo.memberName}님의 큐레이션</Title>
+      )}
     </>
   );
 };
