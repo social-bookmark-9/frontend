@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { useSelector } from "react-redux";
 
 import styled, { css } from "styled-components";
 import { Label, Title, Image, Text } from "../../elements";
@@ -28,6 +29,8 @@ const MyPageRemind = props => {
       setMyOwnPage(false);
     }
   }, [memberId, params.id]);
+
+  const reminderData = useSelector(state => state.reminder);
 
   return (
     <>
@@ -107,7 +110,7 @@ const MyPageRemind = props => {
                       _fontSize={({ theme }) => theme.fontSizes.font13}
                       _lineHeight="18px"
                     >
-                      아직 읽지 않은 아티클 <TextPoint>15개</TextPoint>가 있어요
+                      아직 읽지 않은 아티클 <TextPoint>{reminderData.remindData.length}개</TextPoint>가 있어요
                     </Text>
                   </TextBox>
                 </RemindAlert>
