@@ -102,13 +102,13 @@ const UlTop = styled.div`
     const { colors } = theme;
     return css`
       background-color: ${colors.white};
-      height: 33vh;
+      height: 40vh;
     `;
   }}
 `;
 
 const UlBottom = styled.div`
-  height: 67vh;
+  height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -116,7 +116,7 @@ const UlBottom = styled.div`
 
 const Ul = styled.ul`
   width: 1119px;
-  padding-top: 75px;
+  padding-top: 82px;
   margin: 0 auto;
 `;
 
@@ -132,6 +132,6 @@ const Li = styled.li`
 const ButtonBox = styled.div`
   width: 1119px;
   margin: 0 auto;
-  padding: 124px 0px;
+  padding: 60px 0px;
 `;
 export default SettingD;

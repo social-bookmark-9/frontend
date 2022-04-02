@@ -98,12 +98,16 @@ function App(props) {
               <Route path="/user/favorites" element={<UserFavoritesD />} />
               <Route path="/mypage/:id" element={<MyPageD {...myInfo} />} />
               <Route
-                path="/editprofile"
-                element={<EditProfileD {...myInfo} />}
+                path="/api/users/login"
+                element={<OAuthRedirectHandler />}
               />
               <Route
-                path="/article/:id"
-                element={<ArticleDetailD {...myInfo} />}
+                path="/setting/reminder"
+                element={<MyReminderD {...myInfo} />}
+              />
+              <Route
+                path="/editprofile"
+                element={<EditProfileD {...myInfo} />}
               />
               <Route
                 path="/articles/:id"
@@ -113,77 +117,78 @@ function App(props) {
                 path="/setting/remindEmail"
                 element={<RemindEmailD {...myInfo} />}
               />
-
               <Route
-                path="/setting/reminder"
-                element={<MyReminderD {...myInfo} />}
-              />
-              <Route
-                path="/api/users/login"
-                element={<OAuthRedirectHandler />}
+                path="/article/:id"
+                element={<ArticleDetailD {...myInfo} />}
               />
             </Routes>
           </Desktop>
           <Tablet>
             <Routes>
+              <Route element={<NotFound />} />
+              <Route path="/login" element={<LoginT />} />
               <Route path="/" element={<MainPageT {...myInfo} />} />
+              <Route path="/setting" element={<Setting {...myInfo} />} />
+              <Route path="/user/nickname" element={<UserNicknameT />} />
+              <Route path="/setting/reminder" element={<MyReminderT />} />
+              <Route path="/search" element={<SearchPage {...myInfo} />} />
+              <Route path="/user/favorites" element={<UserFavoritesT />} />
+              <Route path="/mypage/:id" element={<MyPageT {...myInfo} />} />
+              <Route path="/myreview" element={<MyReviewT {...myInfo} />} />
+              <Route
+                path="/api/users/login"
+                element={<OAuthRedirectHandler />}
+              />
               <Route
                 path="/articles/:id"
                 element={<ArticleListT {...myInfo} />}
               />
               <Route
-                path="/article/:id"
-                element={<ArticleDetailT {...myInfo} />}
-              />
-              <Route path="/login" element={<LoginT />} />
-              <Route path="/user/nickname" element={<UserNicknameT />} />
-              <Route path="/user/favorites" element={<UserFavoritesT />} />
-              <Route path="/mypage/:id" element={<MyPageT {...myInfo} />} />
-              <Route path="/setting" element={<SettingT {...myInfo} />} />
-              <Route path="/setting/reminder" element={<MyReminderT />} />
-              <Route path="/myreview" element={<MyReviewT {...myInfo} />} />
-              <Route
                 path="/editprofile"
                 element={<EditProfileT {...myInfo} />}
               />
               <Route
-                path="/api/users/login"
-                element={<OAuthRedirectHandler />}
+                path="/setting/remindEmail"
+                element={<RemindEmailD {...myInfo} />}
+              />
+              <Route
+                path="/article/:id"
+                element={<ArticleDetailT {...myInfo} />}
               />
             </Routes>
           </Tablet>
           <Mobile>
             <Routes>
-              <Route path="/" element={<MainPage {...myInfo} />} />
+              <Route element={<NotFound />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/user/nickname" element={<UserNickname />} />
-              <Route path="/user/favorites" element={<UserFavorites />} />
-              <Route
-                path="/articles/:id"
-                element={<ArticleList {...myInfo} />}
-              />
-              <Route
-                path="/article/:id"
-                element={<ArticleDetail {...myInfo} />}
-              />
-              <Route path="/mypage/:id" element={<MyPage {...myInfo} />} />
-              <Route path="/setting" element={<Setting {...myInfo} />} />
-              <Route path="/setting/reminder" element={<MyReminder />} />
               <Route path="/myreview" element={<MyReview />} />
+              <Route path="/" element={<MainPage {...myInfo} />} />
+              <Route path="/user/nickname" element={<UserNickname />} />
+              <Route path="/setting/reminder" element={<MyReminder />} />
+              <Route path="/setting" element={<Setting {...myInfo} />} />
+              <Route path="/user/favorites" element={<UserFavorites />} />
+              <Route path="/mypage/:id" element={<MyPage {...myInfo} />} />
               <Route path="/search" element={<SearchPage {...myInfo} />} />
               <Route
-                path="/editprofile"
-                element={<EditProfile {...myInfo} />}
+                path="/api/users/login"
+                element={<OAuthRedirectHandler />}
               />
               <Route
                 path="/setting/remindEmail"
                 element={<RemindEmail {...myInfo} />}
               />
               <Route
-                path="/api/users/login"
-                element={<OAuthRedirectHandler />}
+                path="/articles/:id"
+                element={<ArticleList {...myInfo} />}
               />
-              <Route element={<NotFound />} />
+              <Route
+                path="/editprofile"
+                element={<EditProfile {...myInfo} />}
+              />
+              <Route
+                path="/article/:id"
+                element={<ArticleDetail {...myInfo} />}
+              />
             </Routes>
           </Mobile>
         </Suspense>

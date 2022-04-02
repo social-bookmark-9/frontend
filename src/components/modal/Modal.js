@@ -11,12 +11,15 @@ import { FlexboxRow, FlexboxSpace } from "../../styles/flexbox";
 import AddLinkTag from "./AddLinkTag";
 import AddFolder from "./AddFolder";
 import CheckRemind from "./CheckRemind";
+import { getToken } from "../../shared/utils";
 
 const Modal = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getFolderListAxios());
+    if (getToken()) {
+      dispatch(getFolderListAxios());
+    }
   }, [dispatch]);
 
   const toggleAddFolderList = () => {

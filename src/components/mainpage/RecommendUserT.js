@@ -92,9 +92,7 @@ const Container = styled.div`
 `;
 
 const UserContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  column-gap: 20px;
+  width: 159px;
 `;
 
 const Card = styled.div`

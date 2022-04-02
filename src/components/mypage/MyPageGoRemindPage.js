@@ -3,10 +3,8 @@ import { useParams } from "react-router";
 
 import RemindCard from "./RemindCard";
 
-const MyPageGoRemindPage = (props) => {
-  const {
-    memberId,
-  } = props;
+const MyPageGoRemindPage = props => {
+  const { memberId } = props;
 
   const [myOwnPage, setMyOwnPage] = useState(false);
   const params = useParams();
@@ -34,6 +32,5 @@ const MyPageGoRemindPage = (props) => {
     </div>  
   )
 }
-
 
 export default MyPageGoRemindPage;

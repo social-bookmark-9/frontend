@@ -115,7 +115,7 @@ const ArticleCardContent = styled.div`
   position: absolute;
   bottom: 28px;
   left: 28px;
-  @media screen and (min-width: 920px) and (max-width: 1195px) {
+  @media screen and (min-width: 920px) and (max-width: 1194px) {
     width: 100%;
     padding: 0px 10px;
     left: 0;

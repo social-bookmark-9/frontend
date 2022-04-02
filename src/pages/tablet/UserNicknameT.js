@@ -92,9 +92,7 @@ const UserNickname = props => {
               maxLength={16}
               onKeyUp={handleCheckChars}
             />
-            <CheckBox>
-              <CheckButton onClick={handleCheckMemberName}>중복확인</CheckButton>
-            </CheckBox>
+            <CheckButton onClick={handleCheckMemberName}>중복확인</CheckButton>
             <MessageBox>
               {activeMessage ? (
                 usableMemberName ? (
@@ -142,10 +140,11 @@ const UserArea = styled.div`
 const TitleBox = styled.div`
   width: 547px;
   margin-bottom: 110px;
-`
+`;
 
 const InputBox = styled.div`
   width: 547px;
+  position: relative;
 `;
 
 const UserInput = styled.input`
@@ -177,10 +176,7 @@ const ButtonBox = styled.div`
   width: 547px;
   text-align: center;
   display: inline-block;
-`;
-
-const CheckBox = styled.div`
-  text-align: right;
+  position: relative;
 `;
 
 const CheckButton = styled.button`
@@ -196,9 +192,8 @@ const CheckButton = styled.button`
       padding: 6px 17px;
       border-radius: 45px;
       display: inline-block;
-      position: relative;
-      right: 0px;
-      top: -36px;
+      position: absolute;
+      right: 0;
     `;
   }}
 `;
