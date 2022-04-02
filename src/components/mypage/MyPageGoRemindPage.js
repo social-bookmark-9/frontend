@@ -3,10 +3,8 @@ import { useParams } from "react-router";
 
 import RemindCard from "./RemindCard";
 
-const MyPageGoRemindPage = (props) => {
-  const {
-    memberId,
-  } = props;
+const MyPageGoRemindPage = props => {
+  const { memberId } = props;
 
   const [myOwnPage, setMyOwnPage] = useState(false);
   const params = useParams();
@@ -19,21 +17,19 @@ const MyPageGoRemindPage = (props) => {
     }
   }, [memberId, params.id]);
 
-  return(
+  return (
     <>
       {myOwnPage ? (
         <RemindCard
-        _title="저장한 글, 다시 읽고 계신가요?"
-        _text={
-          "3번은 읽어야 완전한 내 것이 될 수 있어요.\n저장한 글을 리마인드 해드릴게요"
-        }
-        _button="리마인드 받기"
+          _title="저장한 글, 다시 읽고 계신가요?"
+          _text={
+            "3번은 읽어야 완전한 내 것이 될 수 있어요.\n저장한 글을 리마인드 해드릴게요"
+          }
+          _button="리마인드 받기"
         />
-      ) : null
-      };  
-    </>  
-  )
-}
-
+      ) : null}
+    </>
+  );
+};
 
 export default MyPageGoRemindPage;

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router";
 
 import styled from "styled-components";
 import { Title, Text, Button } from "../../elements";
-import { Desktop, Tablet, Mobile } from "../../styles/mediaquery";
 
 const RemindCard = props => {
   const { _title, _text, _button, isNew } = props;
@@ -16,77 +15,9 @@ const RemindCard = props => {
 
   return (
     <React.Fragment>
-      <Desktop>
-        <DReCardBox>
-          <DReCard>
-            <DTextBox>
-              <Title
-                _fontSize={({ theme }) => theme.fontSizes.font16}
-                _color="white"
-                _lineHeight="22px"
-              >
-                {_title}
-              </Title>
-              <Text
-                _fontSize={({ theme }) => theme.fontSizes.font13}
-                _color="white"
-                _lineHeight="18px"
-                _padding="8px 0px"
-              >
-                {_text}
-              </Text>
-            </DTextBox>
-            <DButtonBox>
-              <Button
-                _padding="7px 14px"
-                _fontSize={({ theme }) => theme.fontSizes.font12}
-                bgColor="white"
-                _color={({ theme }) => theme.colors.fontColor07}
-                _onClick={onNavigate}
-              >
-                {_button}
-              </Button>
-            </DButtonBox>
-          </DReCard>
-        </DReCardBox>
-      </Desktop>
-      <Tablet>
-        <DReCardBox>
-          <DReCard>
-            <DTextBox>
-              <Title
-                _fontSize={({ theme }) => theme.fontSizes.font16}
-                _color="white"
-                _lineHeight="22px"
-              >
-                {_title}
-              </Title>
-              <Text
-                _fontSize={({ theme }) => theme.fontSizes.font13}
-                _color="white"
-                _lineHeight="18px"
-                _padding="8px 0px"
-              >
-                {_text}
-              </Text>
-            </DTextBox>
-            <ButtonBox>
-              <Button
-                _padding="7px 14px"
-                _fontSize={({ theme }) => theme.fontSizes.font12}
-                bgColor="white"
-                _color={({ theme }) => theme.colors.fontColor07}
-                _onClick={onNavigate}
-              >
-                {_button}
-              </Button>
-            </ButtonBox>
-          </DReCard>
-        </DReCardBox>
-      </Tablet>
-      <Mobile>
-        <ReCardBox>
-          <ReCard>
+      <ReCardBox>
+        <ReCard>
+          <TextBox>
             <Title
               _fontSize={({ theme }) => theme.fontSizes.font16}
               _color="white"
@@ -102,48 +33,38 @@ const RemindCard = props => {
             >
               {_text}
             </Text>
-            <ButtonBox>
-              <Button
-                _padding="7px 14px"
-                _fontSize={({ theme }) => theme.fontSizes.font12}
-                bgColor="white"
-                _color={({ theme }) => theme.colors.fontColor07}
-                _onClick={onNavigate}
-              >
-                {_button}
-              </Button>
-            </ButtonBox>
-          </ReCard>
-        </ReCardBox>
-      </Mobile>
+          </TextBox>
+          <ButtonBox>
+            <Button
+              _padding="7px 14px"
+              _fontSize={({ theme }) => theme.fontSizes.font12}
+              bgColor="white"
+              _color={({ theme }) => theme.colors.fontColor07}
+              _onClick={onNavigate}
+            >
+              {_button}
+            </Button>
+          </ButtonBox>
+        </ReCard>
+      </ReCardBox>
     </React.Fragment>
   );
 };
 
-const DReCardBox = styled.div`
-  padding: 28px 0px;
-`;
-
-const DReCard = styled.div`
-  padding: 30px 52px;
-  display: flex;
-  justify-content: space-between;
-  background: #7881f5;
-  border-radius: 19px;
-  white-space: pre-wrap;
-`;
-
-const DTextBox = styled.div`
-  display: inline-block;
-`;
-
-const DButtonBox = styled.div`
-  padding: 8px 0px;
-  align-self: end;
+const TextBox = styled.div`
+  @media screen and (min-width: 768px) {
+    display: inline-block;
+  }
 `;
 
 const ReCardBox = styled.div`
   padding: 16px;
+  @media screen and (min-width: 768px) and (max-width: 1194px) {
+    padding: 28px 16px;
+  }
+  @media screen and (min-width: 1195px) {
+    padding: 28px 0px;
+  }
 `;
 
 const ReCard = styled.div`
@@ -153,11 +74,24 @@ const ReCard = styled.div`
   border-radius: 19px;
   padding: 30px 28px;
   white-space: pre-wrap;
+  @media screen and (min-width: 768px) {
+    padding: 30px 52px;
+    display: flex;
+    justify-content: space-between;
+    background: #7881f5;
+    border-radius: 19px;
+    white-space: pre-wrap;
+    height: auto;
+  }
 `;
 
 const ButtonBox = styled.div`
   padding: 16px 0px;
   display: inline-block;
+  @media screen and (min-width: 768px) {
+    padding: 8px 0px;
+    align-self: end;
+  }
 `;
 
 export default RemindCard;

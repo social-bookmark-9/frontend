@@ -51,10 +51,26 @@ const CurationContainer = styled.div`
 
 const CurationBox = styled.div`
   padding: 28px 16px;
+  @media screen and (min-width: 768px) and (max-width: 1194px) {
+    & button {
+      width: 359px;
+      margin: 0 auto;
+    }
+  }
 `;
 
 const FolderBox = styled.div`
   margin-bottom: 16px;
+  @media screen and (min-width: 920px) and (max-width: 1194px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 16px;
+  }
+  @media screen and (min-width: 768px) and (max-width: 919px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 16px;
+  }
 `;
 
 export default Curations;

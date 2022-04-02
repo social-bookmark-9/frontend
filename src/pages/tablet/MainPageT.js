@@ -1,14 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
+
 import styled from "styled-components";
 
+import ModalD from "../../components/modal/ModalD";
 import Navbar from "../../components/common/Navbar";
 import Search from "../../components/mainpage/Search";
 import MainTop from "../../components/mainpage/MainTop";
 import Curations from "../../components/mainpage/Curations";
 import RecommendList from "../../components/mainpage/RecommendList";
 import RecommendUserT from "../../components/mainpage/RecommendUserT";
-import ModalD from "../../components/modal/ModalD";
 
 const MainPageT = props => {
   const { isLogin } = props;
@@ -38,6 +39,9 @@ const MainPageT = props => {
 
 MainPageT.defaultProps = {};
 
-const MainContainer = styled.div``;
+const MainContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+`;
 
 export default MainPageT;
