@@ -63,33 +63,8 @@ const MyPageRemind = props => {
               {...defaultFolder}
             />
           </FolderContainer>
-          {folderList && folderList.length > 0 ? (
+          {reminderData.remindData && reminderData.remindData.length > 0 ? (
             <>
-              <AlertBox onClick={openModal}>
-                <RemindAlert>
-                  <ImageBox>
-                    <Image
-                      _src="/images/add.png"
-                      _width="20px"
-                      _height="20px"
-                    />
-                  </ImageBox>
-                  <TextBox>
-                    <Title
-                      _fontSize={({ theme }) => theme.fontSizes.font16}
-                      _lineHeight="22px"
-                    >
-                      새 컬렉션 만들기
-                    </Title>
-                    <Text
-                      _fontSize={({ theme }) => theme.fontSizes.font13}
-                      _lineHeight="18px"
-                    >
-                      컬렉션을 만들어 링크를 분류해 보세요
-                    </Text>
-                  </TextBox>
-                </RemindAlert>
-              </AlertBox>
               <AlertBox>
                 <RemindAlert>
                   <ImageBox>
