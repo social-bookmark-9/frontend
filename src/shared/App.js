@@ -9,7 +9,7 @@ import { getToken } from "./utils";
 
 // css
 import "./App.css";
-import { Desktop, Mobile, Tablet } from "../styles/mediaquery";
+import { Desktop, Tablet, Mobile } from "../styles/mediaquery";
 
 // 공통 페이지
 import Spinner from "./Spinner";
@@ -38,11 +38,9 @@ import EditProfileD from "../pages/desktop/EditProfileD";
 import UserNicknameD from "../pages/desktop/UserNicknameD";
 import UserFavoritesD from "../pages/desktop/UserFavoritesD";
 
-// 타블렛 페이지
 import LoginT from "../pages/tablet/LoginT";
 import UserNicknameT from "../pages/tablet/UserNicknameT";
 import UserFavoritesT from "../pages/tablet/UserFavoritesT";
-import MyPageT from "../pages/tablet/MyPageT";
 
 // 모바일 페이지 lazy 적용
 const MyPage = lazy(() => import("../pages/mobile/MyPage"));
@@ -55,7 +53,6 @@ const MyPageD = lazy(() => import("../pages/desktop/MyPageD"));
 const MainPageD = lazy(() => import("../pages/desktop/MainPageD"));
 const ArticleListD = lazy(() => import("../pages/desktop/ArticleListD"));
 const ArticleDetailD = lazy(() => import("../pages/desktop/ArticleDetailD"));
-
 
 function App(props) {
   const dispatch = useDispatch();

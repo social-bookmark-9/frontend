@@ -32,6 +32,7 @@ const UserFavorites = props => {
     hashtag2: newList[1] ? newList[1] : null,
     hashtag3: newList[2] ? newList[2] : null,
   };
+  console.log(userInfo);
 
   const handleChecked = e => {
     setIsChecked(!isChecked);
