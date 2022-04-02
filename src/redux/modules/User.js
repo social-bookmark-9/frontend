@@ -19,8 +19,6 @@ const initialState = {
 export const kakaoLoginAxios = createAsyncThunk(
   "user/kakaoLogin",
   async ({ code, navigate }, { dispatch }) => {
-    console.log(code);
-    console.log(navigate);
     await UserApi.kakaoLogin({ code, navigate }, data => {
       dispatch(setMyInfo(data));
     });
@@ -43,6 +41,7 @@ export const checkMemberNameAxios = createAsyncThunk(
 export const registerAxios = createAsyncThunk(
   "user/register",
   async ({ userInfo, navigate }, { dispatch }) => {
+    console.log(userInfo);
     const user = await UserApi.register({ userInfo, navigate });
     if (user) {
       dispatch(setMyInfo(user.data));

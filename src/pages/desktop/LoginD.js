@@ -7,8 +7,6 @@ import { Button, Title, Text, Image } from "../../elements";
 import BubbleAnimation from "../../components/common/BubbleAnimation";
 import { getToken } from "../../shared/utils";
 
-// import { useSelector } from "react-redux";
-
 const LoginD = () => {
   return (
     <React.Fragment>

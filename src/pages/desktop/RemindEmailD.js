@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { Button, Image, Text, Title } from "../../elements";
 import { useDispatch } from "react-redux";
 import { editReminderEmailAxios } from "../../redux/modules/Profile";
+import { FlexboxColumn, FlexboxSpace } from "../../styles/flexbox";
 
 const RemindEmailD = props => {
   const emailRef = useRef(null);
@@ -15,50 +16,70 @@ const RemindEmailD = props => {
   return (
     <React.Fragment>
       <RemindContainer>
-        <KeyframeBox>
-          <KeyframeTitleBox>
-            <FrameTitle>42.1%</FrameTitle>
-            <Title
-              _lineHeight="28px"
-              _color={({ theme }) => theme.colors.white}
-            >
-              아티클을 저장하는 사람은 94%지만
-              <br />
-              아티클을 자주 확인하는 비율은
-              <br />
-              42%밖에 되지않습니다.
-            </Title>
-          </KeyframeTitleBox>
-          <ReKeyframeTitleBox>
-            <FrameTitle>RE</FrameTitle>
-            <Title
-              _lineHeight="28px"
-              _color={({ theme }) => theme.colors.white}
-            >
-              아티클을 내 것으로 만들기 위해서는
-              <br />
-              지속적인 리마인드가 필요합니다.
-            </Title>
-          </ReKeyframeTitleBox>
-          <KeyframeTipBox>
-            <TipTitle>
-              <Image
-                _src="/images/DesktopMain1.png"
-                _width="16px"
-                _height="16px"
-              />
-              <TipText>Tip!</TipText>
-            </TipTitle>
-            <Text _padding="0 0 11px 0">
-              카카오 메일을 입력하면 메일 도착 알림톡을 받을 수 있어요
-            </Text>
-            <Text>
-              잘 사용하지 않는 메일을 아티클/뉴스레터 수신 전용 메일로
-              <br />
-              사용해보는건 어떨까요?
-            </Text>
-          </KeyframeTipBox>
-        </KeyframeBox>
+        <KeyframeContainer>
+          <KeyframeBox>
+            <KeyframeTitleBox>
+              <TitleBox>
+                <FrameTitle>42.1%</FrameTitle>
+                <Title
+                  _lineHeight="28px"
+                  _color={({ theme }) => theme.colors.white}
+                >
+                  아티클을 저장하는 사람은 94%지만
+                  <br />
+                  아티클을 자주 확인하는 비율은
+                  <br />
+                  42%밖에 되지않습니다.
+                </Title>
+              </TitleBox>
+              <ImageBox>
+                <Image
+                  _src="/images/remindImg01.png"
+                  _width="395px"
+                  _height="290px"
+                />
+              </ImageBox>
+            </KeyframeTitleBox>
+            <ReKeyframeTitleBox>
+              <TitleBox>
+                <FrameTitle>RE</FrameTitle>
+                <Title
+                  _lineHeight="28px"
+                  _color={({ theme }) => theme.colors.white}
+                >
+                  아티클을 내 것으로 만들기 위해서는
+                  <br />
+                  지속적인 리마인드가 필요합니다.
+                </Title>
+              </TitleBox>
+              <ReImageBox>
+                <Image
+                  _src="/images/remindImg02.png"
+                  _width="596px"
+                  _height="379px"
+                />
+              </ReImageBox>
+            </ReKeyframeTitleBox>
+            <KeyframeTipBox>
+              <TipTitle>
+                <Image
+                  _src="/images/DesktopMain1.png"
+                  _width="16px"
+                  _height="16px"
+                />
+                <TipText>Tip!</TipText>
+              </TipTitle>
+              <Text _padding="0 0 11px 0">
+                카카오 메일을 입력하면 메일 도착 알림톡을 받을 수 있어요
+              </Text>
+              <Text>
+                잘 사용하지 않는 메일을 아티클/뉴스레터 수신 전용 메일로
+                <br />
+                사용해보는건 어떨까요?
+              </Text>
+            </KeyframeTipBox>
+          </KeyframeBox>
+        </KeyframeContainer>
         <EmailInputBox>
           <Title _lineHeight="28px">리마인드 수신 메일</Title>
           <EmailInput
@@ -95,18 +116,27 @@ const TextAnimation = keyframes`
       opacity: 0;
     }
 `;
+
 const RemindContainer = styled.div`
   width: 100vw;
   height: 100vh;
-  padding-top: 82px;
+`;
+const KeyframeContainer = styled.div`
+  width: 100vw;
+  background: ${({ theme }) => theme.colors.pointPurple02};
 `;
 
 const KeyframeBox = styled.div`
-  padding: 81px 36px 32px 36px;
+  width: 1119px;
+  height: 507px;
+  margin: auto;
+  padding-top: 90px;
   background: ${({ theme }) => theme.colors.pointPurple02};
 `;
 
 const KeyframeTitleBox = styled.div`
+  ${FlexboxSpace};
+  flex-direction: row;
   height: 200px;
   position: relative;
   opacity: 0;
@@ -118,6 +148,8 @@ const KeyframeTitleBox = styled.div`
 `;
 
 const ReKeyframeTitleBox = styled.div`
+  ${FlexboxSpace};
+  flex-direction: row;
   height: 200px;
   position: absolute;
   top: 81px;
@@ -137,6 +169,20 @@ const FrameTitle = styled.div`
   text-align: left;
   color: rgba(210, 214, 218, 0.54);
   opacity: 0.6;
+`;
+
+const TitleBox = styled.div`
+  display: inline-block;
+`;
+
+const ImageBox = styled.div`
+  display: inline-block;
+`;
+
+const ReImageBox = styled.div`
+  position: absolute;
+  top: 48px;
+  left: 520px;
 `;
 
 const KeyframeTipBox = styled.div`
@@ -165,7 +211,11 @@ const TipText = styled.h5`
 `;
 
 const EmailInputBox = styled.div`
-  padding: 44px 28px;
+  ${FlexboxColumn};
+  align-items: center;
+  width: 547px;
+  height: 40vh;
+  margin: auto;
 `;
 
 const EmailInput = styled.input`

@@ -12,7 +12,7 @@ import Favorite from "../../components/common/Favorite";
 
 import Swal from "sweetalert2";
 
-const UserFavorites = props => {
+const UserFavoritesT = props => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -32,7 +32,6 @@ const UserFavorites = props => {
     hashtag2: newList[1] ? newList[1] : null,
     hashtag3: newList[2] ? newList[2] : null,
   };
-  console.log(userInfo);
 
   const handleChecked = e => {
     setIsChecked(!isChecked);
@@ -70,16 +69,14 @@ const UserFavorites = props => {
         <UserArea>
           <TitleBox>
             <Title
-              textAlign="center"
+              textAlign="left"
               _fontSize={({ theme }) => theme.fontSizes.font24}
               _lineHeight="38px"
-              _padding="15px 0px"
+              _padding="0 0 4px 0"
             >
-              관심있는 분야를
-              <br />
-              선택해주세요
+              관심있는 분야를 선택해주세요
             </Title>
-            <Text textAlign="center">최대 3개까지 선택 가능해요</Text>
+            <Text textAlign="left">최대 3개까지 선택 가능해요</Text>
           </TitleBox>
           <FavoritesBox>
             <Favorites onChange={handleChecked}>
@@ -104,35 +101,37 @@ const UserFavorites = props => {
 
 // 스타일 컴포넌트 작성 위치
 const UserBox = styled.div`
-  ${FlexboxColumn}
-  box-sizing: border-box;
   width: 100%;
-  height: 100%;
-`;
-
-const UserArea = styled.div`
-  padding: 0px 36px;
-`;
-
-const TitleBox = styled.div`
-  padding: 100px 0px;
-`;
-
-const FavoritesBox = styled.div`
-  width: 100%;
-`;
-
-const Favorites = styled.div`
-  margin: auto;
-  width: 317px;
-  justify-content: center;
   text-align: center;
 `;
 
-const ButtonBox = styled.div`
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+const UserArea = styled.div`
+  ${FlexboxColumn}
+  align-items: center;
+  height: 75vh;
+  text-align: left;
 `;
 
-export default UserFavorites;
+const TitleBox = styled.div`
+  width: 547px;
+  margin-bottom: 78px;
+`;
+
+const FavoritesBox = styled.div`
+  width: 547px;
+`;
+
+const Favorites = styled.div`
+  width: 472px;
+  justify-content: center;
+  text-align: left;
+`;
+
+const ButtonBox = styled.div`
+  bottom: 0;
+  width: 547px;
+  text-align: center;
+  display: inline-block;
+`;
+
+export default UserFavoritesT;

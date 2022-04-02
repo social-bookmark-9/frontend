@@ -14,7 +14,6 @@ import CheckRemind from "./CheckRemind";
 
 const ModalD = props => {
   const { newUrl, isMain } = props;
-
   const dispatch = useDispatch();
 
   useEffect(() => {

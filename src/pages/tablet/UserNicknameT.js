@@ -76,21 +76,25 @@ const UserNickname = props => {
     <React.Fragment>
       <UserBox>
         <UserArea>
-          <Title
-            _fontSize={({ theme }) => theme.fontSizes.font24}
-            _lineHeight="38px"
-          >
-            버블드에서 사용할
-            <br />
-            닉네임을 적어주세요
-          </Title>
+          <TitleBox>
+            <Title
+              _fontSize={({ theme }) => theme.fontSizes.font24}
+              _lineHeight="38px"
+            >
+              버블드에서 사용할
+              <br />
+              닉네임을 적어주세요
+            </Title>
+          </TitleBox>
           <InputBox>
             <UserInput
               placeholder="영어로 된 닉네임을 입력해주세요"
               maxLength={16}
               onKeyUp={handleCheckChars}
             />
-            <CheckButton onClick={handleCheckMemberName}>중복확인</CheckButton>
+            <CheckBox>
+              <CheckButton onClick={handleCheckMemberName}>중복확인</CheckButton>
+            </CheckBox>
             <MessageBox>
               {activeMessage ? (
                 usableMemberName ? (
@@ -124,18 +128,24 @@ const UserNickname = props => {
 
 // 스타일 컴포넌트 작성 위치
 const UserBox = styled.div`
-  ${FlexboxColumn}
-  box-sizing: border-box;
   width: 100%;
-  height: 100%;
+  text-align: center;
 `;
 
 const UserArea = styled.div`
-  padding: 65px 24px;
+  ${FlexboxColumn}
+  align-items: center;
+  height: 75vh;
+  text-align: left;
 `;
 
+const TitleBox = styled.div`
+  width: 547px;
+  margin-bottom: 110px;
+`
+
 const InputBox = styled.div`
-  padding: 48px 0px;
+  width: 547px;
 `;
 
 const UserInput = styled.input`
@@ -163,9 +173,14 @@ const InputCheck = styled.p`
 `;
 
 const ButtonBox = styled.div`
-  position: fixed;
   bottom: 0;
-  width: 100%;
+  width: 547px;
+  text-align: center;
+  display: inline-block;
+`;
+
+const CheckBox = styled.div`
+  text-align: right;
 `;
 
 const CheckButton = styled.button`
@@ -180,10 +195,10 @@ const CheckButton = styled.button`
       color: ${colors.white};
       padding: 6px 17px;
       border-radius: 45px;
-      display: flex;
-      position: absolute;
-      right: 25px;
-      top: 194px;
+      display: inline-block;
+      position: relative;
+      right: 0px;
+      top: -36px;
     `;
   }}
 `;
