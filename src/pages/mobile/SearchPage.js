@@ -1,14 +1,24 @@
-import React, { useState } from "react";
-import styled, { css } from 'styled-components';
+import React, { useEffect, useState } from "react";
 
-import Navbar from '../../components/common/Navbar';
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getSearchArticleResultAxios,
+  setPaging,
+} from "../../redux/modules/Search";
+
+import styled, { css } from "styled-components";
+import { Image, Text, Title } from "../../elements";
+
+import Navbar from "../../components/common/Navbar";
 import SearchResult from "../../components/setting/SearchResult";
+import { useLocation } from "react-router";
 
-import { Image, Text, Title } from '../../elements';
+const SearchPage = props => {
+  const dispatch = useDispatch();
+  const location = useLocation();
 
-
-const SearchPage = () => {
-
+  // 페이지
+  const page = useSelector(state => state.search.paging.page);
 
   // 컬렉션/아티클 선택
   const [searchOpen, setSearchOpen] = useState(false);
@@ -19,7 +29,7 @@ const SearchPage = () => {
   const handleSearchType = e => {
     setSearchType(e.target);
   };
-  const searchList = ["전체", "컬렉션", "아티클"]
+  const searchList = ["전체", "컬렉션", "아티클"];
 
   // 카테고리 선택
   const [categoryOpen, setCategoryOpen] = useState(false);
@@ -31,9 +41,20 @@ const SearchPage = () => {
     setCategoryType(e.target);
   };
   const categoryList = [
-    "전체", "커리어", "업무스킬", "IT", "디자인",
-    "마케팅", "투자", "장소", "동기부여", "인간관계", "패션", "예술", "과학"
-  ]
+    "전체",
+    "커리어",
+    "업무스킬",
+    "IT",
+    "디자인",
+    "마케팅",
+    "투자",
+    "장소",
+    "동기부여",
+    "인간관계",
+    "패션",
+    "예술",
+    "기타",
+  ];
 
   // 최신순/좋아요순 선택
   const [sortByOpen, setSortByOpen] = useState(false);
@@ -44,18 +65,38 @@ const SearchPage = () => {
   const handleSortByType = e => {
     setSortByType(e.target);
   };
-  const sortByList = ["최신순", "오래된순"]
+  const sortByList = ["최신순", "오래된순"];
+
+  // 키워드 입력
+  const [keyword, setKeyword] = useState(location.state);
+  const handleTitleOg = e => {
+    setKeyword(e.target.value);
+  };
 
   const isLoaded = false;
+  console.log(keyword);
 
+  const hashtag = categoryType !== "카테고리" ? categoryType : "";
+  const titleOg = keyword;
+  console.log(titleOg);
+
+  useEffect(() => {
+    dispatch(setPaging());
+    dispatch(getSearchArticleResultAxios({ hashtag, titleOg, page }));
+  }, [dispatch, hashtag, titleOg, page]);
 
   return (
     <React.Fragment>
-      <Navbar title={"검색"} />
+      <Navbar title="검색" />
 
       {/* 검색 부분 */}
       <Container>
-        <Input placeholder="키워드로 검색해보세요" />
+        <Input
+          name="keyword"
+          onChange={handleTitleOg}
+          value={keyword}
+          placeholder="키워드로 검색해보세요"
+        />
         <ImageBox>
           <Image
             _src="/images/search.png"
@@ -141,13 +182,19 @@ const SearchPage = () => {
           <Text>
             <SearchResult />
           </Text>
-        ) : (  
-          <div style={{display:"block", textAlign:"center", paddingTop:"15vh"}}>
+        ) : (
+          <div
+            style={{
+              display: "block",
+              textAlign: "center",
+              paddingTop: "15vh",
+            }}
+          >
             <Image
-                _src="/images/bubbledLight.png"
-                _width="56px"
-                _height="45px"
-              />
+              _src="/images/bubbledLight.png"
+              _width="56px"
+              _height="45px"
+            />
             <Title textAlign="center" _padding="25px" _lineHeight="28px">
               찾으시는 키워드를 <br />
               검색해주세요
@@ -156,10 +203,8 @@ const SearchPage = () => {
         )}
       </Container>
     </React.Fragment>
-  )
-
-}
-
+  );
+};
 
 const Container = styled.div`
   padding: 16px;

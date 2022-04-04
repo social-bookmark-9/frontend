@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 import { FlexboxColumn } from "../../styles/flexbox";
@@ -9,6 +8,7 @@ import { Button, Image, Title } from "../../elements";
 import { Logo } from "../../elements/ImageObj";
 
 import NavProfile from "./NavProfile";
+import Swal from "sweetalert2";
 
 const Navbar = props => {
   const { title, bgColor } = props;
@@ -25,6 +25,46 @@ const Navbar = props => {
     } else {
       setIsOpen(false);
       document.body.style.cssText = `overflow:auto;`;
+    }
+  };
+
+  const handleMemoPage = () => {
+    if (isLogin) {
+      navigate("/myreview");
+    } else {
+      Swal.fire({
+        title: "잠깐!",
+        text: "로그인이 필요한 서비스에요",
+        icon: "warning",
+        showCancelButton: true,
+        cancelButtonColor: `${({ theme }) => theme.colors.error}`,
+        confirmButtonText: "로그인 하기",
+        cancelButtonText: "취소",
+      }).then(result => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  };
+
+  const handleSettingPage = () => {
+    if (isLogin) {
+      navigate("/setting");
+    } else {
+      Swal.fire({
+        title: "잠깐!",
+        text: "로그인이 필요한 서비스에요",
+        icon: "warning",
+        showCancelButton: true,
+        cancelButtonColor: `${({ theme }) => theme.colors.error}`,
+        confirmButtonText: "로그인 하기",
+        cancelButtonText: "취소",
+      }).then(result => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
     }
   };
 
@@ -60,12 +100,14 @@ const Navbar = props => {
                 <NavProfile {...props} />
                 <Line />
                 <MenuBox>
-                  <Link to="/">
-                    <li>추천 아티클</li>
-                  </Link>
-                  <Link to={isLogin ? "/myreview" : "/login"}>
-                    <li>내가 작성한 메모</li>
-                  </Link>
+                  <li
+                    onClick={() => {
+                      navigate("/");
+                    }}
+                  >
+                    추천 아티클
+                  </li>
+                  <li onClick={handleMemoPage}>내가 작성한 메모</li>
                   <Link to={isLogin ? "/setting/reminder" : "/login"}>
                     <li>내 리마인드 목록</li>
                   </Link>
@@ -76,9 +118,7 @@ const Navbar = props => {
                 _padding="15px 0px"
                 bgColor={({ theme }) => theme.colors.white}
                 _color={({ theme }) => theme.colors.fontColor02}
-                _onClick={() => {
-                  isLogin ? navigate("/setting") : navigate("/login");
-                }}
+                _onClick={handleSettingPage}
               >
                 설정
               </Button>

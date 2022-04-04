@@ -20,8 +20,6 @@ const NavProfile = props => {
     }
   };
 
-  console.log(props);
-
   return (
     <React.Fragment>
       <ProfileBox>
