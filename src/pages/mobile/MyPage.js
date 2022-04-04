@@ -6,6 +6,7 @@ import {
   getProfileAxios,
   getProfileWithAxios,
 } from "../../redux/modules/Profile";
+import { getReminderAxios } from "../../redux/modules/Reminder";
 
 import styled from "styled-components";
 
@@ -25,6 +26,7 @@ const MyPage = props => {
   useEffect(() => {
     if (isLogin) {
       dispatch(getProfileWithAxios(memberId));
+      dispatch(getReminderAxios());
     } else {
       dispatch(getProfileAxios(memberId));
     }
@@ -42,12 +44,18 @@ const MyPage = props => {
   const openModal = () => {
     setModalOpen(true);
   };
+  
+  const reminder = useSelector(state => state.reminder);
+
   return (
     <React.Fragment>
       <Container>
         <Navbar {...props} />
+        
         {/* ----- 프로필+이름 부분 ----- */}
         <UserProfile userInfo={userInfo} {...myInfo} />
+
+
         {/* ----- 리마인드, 디폴트 폴더 ----- */}
         <MyPageRemind
           defaultFolder={defaultFolder}
@@ -55,6 +63,7 @@ const MyPage = props => {
           openModal={openModal}
           userInfo={userInfo}
           {...myInfo}
+          {...reminder}
         />
         {/* 폴더리스트 시작 */}
         {folderList &&

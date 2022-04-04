@@ -108,6 +108,9 @@ const Navbar = props => {
                     추천 아티클
                   </li>
                   <li onClick={handleMemoPage}>내가 작성한 메모</li>
+                  <Link to={isLogin ? "/setting/reminder" : "/login"}>
+                    <li>내 리마인드 목록</li>
+                  </Link>
                 </MenuBox>
               </div>
               <Button

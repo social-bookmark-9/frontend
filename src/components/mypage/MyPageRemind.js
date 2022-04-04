@@ -10,7 +10,7 @@ import RemindCard from "./RemindCard";
 import ArticleFolder from "../folderpage/ArticleFolder";
 
 const MyPageRemind = props => {
-  const { defaultFolder, userInfo, completeRate, memberId, openModal } = props;
+  const { remindData, defaultFolder, userInfo, completeRate, memberId, openModal } = props;
 
   const [myOwnPage, setMyOwnPage] = useState(false);
   const params = useParams();
@@ -23,19 +23,21 @@ const MyPageRemind = props => {
     }
   }, [memberId, params.id]);
 
-  const reminderData = useSelector(state => state.reminder);
-
   return (
     <>
       {myOwnPage ? (
         <>
-          <RemindCard
-            _title="저장한 글, 다시 읽고 계신가요?"
-            _text={
-              "3번은 읽어야 완전한 내 것이 될 수 있어요.\n저장한 글을 리마인드 해드릴게요"
-            }
-            _button="리마인드 받기"
-          />
+          {remindData && remindData.length > 0 ? (
+            null
+          ) : (
+            <RemindCard
+              _title="저장한 글, 다시 읽고 계신가요?"
+              _text={
+                "3번은 읽어야 완전한 내 것이 될 수 있어요.\n저장한 글을 리마인드 해드릴게요"
+              }
+              _button="리마인드 받기"
+            />
+          )}
 
           <Qheader>
             <Title _padding="20px">{userInfo.memberName}님의 큐레이션</Title>
@@ -56,7 +58,7 @@ const MyPageRemind = props => {
               {...defaultFolder}
             />
           </FolderContainer>
-          {reminderData.remindData && reminderData.remindData.length > 0 ? (
+          {remindData && remindData.length > 0 ? (
             <>
               <AlertBox>
                 <RemindAlert>
@@ -79,7 +81,7 @@ const MyPageRemind = props => {
                       _lineHeight="18px"
                     >
                       아직 읽지 않은 아티클{" "}
-                      <TextPoint>{reminderData.remindData.length}개</TextPoint>
+                      <TextPoint>{remindData.length}개</TextPoint>
                       가 있어요
                     </Text>
                   </TextBox>
@@ -110,7 +112,9 @@ const MyPageRemind = props => {
             </AlertBox>
           )}
         </>
-      ) : null}
+      ) : (
+        <Title _padding="20px">{userInfo.memberName}님의 큐레이션</Title>
+      )}
     </>
   );
 };
