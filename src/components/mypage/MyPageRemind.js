@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { useSelector } from "react-redux";
 
 import styled, { css } from "styled-components";
 import { Label, Title, Image, Text } from "../../elements";
@@ -10,7 +9,14 @@ import RemindCard from "./RemindCard";
 import ArticleFolder from "../folderpage/ArticleFolder";
 
 const MyPageRemind = props => {
-  const { remindData, defaultFolder, userInfo, completeRate, memberId, openModal } = props;
+  const {
+    remindData,
+    defaultFolder,
+    userInfo,
+    completeRate,
+    memberId,
+    openModal,
+  } = props;
 
   const [myOwnPage, setMyOwnPage] = useState(false);
   const params = useParams();
@@ -27,9 +33,7 @@ const MyPageRemind = props => {
     <>
       {myOwnPage ? (
         <>
-          {remindData && remindData.length > 0 ? (
-            null
-          ) : (
+          {remindData && remindData.length > 0 ? null : (
             <RemindCard
               _title="저장한 글, 다시 읽고 계신가요?"
               _text={
@@ -81,8 +85,7 @@ const MyPageRemind = props => {
                       _lineHeight="18px"
                     >
                       아직 읽지 않은 아티클{" "}
-                      <TextPoint>{remindData.length}개</TextPoint>
-                      가 있어요
+                      <TextPoint>{remindData.length}개</TextPoint>가 있어요
                     </Text>
                   </TextBox>
                 </RemindAlert>
