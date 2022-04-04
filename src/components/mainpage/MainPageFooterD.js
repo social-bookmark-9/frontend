@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
-import styled, { css } from "styled-components";
-import { Button, Image, Text, Title } from "../../elements";
+import styled from "styled-components";
+import { Button, Text, Title } from "../../elements";
 import SearchBoxD from "./SearchBoxD";
 
 const MainPageFooterD = props => {
@@ -178,30 +178,6 @@ const FooterMenu = styled.div`
   font-size: 18px;
   line-height: 22px;
   gap: 18px;
-`;
-
-const Input = styled.input`
-  ${({ theme }) => {
-    const { colors } = theme;
-    return css`
-      background-color: ${colors.white};
-      border-radius: 12px;
-      width: 100%;
-      padding: 14px 24px;
-      position: relative;
-      &::placeholder {
-        color: ${colors.fontColor01};
-      }
-    `;
-  }}
-`;
-
-const ImageBox = styled.div`
-  display: inline-block;
-  position: absolute;
-  right: 38px;
-  padding: 11px;
-  cursor: pointer;
 `;
 
 export default MainPageFooterD;

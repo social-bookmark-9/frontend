@@ -7,7 +7,6 @@ import { getReminderAxios } from "../../redux/modules/Reminder";
 import { Title, Text } from "../../elements";
 
 const MyReminderD = props => {
-  const { isLogin, memberId } = props;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,6 +40,5 @@ const ReminderContainer = styled.div`
   margin: 0 auto;
   width: 1119px;
 `;
-
 
 export default MyReminderD;

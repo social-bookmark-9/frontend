@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import _ from "lodash";
 import { Spinner } from "../elements";
 
-const InfinityScroll = (props) => {
+const InfinityScroll = props => {
   const { children, callNext, is_next, loading } = props;
 
   const _handleScroll = _.throttle(() => {
@@ -22,7 +22,7 @@ const InfinityScroll = (props) => {
     }
   }, 300);
 
-  const handleScroll = useCallback(_handleScroll, [loading]);
+  const handleScroll = useCallback(_handleScroll, [loading, _handleScroll]);
 
   useEffect(() => {
     if (loading) return;
@@ -33,7 +33,7 @@ const InfinityScroll = (props) => {
     }
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [is_next, loading]);
+  }, [is_next, loading, handleScroll]);
 
   return (
     <>

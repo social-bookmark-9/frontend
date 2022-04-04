@@ -68,6 +68,26 @@ const Navbar = props => {
     }
   };
 
+  const handleRemindPage = () => {
+    if (isLogin) {
+      navigate("/setting/reminder");
+    } else {
+      Swal.fire({
+        title: "잠깐!",
+        text: "로그인이 필요한 서비스에요",
+        icon: "warning",
+        showCancelButton: true,
+        cancelButtonColor: `${({ theme }) => theme.colors.error}`,
+        confirmButtonText: "로그인 하기",
+        cancelButtonText: "취소",
+      }).then(result => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  };
+
   return (
     <React.Fragment>
       <NavbarContainer bgColor={bgColor}>
@@ -108,9 +128,7 @@ const Navbar = props => {
                     추천 아티클
                   </li>
                   <li onClick={handleMemoPage}>내가 작성한 메모</li>
-                  <Link to={isLogin ? "/setting/reminder" : "/login"}>
-                    <li>내 리마인드 목록</li>
-                  </Link>
+                  <li onClick={handleRemindPage}>내 리마인드 목록</li>
                 </MenuBox>
               </div>
               <Button
