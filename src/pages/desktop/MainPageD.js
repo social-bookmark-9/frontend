@@ -10,6 +10,7 @@ import RecommendListD from "../../components/mainpage/RecommendListD";
 import MainTopIsLoginD from "../../components/mainpage/MainTopIsLoginD";
 import MainPageFooterD from "../../components/mainpage/MainPageFooterD";
 import NavbarD from "../../components/common/NavbarD";
+import EventAlert from "../../components/mainpage/EventAlert";
 
 const MainPageD = props => {
   const { isLogin } = props;
@@ -22,7 +23,8 @@ const MainPageD = props => {
 
   return (
     <React.Fragment>
-      <NavbarD {...props} />
+      <EventAlert />
+      <NavbarD {...props} bgColor="#fafbfb" />
       <MainContainer>
         {/* 맨 위 영역 */}
         {isLogin ? <MainTopIsLoginD isMain={isMain} /> : <MainTopD />}
@@ -45,6 +47,8 @@ const MainPageD = props => {
 
 MainPageD.defaultProps = {};
 
-const MainContainer = styled.div``;
+const MainContainer = styled.div`
+  width: 100vw;
+`;
 
 export default MainPageD;

@@ -10,6 +10,7 @@ import SearchBox from "../../components/mainpage/SearchBox";
 import Curations from "../../components/mainpage/Curations";
 import RecommendList from "../../components/mainpage/RecommendList";
 import RecommendUserT from "../../components/mainpage/RecommendUserT";
+import EventAlert from "../../components/mainpage/EventAlert";
 
 const MainPageT = props => {
   const { isLogin } = props;
@@ -19,6 +20,7 @@ const MainPageT = props => {
 
   return (
     <React.Fragment>
+      <EventAlert />
       <MainContainer>
         <Navbar {...props} bgColor={isLogin ? "#f2f3f4" : null} />
         {/* 맨 위 영역 */}
