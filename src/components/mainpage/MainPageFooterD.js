@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { Button, Text, Title } from "../../elements";
+import SearchBoxD from "./SearchBoxD";
 
-const MainPageFooterD = (props) => {
-  const {isLogin, memberId} = props;
+const MainPageFooterD = props => {
+  const { isLogin, memberId } = props;
   const navigate = useNavigate();
 
   const onMypage = () => {
@@ -17,40 +18,7 @@ const MainPageFooterD = (props) => {
   return (
     <>
       <FooterSearcher>
-        <LeftFloatDiv>
-          <Title
-            _fontSize="24px"
-            _lineHeight="38px"
-            _color="#FFFFFF"
-            _padding="48px 0 6px 76px"
-          >
-            <div>찾는 아티클이 있으신가요?</div>
-          </Title>
-          <div
-            style={{
-              padding: "0 0 48px 76px",
-              fontSize: "18px",
-              color: "#B1B8C0",
-            }}
-          >
-            다양한 주제의 버블 수집가를 만나보세요
-          </div>
-        </LeftFloatDiv>
-        <RightFloatDiv>
-          <input
-            style={{
-              height: "58px",
-              width: "438px",
-              fontSize: "16px",
-              backgroundColor: "#FFFFFF",
-              margin: "52px 40px 52px auto",
-              borderRadius: "12px",
-              paddingLeft: "28px",
-            }}
-            name="searchkeyword"
-            placeholder="키워드로 검색해보세요"
-          />
-        </RightFloatDiv>
+        <SearchBoxD />
       </FooterSearcher>
       {isLogin ? (
         <FooterViolet>
@@ -85,7 +53,7 @@ const MainPageFooterD = (props) => {
               </div>
             </LeftFloatDiv>
             <RightFloatDiv>
-              <div style={{padding:"50px 0 0 0"}}>
+              <div style={{ padding: "50px 0 0 0" }}>
                 <img src="/images/MainDLogin.png" width="319px" alt="" />
               </div>
             </RightFloatDiv>
@@ -125,7 +93,7 @@ const MainPageFooterD = (props) => {
               </div>
             </LeftFloatDiv>
             <RightFloatDiv>
-              <div style={{padding:"50px 0 0 0"}}>
+              <div style={{ padding: "50px 0 0 0" }}>
                 <img src="/images/MainDNoLogin.png" width="319px" alt="" />
               </div>
             </RightFloatDiv>
@@ -141,8 +109,8 @@ const MainPageFooterD = (props) => {
       >
         <FooterContainer>
           <LeftFloatDiv>
-            <div style={{paddingTop:"102px"}}>
-              <img src="/images/bubbledBanner.png" width="223px" alt="" /> 
+            <div style={{ paddingTop: "102px" }}>
+              <img src="/images/bubbledBanner.png" width="223px" alt="" />
             </div>
             <Text _fontSize="14px" _lineHeight="18px">
               내가 읽은 것으로 나를 표현하는 공간, 버블드
@@ -175,14 +143,14 @@ const FooterContainer = styled.div`
 const FooterSearcher = styled(FooterContainer)`
   margin: 0 auto 128px auto;
   border-radius: 20px;
-  background-color: #353C49;
+  background-color: #353c49;
 `;
 
 const LeftFloatDiv = styled.div`
   flex-direction: column;
   min-width: 40%;
   justify-content: start;
-  color: #FFFFFF;
+  color: #ffffff;
 `;
 
 const RightFloatDiv = styled.div`
@@ -196,7 +164,7 @@ const RightFloatDiv = styled.div`
 const FooterViolet = styled.div`
   width: 100%;
   height: 446px;
-  background-color: #7881F5;
+  background-color: #7881f5;
 `;
 
 const FooterMenu = styled.div`
@@ -211,7 +179,5 @@ const FooterMenu = styled.div`
   line-height: 22px;
   gap: 18px;
 `;
-
-
 
 export default MainPageFooterD;

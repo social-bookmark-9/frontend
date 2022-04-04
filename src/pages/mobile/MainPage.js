@@ -1,19 +1,19 @@
 import React from "react";
 import { useSelector } from "react-redux";
+
 import styled from "styled-components";
 
+import Modal from "../../components/modal/Modal";
 import Navbar from "../../components/common/Navbar";
-
 import MainTop from "../../components/mainpage/MainTop";
-import RecommendList from "../../components/mainpage/RecommendList";
+import SearchBox from "../../components/mainpage/SearchBox";
 import Curations from "../../components/mainpage/Curations";
 import RecommendUser from "../../components/mainpage/RecommendUser";
-
-import Modal from "../../components/modal/Modal";
-import Search from "../../components/mainpage/Search";
+import RecommendList from "../../components/mainpage/RecommendList";
 
 const MainPage = props => {
   const { isLogin } = props;
+
   const memberInfo = useSelector(state => state.main.userInfo);
   const folderList = useSelector(state => state.main.folderList);
   const articleList = useSelector(state => state.main.articleList);
@@ -31,7 +31,7 @@ const MainPage = props => {
         {/* 추천 유저 */}
         <RecommendUser memberInfo={memberInfo} />
         {/* 검색 */}
-        <Search />
+        <SearchBox />
         {isLogin ? <Modal /> : null}
       </MainContainer>
     </React.Fragment>

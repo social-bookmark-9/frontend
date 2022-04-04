@@ -37,9 +37,9 @@ const Curations = props => {
 
         <Button
           _padding="12px"
-          bgColor="#ffffff"
-          _color="#383838"
-          isBorder="true"
+          bgColor={({ theme }) => theme.colors.white}
+          _color={({ theme }) => theme.colors.gray07}
+          isBorder
         >
           더보기
         </Button>

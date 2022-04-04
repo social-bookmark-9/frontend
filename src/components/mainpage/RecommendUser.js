@@ -13,101 +13,98 @@ const RecommendUser = props => {
   const navigate = useNavigate();
 
   const settings = {
-    infinite: false,
     speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    initialSlide: 1,
-    centerMode: true,
-    centerPadding: "50px",
-    focusOnSelect: true,
-    swipeToSlide: true,
     arrows: false,
+    slidesToShow: 2,
+    initialSlide: 1,
+    infinite: false,
+    centerMode: true,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+    focusOnSelect: true,
+    centerPadding: "50px",
   };
 
   return (
-    <>
+    <div
+      style={{
+        width: "100%",
+        padding: "32px 0 40px 18px",
+      }}
+    >
+      <Title _padding="0 0 20px 4px">나와 비슷한 버블러</Title>
       <div
         style={{
-          width: "100%",
-          padding: "32px 0 40px 18px",
+          marginLeft: "-58px",
         }}
       >
-        <Title _padding="0 0 20px 4px">나와 비슷한 버블러</Title>
-        <div
-          style={{
-            marginLeft: "-58px",
-          }}
-        >
-          <Slider {...settings}>
-            {memberInfo.map(member => {
-              return (
-                <div key={member.memberId}>
-                  <Card>
-                    <ProfileBox>
-                      {/*  그거... 동그라미 */}
-                      <CircleBox>
-                        <Circle
-                          _width="15.7px"
-                          _height="15.7px"
-                          bgColor="black"
-                        />
-                      </CircleBox>
-                      <ProfileImage>
-                        <img
-                          src={member.profileImage}
-                          alt="profile"
-                          style={{ zIndex: "3" }}
-                        />
-                      </ProfileImage>
-                      <Title
-                        _padding="23px 0 2px 0"
-                        textAlign="center"
-                        _fontSize={({ theme }) => theme.fontSizes.font16}
+        <Slider {...settings}>
+          {memberInfo.map(member => {
+            return (
+              <div key={member.memberId}>
+                <Card>
+                  <ProfileBox>
+                    <svg width="0" height="0">
+                      <defs>
+                        <clipPath id="myClip">
+                          <ellipse cx="25" cy="56" rx="25" ry="24.5" />
+                          <ellipse cx="62" cy="56" rx="25" ry="24.5" />
+                          <ellipse cx="25" cy="24.5" rx="25" ry="24.5" />
+                          <ellipse cx="62" cy="24.5" rx="25" ry="24.5" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                    {/*  그거... 동그라미 */}
+                    <CircleBox>
+                      <Circle
+                        _width="15.7px"
+                        _height="15.7px"
+                        bgColor="black"
+                      />
+                    </CircleBox>
+                    <ProfileImage>
+                      <img
+                        src={member.profileImage}
+                        alt="profile"
+                        style={{ zIndex: "3" }}
+                      />
+                    </ProfileImage>
+                    <Title
+                      _padding="23px 0 2px 0"
+                      textAlign="center"
+                      _fontSize={({ theme }) => theme.fontSizes.font16}
+                    >
+                      {member.memberName}
+                    </Title>
+                    <Text
+                      _color="#3E3E3E"
+                      _fontSize="13px"
+                      _padding="0 0 8px 0"
+                      textAlign="center"
+                    >
+                      {member.memberComment}
+                    </Text>
+                    <div style={{ display: "inline-block" }}>
+                      <Button
+                        _width="76px"
+                        _padding="6px"
+                        borderRadius="45px"
+                        _onClick={() => {
+                          navigate(`/mypage/${member.memberId}`);
+                          // navigate(`/${member.memberName}`);
+                        }}
                       >
-                        {member.memberName}
-                      </Title>
-                      <Text
-                        _color="#3E3E3E"
-                        _fontSize="13px"
-                        _padding="0 0 8px 0"
-                        textAlign="center"
-                      >
-                        {member.memberComment}
-                      </Text>
-                      <div style={{ display: "inline-block" }}>
-                        <Button
-                          _width="76px"
-                          _padding="6px"
-                          borderRadius="45px"
-                          _onClick={() => {
-                            navigate(`/mypage/${member.memberId}`);
-                            // navigate(`/${member.memberName}`);
-                          }}
-                        >
-                          구경하기
-                        </Button>
-                      </div>
-                    </ProfileBox>
-                  </Card>
-                </div>
-              );
-            })}
-          </Slider>
-        </div>
+                        구경하기
+                      </Button>
+                    </div>
+                  </ProfileBox>
+                </Card>
+              </div>
+            );
+          })}
+        </Slider>
       </div>
-
-      <svg width="0" height="0">
-        <defs>
-          <clipPath id="myClip">
-            <ellipse cx="25" cy="56" rx="25" ry="24.5" />
-            <ellipse cx="62" cy="56" rx="25" ry="24.5" />
-            <ellipse cx="25" cy="24.5" rx="25" ry="24.5" />
-            <ellipse cx="62" cy="24.5" rx="25" ry="24.5" />
-          </clipPath>
-        </defs>
-      </svg>
-    </>
+    </div>
   );
 };
 
@@ -130,7 +127,6 @@ const Card = styled.div`
 
 const ProfileBox = styled.div`
   display: inline-block;
-  width: 100%;
   height: 278px;
   position: relative;
 `;
@@ -151,7 +147,7 @@ const ProfileImage = styled.div`
 const CircleBox = styled.div`
   position: absolute;
   top: 64.8px;
-  right: 10px;
+  right: 0;
   z-index: 3;
 `;
 

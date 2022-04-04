@@ -68,18 +68,19 @@ function App(props) {
   const dispatch = useDispatch();
   const getMyInfo = useSelector(state => state.user.myInfo);
   const isLogin = useSelector(state => state.user.isLogin);
+  const isToken = getToken();
   const myInfo = { ...getMyInfo, isLogin };
   console.log(myInfo);
 
   useEffect(() => {
-    if (getToken()) {
-      dispatch(checkUserAxios(getToken()));
+    if (isToken) {
+      dispatch(checkUserAxios(isToken));
       dispatch(getMainWithAxios());
       dispatch(getFolderListAxios());
     } else {
       dispatch(getMainAxios());
     }
-  }, [dispatch]);
+  }, [dispatch, isLogin, isToken]);
 
   return (
     <React.Fragment>

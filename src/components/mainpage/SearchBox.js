@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router";
+
 import styled, { css } from "styled-components";
 import { Image, Text, Title } from "../../elements";
 
-const Search = props => {
+const SearchBox = props => {
+  const navigate = useNavigate();
+
+  const [keyword, setKeyword] = useState("");
+
+  const getKeyword = e => {
+    setKeyword(e.target.value);
+  };
+
+  const handleSearchPage = () => {
+    navigate("/search", { state: keyword });
+  };
+
   return (
     <React.Fragment>
       <Container>
@@ -22,9 +36,14 @@ const Search = props => {
               다양한 주제의 버블 수집가를 만나보세요👀
             </Text>
           </TextBox>
-          <SearchBox>
-            <Input placeholder="키워드로 검색해보세요" />
-            <ImageBox>
+          <SearchArea>
+            <Input
+              name="keyword"
+              onChange={getKeyword}
+              value={keyword}
+              placeholder="키워드로 검색해보세요"
+            />
+            <ImageBox onClick={handleSearchPage}>
               <Image
                 _src="/images/search.png"
                 _width="24px"
@@ -32,7 +51,7 @@ const Search = props => {
                 _marginR="0px"
               />
             </ImageBox>
-          </SearchBox>
+          </SearchArea>
         </SearchContainer>
       </Container>
     </React.Fragment>
@@ -61,7 +80,7 @@ const TextBox = styled.div`
   }
 `;
 
-const SearchBox = styled.div`
+const SearchArea = styled.div`
   padding: 16px;
 `;
 
@@ -84,8 +103,9 @@ const Input = styled.input`
 const ImageBox = styled.div`
   display: inline-block;
   position: absolute;
-  right: 50px;
-  margin-top: 10px;
+  right: 38px;
+  padding: 11px;
+  cursor: pointer;
 `;
 
-export default Search;
+export default SearchBox;
