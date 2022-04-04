@@ -1,19 +1,53 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import _ from "lodash";
+import { Spinner } from "../elements";
 
-const InfinityScroll = () => {
-  const [photos, setPhotos] = useState([]);
-  const [pageNumber, setPageNumber] = useState(0);
+const InfinityScroll = (props) => {
+  const { children, callNext, is_next, loading } = props;
 
-  const fetchPhotos = async pageNumber => {
-    const accessKey = "mfcqsWqaCS1ESvlF8b6t3fj9UKjLaGU3hfU0RzuBGk8";
-    const res = await fetch(
-      `https://api.unsplash.com/photos/?client_id=${accessKey}&page=${pageNumber}&per_page=3`,
-    );
-    const data = await res.json();
-    console.log(data);
-  };
+  const _handleScroll = _.throttle(() => {
+    if (loading) return;
+    const { innerHeight } = window;
+    const { scrollHeight } = document.body;
 
-  return <React.Fragment></React.Fragment>;
+    const scrollTop =
+      (document.documentElement && document.documentElement.scrollTop) ||
+      document.body.scrollTop;
+
+    if (scrollHeight - innerHeight - scrollTop < 200) {
+      if (loading) {
+        return;
+      }
+      callNext();
+    }
+  }, 300);
+
+  const handleScroll = useCallback(_handleScroll, [loading]);
+
+  useEffect(() => {
+    if (loading) return;
+    if (is_next) {
+      window.addEventListener("scroll", handleScroll);
+    } else {
+      window.removeEventListener("scroll", handleScroll);
+    }
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [is_next, loading]);
+
+  return (
+    <>
+      {children}
+      {is_next && <Spinner />}
+    </>
+  );
+};
+
+InfinityScroll.defaultProps = {
+  children: null,
+  callNext: () => {},
+  is_next: false,
+  loading: false,
 };
 
 export default InfinityScroll;
