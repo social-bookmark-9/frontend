@@ -11,9 +11,9 @@ export default class searchApi {
       method: "GET",
       url: `${
         this.base
-      }/api/searchpage/articles?hashtag=?titleOg=리액트?page=${parseInt(
+      }/api/searchpage/articles?hashtag=${hashtag}&titleOg=${titleOg}&page=${parseInt(
         page,
-      )}?sort=createdAt`,
+      )}&sort=createdAt`,
       headers: {
         "content-type": "application/json;",
         "X-AUTH-TOKEN": getToken(),

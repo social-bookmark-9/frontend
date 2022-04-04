@@ -1,4 +1,5 @@
 import axios from "axios";
+import { instance } from "./instance";
 import Swal from "sweetalert2";
 import { getToken } from "../../shared/utils";
 

@@ -72,18 +72,15 @@ export default class userApi {
       });
   }
 
-  async checkUser() {
-    const checkUserConfig = {
-      method: "GET",
-      url: `${this.base}/api/users/check`,
-      headers: {
-        "content-type": "application/json",
-        "X-AUTH-TOKEN": getToken(),
-      },
-    };
-    return axios(checkUserConfig)
+  async checkUser(token, callback) {
+    await instance
+      .get(`${this.base}/api/users/check`, {
+        data: JSON.stringify(token),
+      })
       .then(res => {
-        return res.data;
+        console.log(res);
+        callback(res.data.data);
+        return res.data.data;
       })
       .catch(err => {
         console.log(err);
@@ -100,12 +97,6 @@ export default class userApi {
     return axios(logoutConfig)
       .then(res => {
         console.log(res);
-        Swal.fire({
-          text: "로그아웃 되었습니다",
-          confirmButtonText: "확인",
-        }).then(res => {
-          navigate("/", { replace: true });
-        });
         return res;
       })
       .catch(err => {

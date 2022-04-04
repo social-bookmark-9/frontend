@@ -12,10 +12,10 @@ const initialState = {
 export const getSearchArticleResultAxios = createAsyncThunk(
   "search/getSearchArticleResult",
   async ({ hashtag, titleOg, page }, { dispatch }) => {
-    const resp = await SearchApi.getSearchArticle({ hashtag, titleOg, page });
-    dispatch(setSearchArticles(resp.data));
-    console.log(resp);
-    return resp;
+    const res = await SearchApi.getSearchArticle({ hashtag, titleOg, page });
+    dispatch(setSearchArticles(res.data));
+    console.log(res);
+    return res.data;
   },
 );
 

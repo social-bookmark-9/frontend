@@ -33,30 +33,38 @@ instance.interceptors.response.use(
   },
   async err => {
     const { response, config } = err;
+    console.log(response);
     const originalRequest = config;
-    if (response.status === 401) {
-      if (response.data.message === "expired") {
+    if (response.data.code === "401") {
+      if (response.data.message === "Expired") {
         let accessToken = getToken();
         let refreshToken = getReToken();
         const tokens = { accessToken, refreshToken };
         if (refreshToken) {
-          const { data } = await checkToken(tokens);
-          accessToken = data.accessToken;
-          refreshToken = data.refreshToken;
-          sessionStorage.setItem("accessToken", accessToken);
-          sessionStorage.setItem("refreshToken", refreshToken);
+          const { data } = await getNewToken(tokens);
+          console.log(data);
+          // accessToken = data.data.accessToken;
+          // refreshToken = data.data.refreshToken;
+          // sessionStorage.setItem("accessToken", accessToken);
+          // sessionStorage.setItem("refreshToken", refreshToken);
+          // console.log(accessToken, refreshToken);
         }
         originalRequest.headers["X-AUTH-TOKEN"] = accessToken;
       }
-      return axios(originalRequest);
+      // return axios(originalRequest);
     }
   },
 );
 
-const checkToken = async ({ accessToken, refreshToken }) => {
+const getNewToken = async ({ accessToken, refreshToken }) => {
+  console.log(accessToken, refreshToken);
   const response = await instance.post("/api/users/token", {
     headers: { "content-type": "application/json" },
-    data: JSON.stringify({ accessToken, refreshToken }),
+    data: JSON.stringify({
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+    }),
   });
-  return response;
+  console.log(response);
+  // return response;
 };

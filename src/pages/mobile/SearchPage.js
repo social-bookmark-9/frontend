@@ -81,7 +81,7 @@ const SearchPage = props => {
   console.log(titleOg);
 
   useEffect(() => {
-    dispatch(setPaging());
+    // dispatch(setPaging());
     dispatch(getSearchArticleResultAxios({ hashtag, titleOg, page }));
   }, [dispatch, hashtag, titleOg, page]);
 

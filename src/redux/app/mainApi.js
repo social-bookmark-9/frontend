@@ -1,4 +1,5 @@
 import axios from "axios";
+import { instance } from "./instance";
 import { getToken } from "../../shared/utils";
 
 export default class mainApi {
@@ -25,16 +26,10 @@ export default class mainApi {
   }
 
   async getMainWith() {
-    const getMainWithConfig = {
-      method: "GET",
-      url: `${this.base}/api/mainpage`,
-      headers: {
-        "Content-Type": "application/json",
-        "X-AUTH-TOKEN": getToken(),
-      },
-    };
-
-    return axios(getMainWithConfig)
+    await instance
+      .get(`${this.base}/api/mainpage`, {
+        headers: { "content-type": "application/json" },
+      })
       .then(res => {
         return res.data;
       })
@@ -54,7 +49,7 @@ export default class mainApi {
 
     return axios(getMainWithConfig)
       .then(res => {
-        return(res.data);
+        return res.data;
       })
       .catch(err => {
         console.log(err);
