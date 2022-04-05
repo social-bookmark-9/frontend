@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getToken } from "../../shared/utils";
+import { instance } from "./instance";
 
 export default class folderApi {
   constructor() {
@@ -41,17 +42,12 @@ export default class folderApi {
       });
   }
 
-  async getFolderList() {
-    const getFolderListConfig = {
-      method: "GET",
-      url: `${this.base}/api/articleFolders/folderName`,
-      headers: {
-        "Content-Type": "application/json",
-        "X-AUTH-TOKEN": getToken(),
-      },
-    };
-    return axios(getFolderListConfig)
+  async getFolderList(callback) {
+    await instance
+      .get(`/api/articleFolders/folderName`)
       .then(res => {
+        console.log(res.data);
+        callback(res.data.data);
         return res.data;
       })
       .catch(err => {

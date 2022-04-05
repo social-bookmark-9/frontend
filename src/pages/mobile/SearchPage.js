@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getSearchArticleResultAxios,
-  setPaging,
-} from "../../redux/modules/Search";
+import { getSearchArticleResultAxios } from "../../redux/modules/Search";
 
 import styled, { css } from "styled-components";
 import { Image, Text, Title } from "../../elements";
 
 import Navbar from "../../components/common/Navbar";
 import SearchResult from "../../components/setting/SearchResult";
-import { useLocation } from "react-router";
+import InfinityScroll from "../../components/common/InfinityScroll";
 
 const SearchPage = props => {
+  const { isLoading, paging } = props;
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -65,30 +64,34 @@ const SearchPage = props => {
   const handleSortByType = e => {
     setSortByType(e.target);
   };
-  const sortByList = ["최신순", "오래된순"];
+  const sortByList = ["최신순", "좋아요순"];
 
   // 키워드 입력
-  const [keyword, setKeyword] = useState(location.state);
+  const [keyword, setKeyword] = useState(location.state ? location.state : "");
   const handleTitleOg = e => {
     setKeyword(e.target.value);
   };
 
   const isLoaded = false;
-  console.log(keyword);
 
   const hashtag = categoryType !== "카테고리" ? categoryType : "";
   const titleOg = keyword;
-  console.log(titleOg);
+  let sort;
+  if (sortByType === "최신순") {
+    sort = "createdAt";
+  } else if (sortByType === "좋아요순") {
+    sort = "likeCount";
+  }
 
   useEffect(() => {
-    dispatch(setPaging());
-    dispatch(getSearchArticleResultAxios({ hashtag, titleOg, page }));
-  }, [dispatch, hashtag, titleOg, page]);
+    if (location.state) {
+      dispatch(getSearchArticleResultAxios({ hashtag, titleOg, page, sort }));
+    }
+  }, [dispatch, hashtag, titleOg, page, location.state, sort]);
 
   return (
     <React.Fragment>
       <Navbar title="검색" />
-
       {/* 검색 부분 */}
       <Container>
         <Input
@@ -106,7 +109,6 @@ const SearchPage = props => {
           />
         </ImageBox>
       </Container>
-
       <DropdownWrap>
         {/* 컬렉션/아티클 */}
         <Dropdown>
@@ -175,13 +177,20 @@ const SearchPage = props => {
           )}
         </Dropdown>
       </DropdownWrap>
-
       {/* 결과 부분 */}
       <Container>
         {isLoaded ? (
-          <Text>
-            <SearchResult />
-          </Text>
+          <InfinityScroll
+            callNext={() => {
+              dispatch(getSearchArticleResultAxios());
+            }}
+            isNext={paging.next ? true : false}
+            loading={isLoading}
+          >
+            <Text>
+              <SearchResult />
+            </Text>
+          </InfinityScroll>
         ) : (
           <div
             style={{

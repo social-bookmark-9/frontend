@@ -9,7 +9,6 @@ import Carousel from "../../elements/Carousel";
 
 const ArticleFolder = props => {
   const { folder, folderColor } = props;
-  console.log(props);
 
   const navigate = useNavigate();
 
@@ -121,6 +120,11 @@ const ArticleFolder = props => {
     </React.Fragment>
   );
 };
+
+ArticleFolder.defaultProps = {
+  folderColor: "#fafbfb",
+};
+
 const Container = styled.div`
   width: 100%;
 `;

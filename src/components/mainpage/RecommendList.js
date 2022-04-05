@@ -36,7 +36,7 @@ const RecommendList = props => {
         breakpoint: 768, //화면 사이즈 768px
         settings: {
           //위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
-          slidesToShow: 1,
+          slidesToShow: 2,
         },
       },
     ],
@@ -122,6 +122,9 @@ const RecommendContainer = styled.div`
 
 const SliderBox = styled.div`
   margin-left: -58px;
+  & .slick-track {
+    transform: translate3d(0, 0, 0) !important;
+  }
 `;
 
 const ArticleCardContent = styled.div`

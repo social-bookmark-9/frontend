@@ -9,8 +9,7 @@ const initialState = {
   articleList: [],
   paging: { page: 0, limit: 3 },
   isLoading: false,
-  hashtagList: []
-
+  hashtagList: [],
 };
 
 export const getMainAxios = createAsyncThunk(
@@ -18,7 +17,7 @@ export const getMainAxios = createAsyncThunk(
   async (_, { dispatch }) => {
     const resp = await MainApi.getMain();
     dispatch(setMain(resp.data));
-    console.log(resp);
+    console.log("비로그인 메인아티클", resp);
     return resp;
   },
 );
@@ -26,20 +25,20 @@ export const getMainAxios = createAsyncThunk(
 export const getMainWithAxios = createAsyncThunk(
   "main/getMain",
   async (_, { dispatch }) => {
-    const resp = await MainApi.getMainWith();
-    dispatch(setMain(resp.data));
-    console.log(resp);
-    return resp;
+    const resp = await MainApi.getMainWith(data => {
+      dispatch(setMain(data));
+    });
+    console.log("로그인 메인아티클", resp);
   },
 );
 
 export const getMainByHashtagAxios = createAsyncThunk(
   "main/getMainByHashtag",
-  async (chosenHashtag) => {
+  async chosenHashtag => {
     const res = await MainApi.getMainByHashtag(chosenHashtag);
-    return(res);
-  }
-)
+    return res;
+  },
+);
 
 export const mainSlice = createSlice({
   name: "main",
@@ -68,9 +67,13 @@ export const mainSlice = createSlice({
       // state.paging.page += 1;
       state.isLoading = false;
     },
+    [getMainWithAxios.fulfilled]: (state, action) => {
+      // state.paging.page += 1;
+      state.isLoading = false;
+    },
     [getMainByHashtagAxios.fulfilled]: (state, action) => {
       state.hashtagList = action.payload.data;
-    }
+    },
   },
 });
 

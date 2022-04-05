@@ -6,8 +6,8 @@ import Swal from "sweetalert2";
 import { Image, Text, Title } from "../../elements";
 
 const NavbarD = props => {
-  const { isLogin, memberId } = props;
-  console.log(memberId);
+  const { isLogin, memberId, bgColor } = props;
+  console.log(bgColor);
 
   const navigate = useNavigate();
 
@@ -73,7 +73,7 @@ const NavbarD = props => {
 
   return (
     <React.Fragment>
-      <NavbarContainer>
+      <NavbarContainer bgColor={bgColor}>
         <NavContainer>
           <NavBox>
             <LogoBox>
@@ -114,11 +114,18 @@ const NavbarD = props => {
   );
 };
 
-NavbarD.defaultProps = {};
+NavbarD.defaultProps = {
+  bgColor: "white",
+  fontColor: "",
+};
+
+const NavbarContainer = styled.div`
+  width: 100%;
+  background-color: ${props => props.bgColor || "white"};
+`;
+
 const NavContainer = styled.div`
   width: 100%;
-  position: absolute;
-  top: 0;
 `;
 
 const NavBox = styled.div`
@@ -163,7 +170,4 @@ const ImageBox = styled.div`
   }
 `;
 
-const NavbarContainer = styled.div`
-  width: 100%;
-`;
 export default NavbarD;
