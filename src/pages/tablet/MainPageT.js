@@ -11,28 +11,12 @@ import Curations from "../../components/mainpage/Curations";
 import RecommendList from "../../components/mainpage/RecommendList";
 import RecommendUserT from "../../components/mainpage/RecommendUserT";
 import EventAlert from "../../components/mainpage/EventAlert";
-import { instance } from "../../redux/app/instance";
 
 const MainPageT = props => {
   const { isLogin } = props;
   const memberInfo = useSelector(state => state.main.userInfo);
   const folderList = useSelector(state => state.main.folderList);
   const articleList = useSelector(state => state.main.articleList);
-
-  const accessToken = sessionStorage.getItem("accessToken");
-  const refreshToken = sessionStorage.getItem("refreshToken");
-  const tokens = {
-    accessToken: accessToken,
-    refreshToken: refreshToken,
-  };
-  console.log(tokens);
-
-  const getNewToken = async () => {
-    await instance.post("/api/users/token", {
-      headers: { "Content-Type": "application/json" },
-      data: JSON.stringify(tokens),
-    });
-  };
 
   return (
     <React.Fragment>
@@ -50,9 +34,6 @@ const MainPageT = props => {
         {/* 검색 */}
         <SearchBox />
         <ModalD />
-        <div>
-          <button onClick={getNewToken}>토큰 재발급</button>
-        </div>
       </MainContainer>
     </React.Fragment>
   );
