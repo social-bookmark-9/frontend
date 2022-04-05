@@ -6,16 +6,20 @@ const SearchApi = new searchApi();
 const initialState = {
   isLoading: false,
   articleList: [],
-  paging: { isFirst: true, isLast: false, page: 0, sort: "createAt" },
+  paging: { next: true, page: 0, sort: "createAt" },
 };
 
 export const getSearchArticleResultAxios = createAsyncThunk(
   "search/getSearchArticleResult",
-  async ({ hashtag, titleOg, page }, { dispatch }) => {
-    const resp = await SearchApi.getSearchArticle({ hashtag, titleOg, page });
-    dispatch(setSearchArticles(resp.data));
-    console.log(resp);
-    return resp;
+  async ({ hashtag, titleOg, page, sort }, { dispatch }) => {
+    const res = await SearchApi.getSearchArticle(
+      { hashtag, titleOg, page, sort },
+      data => {
+        dispatch(setSearchArticles(data));
+      },
+    );
+    console.log(res);
+    return res.data;
   },
 );
 
@@ -39,8 +43,7 @@ export const searchSlice = createSlice({
   },
   extraReducers: {
     [getSearchArticleResultAxios.fulfilled]: (state, action) => {
-      state.paging.isFirst = !action.payload.isFirst;
-      state.paging.isLast = action.payload.isLast;
+      state.paging.next = !action.payload.isLast;
       state.paging.page += 1;
       state.isLoading = false;
     },

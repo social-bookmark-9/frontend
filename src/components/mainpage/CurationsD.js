@@ -6,10 +6,9 @@ import { Title, Button } from "../../elements";
 
 import ArticleFolderD from "../folderpage/ArticleFolderD";
 
-const CurationsD = (props) => {
+const CurationsD = props => {
   const { folderList } = props;
   const navigate = useNavigate();
-  
 
   return (
     <CurationContainer>
@@ -21,10 +20,10 @@ const CurationsD = (props) => {
           <div>추천 큐레이션</div>
         </Title>
         <div style={{ fontSize: "20px", color: "#b1b8c0" }}>
-          설명설명설명설명
+          버블드가 직접 엄선한 유저들의 큐레이션을 만나보세요
         </div>
       </CurationExplain>
-      
+
       <CurationBox>
         {folderList.map((folder, idx) => (
           <FolderBox
@@ -81,7 +80,7 @@ const CurationBox = styled.div`
 
 const FolderBox = styled.div`
   margin-bottom: 16px;
-  width: 100%
+  width: 100%;
 `;
 
 export default CurationsD;

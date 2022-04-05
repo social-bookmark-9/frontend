@@ -9,8 +9,6 @@ import LinesEllipsis from "react-lines-ellipsis";
 import { useDispatch, useSelector } from "react-redux";
 import { getMainByHashtagAxios } from "../../redux/modules/Main";
 
-
-
 const RecommendListD = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -37,7 +35,7 @@ const RecommendListD = () => {
 
   const hashtagList = useSelector(state => state.main.hashtagList);
 
-  const handleChecked = (idx) => {
+  const handleChecked = idx => {
     const chosenHashtag = favoritesList[idx];
     console.log(chosenHashtag);
     dispatch(getMainByHashtagAxios(chosenHashtag));
@@ -55,8 +53,8 @@ const RecommendListD = () => {
         </Title>
         <FavoritesBox>
           <Favorites>
-          {favoritesList.map((favor, idx) => (
-              <InputBox 
+            {favoritesList.map((favor, idx) => (
+              <InputBox
                 key={idx}
                 onClick={() => {
                   setTempId(idx);
@@ -79,66 +77,66 @@ const RecommendListD = () => {
       </LeftDiv>
       <RightDiv>
         {hashtagList.map((article, idx) => {
-        const _hashTag = [
-          article.hashtag1,
-          article.hashtag2,
-          article.hashtag3,
-        ];
-        const hashTag = _hashTag.filter((el, i) => el !== null);
+          const _hashTag = [
+            article.hashtag1,
+            article.hashtag2,
+            article.hashtag3,
+          ];
+          const hashTag = _hashTag.filter((el, i) => el !== null);
 
-        return (
-          <CardBox
-            key={idx}
-            onClick={() => {
-              navigate(`/article/${article.articleId}`);
-            }}
-          >
-            <Card bgImage={article.imgOg}>
-              <ImageBox>
-                <Image
-                  _src={"/images/bookmark.png"}
-                  _width="25px"
-                  _height="24px"
-                  _marginR="none"
-                />
-              </ImageBox>
-              <ArticleCardContent>
-                <LabelBox>
-                  {hashTag.map((tag, idx) => (
-                    <Label key={idx}>{tag}</Label>
-                  ))}
-                </LabelBox>
-                <ArticleTitle>
-                  {article.titleOg !== null ? (
-                    <LinesEllipsis
-                      text={article.titleOg}
-                      maxLine="2"
-                      ellipsis="..."
-                      trimRight
-                      basedOn="letters"
-                    />
-                  ) : (
-                    "제목없음"
-                  )}
-                </ArticleTitle>
-                <ArticleText>
-                  {article.contentOg !== null ? (
-                    <LinesEllipsis
-                      text={article.contentOg}
-                      maxLine="2"
-                      ellipsis="..."
-                      trimRight
-                      basedOn="letters"
-                    />
-                  ) : (
-                    "미리보기 내용을 불러올 수 없습니다"
-                  )}
-                </ArticleText>
-              </ArticleCardContent>
-            </Card>
-          </CardBox>
-        );
-      })}
+          return (
+            <CardBox
+              key={idx}
+              onClick={() => {
+                navigate(`/article/${article.articleId}`);
+              }}
+            >
+              <Card bgImage={article.imgOg}>
+                <ImageBox>
+                  <Image
+                    _src={"/images/bookmark.png"}
+                    _width="25px"
+                    _height="24px"
+                    _marginR="none"
+                  />
+                </ImageBox>
+                <ArticleCardContent>
+                  <LabelBox>
+                    {hashTag.map((tag, idx) => (
+                      <Label key={idx}>{tag}</Label>
+                    ))}
+                  </LabelBox>
+                  <ArticleTitle>
+                    {article.titleOg !== null ? (
+                      <LinesEllipsis
+                        text={article.titleOg}
+                        maxLine="2"
+                        ellipsis="..."
+                        trimRight
+                        basedOn="letters"
+                      />
+                    ) : (
+                      "제목없음"
+                    )}
+                  </ArticleTitle>
+                  <ArticleText>
+                    {article.contentOg !== null ? (
+                      <LinesEllipsis
+                        text={article.contentOg}
+                        maxLine="2"
+                        ellipsis="..."
+                        trimRight
+                        basedOn="letters"
+                      />
+                    ) : (
+                      "미리보기 내용을 불러올 수 없습니다"
+                    )}
+                  </ArticleText>
+                </ArticleCardContent>
+              </Card>
+            </CardBox>
+          );
+        })}
       </RightDiv>
     </Container>
   );
@@ -186,7 +184,7 @@ const Card = styled.div`
 `;
 
 const ArticleCardContent = styled.div`
-  width: 95%;
+  width: 100%;
   padding: 18px 28px;
   & h1 {
     padding-bottom: 8px;

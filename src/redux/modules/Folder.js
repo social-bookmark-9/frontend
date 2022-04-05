@@ -34,10 +34,9 @@ export const getFolderWithAxios = createAsyncThunk(
 export const getFolderListAxios = createAsyncThunk(
   "folder/getFolderList",
   async (_, { dispatch }) => {
-    const resp = await FolderApi.getFolderList();
-    dispatch(setFolderList(resp.data));
-    console.log(resp);
-    return resp;
+    await FolderApi.getFolderList(data => {
+      dispatch(setFolderList(data));
+    });
   },
 );
 

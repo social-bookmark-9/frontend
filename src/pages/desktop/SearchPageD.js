@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getSearchArticleResultAxios } from "../../redux/modules/Search";
+import {
+  getSearchArticleResultAxios,
+  setPaging,
+} from "../../redux/modules/Search";
 
 import styled, { css } from "styled-components";
 import { Image, Text, Title } from "../../elements";
 
 import Navbar from "../../components/common/Navbar";
 import SearchResult from "../../components/setting/SearchResult";
-import InfinityScroll from "../../components/common/InfinityScroll";
+import { useLocation } from "react-router";
+import NavbarD from "../../components/common/NavbarD";
 
-const SearchPage = props => {
-  const { isLoading, paging } = props;
+const SearchPageD = props => {
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -64,34 +66,31 @@ const SearchPage = props => {
   const handleSortByType = e => {
     setSortByType(e.target);
   };
-  const sortByList = ["최신순", "좋아요순"];
+  const sortByList = ["최신순", "오래된순"];
 
   // 키워드 입력
-  const [keyword, setKeyword] = useState(location.state ? location.state : "");
+  const [keyword, setKeyword] = useState(location.state);
   const handleTitleOg = e => {
     setKeyword(e.target.value);
   };
 
   const isLoaded = false;
+  console.log(keyword);
 
   const hashtag = categoryType !== "카테고리" ? categoryType : "";
   const titleOg = keyword;
-  let sort;
-  if (sortByType === "최신순") {
-    sort = "createdAt";
-  } else if (sortByType === "좋아요순") {
-    sort = "likeCount";
-  }
+  console.log(titleOg);
 
   useEffect(() => {
-    if (location.state) {
-      dispatch(getSearchArticleResultAxios({ hashtag, titleOg, page, sort }));
-    }
-  }, [dispatch, hashtag, titleOg, page, location.state, sort]);
+    dispatch(setPaging());
+    dispatch(getSearchArticleResultAxios({ hashtag, titleOg, page }));
+  }, [dispatch, hashtag, titleOg, page]);
 
   return (
     <React.Fragment>
-      <Navbar title="검색" />
+      <NavbarD title="검색" />
+      <SearchPageContainer>
+      
       {/* 검색 부분 */}
       <Container>
         <Input
@@ -101,14 +100,17 @@ const SearchPage = props => {
           placeholder="키워드로 검색해보세요"
         />
         <ImageBox>
+          <ImageAlign>
           <Image
             _src="/images/search.png"
             _width="24px"
             _height="24px"
             _marginR="0px"
           />
+          </ImageAlign>
         </ImageBox>
       </Container>
+
       <DropdownWrap>
         {/* 컬렉션/아티클 */}
         <Dropdown>
@@ -177,20 +179,13 @@ const SearchPage = props => {
           )}
         </Dropdown>
       </DropdownWrap>
+
       {/* 결과 부분 */}
       <Container>
         {isLoaded ? (
-          <InfinityScroll
-            callNext={() => {
-              dispatch(getSearchArticleResultAxios());
-            }}
-            isNext={paging.next ? true : false}
-            loading={isLoading}
-          >
-            <Text>
-              <SearchResult />
-            </Text>
-          </InfinityScroll>
+          <Text>
+            <SearchResult />
+          </Text>
         ) : (
           <div
             style={{
@@ -211,9 +206,17 @@ const SearchPage = props => {
           </div>
         )}
       </Container>
+      </SearchPageContainer>
     </React.Fragment>
   );
 };
+
+
+const SearchPageContainer = styled.div`
+  margin: 0 auto;
+  padding-top: 82px;
+  width: 1119px;
+`;
 
 const Container = styled.div`
   padding: 16px;
@@ -236,16 +239,20 @@ const Input = styled.input`
 `;
 
 const ImageBox = styled.div`
+  position: relative;
+  text-align: right;
+  margin-top: -32px;
+  padding-right: 16px;
+`;
+
+const ImageAlign = styled.div`
   display: inline-block;
-  position: absolute;
-  right: 35px;
-  margin-top: 10px;
 `;
 
 const DropdownWrap = styled.div`
   display: grid;
   padding: 0 16px;
-  grid-template-columns: 22% 30% 25% 22%;
+  grid-template-columns: 20% 25% 21% 34%;
   gap: 8px;
 `;
 
@@ -303,4 +310,4 @@ const DropdownItem = styled.li`
   }
 `;
 
-export default SearchPage;
+export default SearchPageD;
