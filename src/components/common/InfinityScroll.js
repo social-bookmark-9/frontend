@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Spinner } from "../elements";
+import Spinner from "../../shared/Spinner";
 
 const InfinityScroll = props => {
   const { children, callNext, isNext, loading } = props;
