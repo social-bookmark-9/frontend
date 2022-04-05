@@ -10,10 +10,9 @@ import { FlexboxRow } from "../../styles/flexbox";
 import { Title, Button, Text, Image } from "../../elements";
 
 import Favorite from "../../components/common/Favorite";
-import { current } from "@reduxjs/toolkit";
 
 const AddLinkTagE = props => {
-  const { setShowModal, openModal, myFolderList } = props;
+  const { setShowModal, myFolderList } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
