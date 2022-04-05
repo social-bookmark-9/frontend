@@ -1,8 +1,7 @@
 import axios from "axios";
 import { instance } from "./instance";
 
-import { getToken, getReToken } from "../../shared/utils";
-import Swal from "sweetalert2";
+import { getReToken } from "../../shared/utils";
 export default class userApi {
   constructor() {
     this.base = process.env.REACT_APP_SERVER;
@@ -74,7 +73,7 @@ export default class userApi {
 
   async checkUser(token, callback) {
     await instance
-      .get(`${this.base}/api/users/check`, {
+      .get(`/api/users/check`, {
         data: JSON.stringify(token),
       })
       .then(res => {
@@ -102,5 +101,13 @@ export default class userApi {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  async getNewToken(tokens, callback) {
+    await instance
+      .post("/api/users/token", {
+        data: JSON.stringify(tokens),
+      })
+      .then();
   }
 }

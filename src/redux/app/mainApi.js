@@ -1,6 +1,5 @@
 import axios from "axios";
 import { instance } from "./instance";
-import { getToken } from "../../shared/utils";
 
 export default class mainApi {
   constructor() {
@@ -15,7 +14,6 @@ export default class mainApi {
         "Content-Type": "application/json",
       },
     };
-
     return axios(getMainConfig)
       .then(res => {
         return res.data;
@@ -25,13 +23,12 @@ export default class mainApi {
       });
   }
 
-  async getMainWith() {
+  async getMainWith(callback) {
     await instance
-      .get(`${this.base}/api/mainpage`, {
-        headers: { "content-type": "application/json" },
-      })
+      .get(`/api/mainpage`)
       .then(res => {
-        return res.data;
+        console.log("로그인 메인아티클", res.data);
+        callback(res.data.data);
       })
       .catch(err => {
         console.log(err);

@@ -1,4 +1,4 @@
-import { instance, accessInstance } from "./instance";
+import { instance } from "./instance";
 
 export default class searchApi {
   constructor() {
@@ -6,7 +6,7 @@ export default class searchApi {
   }
 
   async getSearchArticle({ hashtag, titleOg, page, sort }, callback) {
-    await accessInstance
+    await instance
       .get(
         `/api/searchpage/articles?hashtag=${hashtag}&titleOg=${titleOg}&page=${parseInt(
           page,

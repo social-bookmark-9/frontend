@@ -1,12 +1,9 @@
 import axios from "axios";
-import { getToken, getReToken } from "../../shared/utils";
+import { getToken } from "../../shared/utils";
 
 export const instance = axios.create({
   baseURL: process.env.REACT_APP_SERVER,
 });
-
-console.log("엑세스토큰", getToken());
-console.log("리프레시토큰", getReToken());
 
 instance.interceptors.request.use(
   config => {
@@ -22,49 +19,48 @@ instance.interceptors.request.use(
   },
   err => {
     console.log(err);
-    return console.log(err);
+    return Promise.reject(err);
   },
 );
 
 instance.interceptors.response.use(
-  response => {
-    console.log(response);
-    return response;
+  res => {
+    console.log(res);
+    return res;
   },
-  async err => {
+  err => {
     const { response, config } = err;
-    console.log(response);
-    const originalRequest = config;
-    if (response.data.code === "401") {
-      if (response.data.message === "Expired") {
-        let accessToken = getToken();
-        let refreshToken = getReToken();
-        const tokens = { accessToken, refreshToken };
-        if (refreshToken) {
-          const { data } = await getNewToken(tokens);
-          console.log(data);
-          // accessToken = data.data.accessToken;
-          // refreshToken = data.data.refreshToken;
-          // sessionStorage.setItem("accessToken", accessToken);
-          // sessionStorage.setItem("refreshToken", refreshToken);
-          // console.log(accessToken, refreshToken);
-        }
-        originalRequest.headers["X-AUTH-TOKEN"] = accessToken;
+    return new Promise(async (resolve, reject) => {
+      console.log(typeof response.data.code);
+      console.log(typeof response.data.message);
+      const originalRequest = config;
+      console.log(originalRequest);
+
+      if (
+        response.data.code === "401" &&
+        response.data.message === "Expired" &&
+        config &&
+        !config._retry
+      ) {
+        originalRequest._retry = true;
+        console.log("토큰 만료");
+
+        // const res = await instance.post("/api/users/token", {
+        //   data: JSON.stringify(tokens),
+        // });
+        // const data = res.data;
+        // console.log(data);
       }
-      // return axios(originalRequest);
-    }
+    });
+
+    //     // accessToken = data.data.accessToken;
+    //     // refreshToken = data.data.refreshToken;
+    //     // sessionStorage.setItem("accessToken", accessToken);
+    //     // sessionStorage.setItem("refreshToken", refreshToken);
+    //     // console.log(accessToken, refreshToken);
+    //   }
+    //   // originalRequest.headers["X-AUTH-TOKEN"] = accessToken;
+    // return axios(originalRequest);
+    // return Promise.reject(err);
   },
 );
-
-const getNewToken = async ({ accessToken, refreshToken }) => {
-  console.log(accessToken, refreshToken);
-  const response = await instance.post("/api/users/token", {
-    headers: { "content-type": "application/json" },
-    data: JSON.stringify({
-      accessToken: accessToken,
-      refreshToken: refreshToken,
-    }),
-  });
-  console.log(response);
-  // return response;
-};

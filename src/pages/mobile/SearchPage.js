@@ -12,7 +12,7 @@ import SearchResult from "../../components/setting/SearchResult";
 import InfinityScroll from "../../components/common/InfinityScroll";
 
 const SearchPage = props => {
-  const { result, isLoading, paging } = props;
+  const { isLoading, paging } = props;
   const dispatch = useDispatch();
   const location = useLocation();
 
