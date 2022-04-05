@@ -1,0 +1,9 @@
+body {
+  width: 360px;
+  height: 540px;
+  padding-top: 20px;
+}
+
+container {
+  padding: 0 20px;
+}

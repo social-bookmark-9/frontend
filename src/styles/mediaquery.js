@@ -9,6 +9,10 @@ export const Tablet = ({ children }) => {
   return isTablet ? children : null;
 };
 export const Mobile = ({ children }) => {
-  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isMobile = useMediaQuery({ minWidth: 321, maxWidth: 767 });
   return isMobile ? children : null;
+};
+export const Extension = ({ children }) => {
+  const isExtension = useMediaQuery({ maxWidth: 320 });
+  return isExtension ? children : null;
 };

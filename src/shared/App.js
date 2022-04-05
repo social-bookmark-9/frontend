@@ -9,7 +9,7 @@ import { getToken } from "./utils";
 
 // css
 import "./App.css";
-import { Desktop, Tablet, Mobile } from "../styles/mediaquery";
+import { Desktop, Tablet, Mobile, Extension } from "../styles/mediaquery";
 
 // 공통 페이지
 import Spinner from "./Spinner";
@@ -32,6 +32,7 @@ import UserFavorites from "../pages/mobile/UserFavorites";
 import LoginD from "../pages/desktop/LoginD";
 import SettingD from "../pages/desktop/SettingD";
 import MyReviewD from "../pages/desktop/MyReviewD";
+import SearchPageD from "../pages/desktop/SearchPageD";
 import MyReminderD from "../pages/desktop/MyReminderD";
 import RemindEmailD from "../pages/desktop/RemindEmailD";
 import EditProfileD from "../pages/desktop/EditProfileD";
@@ -45,6 +46,9 @@ import MyReminderT from "../pages/tablet/MyReminderT";
 import EditProfileT from "../pages/tablet/EditProfileT";
 import UserNicknameT from "../pages/tablet/UserNicknameT";
 import UserFavoritesT from "../pages/tablet/UserFavoritesT";
+
+// 크롬 익스텐션 페이지
+import MainE from "../pages/extension/MainE";
 
 // 모바일 페이지 lazy 적용
 const MyPage = lazy(() => import("../pages/mobile/MyPage"));
@@ -92,6 +96,7 @@ function App(props) {
               <Route path="/login" element={<LoginD />} />
               <Route path="/myreview" element={<MyReviewD />} />
               <Route path="/" element={<MainPageD {...myInfo} />} />
+              <Route path="/search" element={<SearchPageD {...myInfo} />} />
               <Route path="/user/nickname" element={<UserNicknameD />} />
               <Route path="/setting" element={<SettingD {...myInfo} />} />
               <Route path="/user/favorites" element={<UserFavoritesD />} />
@@ -190,6 +195,15 @@ function App(props) {
               />
             </Routes>
           </Mobile>
+          <Extension>
+            <Routes>
+              <Route path="/" element={<MainE {...myInfo} />} />
+              <Route
+                path="/api/users/login"
+                element={<OAuthRedirectHandler />}
+              />
+            </Routes>
+          </Extension>
         </Suspense>
       </ErrorBoundary>
     </React.Fragment>
