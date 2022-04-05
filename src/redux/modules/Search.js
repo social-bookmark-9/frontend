@@ -12,14 +12,10 @@ const initialState = {
 export const getSearchArticleResultAxios = createAsyncThunk(
   "search/getSearchArticleResult",
   async ({ hashtag, titleOg, page, sort }, { dispatch }) => {
-    const res = await SearchApi.getSearchArticle(
-      { hashtag, titleOg, page, sort },
-      data => {
-        dispatch(setSearchArticles(data));
-      },
-    );
-    console.log(res);
-    return res.data;
+    await SearchApi.getSearchArticle({ hashtag, titleOg, page, sort }, data => {
+      setPaging(data);
+      dispatch(setSearchArticles(data));
+    });
   },
 );
 
@@ -34,16 +30,15 @@ export const searchSlice = createSlice({
       state.isLoading = action.payload;
     },
     setPaging: (state, action) => {
+      console.log(action.payload);
       state.articleList = initialState.articleList;
       state.paging.page = 1;
-      state.paging.isFirst = true;
-      state.paging.isLast = false;
-      state.paging.next = null;
+      state.paging.isLast = action.payload.isLast;
+      state.paging.next = action.payload.isFirst;
     },
   },
   extraReducers: {
     [getSearchArticleResultAxios.fulfilled]: (state, action) => {
-      state.paging.next = !action.payload.isLast;
       state.paging.page += 1;
       state.isLoading = false;
     },

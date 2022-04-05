@@ -9,7 +9,6 @@ import {
 import styled, { css } from "styled-components";
 import { Image, Text, Title } from "../../elements";
 
-import Navbar from "../../components/common/Navbar";
 import SearchResult from "../../components/setting/SearchResult";
 import { useLocation } from "react-router";
 import NavbarD from "../../components/common/NavbarD";
@@ -30,7 +29,7 @@ const SearchPageD = props => {
   const handleSearchType = e => {
     setSearchType(e.target);
   };
-  const searchList = ["전체", "컬렉션", "아티클"];
+  const searchList = ["아티클", "컬렉션"];
 
   // 카테고리 선택
   const [categoryOpen, setCategoryOpen] = useState(false);
@@ -66,7 +65,7 @@ const SearchPageD = props => {
   const handleSortByType = e => {
     setSortByType(e.target);
   };
-  const sortByList = ["최신순", "오래된순"];
+  const sortByList = ["최신순", "좋아요순"];
 
   // 키워드 입력
   const [keyword, setKeyword] = useState(location.state);
@@ -90,127 +89,128 @@ const SearchPageD = props => {
     <React.Fragment>
       <NavbarD title="검색" />
       <SearchPageContainer>
-      
-      {/* 검색 부분 */}
-      <Container>
-        <Input
-          name="keyword"
-          onChange={handleTitleOg}
-          value={keyword}
-          placeholder="키워드로 검색해보세요"
-        />
-        <ImageBox>
-          <ImageAlign>
-          <Image
-            _src="/images/search.png"
-            _width="24px"
-            _height="24px"
-            _marginR="0px"
+        {/* 검색 부분 */}
+        <Container>
+          <Input
+            name="keyword"
+            onChange={handleTitleOg}
+            value={keyword}
+            placeholder="키워드로 검색해보세요"
           />
-          </ImageAlign>
-        </ImageBox>
-      </Container>
+          <ImageBox>
+            <ImageAlign>
+              <Image
+                _src="/images/search.png"
+                _width="24px"
+                _height="24px"
+                _marginR="0px"
+              />
+            </ImageAlign>
+          </ImageBox>
+        </Container>
 
-      <DropdownWrap>
-        {/* 컬렉션/아티클 */}
-        <Dropdown>
-          <DropdownHeader state={searchOpen} onClick={toggleSearchDropdown}>
-            <FolderName>{searchType}</FolderName>
-            <SelectIcon>{">"}</SelectIcon>
-          </DropdownHeader>
-          {searchOpen && (
-            <DropdownList key={searchType}>
-              {searchList.map((option, idx) => (
-                <DropdownItem
-                  key={idx}
-                  onClick={() => {
-                    toggleSearchDropdown(setSearchType(option));
-                  }}
-                  onChange={handleSearchType}
-                >
-                  {option}
-                </DropdownItem>
-              ))}
-            </DropdownList>
-          )}
-        </Dropdown>
-        {/* 카테고리 */}
-        <Dropdown>
-          <DropdownHeader state={categoryOpen} onClick={toggleCategoryDropdown}>
-            <FolderName>{categoryType}</FolderName>
-            <SelectIcon>{">"}</SelectIcon>
-          </DropdownHeader>
-          {categoryOpen && (
-            <DropdownList key={searchType}>
-              {categoryList.map((option, idx) => (
-                <DropdownItem
-                  key={idx}
-                  onClick={() => {
-                    toggleCategoryDropdown(setCategoryType(option));
-                  }}
-                  onChange={handleCategoryType}
-                >
-                  {option}
-                </DropdownItem>
-              ))}
-            </DropdownList>
-          )}
-        </Dropdown>
-        {/* 최신순 */}
-        <Dropdown>
-          <DropdownHeader state={sortByOpen} onClick={toggleSortByDropdown}>
-            <FolderName>{sortByType}</FolderName>
-            <SelectIcon>{">"}</SelectIcon>
-          </DropdownHeader>
-          {sortByOpen && (
-            <DropdownList key={sortByType}>
-              {sortByList.map((option, idx) => (
-                <DropdownItem
-                  key={idx}
-                  onClick={() => {
-                    toggleSortByDropdown(setSortByType(option));
-                  }}
-                  onChange={handleSortByType}
-                >
-                  {option}
-                </DropdownItem>
-              ))}
-            </DropdownList>
-          )}
-        </Dropdown>
-      </DropdownWrap>
+        <DropdownWrap>
+          {/* 컬렉션/아티클 */}
+          <Dropdown>
+            <DropdownHeader state={searchOpen} onClick={toggleSearchDropdown}>
+              <FolderName>{searchType}</FolderName>
+              <SelectIcon>{">"}</SelectIcon>
+            </DropdownHeader>
+            {searchOpen && (
+              <DropdownList key={searchType}>
+                {searchList.map((option, idx) => (
+                  <DropdownItem
+                    key={idx}
+                    onClick={() => {
+                      toggleSearchDropdown(setSearchType(option));
+                    }}
+                    onChange={handleSearchType}
+                  >
+                    {option}
+                  </DropdownItem>
+                ))}
+              </DropdownList>
+            )}
+          </Dropdown>
+          {/* 카테고리 */}
+          <Dropdown>
+            <DropdownHeader
+              state={categoryOpen}
+              onClick={toggleCategoryDropdown}
+            >
+              <FolderName>{categoryType}</FolderName>
+              <SelectIcon>{">"}</SelectIcon>
+            </DropdownHeader>
+            {categoryOpen && (
+              <DropdownList key={searchType}>
+                {categoryList.map((option, idx) => (
+                  <DropdownItem
+                    key={idx}
+                    onClick={() => {
+                      toggleCategoryDropdown(setCategoryType(option));
+                    }}
+                    onChange={handleCategoryType}
+                  >
+                    {option}
+                  </DropdownItem>
+                ))}
+              </DropdownList>
+            )}
+          </Dropdown>
+          {/* 최신순 */}
+          <Dropdown>
+            <DropdownHeader state={sortByOpen} onClick={toggleSortByDropdown}>
+              <FolderName>{sortByType}</FolderName>
+              <SelectIcon>{">"}</SelectIcon>
+            </DropdownHeader>
+            {sortByOpen && (
+              <DropdownList key={sortByType}>
+                {sortByList.map((option, idx) => (
+                  <DropdownItem
+                    key={idx}
+                    onClick={() => {
+                      toggleSortByDropdown(setSortByType(option));
+                    }}
+                    onChange={handleSortByType}
+                  >
+                    {option}
+                  </DropdownItem>
+                ))}
+              </DropdownList>
+            )}
+          </Dropdown>
+        </DropdownWrap>
 
-      {/* 결과 부분 */}
-      <Container>
-        {isLoaded ? (
-          <Text>
-            <SearchResult />
-          </Text>
-        ) : (
-          <div
-            style={{
-              display: "block",
-              textAlign: "center",
-              paddingTop: "15vh",
-            }}
-          >
-            <Image
-              _src="/images/bubbledLight.png"
-              _width="56px"
-              _height="45px"
-            />
-            <Title textAlign="center" _padding="25px" _lineHeight="28px">
-              찾으시는 키워드를 <br />
-              검색해주세요
-            </Title>
-          </div>
-        )}
-      </Container>
+        {/* 결과 부분 */}
+        <Container>
+          {isLoaded ? (
+            <Text>
+              <SearchResult />
+            </Text>
+          ) : (
+            <div
+              style={{
+                display: "block",
+                textAlign: "center",
+                paddingTop: "15vh",
+              }}
+            >
+              <Image
+                _src="/images/bubbledLight.png"
+                _width="56px"
+                _height="45px"
+              />
+              <Title textAlign="center" _padding="25px" _lineHeight="28px">
+                찾으시는 키워드를 <br />
+                검색해주세요
+              </Title>
+            </div>
+          )}
+        </Container>
       </SearchPageContainer>
     </React.Fragment>
   );
 };
-
 
 const SearchPageContainer = styled.div`
   margin: 0 auto;

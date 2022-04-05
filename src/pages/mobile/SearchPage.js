@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getSearchArticleResultAxios } from "../../redux/modules/Search";
+import {
+  getSearchArticleResultAxios,
+  setPaging,
+} from "../../redux/modules/Search";
 
 import styled, { css } from "styled-components";
 import { Image, Text, Title } from "../../elements";
@@ -12,12 +15,14 @@ import SearchResult from "../../components/setting/SearchResult";
 import InfinityScroll from "../../components/common/InfinityScroll";
 
 const SearchPage = props => {
-  const { isLoading, paging } = props;
   const dispatch = useDispatch();
   const location = useLocation();
 
   // 페이지
-  const page = useSelector(state => state.search.paging.page);
+  const paging = useSelector(state => state.search.paging);
+  const page = paging.page;
+  const articleList = useSelector(state => state.search.articleList);
+  const isLoading = useSelector(state => state.user.isLoading);
 
   // 컬렉션/아티클 선택
   const [searchOpen, setSearchOpen] = useState(false);
@@ -87,7 +92,11 @@ const SearchPage = props => {
     if (location.state) {
       dispatch(getSearchArticleResultAxios({ hashtag, titleOg, page, sort }));
     }
-  }, [dispatch, hashtag, titleOg, page, location.state, sort]);
+  }, [dispatch, hashtag, titleOg, location.state, sort]);
+
+  const handleSearch = () => {
+    dispatch(getSearchArticleResultAxios({ hashtag, titleOg, page, sort }));
+  };
 
   return (
     <React.Fragment>
@@ -100,7 +109,7 @@ const SearchPage = props => {
           value={keyword}
           placeholder="키워드로 검색해보세요"
         />
-        <ImageBox>
+        <ImageBox onClick={handleSearch}>
           <Image
             _src="/images/search.png"
             _width="24px"
@@ -186,6 +195,7 @@ const SearchPage = props => {
             }}
             isNext={paging.next ? true : false}
             loading={isLoading}
+            articleList={articleList}
           >
             <Text>
               <SearchResult />
