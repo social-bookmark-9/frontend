@@ -33,7 +33,7 @@ const RecommendUserD = props => {
             <div>추천 유저</div>
           </Title>
           <div style={{ fontSize: "20px", color: "#B1B8C0" }}>
-            설명설명설명설명
+            나와 비슷한 유저들의 생각을 구경해보세요
           </div>
         </div>
         <div
