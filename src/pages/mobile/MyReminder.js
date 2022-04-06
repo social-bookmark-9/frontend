@@ -13,13 +13,13 @@ const MyReminder = props => {
   }, [dispatch]);
 
   const reminderData = useSelector(state => state.reminder);
-  console.log(reminderData);
-  console.log(reminderData.remindData.length);
 
   return (
     <React.Fragment>
       <ReminderContainer>
-        <Navbar title={`읽지 않은 아티클 (${reminderData.remindData.length})`} />
+        <Navbar
+          title={`읽지 않은 아티클 (${reminderData.remindData.length})`}
+        />
         <RemindList {...reminderData} />
       </ReminderContainer>
     </React.Fragment>
@@ -29,6 +29,5 @@ const MyReminder = props => {
 const ReminderContainer = styled.div`
   padding: 16px;
 `;
-
 
 export default MyReminder;

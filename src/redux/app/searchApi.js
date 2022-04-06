@@ -13,7 +13,6 @@ export default class searchApi {
         )}&sort=${sort}`,
       )
       .then(res => {
-        console.log(res.data.data);
         callback(res.data.data);
         return res.data;
       })

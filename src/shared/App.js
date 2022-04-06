@@ -74,7 +74,6 @@ function App(props) {
   const isLogin = useSelector(state => state.user.isLogin);
   const isToken = getToken();
   const myInfo = { ...getMyInfo, isLogin };
-  console.log(myInfo);
 
   useEffect(() => {
     if (isToken) {

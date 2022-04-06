@@ -36,7 +36,7 @@ export default class reminderApi {
     };
     return axios(postReminderConfig)
       .then(res => {
-        console.log(res);
+        return res.data;
       })
       .catch(err => {
         console.log(err);
@@ -44,7 +44,6 @@ export default class reminderApi {
   }
 
   async patchReminder(remindData) {
-    console.log(remindData)
     const patchReminderConfig = {
       method: "PATCH",
       url: `${this.base}/api/reminders`,
@@ -56,7 +55,7 @@ export default class reminderApi {
     };
     return axios(patchReminderConfig)
       .then(res => {
-        console.log(res);
+        return res.data;
       })
       .catch(err => {
         console.log(err);
@@ -64,7 +63,6 @@ export default class reminderApi {
   }
 
   async deleteReminder(remindData) {
-    console.log(remindData)
     const deleteReminderConfig = {
       method: "DELETE",
       url: `${this.base}/api/reminders`,
@@ -76,11 +74,10 @@ export default class reminderApi {
     };
     return axios(deleteReminderConfig)
       .then(res => {
-        console.log(res);
+        return res.data;
       })
       .catch(err => {
         console.log(err);
       });
   }
-  
 }

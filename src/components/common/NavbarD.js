@@ -7,7 +7,6 @@ import { Image, Text, Title } from "../../elements";
 
 const NavbarD = props => {
   const { isLogin, memberId, bgColor } = props;
-  console.log(bgColor);
 
   const navigate = useNavigate();
 

@@ -22,8 +22,6 @@ const DetailRemindD = props => {
     { key: "선택안함", value: 0 },
   ];
 
-  console.log(reminderDate);
-
   const changeRemind = e => {
     const remindData = {
       articleId: parseInt(articleId),
@@ -31,7 +29,6 @@ const DetailRemindD = props => {
       buttonDate: parseInt(e.target.value),
       imgOg: imgOg,
     };
-    console.log(e.target.value);
     if (reminderDate === null && e.target.value !== "0") {
       dispatch(postReminderAxios(remindData));
     } else if (reminderDate !== null && e.target.value === "0") {
@@ -44,9 +41,7 @@ const DetailRemindD = props => {
   return (
     <React.Fragment>
       <Reminder>
-        <Text
-          _fontSize={({ theme }) => theme.fontSizes.font14}
-        >
+        <Text _fontSize={({ theme }) => theme.fontSizes.font14}>
           리마인드 받기
         </Text>
         <RemindSelection>

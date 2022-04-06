@@ -7,7 +7,6 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
   config => {
-    console.log(config);
     config.headers["content-type"] = "application/json; charset=utf-8";
     config.headers["X-Requested-With"] = "XMLHttpRequest";
     config.headers["Accept"] = "*/*";
@@ -25,16 +24,13 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   res => {
-    console.log(res);
     return res;
   },
   err => {
     const { response, config } = err;
     return new Promise(async (resolve, reject) => {
-      console.log(typeof response.data.code);
-      console.log(typeof response.data.message);
+
       const originalRequest = config;
-      console.log(originalRequest);
 
       if (
         response.data.code === "401" &&
