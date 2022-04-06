@@ -3,70 +3,56 @@
 <br />
 <br />
 
-# 목차
-1. 개요
-2. 사용기술
-3. 기능소개
-4. 멤버소개
-<br />
+## 🌟 서비스 소개
+bubbled는 웹페이지 링크 저장(북마크) 및 공유 플랫폼 입니다.  
+개발자, 디자이너, 취준생, 프로덕트 매니저, 대학생 등 다양한 사람들이 평소에 관심있는 분야의 글을 태그를 설정하여 모아놓을 수 있습니다.  
+또한 다른 사용자들의 모아놓은 양질의 북마크들을 확인할 수 있으며 이메일을 통해 리마인드 기능을 활용하여 읽어야 할 글들을 확인할 수 있습니다.
 
-# 개요
-기간 : 2022-03-04 ~ 2022-04-05 (32일)<br />
-<br />
-- 관심있는 (혹은 다시 보고싶은) 아티클들을 북마크에 저장해놓지만 <br/>
-그렇게 저장만 해놓고 잊혀진 아티클들...<br/>
+## 👫 팀원 소개
 
-- 웹, 모바일 어디서나 간편하게 볼 수 있도록 <br />
+- **Front End**
+    - 이정민(부팀장)([https://github.com/jeongmin-dev](https://github.com/jeongmin-dev))
+    - 이윤수([https://github.com/yonslee](https://github.com/yonslee))
+- **Back End**
+    - 임현우(팀장)([https://github.com/hyunwoome](https://github.com/hyunwoome))
+    - 이영욱([https://github.com/wowba](https://github.com/wowba))
+    - 김수동([https://github.com/Sudongk](https://github.com/Sudongk))
+- **Designer**
+    - 이가인
+    - 이경미
 
-- 내가 모은 좋은 글, 혼자 보기엔 아깝다! <br/>
-또는 다른 사람들의 북마크 리스트엔 뭐가 있을까? <br/>
+## 🏢 Project Architecture
+![](https://user-images.githubusercontent.com/76833697/161889252-2fa7d4f9-da8f-4b8f-8a94-78f6f2b83545.png)
 
-- 북마크한 글을 온라인으로 사용자 간 공유할 수 있는 플랫폼.
-<br />
-<br />
+## 🔧 Tech Stack
+- axios
+- lottie-web
+- react-slick
+- react-responsive
+- redux
+- @reduxjs/toolkit
+- redux-logger
+- styled-components
+- sweetalert2
 
-## URL
-- 사이트 : http://finalproject9.s3-website.ap-northeast-2.amazonaws.com/category
-<br />
-<br />
-- YOUTUBE : 발표영상 유튜브 주소
-<br />
-<br />
+## 📌 Library
 
-# 사용기술
-- React - 우리의 근간 <br />
-- 통신: axios <br />
-- 라우터: react-router-dom // 컴포넌트 기반 특화 <br />
-- 상태관리: redux, @reduxjs/toolkit // 상태 관리가 한눈에 보여 편한 <br />
-- 스타일: styled-components // 재사용성은 높이고 노동은 줄이기 위해 <br />
+|       library     |   description   |
+|:-----------------:|:---------------:|
+|        axios      |   서버 비동기 통신  |
+|    lottie-web     |  이미지 애니메이션  |
+|    react-slick    |  carousel 구현   |
+|  react-responsive |   반응형 웹 구현   |
+|       redux       |     상태관리      |
+|    redux-logger   |  리덕스 흐름 체크   |
+| styled-components |  css, 미디어쿼리  |
+|     sweetalert2   |     알람구현     |
 
-- 기타 - <br/>
-sweetalert2 // 어디서든 일관되고 예쁜 alert을!<br />
-react-slick // 보여주고 싶은건 많지만 스크롤이 길어지는건 싫으니까 <br />
-<br />
+## 🔍  API
+##[BUBBLED API 리스트](https://bubbled.notion.site/fd1d1c5c6a3c42bbbfe18d4cf029c284?v=e7f88371b99b4da895856e98dc20432a)
 
-
-# 기능소개
-- 카카오 소셜로그인 <br />
-- 타인이 저장한 링크를 내 컬렉션으로 가져오기 <br />
-- 관심사에 따른 맞춤 큐레이션 <br />
-- 잊지 않고 다시 찾아볼 수 있도록 리마인드 기능 <br />
-- 기타 사용/구현한 기능들
-<br/>
-<br/>
-
-# 멤버소개
-## Frontend
-- 이정민 ([Github](https://github.com/jeongmin-dev))
-- 이윤수 ([Github](https://github.com/yonslee))
-
-## Backend
-- 임현우 ([Github](https://github.com/hyunwoome))
-- 김수동 ([Github](https://github.com/Sudongk))
-- 이영욱 ([Github](https://github.com/wowba))
-
-## Designer
-- 이가인 ([notion](http://bit.ly/leegain))
-- 이경미
-
-
+## 기능소개
+- 카카오 소셜로그인
+- 타인이 저장한 링크를 내 컬렉션으로 가져오기
+- 관심사에 따른 맞춤 큐레이션
+- 잊지 않고 다시 찾아볼 수 있도록 리마인드 기능
