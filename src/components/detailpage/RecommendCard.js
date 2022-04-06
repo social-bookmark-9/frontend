@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router";
 
 import styled from "styled-components";
-import { Image, Label } from "../../elements";
+import { Label } from "../../elements";
 
 import LinesEllipsis from "react-lines-ellipsis";
 
@@ -29,14 +29,6 @@ const RecommendCard = props => {
                 navigate(`/article/${recommend.articleId}`);
               }}
             >
-              <ImageBox>
-                <Image
-                  _src={`/images/bookmark.png`}
-                  _width="25px"
-                  _height="24px"
-                  _marginR="none"
-                />
-              </ImageBox>
               <ReCardContent>
                 <LabelBox>
                   {hashTag.map((tag, idx) => (
@@ -95,11 +87,6 @@ const ReContainer = styled.div`
   background-repeat: no-repeat;
   background-blend-mode: darken;`
       : ""}
-`;
-
-const ImageBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
 `;
 
 const LabelBox = styled.div`

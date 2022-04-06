@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 
 import styled from "styled-components";
 import { DesignObj, Circle } from "../../elements/ImageObj";
-import { Image, Label } from "../../elements";
+import { Label } from "../../elements";
 import { FlexboxSpace } from "../../styles/flexbox";
 
 import LinesEllipsis from "react-lines-ellipsis";
@@ -52,17 +52,7 @@ const ArticleCard = props => {
           <ArticleCardObj>
             <DesignObj />
           </ArticleCardObj>
-        ) : (
-          // )
-          <ImageBox>
-            <Image
-              _src={`/images/${article.save ? "bookmark" : "unbookmark"}.png`}
-              _width="25px"
-              _height="24px"
-              _marginR="none"
-            />
-          </ImageBox>
-        )}
+        ) : null}
         <ArticleCardContent>
           <LabelBox>
             {hashTag &&
@@ -138,11 +128,6 @@ const Text = styled.div`
 const LabelBox = styled.div`
   display: flex;
   padding-bottom: 8px;
-`;
-
-const ImageBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
 `;
 
 const ArticleCardBox = styled.div`

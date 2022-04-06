@@ -33,7 +33,6 @@ const ArticleListD = props => {
   const isMe = useSelector(state => state.folder.folderInfo.me);
   const folderInfo = useSelector(state => state.folder.folderInfo);
   const articleListData = useSelector(state => state.folder.articleList);
-  const likeCount = useSelector(state => state.folder.folderInfo.likeCount);
 
   useEffect(() => {
     if (isLogin) {
@@ -45,7 +44,9 @@ const ArticleListD = props => {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [userLiked, setUserLiked] = useState(false);
-  const [likeCnt, setLikeCnt] = useState(folderInfo && parseInt(likeCount));
+  const [likeCnt, setLikeCnt] = useState(
+    folderInfo && parseInt(folderInfo.likeCount),
+  );
 
   const cancelLike = () => {
     dispatch(cancelLikeAios(folderId));
@@ -119,7 +120,7 @@ const ArticleListD = props => {
           <LikeBox isMe={isMe}>
             {isMe ? (
               <Text _fontSize={({ theme }) => theme.fontSizes.font14}>
-                {likeCount}명이 도움을 받았어요
+                {folderInfo.likeCount}명이 도움을 받았어요
               </Text>
             ) : userLiked ? (
               <Button
