@@ -8,8 +8,11 @@ export default class userApi {
   }
 
   async kakaoLogin({ code, navigate }, callback) {
-    await instance
-      .get(`/api/users/login?code=${code}`)
+    const kakaoLoginConfig = {
+      method: "GET",
+      url: `${this.base}/api/users/login?code=${code}`,
+    };
+    return axios(kakaoLoginConfig)
       .then(res => {
         if (res.data.data.login === true) {
           navigate("/", { replace: true });

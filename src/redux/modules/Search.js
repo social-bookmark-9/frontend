@@ -9,6 +9,16 @@ const initialState = {
   paging: { next: true, page: 0, sort: "createAt" },
 };
 
+export const searchByKeywordAxios = createAsyncThunk(
+  "search/searchByKeyword",
+  async ({ keyword, page }, { dispatch }) => {
+    SearchApi.searchByKeyword({ keyword, page }, data => {
+      setPaging(data);
+      dispatch(setSearchArticles(data));
+    });
+  },
+);
+
 export const getSearchArticleResultAxios = createAsyncThunk(
   "search/getSearchArticleResult",
   async ({ hashtag, titleOg, page, sort }, { dispatch }) => {

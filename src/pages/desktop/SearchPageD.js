@@ -9,7 +9,7 @@ import {
 import styled, { css } from "styled-components";
 import { Image, Text, Title } from "../../elements";
 
-import SearchResult from "../../components/setting/SearchResult";
+import SearchResult from "../../components/searchpage/SearchResult";
 import { useLocation } from "react-router";
 import NavbarD from "../../components/common/NavbarD";
 
