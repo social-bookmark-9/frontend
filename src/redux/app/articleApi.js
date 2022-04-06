@@ -19,7 +19,6 @@ export default class articleApi {
     };
     return axios(postArticleConfig)
       .then(res => {
-        navigate("/", { replace: true });
         return res;
       })
       .catch(err => {

@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { Image, Text, Title } from "../../elements";
 
 const NavbarD = props => {
-  const { isLogin, memberId, bgColor, profileImageUrl } = props;
+  const { isLogin, memberId, bgColor, profileImageUrl, isRemindEmail } = props;
   console.log(props);
 
   const navigate = useNavigate();
@@ -76,16 +76,34 @@ const NavbarD = props => {
       <NavbarContainer bgColor={bgColor}>
         <NavContainer>
           <NavBox>
-            <LogoBox>
-              <Title _fontSize="24px" _lineHeight="31px">
+            <LogoBox
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              <Title
+                _fontSize="24px"
+                _lineHeight="31px"
+                _color={isRemindEmail ? "white" : ""}
+              >
                 bubbled
               </Title>
-              <Image _src="/images/bubbled.png" _width="26px" _height="21px" />
+              <Image
+                _src={`/images/${
+                  isRemindEmail ? "bubbledWhite" : "bubbled"
+                }.png`}
+                _width="26px"
+                _height="21px"
+              />
             </LogoBox>
             <MenuBox>
               <Text
                 _fontSize={({ theme }) => theme.fontSizes.font18}
-                _color={({ theme }) => theme.colors.fontColor05}
+                _color={
+                  isRemindEmail
+                    ? ({ theme }) => theme.colors.white
+                    : ({ theme }) => theme.colors.fontColor05
+                }
                 _onClick={() => {
                   navigate("/");
                 }}
@@ -94,11 +112,17 @@ const NavbarD = props => {
               </Text>
               <Line />
               <ImageBox onClick={handleMemoPage}>
-                <Image _src="/images/memo.png" _width="24px" _height="24px" />
+                <Image
+                  _src={`/images/${isRemindEmail ? "memoWhite" : "memo"}.png`}
+                  _width="24px"
+                  _height="24px"
+                />
               </ImageBox>
               <ImageBox onClick={handleSettingPage}>
                 <Image
-                  _src="/images/setting.png"
+                  _src={`/images/${
+                    isRemindEmail ? "settingWhite" : "setting"
+                  }.png`}
                   _width="24px"
                   _height="24px"
                 />
