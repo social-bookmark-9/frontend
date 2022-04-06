@@ -106,7 +106,7 @@ export default class ProfileApi {
         "Content-Type": "multipart/form-data",
         "X-AUTH-TOKEN": getToken(),
       },
-      data: JSON.stringify(formData),
+      data: formData,
     };
     return axios(editProfileImageConfig)
       .then(res => {
