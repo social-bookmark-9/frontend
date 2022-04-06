@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
 import styled, { css } from "styled-components";
 import { Image, Text, Title } from "../../elements";
+import { searchByKeywordAxios } from "../../redux/modules/Search";
 
 const SearchBox = props => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [keyword, setKeyword] = useState("");
@@ -14,6 +17,7 @@ const SearchBox = props => {
   };
 
   const handleSearchPage = () => {
+    dispatch(searchByKeywordAxios(keyword, 0));
     navigate("/search", { state: keyword });
   };
 

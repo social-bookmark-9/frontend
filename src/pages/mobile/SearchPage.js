@@ -8,10 +8,10 @@ import {
 } from "../../redux/modules/Search";
 
 import styled, { css } from "styled-components";
-import { Image, Text, Title } from "../../elements";
+import { Image, Title } from "../../elements";
 
 import Navbar from "../../components/common/Navbar";
-import SearchResult from "../../components/setting/SearchResult";
+import SearchResult from "../../components/searchpage/SearchResult";
 import InfinityScroll from "../../components/common/InfinityScroll";
 
 const SearchPage = props => {
@@ -24,16 +24,23 @@ const SearchPage = props => {
   const articleList = useSelector(state => state.search.articleList);
   const isLoading = useSelector(state => state.user.isLoading);
 
+  // 메인에서 넘어온 검색값
+  useEffect(() => {
+    if (location.state) {
+      dispatch(getSearchArticleResultAxios({ hashtag, titleOg, page, sort }));
+    }
+  }, [dispatch, hashtag, titleOg, location.state, sort, page]);
+
   // 컬렉션/아티클 선택
   const [searchOpen, setSearchOpen] = useState(false);
   const toggleSearchDropdown = () => {
     setSearchOpen(!searchOpen);
   };
-  const [searchType, setSearchType] = useState("전체");
+  const [searchType, setSearchType] = useState("아티클");
   const handleSearchType = e => {
     setSearchType(e.target);
   };
-  const searchList = ["전체", "컬렉션", "아티클"];
+  const searchList = ["아티클", "컬렉션"];
 
   // 카테고리 선택
   const [categoryOpen, setCategoryOpen] = useState(false);
@@ -87,12 +94,6 @@ const SearchPage = props => {
   } else if (sortByType === "좋아요순") {
     sort = "likeCount";
   }
-
-  useEffect(() => {
-    if (location.state) {
-      dispatch(getSearchArticleResultAxios({ hashtag, titleOg, page, sort }));
-    }
-  }, [dispatch, hashtag, titleOg, location.state, sort]);
 
   const handleSearch = () => {
     dispatch(getSearchArticleResultAxios({ hashtag, titleOg, page, sort }));
@@ -189,18 +190,9 @@ const SearchPage = props => {
       {/* 결과 부분 */}
       <Container>
         {isLoaded ? (
-          <InfinityScroll
-            callNext={() => {
-              dispatch(getSearchArticleResultAxios());
-            }}
-            isNext={paging.next ? true : false}
-            loading={isLoading}
-            articleList={articleList}
-          >
-            <Text>
-              <SearchResult />
-            </Text>
-          </InfinityScroll>
+          <SearchResultContainer>
+            <SearchResult articleList={articleList} />
+          </SearchResultContainer>
         ) : (
           <div
             style={{
@@ -255,7 +247,7 @@ const ImageBox = styled.div`
 const DropdownWrap = styled.div`
   display: grid;
   padding: 0 16px;
-  grid-template-columns: 22% 30% 25% 22%;
+  grid-template-columns: 22% 27% 22% 23%;
   gap: 8px;
 `;
 
@@ -312,5 +304,7 @@ const DropdownItem = styled.li`
     color: ${({ theme }) => theme.colors.gray06};
   }
 `;
+
+const SearchResultContainer = styled.div``;
 
 export default SearchPage;
