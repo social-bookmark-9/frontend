@@ -6,7 +6,8 @@ import Swal from "sweetalert2";
 import { Image, Text, Title } from "../../elements";
 
 const NavbarD = props => {
-  const { isLogin, memberId, bgColor } = props;
+  const { isLogin, memberId, bgColor, profileImageUrl } = props;
+  console.log(props);
 
   const navigate = useNavigate();
 
@@ -103,7 +104,11 @@ const NavbarD = props => {
                 />
               </ImageBox>
               <ImageBox onClick={handleMyPage}>
-                <Image _src="/images/iconMe.png" _width="30px" _height="30px" />
+                <Image
+                  _src={isLogin ? profileImageUrl : "/images/user.png"}
+                  _width="30px"
+                  _height="30px"
+                />
               </ImageBox>
             </MenuBox>
           </NavBox>
@@ -165,6 +170,7 @@ const Line = styled.hr`
 
 const ImageBox = styled.div`
   & img {
+    border-radius: 5px;
     margin-left: 30px;
   }
 `;
