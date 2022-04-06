@@ -4,6 +4,7 @@ import { Button, Image, Text, Title } from "../../elements";
 import { useDispatch } from "react-redux";
 import { editReminderEmailAxios } from "../../redux/modules/Profile";
 import { FlexboxColumn, FlexboxSpace } from "../../styles/flexbox";
+import NavbarD from "../../components/common/NavbarD";
 
 const RemindEmailD = props => {
   const emailRef = useRef(null);
@@ -15,6 +16,7 @@ const RemindEmailD = props => {
 
   return (
     <React.Fragment>
+      <NavbarD {...props} bgColor="#7881F5" isRemindEmail />
       <RemindContainer>
         <KeyframeContainer>
           <KeyframeBox>
@@ -82,11 +84,7 @@ const RemindEmailD = props => {
         </KeyframeContainer>
         <EmailInputBox>
           <Title _lineHeight="28px">리마인드 수신 메일</Title>
-          <EmailInput
-            ref={emailRef}
-            type="text"
-            placeholder="bubbled@bubbled.com"
-          />
+          <EmailInput ref={emailRef} type="text" placeholder={props.email} />
           <Button
             _fontSize="14px"
             _padding="15px 0px"
