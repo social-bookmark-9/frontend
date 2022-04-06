@@ -20,7 +20,10 @@ const CurationsD = props => {
           <div>추천 큐레이션</div>
         </Title>
         <div style={{ fontSize: "20px", color: "#b1b8c0" }}>
-          버블드가 직접 엄선한 유저들의 큐레이션을 만나보세요
+          버블드가 직접 엄선한
+          <br />
+          유저들의 큐레이션을
+          <br /> 만나보세요
         </div>
       </CurationExplain>
 
