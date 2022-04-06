@@ -16,14 +16,11 @@ const DetailRemind = props => {
   const dispatch = useDispatch();
 
   const remindList = [
-    { key: "선택안함", value: "null" },
+    { key: "선택안함", value: 0 },
     { key: "내일", value: 1 },
     { key: "3일 뒤", value: 3 },
     { key: "7일 뒤", value: 7 },
-    { key: "선택안함", value: 0 },
   ];
-
-  console.log(reminderDate);
 
   const changeRemind = e => {
     const remindData = {
@@ -32,7 +29,6 @@ const DetailRemind = props => {
       buttonDate: parseInt(e.target.value),
       imgOg: imgOg,
     };
-    console.log(e.target.value);
     if (reminderDate === null && e.target.value !== "0") {
       dispatch(postReminderAxios(remindData));
     } else if (reminderDate !== null && e.target.value === "0") {

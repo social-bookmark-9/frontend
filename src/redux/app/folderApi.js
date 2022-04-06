@@ -46,7 +46,6 @@ export default class folderApi {
     await instance
       .get(`/api/articleFolders/folderName`)
       .then(res => {
-        console.log(res.data);
         callback(res.data.data);
         return res.data;
       })

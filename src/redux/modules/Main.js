@@ -17,7 +17,6 @@ export const getMainAxios = createAsyncThunk(
   async (_, { dispatch }) => {
     const resp = await MainApi.getMain();
     dispatch(setMain(resp.data));
-    console.log("비로그인 메인아티클", resp);
     return resp;
   },
 );
@@ -25,10 +24,9 @@ export const getMainAxios = createAsyncThunk(
 export const getMainWithAxios = createAsyncThunk(
   "main/getMain",
   async (_, { dispatch }) => {
-    const resp = await MainApi.getMainWith(data => {
+    await MainApi.getMainWith(data => {
       dispatch(setMain(data));
     });
-    console.log("로그인 메인아티클", resp);
   },
 );
 

@@ -16,7 +16,6 @@ export const getFolderAxios = createAsyncThunk(
   async (folderId, { dispatch }) => {
     const resp = await FolderApi.getFolder(folderId);
     dispatch(setFolder(resp.data));
-    console.log(resp);
     return resp;
   },
 );
@@ -26,7 +25,6 @@ export const getFolderWithAxios = createAsyncThunk(
   async (folderId, { dispatch }) => {
     const resp = await FolderApi.getFolderWith(folderId);
     dispatch(setFolder(resp.data));
-    console.log(resp);
     return resp;
   },
 );
@@ -45,7 +43,6 @@ export const createFolderWithAxios = createAsyncThunk(
   async ({ folderData, articleData, navigate }, { dispatch }) => {
     const resp = await FolderApi.createFolder({ folderData, navigate });
     dispatch(postArticleAxios({ articleData, navigate }));
-    console.log(resp);
     return resp;
   },
 );
@@ -56,7 +53,6 @@ export const createFolderAxios = createAsyncThunk(
     const resp = await FolderApi.createFolder({ folderData, navigate });
     Swal.fire({ text: "폴더가 생성되었습니다", confirmButtonText: "확인" });
     dispatch(getFolderListAxios());
-    console.log(resp);
     return resp;
   },
 );
@@ -68,7 +64,6 @@ export const updateFolderNameAxios = createAsyncThunk(
       folderId,
       articleFolderName,
     });
-    console.log(resp);
     return resp;
   },
 );
@@ -78,7 +73,6 @@ export const deleteFolderAxios = createAsyncThunk(
   async ({ folderId, navigate }) => {
     const resp = await FolderApi.deleteFolder({ folderId, navigate });
     navigate("/", { replace: true });
-    console.log(resp);
     return resp;
   },
 );
@@ -87,7 +81,6 @@ export const addLikeAxios = createAsyncThunk(
   "folder/addLike",
   async folderId => {
     const resp = await FolderApi.addLike(folderId);
-    console.log(resp);
     return resp;
   },
 );
@@ -96,7 +89,6 @@ export const cancelLikeAios = createAsyncThunk(
   "folder/addLike",
   async folderId => {
     const resp = await FolderApi.cancelLike(folderId);
-    console.log(resp);
     return resp;
   },
 );

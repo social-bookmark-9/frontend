@@ -26,8 +26,6 @@ const SelectFolder = props => {
   const [isOpen, setIsOpen] = useState(false);
   const [folder, setFolder] = useState(myFolderList && myFolderList[0]);
   const articleFolderName = { articleFolderName: folder };
-  console.log(articleFolderName);
-  console.log(folderId);
 
   // 모달 열고 닫기 펑션
 

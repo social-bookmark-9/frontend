@@ -27,7 +27,6 @@ export default class mainApi {
     await instance
       .get(`/api/mainpage`)
       .then(res => {
-        console.log("로그인 메인아티클", res.data);
         callback(res.data.data);
       })
       .catch(err => {

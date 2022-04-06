@@ -9,7 +9,7 @@ export default class userApi {
 
   async kakaoLogin({ code, navigate }, callback) {
     await instance
-      .get(`${process.env.REACT_APP_KAKAO_URI}?code=${code}`)
+      .get(`/api/users/login?code=${code}`)
       .then(res => {
         if (res.data.data.login === true) {
           navigate("/", { replace: true });
@@ -46,7 +46,6 @@ export default class userApi {
     };
     return axios(checkMemberNameConfig)
       .then(res => {
-        console.log(res);
         return res.data;
       })
       .catch(err => {
@@ -77,7 +76,6 @@ export default class userApi {
         data: JSON.stringify(token),
       })
       .then(res => {
-        console.log(res);
         callback(res.data.data);
         return res.data.data;
       })
@@ -95,7 +93,6 @@ export default class userApi {
     };
     return axios(logoutConfig)
       .then(res => {
-        console.log(res);
         return res;
       })
       .catch(err => {

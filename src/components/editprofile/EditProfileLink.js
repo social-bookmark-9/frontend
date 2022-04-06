@@ -94,7 +94,6 @@ const EditProfileLink = props => {
     blogUrl: blog ? blog : "",
     websiteUrl: website ? website : "",
   };
-  console.log(urlData);
 
   const updateSnsUrl = () => {
     Swal.fire({

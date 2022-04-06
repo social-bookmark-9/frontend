@@ -137,7 +137,6 @@ export default class ProfileApi {
   }
 
   async editReminderEmail(remindEmail) {
-    console.log(remindEmail)
     const editReminderEmailConfig = {
       method: "PATCH",
       url: `${this.base}/api/mypage/reminder`,
@@ -149,11 +148,10 @@ export default class ProfileApi {
     };
     return axios(editReminderEmailConfig)
       .then(res => {
-        console.log(res);
+        return res.data;
       })
       .catch(err => {
         console.log(err);
       });
-
-    }
+  }
 }
