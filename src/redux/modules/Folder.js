@@ -9,6 +9,8 @@ const FolderApi = new folderApi();
 const initialState = {
   folderInfo: {},
   articleList: [],
+  likeStatus: false,
+  likeCount: 0,
 };
 
 export const getFolderAxios = createAsyncThunk(
@@ -77,18 +79,10 @@ export const deleteFolderAxios = createAsyncThunk(
   },
 );
 
-export const addLikeAxios = createAsyncThunk(
-  "folder/addLike",
+export const updateLikeAxios = createAsyncThunk(
+  "folder/updateLike",
   async folderId => {
-    const resp = await FolderApi.addLike(folderId);
-    return resp;
-  },
-);
-
-export const cancelLikeAios = createAsyncThunk(
-  "folder/addLike",
-  async folderId => {
-    const resp = await FolderApi.cancelLike(folderId);
+    const resp = await FolderApi.updateLike(folderId);
     return resp;
   },
 );
@@ -99,6 +93,7 @@ export const folderSlice = createSlice({
   reducers: {
     setFolder: (state, action) => {
       state.folderInfo = action.payload;
+      state.likeCount = action.payload.likeCount;
     },
     setFolderList: (state, action) => {
       state.myFolderList = action.payload;
@@ -112,6 +107,9 @@ export const folderSlice = createSlice({
     [getFolderWithAxios.fulfilled]: (state, action) => {
       state.articleList =
         action.payload.data.articlesInfoInFolderResponseDtoList;
+    },
+    [updateLikeAxios.fulfilled]: (state, action) => {
+      state.likeStatus = action.payload.data.likeStatus;
     },
   },
 });

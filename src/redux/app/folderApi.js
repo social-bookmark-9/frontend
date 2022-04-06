@@ -110,34 +110,16 @@ export default class folderApi {
       });
   }
 
-  async addLike(folderId) {
-    const addLikeConfig = {
-      method: "POST",
+  async updateLike(folderId) {
+    const updateLikeConfig = {
+      method: "PATCH",
       url: `${this.base}/api/articleFolders/${folderId}/likes`,
       headers: {
         "Content-Type": "application/json",
         "X-AUTH-TOKEN": getToken(),
       },
     };
-    return axios(addLikeConfig)
-      .then(res => {
-        return res.data;
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
-  async Like(folderId) {
-    const cancelLikeConfig = {
-      method: "DELETE",
-      url: `${this.base}/api/articleFolders/${folderId}/likes`,
-      headers: {
-        "Content-Type": "application/json",
-        "X-AUTH-TOKEN": getToken(),
-      },
-    };
-    return axios(cancelLikeConfig)
+    return axios(updateLikeConfig)
       .then(res => {
         return res.data;
       })
