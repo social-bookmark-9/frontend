@@ -15,7 +15,10 @@ const EventAlert = props => {
       <Container id="alertBox">
         <AlertBox>
           <div />
-          <TextBox>
+          <TextBox
+            href="https://docs.google.com/forms/d/1a8-aYpDY8tdUg9Gyva-w9xfTDB2qHvfV4S1lprffIyA/edit"
+            target="_blank"
+          >
             <Text
               _color={({ theme }) => theme.colors.white}
               _fontSize={({ theme }) => theme.fontSizes.font18}
@@ -28,6 +31,7 @@ const EventAlert = props => {
             <Button
               bgColor="none"
               _fontSize={({ theme }) => theme.fontSizes.font18}
+              _onClick={handleAlert}
             >
               &times;
             </Button>
@@ -47,7 +51,7 @@ const AlertBox = styled.div`
   align-items: center;
 `;
 
-const TextBox = styled.div``;
+const TextBox = styled.a``;
 
 const CloseBox = styled.div`
   padding: 0px 32px;
