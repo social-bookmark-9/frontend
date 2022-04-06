@@ -66,7 +66,6 @@ const ArticleDetailD = props => {
     }
   };
 
-  console.log("상세페이지 아이디:", articleId);
   const handleMemoHide = () => {
     if (reviewHide) {
       Swal.fire({
@@ -112,80 +111,82 @@ const ArticleDetailD = props => {
 
   return (
     <React.Fragment>
-    <NavbarD {...props} />
-    <Container>
-      <DetailNavbarD
-        article={article}
-        {...article}
-        title={article.articleFolderName}
-        articleId={articleId}
-        isMe={isMe}
-      />
-      <DetailContainer>
-        {/* 아티클 카드 */}
-        <div style={{width:"100%"}}>
-          <DetailCard article={article} articleId={articleId} />
-        </div>
-        <div>
-        {/* 아티클 저장 */}
-        {isMe ? null : (
-          <Button
-            _onClick={handleSave}
-            _padding="12px"
-            bgColor={({ theme }) => theme.colors.white}
-            _color={({ theme }) => theme.colors.fontColor05}
-            isBorder
-            bold
-          >
-            내 컬렉션에 저장
-          </Button>
-        )}
-        {/* 유저 메모 작성 */}
-        <MemoBox>
-          <MemoHead>
-            <Title
-              _fontSize={({ theme }) => theme.fontSizes.font20}
-              _lineHeight="24px"
-            >
-              {article.writerMemberName}의 메모
-            </Title>
-            {isMe ? (
-              <ImageBox onClick={handleMemoHide}>
-                <Image
-                  _src={`/images/${
-                    reviewHide && reviewHide ? "hide" : "show"
-                  }.png`}
-                  _width="20px"
-                  _height="20px"
-                />
-              </ImageBox>
-            ) : null}
-          </MemoHead>
-          {isMe ? (
-            <>
-              <TextAreaField
-                ref={memoRef}
-                name="userMemo"
-                defaultValue={article.review != null ? article.review : null}
-                placeholder="여기를 눌러 메모를 남겨보세요."
-                rows={5}
-                maxLength={200}
-                onKeyUp={handleKeyUp}
-                onBlur={updateUserMemo}
-              />
-              <InputCheck>{words}/200</InputCheck>
-            </>
-          ) : (
-            <TextBox>
-              <Text>{article.review}</Text>
-            </TextBox>
-          )}
-        </MemoBox>
-        <DetailRemindD {...article} />
-        </div>
-      </DetailContainer>
-    </Container>
-    <GoodToReadContainer>
+      <NavbarD {...props} />
+      <Container>
+        <DetailNavbarD
+          article={article}
+          {...article}
+          title={article.articleFolderName}
+          articleId={articleId}
+          isMe={isMe}
+        />
+        <DetailContainer>
+          {/* 아티클 카드 */}
+          <div style={{ width: "100%" }}>
+            <DetailCard article={article} articleId={articleId} />
+          </div>
+          <div>
+            {/* 아티클 저장 */}
+            {isMe ? null : (
+              <Button
+                _onClick={handleSave}
+                _padding="12px"
+                bgColor={({ theme }) => theme.colors.white}
+                _color={({ theme }) => theme.colors.fontColor05}
+                isBorder
+                bold
+              >
+                내 컬렉션에 저장
+              </Button>
+            )}
+            {/* 유저 메모 작성 */}
+            <MemoBox>
+              <MemoHead>
+                <Title
+                  _fontSize={({ theme }) => theme.fontSizes.font20}
+                  _lineHeight="24px"
+                >
+                  {article.writerMemberName}의 메모
+                </Title>
+                {isMe ? (
+                  <ImageBox onClick={handleMemoHide}>
+                    <Image
+                      _src={`/images/${
+                        reviewHide && reviewHide ? "hide" : "show"
+                      }.png`}
+                      _width="20px"
+                      _height="20px"
+                    />
+                  </ImageBox>
+                ) : null}
+              </MemoHead>
+              {isMe ? (
+                <>
+                  <TextAreaField
+                    ref={memoRef}
+                    name="userMemo"
+                    defaultValue={
+                      article.review != null ? article.review : null
+                    }
+                    placeholder="여기를 눌러 메모를 남겨보세요."
+                    rows={5}
+                    maxLength={200}
+                    onKeyUp={handleKeyUp}
+                    onBlur={updateUserMemo}
+                  />
+                  <InputCheck>{words}/200</InputCheck>
+                </>
+              ) : (
+                <TextBox>
+                  <Text>{article.review}</Text>
+                </TextBox>
+              )}
+            </MemoBox>
+            <DetailRemindD {...article} />
+          </div>
+        </DetailContainer>
+      </Container>
+      <GoodToReadContainer>
         <Container>
           <Title
             _fontSize={({ theme }) => theme.fontSizes.font20}

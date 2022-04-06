@@ -65,7 +65,6 @@ const ArticleDetailT = props => {
     }
   };
 
-  console.log("상세페이지 아이디:", articleId);
   const handleMemoHide = () => {
     if (reviewHide) {
       Swal.fire({

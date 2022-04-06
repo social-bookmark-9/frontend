@@ -33,7 +33,7 @@ const MainPageT = props => {
         <RecommendUserT memberInfo={memberInfo} />
         {/* 검색 */}
         <SearchBox />
-        <ModalD />
+        <ModalD isLogin={isLogin} />
       </MainContainer>
     </React.Fragment>
   );

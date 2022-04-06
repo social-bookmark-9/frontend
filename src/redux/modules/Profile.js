@@ -28,7 +28,6 @@ export const getProfileAxios = createAsyncThunk(
     const resp = await ProfileApi.getProfile(memberId);
     dispatch(setProfile(resp.data));
     dispatch(setFolder(resp.data.articleFolderListResponseDto));
-    console.log(resp);
     return resp;
   },
 );
@@ -39,7 +38,6 @@ export const getProfileWithAxios = createAsyncThunk(
     const resp = await ProfileApi.getProfileWith(memberId);
     dispatch(setProfile(resp.data));
     dispatch(setFolder(resp.data.articleFolderListResponseDto));
-    console.log(resp);
     return resp;
   },
 );
@@ -48,7 +46,6 @@ export const editProfileUserDescAxios = createAsyncThunk(
   "profile/editProfileUserDesc",
   async ({ userDesc }) => {
     const resp = await ProfileApi.editProfileUserDesc({ userDesc });
-    console.log(resp);
     return resp;
   },
 );
@@ -57,7 +54,6 @@ export const editProfileUserNameAxios = createAsyncThunk(
   "profile/editProfileUserName",
   async ({ nickname }) => {
     const resp = await ProfileApi.editProfileUserName({ nickname });
-    console.log(resp);
     return resp;
   },
 );
@@ -66,7 +62,6 @@ export const editProfileImageAxios = createAsyncThunk(
   "profile/editProfileImage",
   async (formData, { getState }) => {
     const resp = await ProfileApi.editProfileImage(formData);
-    console.log(resp);
     return resp;
   },
 );
@@ -75,7 +70,6 @@ export const editProfileHashtagAxios = createAsyncThunk(
   "profile/editProfileHashtag",
   async hashTag => {
     const resp = await ProfileApi.editProfileHashtag(hashTag);
-    console.log(resp);
     Swal.fire({
       text: "관심분야가 변경되었습니다",
       confirmButtonText: "확인",
@@ -88,7 +82,6 @@ export const editProfileSnsUrlAxios = createAsyncThunk(
   "profile/editProfileSnsUrl",
   async ({ urlData, memberId, navigate }) => {
     const resp = await ProfileApi.editProfileSnsUrl(urlData);
-    console.log(resp);
     Swal.fire({ text: "저장되었습니다", confirmButtonText: "확인" });
     navigate(`/mypage/${memberId}`);
     return resp;

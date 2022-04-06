@@ -1,12 +1,18 @@
 import React from "react";
+
 import styled from "styled-components";
 import { Text, Button } from "../../elements";
 import { FlexboxSpace } from "../../styles/flexbox";
 
 const EventAlert = props => {
+  const handleAlert = () => {
+    const alertBox = document.getElementById("alertBox");
+    alertBox.style.cssText = `display: none;`;
+  };
+
   return (
     <React.Fragment>
-      <Container>
+      <Container id="alertBox">
         <AlertBox>
           <div />
           <TextBox>
@@ -18,7 +24,7 @@ const EventAlert = props => {
               더 나은 버블드를 만들기 위해, 소중한 의견을 남겨주세요!
             </Text>
           </TextBox>
-          <CloseBox>
+          <CloseBox onClick={handleAlert}>
             <Button
               bgColor="none"
               _fontSize={({ theme }) => theme.fontSizes.font18}

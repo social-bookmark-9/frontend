@@ -37,7 +37,6 @@ const RecommendListD = () => {
 
   const handleChecked = idx => {
     const chosenHashtag = favoritesList[idx];
-    console.log(chosenHashtag);
     dispatch(getMainByHashtagAxios(chosenHashtag));
   };
 

@@ -19,7 +19,6 @@ export const postArticleAxios = createAsyncThunk(
         confirmButtonText: "확인",
       });
     }
-    console.log(resp);
     return resp;
   },
 );
@@ -29,7 +28,6 @@ export const getArticleAxios = createAsyncThunk(
   async ({ articleId, navigate }, { dispatch }) => {
     const resp = await ArticleApi.getArticle({ articleId, navigate });
     dispatch(setArticle(resp.data));
-    console.log(resp);
     return resp;
   },
 );
@@ -39,7 +37,6 @@ export const getArticleWithAxios = createAsyncThunk(
   async ({ articleId, navigate }, { dispatch }) => {
     const resp = await ArticleApi.getArticleWith({ articleId, navigate });
     dispatch(setArticle(resp.data));
-    console.log(resp);
     return resp;
   },
 );
@@ -48,7 +45,6 @@ export const deleteArticleAxios = createAsyncThunk(
   "article/deleteArticle",
   async ({ articleId, navigate }) => {
     const resp = await ArticleApi.deleteArticle({ articleId, navigate });
-    console.log(resp);
     return resp;
   },
 );
@@ -57,7 +53,6 @@ export const updateReviewAxios = createAsyncThunk(
   "article/updateReview",
   async ({ articleId, review, navigate }, { dispatch }) => {
     const resp = await ArticleApi.updateReview({ articleId, review, navigate });
-    console.log(resp);
     return resp;
   },
 );
@@ -67,7 +62,6 @@ export const reviewHideAxios = createAsyncThunk(
   async (articleId, { dispatch }) => {
     const resp = await ArticleApi.reviewHide(articleId);
     dispatch(setReviewHide());
-    console.log(resp);
     return resp;
   },
 );
@@ -77,7 +71,6 @@ export const updateTitleOgAxios = createAsyncThunk(
   async ({ articleId, titleOg }, { dispatch }) => {
     const resp = await ArticleApi.updateTitleOg({ articleId, titleOg });
     dispatch(setNewTitleOg(resp.data));
-    console.log(resp);
     return resp;
   },
 );
@@ -89,7 +82,6 @@ export const changeArticleFolderAxios = createAsyncThunk(
       articleId,
       articleFolderName,
     });
-    console.log(resp);
     return resp;
   },
 );
@@ -99,7 +91,6 @@ export const updateHashtagAxios = createAsyncThunk(
   async ({ articleId, tagData }, { dispatch }) => {
     const resp = await ArticleApi.updateHashtag({ articleId, tagData });
     Swal.fire({ text: "변경되었습니다", confirmButtonText: "확인" });
-    console.log(resp);
     return resp;
   },
 );
@@ -112,7 +103,6 @@ export const saveArticleAxios = createAsyncThunk(
       text: "아티클이 저장되었습니다",
       confirmButtonText: "확인",
     });
-    console.log(resp);
     return resp;
   },
 );
@@ -128,7 +118,6 @@ export const saveAllArticleAxios = createAsyncThunk(
       text: "모든 아티클이 저장되었습니다",
       confirmButtonText: "확인",
     });
-    console.log(resp);
     return resp;
   },
 );
@@ -142,7 +131,6 @@ export const updateReadCountAxios = createAsyncThunk(
   "article/updateHashtag",
   async (articleId, { dispatch }) => {
     const resp = await ArticleApi.updateReadCount(articleId);
-    console.log(resp);
     return resp;
   },
 );
@@ -161,19 +149,14 @@ export const articleSlice = createSlice({
     setReviewHide: (state, action) => {
       state.review = action.payload;
     },
-    setNewTitleOg: (state, action) => {
-      console.log(action.payload);
-    },
+    setNewTitleOg: (state, action) => {},
   },
   extraReducers: {
-    [updateReviewAxios.fulfilled]: (state, action) => {
-      console.log(action.payload);
-    },
+    [updateReviewAxios.fulfilled]: (state, action) => {},
     [postArticleAxios.fulfilled]: (state, action) => {
       state.localdata = initialState;
     },
     [getArticleReviewAxios.fulfilled]: (state, action) => {
-      console.log(action.payload);
       state.reviewList = action.payload;
     },
   },

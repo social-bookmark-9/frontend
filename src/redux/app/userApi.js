@@ -46,7 +46,6 @@ export default class userApi {
     };
     return axios(checkMemberNameConfig)
       .then(res => {
-        console.log(res);
         return res.data;
       })
       .catch(err => {
@@ -77,7 +76,6 @@ export default class userApi {
         data: JSON.stringify(token),
       })
       .then(res => {
-        console.log(res);
         callback(res.data.data);
         return res.data.data;
       })
@@ -95,7 +93,6 @@ export default class userApi {
     };
     return axios(logoutConfig)
       .then(res => {
-        console.log(res);
         return res;
       })
       .catch(err => {

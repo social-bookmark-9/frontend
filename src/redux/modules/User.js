@@ -29,7 +29,6 @@ export const checkMemberNameAxios = createAsyncThunk(
   "user/checkMemberName",
   async (memberNameData, { dispatch }) => {
     const user = await UserApi.checkMemberName(memberNameData);
-    console.log(user);
     if (user) {
       dispatch(setMessage(user.message));
       return user;
@@ -40,7 +39,6 @@ export const checkMemberNameAxios = createAsyncThunk(
 export const registerAxios = createAsyncThunk(
   "user/register",
   async ({ userInfo, navigate }, { dispatch }) => {
-    console.log(userInfo);
     const user = await UserApi.register({ userInfo, navigate });
     if (user) {
       dispatch(setMyInfo(user.data));
@@ -56,7 +54,6 @@ export const registerAxios = createAsyncThunk(
 export const checkUserAxios = createAsyncThunk(
   "user/checkUser",
   async (token, { dispatch }) => {
-    console.log(token);
     const user = await UserApi.checkUser(token, data => {
       dispatch(setUser(data));
     });
@@ -70,7 +67,6 @@ export const refreshTokensAxios = createAsyncThunk(
     const user = await UserApi.refreshTokens({ tokens, navigate });
     if (user) {
       dispatch(setMyInfo(user.data));
-      console.log(user);
       return user;
     }
   },
@@ -87,7 +83,6 @@ export const kakaoLogoutAxios = createAsyncThunk(
     }).then(() => {
       navigate("/", { replace: true });
     });
-    console.log(user);
     return user;
   },
 );
@@ -118,7 +113,6 @@ export const userSlice = createSlice({
       sessionStorage.removeItem("refreshToken");
     },
     setUser: (state, action) => {
-      console.log(action.payload);
       const myInfo = action.payload.myInfo;
       state.myInfo = { ...myInfo };
       state.memberId = action.payload.myInfo.memberId;

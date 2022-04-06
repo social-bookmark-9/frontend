@@ -32,7 +32,7 @@ const MainPage = props => {
         <RecommendUser memberInfo={memberInfo} />
         {/* 검색 */}
         <SearchBox />
-        {isLogin ? <Modal /> : null}
+        <Modal isLogin={isLogin} />
       </MainContainer>
     </React.Fragment>
   );

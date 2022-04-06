@@ -74,11 +74,9 @@ const SearchPageD = props => {
   };
 
   const isLoaded = false;
-  console.log(keyword);
 
   const hashtag = categoryType !== "카테고리" ? categoryType : "";
   const titleOg = keyword;
-  console.log(titleOg);
 
   useEffect(() => {
     dispatch(setPaging());
