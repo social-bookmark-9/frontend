@@ -12,9 +12,14 @@ import AddLinkTag from "./AddLinkTag";
 import AddFolder from "./AddFolder";
 import CheckRemind from "./CheckRemind";
 import { getToken } from "../../shared/utils";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
-const Modal = () => {
+const Modal = props => {
+  const { isLogin } = props;
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (getToken()) {
@@ -95,14 +100,35 @@ const Modal = () => {
     setFolder(e.target);
   };
 
+  const handleLogin = () => {
+    Swal.fire({
+      title: "잠깐!",
+      text: "로그인이 필요한 서비스에요",
+      icon: "warning",
+      showCancelButton: true,
+      cancelButtonColor: `${({ theme }) => theme.colors.error}`,
+      confirmButtonText: "로그인 하기",
+      cancelButtonText: "취소",
+    }).then(result => {
+      if (result.isConfirmed) {
+        navigate("/login");
+      }
+    });
+  };
+
   return (
     <>
       {/* 아직 버튼 모양은 안 잡아서 기본으로! */}
       <LinkButtonBox>
-        <Button borderRadius="16px" _fontSize="28px" _onClick={openModal}>
+        <Button
+          borderRadius="16px"
+          _fontSize="28px"
+          _onClick={isLogin ? openModal : handleLogin}
+        >
           +
         </Button>
       </LinkButtonBox>
+
       {modalOpen ? (
         <Section>
           <MainModal>
