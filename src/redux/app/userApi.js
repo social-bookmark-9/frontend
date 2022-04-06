@@ -9,7 +9,7 @@ export default class userApi {
 
   async kakaoLogin({ code, navigate }, callback) {
     await instance
-      .get(`${process.env.REACT_APP_KAKAO_URI}?code=${code}`)
+      .get(`/api/users/login?code=${code}`)
       .then(res => {
         if (res.data.data.login === true) {
           navigate("/", { replace: true });
