@@ -7,10 +7,9 @@ import { FlexboxColumn } from "../../styles/flexbox";
 import { Text, Button, Image } from "../../elements";
 
 import {
-  addLikeAxios,
-  cancelLikeAios,
   getFolderAxios,
   getFolderWithAxios,
+  updateLikeAxios,
 } from "../../redux/modules/Folder";
 
 import ArticleCard from "../../components/folderpage/ArticleCard";
@@ -30,6 +29,7 @@ const ArticleList = props => {
   const isMe = useSelector(state => state.folder.folderInfo.me);
   const folderInfo = useSelector(state => state.folder.folderInfo);
   const articleListData = useSelector(state => state.folder.articleList);
+  const likeCount = useSelector(state => state.folder.likeCount);
   const collectionUrl = window.location.href;
 
   useEffect(() => {
@@ -41,19 +41,17 @@ const ArticleList = props => {
   }, [dispatch, folderId, isLogin]);
 
   const [modalOpen, setModalOpen] = useState(false);
-  const [likeCnt, setLikeCnt] = useState(
-    folderInfo && parseInt(folderInfo.likeCount),
-  );
+  const [likeCnt, setLikeCnt] = useState(likeCount);
   const [userLiked, setUserLiked] = useState(false);
 
   const cancelLike = () => {
-    dispatch(cancelLikeAios(folderId));
+    dispatch(updateLikeAxios(folderId));
     setUserLiked(false);
     setLikeCnt(likeCnt - 1);
   };
 
   const addLike = () => {
-    dispatch(addLikeAxios(folderId));
+    dispatch(updateLikeAxios(folderId));
     setUserLiked(true);
     setLikeCnt(likeCnt + 1);
   };
@@ -99,7 +97,7 @@ const ArticleList = props => {
       <LikeBox isMe={isMe}>
         {isMe ? (
           <Text _fontSize={({ theme }) => theme.fontSizes.font14}>
-            {folderInfo.likeCount}명이 도움을 받았어요
+            {likeCount}명이 도움을 받았어요
           </Text>
         ) : userLiked ? (
           <Button
