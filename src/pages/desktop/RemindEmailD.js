@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Button, Image, Text, Title } from "../../elements";
 import { useDispatch } from "react-redux";
 import { editReminderEmailAxios } from "../../redux/modules/Profile";
@@ -99,23 +99,23 @@ const RemindEmailD = props => {
     </React.Fragment>
   );
 };
-// const TextAnimation = keyframes`
-//     0% {
-//       opacity: 0;
-//     }
-//     20% {
-//       opacity: 1;
-//     }
-//     40% {
-//       opacity: 1;
-//     }
-//     50% {
-//       opacity: 0;
-//     }
-//     100% {
-//       opacity: 0;
-//     }
-// `;
+const TextAnimation = keyframes`
+    0% {
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    40% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+`;
 
 const RemindContainer = styled.div`
   width: 100vw;
@@ -145,6 +145,7 @@ const KeyframeTitleBox = styled.div`
   height: 200px;
   position: relative;
   opacity: 0;
+  animation: ${TextAnimation};
   animation-delay: 500ms;
   animation-duration: 10s;
   animation-timing-function: ease-in-out;
@@ -157,7 +158,8 @@ const ReKeyframeTitleBox = styled.div`
   height: 200px;
   position: relative;
   top: -200px;
-  opacity: 1;
+  opacity: 0;
+  animation: ${TextAnimation};
   animation-delay: 5s;
   animation-duration: 10s;
   animation-timing-function: ease-in-out;
