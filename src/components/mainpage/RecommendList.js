@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router";
 
 import styled from "styled-components";
-import { Image, Label, Title } from "../../elements";
+import { Label, Title } from "../../elements";
 import { FlexboxSpace } from "../../styles/flexbox";
 
 import Slider from "react-slick";
@@ -63,14 +63,6 @@ const RecommendList = props => {
                 }}
               >
                 <Card bgImage={article.imgOg}>
-                  <ImageBox>
-                    <Image
-                      _src={"/images/bookmark.png"}
-                      _width="25px"
-                      _height="24px"
-                      _marginR="none"
-                    />
-                  </ImageBox>
                   <ArticleCardContent>
                     <LabelBox>
                       {hashTag.map((tag, idx) => (
@@ -173,15 +165,6 @@ const ArticleText = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.font13};
   line-height: 18px;
   color: ${({ theme }) => theme.colors.white};
-`;
-
-const ImageBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  padding: 28px;
-  & img {
-    margin-right: 0px;
-  }
 `;
 
 export default RecommendList;
