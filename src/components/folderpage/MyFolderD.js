@@ -6,11 +6,11 @@ import { Label, Image, Title } from "../../elements";
 
 import LinesEllipsis from "react-lines-ellipsis";
 
-const ArticleFolderD = props => {
+const MyFolderD = props => {
   const { folder, folderColor, memberId, myId } = props;
   const navigate = useNavigate();
   const isDefault = folder.isdDeleteable;
-  const articleContents = folder.articleTitleContentDto;
+  const articleContents = folder.articleListDtoList;
 
   const isMe = myId === memberId ? true : false;
 
@@ -111,7 +111,6 @@ const ArticleFolderD = props => {
               </Label>
             )}
           </TitleBox>
-
           <CardWrap>
             {articleContents && articleContents.length > 4 ? (
               <>
@@ -119,9 +118,9 @@ const ArticleFolderD = props => {
                   <CardBox key={idx}>
                     <Card>
                       <CardTitle>
-                        {content.titleOg !== null ? (
+                        {content.title !== null ? (
                           <LinesEllipsis
-                            text={content.titlOg}
+                            text={content.titl}
                             maxLine="2"
                             ellipsis="..."
                             trimRight
@@ -132,9 +131,9 @@ const ArticleFolderD = props => {
                         )}
                       </CardTitle>
                       <CardContents>
-                        {content.contentOg !== null ? (
+                        {content.content !== null ? (
                           <LinesEllipsis
-                            text={content.contentOg}
+                            text={content.content}
                             maxLine="2"
                             ellipsis="..."
                             trimRight
@@ -158,9 +157,9 @@ const ArticleFolderD = props => {
                     <CardBox key={idx}>
                       <Card>
                         <CardTitle>
-                          {content.titleOg !== null ? (
+                          {content.title !== null ? (
                             <LinesEllipsis
-                              text={content.titleOg}
+                              text={content.title}
                               maxLine="2"
                               ellipsis="..."
                               trimRight
@@ -171,9 +170,9 @@ const ArticleFolderD = props => {
                           )}
                         </CardTitle>
                         <CardContents>
-                          {content.contentOg !== null ? (
+                          {content.content !== null ? (
                             <LinesEllipsis
-                              text={content.contentOg}
+                              text={content.content}
                               maxLine="2"
                               ellipsis="..."
                               trimRight
@@ -272,4 +271,4 @@ const CardContents = styled.div`
   line-height: 16px;
 `;
 
-export default ArticleFolderD;
+export default MyFolderD;

@@ -58,7 +58,7 @@ const MyPageRemindD = props => {
                       _fontSize={({ theme }) => theme.fontSizes.font13}
                       _lineHeight="18px"
                     >
-                      아직 읽지 않은 아티클{" "}
+                      아직 읽지 않은 아티클
                       <TextPoint>{reminderData.remindData.length}개</TextPoint>
                       가 있어요
                     </Text>
@@ -67,7 +67,6 @@ const MyPageRemindD = props => {
               </RemindAlert>
             </AlertBox>
           </CurationDiv>
-
           <Qheader>
             <Title _padding="20px">{userInfo.memberName}님의 큐레이션</Title>
             <LabelBox>

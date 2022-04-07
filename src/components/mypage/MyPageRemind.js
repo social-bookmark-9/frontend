@@ -6,7 +6,7 @@ import { Label, Title, Image, Text } from "../../elements";
 import { Flexbox } from "../../styles/flexbox";
 
 import RemindCard from "./RemindCard";
-import ArticleFolder from "../folderpage/ArticleFolder";
+import MyFolder from "../folderpage/MyFolder";
 
 const MyPageRemind = props => {
   const {
@@ -56,10 +56,12 @@ const MyPageRemind = props => {
             </LabelBox>
           </Qheader>
           <FolderContainer>
-            <ArticleFolder
+            <MyFolder
               folderColor="default"
               folder={defaultFolder}
               {...defaultFolder}
+              memberId={userInfo.memberId}
+              myId={memberId}
             />
           </FolderContainer>
           {remindData && remindData.length > 0 ? (
