@@ -39,14 +39,6 @@ export const deleteReminderAxios = createAsyncThunk(
   },
 );
 
-// export const editProfileHashtagAxios = createAsyncThunk(
-//   "profile/editProfileHashtagAxios",
-//   async hashTag => {
-//     const res = await ProfileApi.editProfileHashtag(hashTag);
-//     return res;
-//   },
-// );
-
 export const reminderSlice = createSlice({
   name: "reminder",
   initialState,
