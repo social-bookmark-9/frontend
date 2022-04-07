@@ -44,17 +44,16 @@ const MyPage = props => {
   const openModal = () => {
     setModalOpen(true);
   };
-  
+
   const reminder = useSelector(state => state.reminder);
 
   return (
     <React.Fragment>
       <Container>
         <Navbar {...props} />
-        
+
         {/* ----- 프로필+이름 부분 ----- */}
         <UserProfile userInfo={userInfo} {...myInfo} />
-
 
         {/* ----- 리마인드, 디폴트 폴더 ----- */}
         <MyPageRemind

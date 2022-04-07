@@ -32,7 +32,9 @@ const RecommendUserD = props => {
           <Title _fontSize="34px" _lineHeight="41px" _padding="0 0 20px 0">
             <div>추천 유저</div>
           </Title>
-          <div style={{ fontSize: "20px", color: "#B1B8C0" }}>
+          <div
+            style={{ fontSize: "20px", lineHeight: "28px", color: "#B1B8C0" }}
+          >
             나와 비슷한 유저들의
             <br />
             생각을 구경해보세요
