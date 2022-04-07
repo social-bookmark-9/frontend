@@ -14,6 +14,7 @@ const ArticleFolder = props => {
   // 내 아이디와 폴더 유저 아이디로 비교해야함
   const isDefault = folder.isdDeleteable;
   const articleContents = folder.articleTitleContentDto;
+
   let isMe;
   if (memberId === myId) {
     isMe = true;
