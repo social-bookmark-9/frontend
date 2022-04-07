@@ -128,7 +128,7 @@ export const getArticleReviewAxios = createAsyncThunk("reviews", async () => {
 });
 
 export const updateReadCountAxios = createAsyncThunk(
-  "article/updateHashtag",
+  "article/updateReadCount",
   async (articleId, { dispatch }) => {
     const resp = await ArticleApi.updateReadCount(articleId);
     return resp;

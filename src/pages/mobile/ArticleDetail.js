@@ -11,7 +11,6 @@ import { Button, Image, Title, Text } from "../../elements";
 import {
   getArticleAxios,
   getArticleWithAxios,
-  postArticleAxios,
   reviewHideAxios,
   updateReviewAxios,
 } from "../../redux/modules/Article";
@@ -22,6 +21,7 @@ import DetailRemind from "../../components/detailpage/DetailRemind";
 import RecommendCard from "../../components/detailpage/RecommendCard";
 
 import Swal from "sweetalert2";
+import SelectFolder from "../../components/detailpage/SelectFolder";
 
 const ArticleDetail = props => {
   const { memberId } = props;
@@ -48,6 +48,7 @@ const ArticleDetail = props => {
 
   const [words, setWords] = useState(0);
   const [reviewHide, setReviewHide] = useState(article.reviewHide);
+  const [folderModalOpen, setFolderModalOpen] = useState(false);
 
   const handleKeyUp = e => {
     if (e.target.value.length <= 200) {
@@ -95,17 +96,14 @@ const ArticleDetail = props => {
     }
   };
 
-  const handleSave = () => {
-    const articleData = {
-      articleFolderName: article.articleFolderName,
-      url: article.url,
-      reminderDate: 0,
-      readCount: 0,
-      hashtag1: article.hashtag1,
-      hashtag2: article.hashtag2,
-      hashtag3: article.hashtag3,
-    };
-    dispatch(postArticleAxios({ articleData, navigate }));
+  const openFolderModal = () => {
+    if (folderModalOpen === false) {
+      setFolderModalOpen(true);
+      document.body.style.cssText = `overflow: hidden; touch-action: none;`;
+    } else {
+      setFolderModalOpen(false);
+      document.body.style.cssText = `overflow:auto;`;
+    }
   };
 
   return (
@@ -123,7 +121,7 @@ const ArticleDetail = props => {
         {/* 아티클 저장 */}
         {isMe ? null : (
           <Button
-            _onClick={handleSave}
+            _onClick={openFolderModal}
             _padding="12px"
             bgColor={({ theme }) => theme.colors.white}
             _color={({ theme }) => theme.colors.fontColor05}
@@ -188,6 +186,9 @@ const ArticleDetail = props => {
           <RecommendCard recommendList={recommendList} {...recommendList} />
         </ReCardBox>
       </div>
+      {folderModalOpen ? (
+        <SelectFolder openFolderModal={openFolderModal} article={article} />
+      ) : null}
     </React.Fragment>
   );
 };
