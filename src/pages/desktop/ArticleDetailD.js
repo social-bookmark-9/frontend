@@ -11,7 +11,6 @@ import { Button, Image, Title, Text } from "../../elements";
 import {
   getArticleAxios,
   getArticleWithAxios,
-  postArticleAxios,
   reviewHideAxios,
   updateReviewAxios,
 } from "../../redux/modules/Article";
@@ -23,6 +22,7 @@ import RecommendCard from "../../components/detailpage/RecommendCard";
 
 import Swal from "sweetalert2";
 import NavbarD from "../../components/common/NavbarD";
+import SelectFolderD from "../../components/detailpage/SelectFolderD";
 
 const ArticleDetailD = props => {
   const { memberId } = props;
@@ -49,6 +49,7 @@ const ArticleDetailD = props => {
 
   const [words, setWords] = useState(0);
   const [reviewHide, setReviewHide] = useState(article.reviewHide);
+  const [folderModalOpen, setFolderModalOpen] = useState(false);
 
   const handleKeyUp = e => {
     if (e.target.value.length <= 200) {
@@ -96,17 +97,14 @@ const ArticleDetailD = props => {
     }
   };
 
-  const handleSave = () => {
-    const articleData = {
-      articleFolderName: article.articleFolderName,
-      url: article.url,
-      reminderDate: 0,
-      readCount: 0,
-      hashtag1: article.hashtag1,
-      hashtag2: article.hashtag2,
-      hashtag3: article.hashtag3,
-    };
-    dispatch(postArticleAxios({ articleData, navigate }));
+  const openFolderModal = () => {
+    if (folderModalOpen === false) {
+      setFolderModalOpen(true);
+      document.body.style.cssText = `overflow: hidden; touch-action: none;`;
+    } else {
+      setFolderModalOpen(false);
+      document.body.style.cssText = `overflow:auto;`;
+    }
   };
 
   return (
@@ -175,7 +173,7 @@ const ArticleDetailD = props => {
             ) : (
               <ButtonBox>
                 <Button
-                  _onClick={handleSave}
+                  _onClick={openFolderModal}
                   _padding="12px"
                   bgColor={({ theme }) => theme.colors.white}
                   _color={({ theme }) => theme.colors.fontColor05}
@@ -203,6 +201,9 @@ const ArticleDetailD = props => {
           </ReCardBox>
         </Container>
       </GoodToReadContainer>
+      {folderModalOpen ? (
+        <SelectFolderD openFolderModal={openFolderModal} article={article} />
+      ) : null}
     </React.Fragment>
   );
 };
@@ -226,11 +227,11 @@ const DetailContainer = styled.div`
 `;
 
 const MemoBox = styled.div`
-  ${FlexboxColumn}
+  ${FlexboxColumn};
 `;
 
 const MemoHead = styled.div`
-  ${FlexboxRow}
+  ${FlexboxRow};
   justify-content: space-between;
   padding: 0 0 19px 0;
 `;
