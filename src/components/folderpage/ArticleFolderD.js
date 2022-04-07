@@ -13,7 +13,7 @@ const ArticleFolderD = props => {
   const navigate = useNavigate();
   const isMe = useSelector(state => state.user.isMe);
   const isDefault = folder.isdDeleteable;
-  const articleContents = folder.articleListDtoList;
+  const articleContents = folder.articleTitleContentDto;
 
   // 해시태스 리스트
   const _hashTag = [props.hashTag1, props.hashTag2, props.hashTag3];
@@ -32,7 +32,6 @@ const ArticleFolderD = props => {
         return "#505866";
     }
   };
-
 
   return (
     <React.Fragment>
@@ -111,82 +110,81 @@ const ArticleFolderD = props => {
               </Label>
             )}
           </TitleBox>
-        
+
           <CardWrap>
             {articleContents && articleContents.length > 4 ? (
               <>
-              {articleContents.slice(0, 3).map((content, idx) => 
-                <CardBox key={idx}>
-                <Card>
-                  <CardTitle>
-                    {content.title !== null ? (
-                      <LinesEllipsis
-                        text={content.title}
-                        maxLine="2"
-                        ellipsis="..."
-                        trimRight
-                        basedOn="words"
-                      />
-                    ) : (
-                      "제목없음"
-                    )}
-                  </CardTitle>
-                  <CardContents>
-                    {content.content !== null ? (
-                      <LinesEllipsis
-                        text={content.content}
-                        maxLine="2"
-                        ellipsis="..."
-                        trimRight
-                        basedOn="letters"
-                      />
-                    ) : (
-                      "미리보기 내용을 불러올 수 없습니다"
-                    )}
-                  </CardContents>
-                </Card>
-              </CardBox>
-              )}
-              <MoreCard>
-                <div>
-                  {articleContents.length - 3}개 더보기
-                </div>
-              </MoreCard>
+                {articleContents.slice(0, 3).map((content, idx) => (
+                  <CardBox key={idx}>
+                    <Card>
+                      <CardTitle>
+                        {content.titleOg !== null ? (
+                          <LinesEllipsis
+                            text={content.titlOg}
+                            maxLine="2"
+                            ellipsis="..."
+                            trimRight
+                            basedOn="words"
+                          />
+                        ) : (
+                          "제목없음"
+                        )}
+                      </CardTitle>
+                      <CardContents>
+                        {content.contentOg !== null ? (
+                          <LinesEllipsis
+                            text={content.contentOg}
+                            maxLine="2"
+                            ellipsis="..."
+                            trimRight
+                            basedOn="letters"
+                          />
+                        ) : (
+                          "미리보기 내용을 불러올 수 없습니다"
+                        )}
+                      </CardContents>
+                    </Card>
+                  </CardBox>
+                ))}
+                <MoreCard>
+                  <div>{articleContents.length - 3}개 더보기</div>
+                </MoreCard>
               </>
             ) : (
               <>
-              {articleContents && articleContents.map((content, idx) => 
-                <CardBox key={idx}>
-                <Card>
-                  <CardTitle>
-                    {content.title !== null ? (
-                      <LinesEllipsis
-                        text={content.title}
-                        maxLine="2"
-                        ellipsis="..."
-                        trimRight
-                        basedOn="words"
-                      />
-                    ) : (
-                      "제목없음"
-                    )}
-                  </CardTitle>
-                  <CardContents>
-                    {content.content !== null ? (
-                      <LinesEllipsis
-                        text={content.content}
-                        maxLine="2"
-                        ellipsis="..."
-                        trimRight
-                        basedOn="letters"
-                      />
-                    ) : (
-                      "미리보기 내용을 불러올 수 없습니다"
-                    )}
-                  </CardContents>
-                </Card>
-              </CardBox>
-              )}
+                {articleContents &&
+                  articleContents.map((content, idx) => (
+                    <CardBox key={idx}>
+                      <Card>
+                        <CardTitle>
+                          {content.title !== null ? (
+                            <LinesEllipsis
+                              text={content.title}
+                              maxLine="2"
+                              ellipsis="..."
+                              trimRight
+                              basedOn="words"
+                            />
+                          ) : (
+                            "제목없음"
+                          )}
+                        </CardTitle>
+                        <CardContents>
+                          {content.content !== null ? (
+                            <LinesEllipsis
+                              text={content.content}
+                              maxLine="2"
+                              ellipsis="..."
+                              trimRight
+                              basedOn="letters"
+                            />
+                          ) : (
+                            "미리보기 내용을 불러올 수 없습니다"
+                          )}
+                        </CardContents>
+                      </Card>
+                    </CardBox>
+                  ))}
               </>
             )}
           </CardWrap>
