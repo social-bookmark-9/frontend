@@ -8,7 +8,7 @@ import { Button, Image, Text } from "../../elements";
 import { postArticleAxios } from "../../redux/modules/Article";
 
 const SelectFolderD = props => {
-  const { openFolderModal, article } = props;
+  const { openFolderModal, setFolderModalOpen, article } = props;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -40,6 +40,7 @@ const SelectFolderD = props => {
 
   const handleSave = () => {
     dispatch(postArticleAxios({ articleData, navigate }));
+    setFolderModalOpen(false);
   };
 
   return (
