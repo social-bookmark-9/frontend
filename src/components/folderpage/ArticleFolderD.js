@@ -11,9 +11,12 @@ const ArticleFolderD = props => {
   const { folder, folderColor } = props;
 
   const navigate = useNavigate();
-  const isMe = useSelector(state => state.user.isMe);
+  const memberId = useSelector(state => state.folder.memberId);
+  const myId = useSelector(state => state.user.myInfo.memberId);
   const isDefault = folder.isdDeleteable;
   const articleContents = folder.articleTitleContentDto;
+
+  const isMe = memberId === myId ? true : false;
 
   // 해시태스 리스트
   const _hashTag = [props.hashTag1, props.hashTag2, props.hashTag3];
@@ -78,15 +81,17 @@ const ArticleFolderD = props => {
             >
               {props.folderName}
             </Title>
-            {isMe || isDefault ? (
-              <Label bgColor="white" _padding="7px" borderColor="white">
-                <Image
-                  _src={`/images/${props.hide ? "show" : "hide"}.png`}
-                  _marginR="0px"
-                  _width="20px"
-                  _height="20px"
-                />
-              </Label>
+            {isMe ? (
+              isDefault ? (
+                <Label bgColor="white" _padding="7px" borderColor="white">
+                  <Image
+                    _src={`/images/${props.hide ? "show" : "hide"}.png`}
+                    _marginR="0px"
+                    _width="20px"
+                    _height="20px"
+                  />
+                </Label>
+              ) : null
             ) : (
               <Label
                 _fontSize={({ theme }) => theme.fontSizes.font12}
@@ -157,9 +162,9 @@ const ArticleFolderD = props => {
                     <CardBox key={idx}>
                       <Card>
                         <CardTitle>
-                          {content.title !== null ? (
+                          {content.titleOg !== null ? (
                             <LinesEllipsis
-                              text={content.title}
+                              text={content.titleOg}
                               maxLine="2"
                               ellipsis="..."
                               trimRight
@@ -170,9 +175,9 @@ const ArticleFolderD = props => {
                           )}
                         </CardTitle>
                         <CardContents>
-                          {content.content !== null ? (
+                          {content.contentOg !== null ? (
                             <LinesEllipsis
-                              text={content.content}
+                              text={content.contentOg}
                               maxLine="2"
                               ellipsis="..."
                               trimRight
