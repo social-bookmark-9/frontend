@@ -25,18 +25,26 @@ const RecommendList = props => {
     arrows: false,
     responsive: [
       // 반응형 웹 구현 옵션
+
       {
-        breakpoint: 1194, //화면 사이즈 960px
+        breakpoint: 567, //화면 사이즈 768px
+        settings: {
+          //위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 899, //화면 사이즈 768px
         settings: {
           //위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
           slidesToShow: 3,
         },
       },
       {
-        breakpoint: 768, //화면 사이즈 768px
+        breakpoint: 1194, //화면 사이즈 960px
         settings: {
           //위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
-          slidesToShow: 2,
+          slidesToShow: 4,
         },
       },
     ],
@@ -113,9 +121,12 @@ const RecommendContainer = styled.div`
 `;
 
 const SliderBox = styled.div`
-  margin-left: -58px;
-  & .slick-track {
-    transform: translate3d(0, 0, 0) !important;
+  margin-left: -320px;
+  @media screen and (min-width: 769px) and (max-width: 899px) {
+    margin-left: -370px;
+  }
+  @media screen and (min-width: 900px) and (max-width: 1194px) {
+    margin-left: -630px;
   }
 `;
 
