@@ -6,14 +6,7 @@ import Swal from "sweetalert2";
 import { Image, Text, Title } from "../../elements";
 
 const NavbarD = props => {
-  const {
-    isLogin,
-    memberId,
-    bgColor,
-    profileImageUrl,
-    isRemindEmail,
-    nickName,
-  } = props;
+  const { isLogin, bgColor, profileImageUrl, isRemindEmail, nickName } = props;
   console.log(props);
   const navigate = useNavigate();
 
