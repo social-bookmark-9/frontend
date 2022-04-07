@@ -13,9 +13,11 @@ const ArticleFolder = props => {
   const navigate = useNavigate();
 
   // 내 아이디와 폴더 유저 아이디로 비교해야함
-  const isMe = useSelector(state => state.user.isMe);
   const isDefault = folder.isdDeleteable;
   const articleContents = folder.articleTitleContentDto;
+  const memberId = useSelector(state => state.folder.memberId);
+  const myId = useSelector(state => state.user.myInfo.memberId);
+  const isMe = memberId === myId ? true : false;
 
   // 해시태스 리스트
   const _hashTag = [props.hashTag1, props.hashTag2, props.hashTag3];
