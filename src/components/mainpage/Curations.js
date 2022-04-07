@@ -9,7 +9,7 @@ import ArticleFolder from "../folderpage/ArticleFolder";
 
 const Curations = props => {
   const { folderList } = props;
-  const myId = useSelector(state => state.user.myInfo.memberId);
+  // const myId = useSelector(state => state.user.myInfo.memberId);
 
   const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ const Curations = props => {
                 folderColor={
                   idx % 3 === 0 ? "green" : idx % 3 === 1 ? "purple" : "blue"
                 }
-                myId={myId}
+                // myId={myId}
                 memberId={folder.memberId}
                 folder={folder}
                 {...folder}
