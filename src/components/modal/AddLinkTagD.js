@@ -10,6 +10,7 @@ import { FlexboxRow } from "../../styles/flexbox";
 import { Title, Button, Text, Image } from "../../elements";
 
 import Favorite from "../common/Favorite";
+import Swal from "sweetalert2";
 
 const AddLinkTagD = props => {
   const { setShowModal, openModal, myFolderList } = props;
@@ -34,12 +35,20 @@ const AddLinkTagD = props => {
   };
 
   const handleAddLink = () => {
-    if (myFolderList.includes(linkData.articleFolderName)) {
-      dispatch(postArticleAxios({ articleData, navigate }));
+    if (tagData.length < 1) {
+      Swal.fire({
+        text: "관심분야를 최소 한개는 선택해주세요",
+        icon: "warning",
+        confirmButtonText: "확인",
+      });
     } else {
-      dispatch(createFolderWithAxios({ folderData, articleData, navigate }));
+      if (myFolderList.includes(linkData.articleFolderName)) {
+        dispatch(postArticleAxios({ articleData, navigate }));
+      } else {
+        dispatch(createFolderWithAxios({ folderData, articleData, navigate }));
+      }
+      openModal();
     }
-    openModal();
   };
 
   const modalChange = () => {
@@ -99,7 +108,6 @@ const AddLinkTagD = props => {
           링크 저장
         </Button>
       </ButtonBox>
-      
     </>
   );
 };
