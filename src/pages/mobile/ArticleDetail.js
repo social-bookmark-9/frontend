@@ -187,7 +187,11 @@ const ArticleDetail = props => {
         </ReCardBox>
       </div>
       {folderModalOpen ? (
-        <SelectFolder openFolderModal={openFolderModal} article={article} />
+        <SelectFolder
+          openFolderModal={openFolderModal}
+          setFolderModalOpen={setFolderModalOpen}
+          article={article}
+        />
       ) : null}
     </React.Fragment>
   );

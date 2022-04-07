@@ -202,7 +202,11 @@ const ArticleDetailD = props => {
         </Container>
       </GoodToReadContainer>
       {folderModalOpen ? (
-        <SelectFolderD openFolderModal={openFolderModal} article={article} />
+        <SelectFolderD
+          openFolderModal={openFolderModal}
+          setFolderModalOpen={setFolderModalOpen}
+          article={article}
+        />
       ) : null}
     </React.Fragment>
   );
