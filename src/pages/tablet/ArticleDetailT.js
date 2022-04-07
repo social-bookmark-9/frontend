@@ -124,19 +124,6 @@ const ArticleDetailT = props => {
             <DetailCard article={article} articleId={articleId} />
           </div>
           <div>
-            {/* 아티클 저장 */}
-            {isMe ? null : (
-              <Button
-                _onClick={handleSave}
-                _padding="12px"
-                bgColor={({ theme }) => theme.colors.white}
-                _color={({ theme }) => theme.colors.fontColor05}
-                isBorder
-                bold
-              >
-                내 컬렉션에 저장
-              </Button>
-            )}
             {/* 유저 메모 작성 */}
             <MemoBox>
               <MemoHead>
@@ -180,7 +167,22 @@ const ArticleDetailT = props => {
                 </TextBox>
               )}
             </MemoBox>
-            {isMe ? <DetailRemindD {...article} /> : null}
+            {isMe ? (
+              <DetailRemindD {...article} />
+            ) : (
+              <ButtonBox>
+                <Button
+                  _onClick={handleSave}
+                  _padding="12px"
+                  bgColor={({ theme }) => theme.colors.white}
+                  _color={({ theme }) => theme.colors.fontColor05}
+                  isBorder
+                  bold
+                >
+                  내 컬렉션에 저장
+                </Button>
+              </ButtonBox>
+            )}
           </div>
         </DetailContainer>
       </Container>
@@ -267,6 +269,9 @@ const ImageBox = styled.div`
   display: inline-block;
 `;
 
+const ButtonBox = styled.div`
+  padding-top: 8px;
+`;
 const ReCardBox = styled.div`
   width: 100%;
   display: grid;
