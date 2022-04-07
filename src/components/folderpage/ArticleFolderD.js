@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 import styled from "styled-components";
@@ -8,16 +7,18 @@ import { Label, Image, Title } from "../../elements";
 import LinesEllipsis from "react-lines-ellipsis";
 
 const ArticleFolderD = props => {
-  const { folder, folderColor } = props;
+  const { folder, folderColor, memberId, myId } = props;
 
   const navigate = useNavigate();
-  const memberId = useSelector(state => state.folder.memberId);
-  const myId = useSelector(state => state.user.myInfo.memberId);
   const isDefault = folder.isdDeleteable;
   const articleContents = folder.articleTitleContentDto;
-
-  const isMe = memberId === myId ? true : false;
-
+  let isMe;
+  if (memberId === myId) {
+    isMe = true;
+  } else {
+    isMe = false;
+  }
+  // const isMe = false;
   // 해시태스 리스트
   const _hashTag = [props.hashTag1, props.hashTag2, props.hashTag3];
   const hashTag = _hashTag.filter(el => el !== null);
