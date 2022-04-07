@@ -185,6 +185,7 @@ const NavMenu = styled.div`
   float: right;
   display: flow-root;
   cursor: pointer;
+  z-index: 1;
 `;
 
 const Nav = styled.div`
@@ -208,6 +209,7 @@ const Nav = styled.div`
 const MenuBox = styled.ul`
   & li {
     padding: 20px 36px;
+    cursor: pointer;
   }
 `;
 

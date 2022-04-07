@@ -6,8 +6,15 @@ import Swal from "sweetalert2";
 import { Image, Text, Title } from "../../elements";
 
 const NavbarD = props => {
-  const { isLogin, memberId, bgColor, profileImageUrl, isRemindEmail } = props;
-
+  const {
+    isLogin,
+    memberId,
+    bgColor,
+    profileImageUrl,
+    isRemindEmail,
+    nickName,
+  } = props;
+  console.log(props);
   const navigate = useNavigate();
 
   const handleMemoPage = () => {
@@ -52,7 +59,7 @@ const NavbarD = props => {
 
   const handleMyPage = () => {
     if (isLogin) {
-      navigate(`/mypage/${memberId}`);
+      navigate(`/${nickName}`);
     } else {
       Swal.fire({
         title: "잠깐!",
@@ -168,6 +175,7 @@ const LogoBox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  cursor: pointer;
   & h1 {
     padding-right: 8px;
   }
@@ -180,6 +188,9 @@ const MenuBox = styled.div`
   & p {
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
     padding-right: 30px;
+    cursor: pointer;
+  }
+  & img {
     cursor: pointer;
   }
 `;

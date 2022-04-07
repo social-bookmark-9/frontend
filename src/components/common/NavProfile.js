@@ -7,14 +7,14 @@ import { Title, Text } from "../../elements";
 import { Circle } from "../../elements/ImageObj";
 
 const NavProfile = props => {
-  const { memberId, nickName, profileImageUrl } = props;
+  const { nickName, profileImageUrl } = props;
   const isLogin = useSelector(state => state.user.isLogin);
 
   const navigate = useNavigate();
 
   const onMypage = () => {
     if (isLogin) {
-      navigate(`/mypage/${memberId}`);
+      navigate(`/${nickName}`);
     } else {
       navigate("/login");
     }
@@ -73,6 +73,7 @@ const ProfileBox = styled.div`
   height: 108px;
   position: relative;
   padding: 25px 0px;
+  cursor: pointer;
 `;
 
 const ProfileHead = styled.div`
