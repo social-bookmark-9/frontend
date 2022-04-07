@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
 
 import styled, { css } from "styled-components";
 import { Label, Title, Image, Text } from "../../elements";
@@ -19,15 +18,14 @@ const MyPageRemind = props => {
   } = props;
 
   const [myOwnPage, setMyOwnPage] = useState(false);
-  const params = useParams();
 
   useEffect(() => {
-    if (parseInt(params.id) === parseInt(memberId)) {
+    if (memberId === userInfo.memberId) {
       setMyOwnPage(true);
-    } else if (parseInt(params.id) !== parseInt(memberId)) {
+    } else if (memberId !== userInfo.memberId) {
       setMyOwnPage(false);
     }
-  }, [memberId, params.id]);
+  }, [memberId, userInfo.memberId]);
 
   return (
     <>
