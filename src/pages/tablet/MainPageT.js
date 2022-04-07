@@ -6,7 +6,7 @@ import styled from "styled-components";
 import ModalD from "../../components/modal/ModalD";
 import Navbar from "../../components/common/Navbar";
 import MainTop from "../../components/mainpage/MainTop";
-import SearchBox from "../../components/mainpage/SearchBox";
+// import SearchBox from "../../components/mainpage/SearchBox";
 import Curations from "../../components/mainpage/Curations";
 import RecommendList from "../../components/mainpage/RecommendList";
 import EventAlert from "../../components/mainpage/EventAlert";
@@ -34,7 +34,7 @@ const MainPageT = props => {
         {/* <RecommendUserT memberInfo={memberInfo} /> */}
         <RecommendUser memberInfo={memberInfo} />
         {/* 검색 */}
-        <SearchBox />
+        {/* <SearchBox /> */}
         <ModalD isLogin={isLogin} />
       </MainContainer>
     </React.Fragment>

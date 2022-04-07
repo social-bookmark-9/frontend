@@ -6,7 +6,7 @@ import styled from "styled-components";
 import Modal from "../../components/modal/Modal";
 import Navbar from "../../components/common/Navbar";
 import MainTop from "../../components/mainpage/MainTop";
-import SearchBox from "../../components/mainpage/SearchBox";
+// import SearchBox from "../../components/mainpage/SearchBox";
 import Curations from "../../components/mainpage/Curations";
 import RecommendUser from "../../components/mainpage/RecommendUser";
 import RecommendList from "../../components/mainpage/RecommendList";
@@ -31,7 +31,7 @@ const MainPage = props => {
         {/* 추천 유저 */}
         <RecommendUser memberInfo={memberInfo} />
         {/* 검색 */}
-        <SearchBox />
+        {/* <SearchBox /> */}
         <Modal isLogin={isLogin} />
       </MainContainer>
     </React.Fragment>
