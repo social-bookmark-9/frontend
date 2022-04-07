@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 
 import styled from "styled-components";
 import { Title, Text } from "../../elements";
@@ -10,15 +10,14 @@ const UserProfile = props => {
   const navigate = useNavigate();
 
   const [myOwnPage, setMyOwnPage] = useState(false);
-  const params = useParams();
 
   useEffect(() => {
-    if (parseInt(params.id) === parseInt(memberId)) {
+    if (userInfo.memberId === memberId) {
       setMyOwnPage(true);
-    } else if (parseInt(params.id) !== parseInt(memberId)) {
+    } else if (userInfo.memberId !== memberId) {
       setMyOwnPage(false);
     }
-  }, [memberId, params.id]);
+  }, [memberId, userInfo.memberId]);
 
   const goEditProfile = () => {
     navigate("/editprofile", { state: { memberId } });
@@ -93,8 +92,6 @@ const UserProfile = props => {
     </React.Fragment>
   );
 };
-
-
 
 const ProfileBox = styled.div`
   width: 100vw;

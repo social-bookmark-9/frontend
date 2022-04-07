@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
 import styled from "styled-components";
 import { Image, Text, Title } from "../../elements";
 
@@ -9,16 +8,15 @@ const MyPageSuggest = props => {
   const { userInfo, memberId, isLogin, isTablet, openModal } = props;
 
   const [myOwnPage, setMyOwnPage] = useState(false);
-  const params = useParams();
   const isNew = true;
 
   useEffect(() => {
-    if (parseInt(params.id) === parseInt(memberId)) {
+    if (memberId === userInfo.memberId) {
       setMyOwnPage(true);
-    } else if (parseInt(params.id) !== parseInt(memberId)) {
+    } else if (memberId !== userInfo.memberId) {
       setMyOwnPage(false);
     }
-  }, [memberId, params.id]);
+  }, [memberId, userInfo.memberId]);
 
   return (
     <>

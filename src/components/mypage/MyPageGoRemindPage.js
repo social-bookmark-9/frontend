@@ -1,29 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
 
 import RemindCard from "./RemindCard";
 
 const MyPageGoRemindPage = props => {
-  const { memberId, remindData } = props;
+  const { memberId, remindData, userInfo } = props;
 
   const [myOwnPage, setMyOwnPage] = useState(false);
-  const params = useParams();
 
   useEffect(() => {
-    if (parseInt(params.id) === parseInt(memberId)) {
+    if (parseInt(userInfo.memberId) === parseInt(memberId)) {
       setMyOwnPage(true);
-    } else if (parseInt(params.id) !== parseInt(memberId)) {
+    } else if (parseInt(userInfo.memberId) !== parseInt(memberId)) {
       setMyOwnPage(false);
     }
-  }, [memberId, params.id]);
+  }, [memberId, userInfo.memberId]);
 
-  return(
-    <div style={{padding:"0 16px"}}>
+  return (
+    <div style={{ padding: "0 16px" }}>
       {myOwnPage ? (
         <>
-          {remindData && remindData.length > 0 ? (
-            null
-          ) : (
+          {remindData && remindData.length > 0 ? null : (
             <RemindCard
               _title="저장한 글, 다시 읽고 계신가요?"
               _text={
@@ -33,10 +29,9 @@ const MyPageGoRemindPage = props => {
             />
           )}
         </>
-      ) : null
-      }
-    </div>  
-  )
-}
+      ) : null}
+    </div>
+  );
+};
 
 export default MyPageGoRemindPage;

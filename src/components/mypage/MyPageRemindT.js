@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
 
 import styled, { css } from "styled-components";
 import { Title, Image, Text } from "../../elements";
 
 const MyPageRemindT = props => {
-  const { remindData, memberId, openModal } = props;
+  const { userInfo, remindData, memberId, openModal } = props;
 
   const [myOwnPage, setMyOwnPage] = useState(false);
-  const params = useParams();
 
   useEffect(() => {
-    if (parseInt(params.id) === parseInt(memberId)) {
+    if (memberId === userInfo.memberId) {
       setMyOwnPage(true);
-    } else if (parseInt(params.id) !== parseInt(memberId)) {
+    } else if (memberId !== userInfo.memberId) {
       setMyOwnPage(false);
     }
-  }, [memberId, params.id]);
+  }, [memberId, userInfo.memberId]);
 
   return (
     <>
