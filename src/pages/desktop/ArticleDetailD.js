@@ -173,16 +173,18 @@ const ArticleDetailD = props => {
             {isMe ? (
               <DetailRemindD {...article} />
             ) : (
-              <Button
-                _onClick={handleSave}
-                _padding="12px"
-                bgColor={({ theme }) => theme.colors.white}
-                _color={({ theme }) => theme.colors.fontColor05}
-                isBorder
-                bold
-              >
-                내 컬렉션에 저장
-              </Button>
+              <ButtonBox>
+                <Button
+                  _onClick={handleSave}
+                  _padding="12px"
+                  bgColor={({ theme }) => theme.colors.white}
+                  _color={({ theme }) => theme.colors.fontColor05}
+                  isBorder
+                  bold
+                >
+                  내 컬렉션에 저장
+                </Button>
+              </ButtonBox>
             )}
           </div>
         </DetailContainer>
@@ -262,6 +264,10 @@ const TextBox = styled.div`
 
 const ImageBox = styled.div`
   display: inline-block;
+`;
+
+const ButtonBox = styled.div`
+  padding-top: 8px;
 `;
 
 const ReCardBox = styled.div`
