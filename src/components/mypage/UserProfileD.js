@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 
 import styled from "styled-components";
 import { Title, Text } from "../../elements";
@@ -10,15 +10,14 @@ const UserProfileD = props => {
   const navigate = useNavigate();
 
   const [myOwnPage, setMyOwnPage] = useState(false);
-  const params = useParams();
 
   useEffect(() => {
-    if (parseInt(params.id) === parseInt(memberId)) {
+    if (userInfo.memberId === memberId) {
       setMyOwnPage(true);
-    } else if (parseInt(params.id) !== parseInt(memberId)) {
+    } else if (userInfo.memberId !== memberId) {
       setMyOwnPage(false);
     }
-  }, [memberId, params.id]);
+  }, [memberId, userInfo.memberId]);
 
   const goEditProfile = () => {
     navigate("/editprofile", { state: { memberId } });
@@ -26,70 +25,69 @@ const UserProfileD = props => {
 
   return (
     <React.Fragment>
-    <DProfileBox>
-      <ProfileHead>
-        <DProfileImage>
-          <img src={userInfo.profileImage} alt="profile" />
-        </DProfileImage>
-        <DCircleBox>
-          <Circle _width="28px" _height="28px" bgColor="black" />
-        </DCircleBox>
-        <DPropfileInfo>
-          {myOwnPage ? (
-            <div
-              style={{
-            display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-              onClick={goEditProfile}
-            >
+      <DProfileBox>
+        <ProfileHead>
+          <DProfileImage>
+            {/* 마법의 svg */}
+            <svg width="0" height="0">
+              <defs>
+                <clipPath id="myClip">
+                  <ellipse cx="44" cy="106" rx="44.78" ry="44" />
+                  <ellipse cx="108" cy="106" rx="44.78" ry="44" />
+                  <ellipse cx="44" cy="44" rx="44.78" ry="44" />
+                  <ellipse cx="108" cy="44" rx="44.78" ry="44" />
+                </clipPath>
+              </defs>
+            </svg>
+            <img src={userInfo.profileImage} alt="profile" />
+          </DProfileImage>
+          <DCircleBox>
+            <Circle _width="28px" _height="28px" bgColor="black" />
+          </DCircleBox>
+          <DPropfileInfo>
+            {myOwnPage ? (
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "start",
+                  flexDirection: "row",
                   alignItems: "center",
                 }}
+                onClick={goEditProfile}
               >
-                <Title>{userInfo.memberName}</Title>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "center",
+                  }}
+                >
+                  <Title>{userInfo.memberName}</Title>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "end",
+                    alignItems: "center",
+                    marginLeft: "5px",
+                  }}
+                >
+                  <img
+                    src={`/images/edit.png`}
+                    width={"20px"}
+                    height={"20px"}
+                    alt=""
+                  />
+                </div>
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "end",
-                  alignItems: "center",
-                  marginLeft: "5px",
-                }}
-              >
-                <img
-                  src={`/images/edit.png`}
-                  width={"20px"}
-                  height={"20px"}
-                  alt=""
-                />
-              </div>
-            </div>
-          ) : (
-            <Title>{userInfo.memberName}</Title>
-          )}
-          <Text _fontSize="13px" _padding="8px 0px">
-            {userInfo.memberComment}
-          </Text>
-        </DPropfileInfo>
-      </ProfileHead>
-    </DProfileBox>
-
-      {/* 마법의 svg */}
-      <svg width="0" height="0">
-        <defs>
-          <clipPath id="myClip">
-            <ellipse cx="44" cy="106" rx="44.78" ry="44" />
-            <ellipse cx="108" cy="106" rx="44.78" ry="44" />
-            <ellipse cx="44" cy="44" rx="44.78" ry="44" />
-            <ellipse cx="108" cy="44" rx="44.78" ry="44" />
-          </clipPath>
-        </defs>
-      </svg>
+            ) : (
+              <Title>{userInfo.memberName}</Title>
+            )}
+            <Text _fontSize="13px" _padding="8px 0px">
+              {userInfo.memberComment}
+            </Text>
+          </DPropfileInfo>
+        </ProfileHead>
+      </DProfileBox>
     </React.Fragment>
   );
 };
@@ -128,6 +126,5 @@ const ProfileHead = styled.div`
   align-items: center;
   position: relative;
 `;
-
 
 export default UserProfileD;

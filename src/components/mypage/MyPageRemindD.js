@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router";
 
 import styled, { css } from "styled-components";
 import { Label, Title, Image, Text } from "../../elements";
@@ -12,15 +11,14 @@ const MyPageRemindD = props => {
   const { userInfo, completeRate, memberId } = props;
 
   const [myOwnPage, setMyOwnPage] = useState(false);
-  const params = useParams();
 
   useEffect(() => {
-    if (parseInt(params.id) === parseInt(memberId)) {
+    if (userInfo.memberId === memberId) {
       setMyOwnPage(true);
-    } else if (parseInt(params.id) !== parseInt(memberId)) {
+    } else if (userInfo.memberId !== memberId) {
       setMyOwnPage(false);
     }
-  }, [memberId, params.id]);
+  }, [memberId, userInfo.memberId]);
 
   const reminderData = useSelector(state => state.reminder);
 

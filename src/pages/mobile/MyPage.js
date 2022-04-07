@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -18,10 +17,9 @@ import MyPageRemind from "../../components/mypage/MyPageRemind";
 import MyPageSuggest from "../../components/mypage/MyPageSuggest";
 
 const MyPage = props => {
-  const { isLogin } = props;
+  const { isLogin, memberId } = props;
+  console.log(props);
   const dispatch = useDispatch();
-  const params = useParams();
-  const memberId = params.id;
 
   useEffect(() => {
     if (isLogin) {

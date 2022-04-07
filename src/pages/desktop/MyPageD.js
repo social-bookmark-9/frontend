@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -18,10 +17,8 @@ import AddCollectionD from "../../components/mypage/AddCollectionD";
 import MyFolderD from "../../components/folderpage/MyFolderD";
 
 const MyPageD = props => {
-  const { isLogin } = props;
+  const { isLogin, memberId } = props;
   const dispatch = useDispatch();
-  const params = useParams();
-  const memberId = params.id;
 
   useEffect(() => {
     if (isLogin) {

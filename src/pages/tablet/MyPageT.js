@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -20,10 +19,9 @@ import MyPageGoRemindPage from "../../components/mypage/MyPageGoRemindPage";
 import AddCollectionD from "../../components/mypage/AddCollectionD";
 
 const MyPageT = props => {
-  const { isLogin } = props;
+  const { isLogin, memberId } = props;
+  console.log(props);
   const dispatch = useDispatch();
-  const params = useParams();
-  const memberId = params.id;
 
   useEffect(() => {
     if (isLogin) {
@@ -59,7 +57,7 @@ const MyPageT = props => {
         <UserProfile userInfo={userInfo} isTablet={isTablet} {...myInfo} />
 
         {/* ----- 리마인드 ----- */}
-        <MyPageGoRemindPage {...myInfo} {...reminder} />
+        <MyPageGoRemindPage userInfo={userInfo} {...myInfo} {...reminder} />
 
         {/* 큐레이션 시작 */}
         <Title _fontSize="20px" _padding="30px 0 18px 30px" _lineHeight="28px">
@@ -98,6 +96,7 @@ const MyPageT = props => {
         <MyPageRemindT
           openModal={openModal}
           isLogin={isLogin}
+          userInfo={userInfo}
           {...myInfo}
           {...reminder}
         />
