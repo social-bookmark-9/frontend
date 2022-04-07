@@ -31,7 +31,6 @@ const MainPageT = props => {
         {/* 추천 큐레이션 */}
         <Curations folderList={folderList} myId={myId} />
         {/* 추천 유저 */}
-        {/* <RecommendUserT memberInfo={memberInfo} /> */}
         <RecommendUser memberInfo={memberInfo} />
         {/* 검색 */}
         {/* <SearchBox /> */}
