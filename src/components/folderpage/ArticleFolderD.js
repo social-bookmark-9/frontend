@@ -16,8 +16,8 @@ const ArticleFolderD = props => {
   const isDefault = folder.isdDeleteable;
   const articleContents = folder.articleTitleContentDto;
 
-  const isMe = memberId === myId ? true : false;
-
+  // const isMe = memberId === myId ? true : false;
+  const isMe = false;
   // 해시태스 리스트
   const _hashTag = [props.hashTag1, props.hashTag2, props.hashTag3];
   const hashTag = _hashTag.filter(el => el !== null);
