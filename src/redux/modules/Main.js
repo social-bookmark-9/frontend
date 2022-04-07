@@ -5,7 +5,7 @@ const MainApi = new mainApi();
 
 const initialState = {
   userInfo: [],
-  folderList: [],
+  folderList: [{ memberId: "" }],
   articleList: [],
   paging: { page: 0, limit: 3 },
   isLoading: false,

@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 import styled from "styled-components";
@@ -8,6 +9,7 @@ import ArticleFolder from "../folderpage/ArticleFolder";
 
 const Curations = props => {
   const { folderList } = props;
+  const myId = useSelector(state => state.user.myInfo.memberId);
 
   const navigate = useNavigate();
 
@@ -28,6 +30,8 @@ const Curations = props => {
                 folderColor={
                   idx % 3 === 0 ? "green" : idx % 3 === 1 ? "purple" : "blue"
                 }
+                myId={myId}
+                memberId={folder.memberId}
                 folder={folder}
                 {...folder}
               />

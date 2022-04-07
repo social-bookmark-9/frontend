@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 import styled from "styled-components";
@@ -8,17 +7,19 @@ import { Label, Image, Title } from "../../elements";
 import Carousel from "../../elements/Carousel";
 
 const ArticleFolder = props => {
-  const { folder, folderColor } = props;
+  const { folder, folderColor, memberId, myId } = props;
 
   const navigate = useNavigate();
 
   // 내 아이디와 폴더 유저 아이디로 비교해야함
   const isDefault = folder.isdDeleteable;
   const articleContents = folder.articleTitleContentDto;
-  const memberId = useSelector(state => state.folder.memberId);
-  const myId = useSelector(state => state.user.myInfo.memberId);
-  // const isMe = memberId && memberId === myId ? true : false;
-  const isMe = false;
+  let isMe;
+  if (memberId === myId) {
+    isMe = true;
+  } else {
+    isMe = false;
+  }
 
   // 해시태스 리스트
   const _hashTag = [props.hashTag1, props.hashTag2, props.hashTag3];
