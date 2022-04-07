@@ -17,7 +17,7 @@ const ArticleFolder = props => {
   const articleContents = folder.articleTitleContentDto;
   const memberId = useSelector(state => state.folder.memberId);
   const myId = useSelector(state => state.user.myInfo.memberId);
-  const isMe = memberId === myId ? true : false;
+  const isMe = memberId && memberId === myId ? true : false;
 
   // 해시태스 리스트
   const _hashTag = [props.hashTag1, props.hashTag2, props.hashTag3];
