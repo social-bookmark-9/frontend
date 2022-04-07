@@ -126,19 +126,6 @@ const ArticleDetailD = props => {
             <DetailCard article={article} articleId={articleId} />
           </div>
           <div>
-            {/* 아티클 저장 */}
-            {isMe ? null : (
-              <Button
-                _onClick={handleSave}
-                _padding="12px"
-                bgColor={({ theme }) => theme.colors.white}
-                _color={({ theme }) => theme.colors.fontColor05}
-                isBorder
-                bold
-              >
-                내 컬렉션에 저장
-              </Button>
-            )}
             {/* 유저 메모 작성 */}
             <MemoBox>
               <MemoHead>
@@ -182,7 +169,21 @@ const ArticleDetailD = props => {
                 </TextBox>
               )}
             </MemoBox>
-            {isMe ? <DetailRemindD {...article} /> : null}
+            {/* 아티클 저장 */}
+            {isMe ? (
+              <DetailRemindD {...article} />
+            ) : (
+              <Button
+                _onClick={handleSave}
+                _padding="12px"
+                bgColor={({ theme }) => theme.colors.white}
+                _color={({ theme }) => theme.colors.fontColor05}
+                isBorder
+                bold
+              >
+                내 컬렉션에 저장
+              </Button>
+            )}
           </div>
         </DetailContainer>
       </Container>
