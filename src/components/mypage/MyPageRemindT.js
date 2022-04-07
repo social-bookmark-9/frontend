@@ -45,7 +45,7 @@ const MyPageRemindT = props => {
                         _fontSize={({ theme }) => theme.fontSizes.font13}
                         _lineHeight="18px"
                       >
-                        아직 읽지 않은 아티클{" "}
+                        아직 읽지 않은 아티클
                         <TextPoint>{remindData.length}개</TextPoint>가 있어요
                       </Text>
                     </TextBox>

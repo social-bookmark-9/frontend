@@ -11,7 +11,7 @@ import { getReminderAxios } from "../../redux/modules/Reminder";
 import styled from "styled-components";
 
 import Navbar from "../../components/common/Navbar";
-import ArticleFolder from "../../components/folderpage/ArticleFolder";
+import MyFolder from "../../components/folderpage/MyFolder";
 import UserProfile from "../../components/mypage/UserProfile";
 import AddCollection from "../../components/mypage/AddCollection";
 import MyPageRemind from "../../components/mypage/MyPageRemind";
@@ -51,10 +51,8 @@ const MyPage = props => {
     <React.Fragment>
       <Container>
         <Navbar {...props} />
-
         {/* ----- 프로필+이름 부분 ----- */}
         <UserProfile userInfo={userInfo} {...myInfo} />
-
         {/* ----- 리마인드, 디폴트 폴더 ----- */}
         <MyPageRemind
           defaultFolder={defaultFolder}
@@ -68,13 +66,15 @@ const MyPage = props => {
         {folderList &&
           folderList.map((folder, idx) => (
             <FolderContainer key={idx}>
-              <ArticleFolder
+              <MyFolder
+                key={idx}
                 folder={folder}
                 {...folder}
-                key={idx}
                 folderColor={
                   idx % 3 === 0 ? "green" : idx % 3 === 1 ? "purple" : "blue"
                 }
+                memberId={userInfo.memberId}
+                myId={myInfo.memberId}
               />
             </FolderContainer>
           ))}
