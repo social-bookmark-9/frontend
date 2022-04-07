@@ -15,7 +15,7 @@ import UserProfileD from "../../components/mypage/UserProfileD";
 import MyPageRemindD from "../../components/mypage/MyPageRemindD";
 import MyPageSuggest from "../../components/mypage/MyPageSuggest";
 import AddCollectionD from "../../components/mypage/AddCollectionD";
-import ArticleFolderD from "../../components/folderpage/ArticleFolderD";
+import MyFolderD from "../../components/folderpage/MyFolderD";
 
 const MyPageD = props => {
   const { isLogin } = props;
@@ -63,21 +63,25 @@ const MyPageD = props => {
         />
         {/* 폴더리스트 시작 */}
         <FolderListContainer>
-          <ArticleFolderD
+          <MyFolderD
             folderColor="default"
             folder={defaultFolder}
             {...defaultFolder}
+            memberId={userInfo.memberId}
+            myId={myInfo.memberId}
           />
           {folderList &&
             folderList.map((folder, idx) => (
               <div key={idx}>
-                <ArticleFolderD
+                <MyFolderD
                   folder={folder}
                   {...folder}
                   key={idx}
                   folderColor={
                     idx % 3 === 0 ? "green" : idx % 3 === 1 ? "purple" : "blue"
                   }
+                  memberId={userInfo.memberId}
+                  myId={myInfo.memberId}
                 />
               </div>
             ))}
