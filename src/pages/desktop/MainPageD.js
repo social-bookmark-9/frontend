@@ -13,12 +13,11 @@ import NavbarD from "../../components/common/NavbarD";
 import EventAlert from "../../components/mainpage/EventAlert";
 
 const MainPageD = props => {
-  const { isLogin } = props;
-
+  const { isLogin, memberId } = props;
   const memberInfo = useSelector(state => state.main.userInfo);
   const folderList = useSelector(state => state.main.folderList);
   const articleList = useSelector(state => state.main.articleList);
-
+  const myId = memberId;
   const isMain = true;
 
   return (
@@ -33,7 +32,7 @@ const MainPageD = props => {
         <RecommendListD articleList={articleList} />
 
         {/* 추천 큐레이션 */}
-        <CurationsD folderList={folderList} />
+        <CurationsD folderList={folderList} myId={myId} />
 
         {/* 추천 유저 */}
         <RecommendUserD memberInfo={memberInfo} />

@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 import styled from "styled-components";
@@ -8,9 +7,8 @@ import { Title, Button } from "../../elements";
 import ArticleFolderD from "../folderpage/ArticleFolderD";
 
 const CurationsD = props => {
-  const { folderList } = props;
+  const { folderList, myId } = props;
   const navigate = useNavigate();
-  // const myId = useSelector(state => state.user.myInfo.memberId);
 
   return (
     <CurationContainer>
@@ -21,7 +19,7 @@ const CurationsD = props => {
         <Title _fontSize="34px" _lineHeight="41px" _padding="0 0 20px 0">
           <div>추천 큐레이션</div>
         </Title>
-        <div style={{ fontSize: "20px", color: "#b1b8c0" }}>
+        <div style={{ fontSize: "20px", lineHeight: "28px", color: "#b1b8c0" }}>
           버블드가 직접 엄선한
           <br />
           유저들의 큐레이션을
@@ -42,7 +40,7 @@ const CurationsD = props => {
               folderColor={
                 idx % 3 === 0 ? "green" : idx % 3 === 1 ? "purple" : "blue"
               }
-              // myId={myId}
+              myId={myId}
               memberId={folder.memberId}
               folder={folder}
               {...folder}

@@ -12,11 +12,11 @@ import RecommendUser from "../../components/mainpage/RecommendUser";
 import RecommendList from "../../components/mainpage/RecommendList";
 
 const MainPage = props => {
-  const { isLogin } = props;
-
+  const { isLogin, memberId } = props;
   const memberInfo = useSelector(state => state.main.userInfo);
   const folderList = useSelector(state => state.main.folderList);
   const articleList = useSelector(state => state.main.articleList);
+  const myId = memberId;
 
   return (
     <React.Fragment>
@@ -27,7 +27,7 @@ const MainPage = props => {
         {/* 추천아티클 */}
         <RecommendList articleList={articleList} />
         {/* 추천 큐레이션 */}
-        <Curations folderList={folderList} />
+        <Curations folderList={folderList} myId={myId} />
         {/* 추천 유저 */}
         <RecommendUser memberInfo={memberInfo} />
         {/* 검색 */}
