@@ -1,15 +1,13 @@
-# <img src="./public/images/bubbled.png" width="32px" /> bubbled 
-사이트 아카이빙 소셜 서비스 
-<br />
-<br />
+# <img src="./public/images/bubbled.png" width="32px" /> bubbled
 
 ## 🌟 서비스 소개
 bubbled는 웹페이지 링크 저장(북마크) 및 공유 플랫폼 입니다.  
 개발자, 디자이너, 취준생, 프로덕트 매니저, 대학생 등 다양한 사람들이 평소에 관심있는 분야의 글을 태그를 설정하여 모아놓을 수 있습니다.  
 또한 다른 사용자들의 모아놓은 양질의 북마크들을 확인할 수 있으며 이메일을 통해 리마인드 기능을 활용하여 읽어야 할 글들을 확인할 수 있습니다.
 
-## 👫 팀원 소개
+##([https://bubbled.at]bubbled) 둘러보기
 
+## 👫 버블드 멤버
 - **Front End**
     - 이정민(부팀장)([https://github.com/jeongmin-dev](https://github.com/jeongmin-dev))
     - 이윤수([https://github.com/yonslee](https://github.com/yonslee))
@@ -21,10 +19,10 @@ bubbled는 웹페이지 링크 저장(북마크) 및 공유 플랫폼 입니다.
     - 이가인
     - 이경미
 
-## 🏢 Project Architecture
+## 🏢 프로젝트 아키텍쳐
 ![](https://user-images.githubusercontent.com/76833697/161889252-2fa7d4f9-da8f-4b8f-8a94-78f6f2b83545.png)
 
-## 🔧 Tech Stack
+## 🔧 사용 기술
 - axios
 - lottie-web
 - react-slick
