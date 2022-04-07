@@ -1,4 +1,4 @@
-(<img src="./public/images/ogBubbled.png" />)
+<img src="./public/images/ogBubbled.png" />
 <br />
 
 ## 🌟 서비스 소개
@@ -38,22 +38,22 @@ bubbled는 웹페이지 링크 저장(북마크) 및 공유 플랫폼 입니다.
 <br />
 
 ## 🔍  API
-##[bubbled API 리스트](https://jlog.notion.site/fd1d1c5c6a3c42bbbfe18d4cf029c284?v=e7f88371b99b4da895856e98dc20432a)
+## [bubbled API 리스트](https://jlog.notion.site/fd1d1c5c6a3c42bbbfe18d4cf029c284?v=e7f88371b99b4da895856e98dc20432a)
 <br />
 
 ## 🔧 사용 기술
-- React.lazy
-  React.lazy 메서드를 사용해 코드 스플리팅을 하여 지연로딩을 실행함으로써 앱의 초기 로딩 시간을 단축
-- axios / interceptors
-  axios interceptors를 사용해 JWT 엑세스 토큰 만료시 토근 재발급 및 비로그인과 로그인 분리 요청 관리
-- redux / redux-toolkit
-  효과적인 상태관리를 위해 리덕스와 개발도구로 리덕스 툴킷을 사용. 코드를 한곳에 모아 관리가 용이하며 유지보수 효율을 향상
-- styled-components
-  재사용성과 유지보수를 위해 스타일드 컴포넌트를 사용. 반복적인 컴포넌트들을 props에 따라 간편하게 스타일링
-- Github Actions
-  Githun Actions를 통한 CI/CD로 새로 적용된 코드를 서버에서부터 유저까지 짧은 주기로 제공
-- AWS S3
-- AWS CloudFront
+- <b>React.lazy</b>
+	- React.lazy 메서드를 사용해 코드 스플리팅을 하여 지연로딩을 실행함으로써 앱의 초기 로딩 시간을 단축
+- <b>axios / interceptors</b>
+	- axios interceptors를 사용해 JWT 엑세스 토큰 만료시 토근 재발급 및 비로그인과 로그인 분리 요청 관리
+- <b>redux / redux-toolkit</b>
+	- 효과적인 상태관리를 위해 리덕스와 개발도구로 리덕스 툴킷을 사용. 코드를 한곳에 모아 관리가 용이하며 유지보수 효율을 향상
+- <b>styled-components</b>
+	- 재사용성과 유지보수를 위해 스타일드 컴포넌트를 사용. 반복적인 컴포넌트들을 props에 따라 간편하게 스타일링
+- <b>Github Actions</b>
+	- Github Actions를 통한 CI/CD로 새로 적용된 코드를 서버에서부터 유저까지 짧은 주기로 제공
+- <b>AWS S3</b>
+- <b>AWS CloudFront</b>
 <br />
 
 ## 📌 Library
