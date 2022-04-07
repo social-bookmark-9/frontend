@@ -180,7 +180,7 @@ const ArticleDetailT = props => {
                 </TextBox>
               )}
             </MemoBox>
-            <DetailRemindD {...article} />
+            {isMe ? <DetailRemindD {...article} /> : null}
           </div>
         </DetailContainer>
       </Container>
