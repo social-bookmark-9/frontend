@@ -12,12 +12,13 @@ const ArticleFolderD = props => {
   const navigate = useNavigate();
   const isDefault = folder.isdDeleteable;
   const articleContents = folder.articleTitleContentDto;
-  let isMe;
-  if (memberId === myId) {
-    isMe = true;
-  } else {
-    isMe = false;
-  }
+  const isMe = true;
+  // let isMe;
+  // if (memberId === myId) {
+  //   isMe = true;
+  // } else {
+  //   isMe = false;
+  // }
   // const isMe = false;
   // 해시태스 리스트
   const _hashTag = [props.hashTag1, props.hashTag2, props.hashTag3];
