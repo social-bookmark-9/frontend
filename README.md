@@ -1,4 +1,4 @@
-<img src="./public/images/ogBubbled.png" />
+(<img src="./public/images/ogBubbled.png" />)
 <br />
 
 ## 🌟 서비스 소개
