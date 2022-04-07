@@ -27,9 +27,9 @@ const Carousel = props => {
             <CardBox key={idx}>
               <Card>
                 <CardTitle>
-                  {content.title !== null ? (
+                  {content.titleOg !== null ? (
                     <LinesEllipsis
-                      text={content.title}
+                      text={content.titleOg}
                       maxLine="2"
                       ellipsis="..."
                       trimRight
@@ -40,9 +40,9 @@ const Carousel = props => {
                   )}
                 </CardTitle>
                 <CardContents>
-                  {content.content !== null ? (
+                  {content.contentOg !== null ? (
                     <LinesEllipsis
-                      text={content.content}
+                      text={content.contentOg}
                       maxLine="2"
                       ellipsis="..."
                       trimRight
