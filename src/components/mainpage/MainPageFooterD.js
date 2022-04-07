@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { Button, Text, Title } from "../../elements";
-import SearchBoxD from "./SearchBoxD";
+// import SearchBoxD from "./SearchBoxD";
 
 const MainPageFooterD = props => {
   const { isLogin, memberId } = props;
@@ -17,9 +17,7 @@ const MainPageFooterD = props => {
 
   return (
     <>
-      <FooterSearcher>
-        <SearchBoxD />
-      </FooterSearcher>
+      <FooterSearcher>{/* <SearchBoxD /> */}</FooterSearcher>
       {isLogin ? (
         <FooterViolet>
           <FooterContainer>
