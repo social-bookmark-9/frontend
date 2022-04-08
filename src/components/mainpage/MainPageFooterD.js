@@ -15,6 +15,14 @@ const MainPageFooterD = props => {
     }
   };
 
+  const onMyReview = () => {
+    if (isLogin) {
+      navigate(`/myreview`);
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
     <>
       <FooterSearcher>{/* <SearchBoxD /> */}</FooterSearcher>
@@ -120,10 +128,18 @@ const MainPageFooterD = props => {
               <div>공지사항</div>
               <div>홈 피드</div>
               <div>버블드 팀 소개</div>
-              <div>내가 작성한 메모</div>
-              <div>버블드 인스타그램</div>
-              <div>설정</div>
-              <div>버그제보</div>
+              <div onClick={onMyReview}>내가 작성한 메모</div>
+              <div onClick={() =>{
+                window.open("https://instagram.com/bubbled.at?igshid=YmMyMTA2M2Y=")
+              }}>
+                버블드 인스타그램
+              </div>
+              <div onClick={() => navigate("/setting")}>설정</div>
+              <div onClick={() => { 
+                window.open("https://docs.google.com/forms/d/1a8-aYpDY8tdUg9Gyva-w9xfTDB2qHvfV4S1lprffIyA/edit")
+              }}>
+                버그제보
+              </div>
             </FooterMenu>
           </RightFloatDiv>
         </FooterContainer>
