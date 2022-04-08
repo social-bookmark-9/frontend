@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useParams } from "react-router";
 import {
   getProfileAxios,
   getProfileWithAxios,
@@ -17,10 +17,17 @@ import MyPageRemind from "../../components/mypage/MyPageRemind";
 import MyPageSuggest from "../../components/mypage/MyPageSuggest";
 
 const MyPage = props => {
-  const { isLogin, memberId } = props;
+  const { isLogin } = props;
   console.log(props);
   const dispatch = useDispatch();
-
+  const params = useParams();
+  const memberId = params.id;
+  // ----- 폴더 리스트 ----- //
+  const folderList = useSelector(state => state.profile.folderInfo);
+  const defaultFolder = useSelector(state => state.profile.defaultFolder);
+  // ----- 유저 정보 ----- //
+  const userInfo = useSelector(state => state.profile.memberInfo);
+  const myInfo = useSelector(state => state.user.myInfo);
   useEffect(() => {
     if (isLogin) {
       dispatch(getProfileWithAxios(memberId));
@@ -30,12 +37,6 @@ const MyPage = props => {
     }
   }, [dispatch, memberId, isLogin]);
 
-  // ----- 폴더 리스트 ----- //
-  const folderList = useSelector(state => state.profile.folderInfo);
-  const defaultFolder = useSelector(state => state.profile.defaultFolder);
-  // ----- 유저 정보 ----- //
-  const userInfo = useSelector(state => state.profile.memberInfo);
-  const myInfo = useSelector(state => state.user.myInfo);
   // 모달 열고 닫기
   const [modalOpen, setModalOpen] = useState(false);
   // 모달 열고 닫기 펑션

@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-
+import { useParams } from "react-router";
 import RemindCard from "./RemindCard";
 
 const MyPageGoRemindPage = props => {
-  const { memberId, remindData, userInfo } = props;
-
+  const { memberId, remindData } = props;
+  const params = useParams();
   const [myOwnPage, setMyOwnPage] = useState(false);
 
   useEffect(() => {
-    if (parseInt(userInfo.memberId) === parseInt(memberId)) {
+    if (parseInt(params.id) === parseInt(memberId)) {
       setMyOwnPage(true);
-    } else if (parseInt(userInfo.memberId) !== parseInt(memberId)) {
+    } else if (parseInt(params.id) !== parseInt(memberId)) {
       setMyOwnPage(false);
     }
-  }, [memberId, userInfo.memberId]);
+  }, [memberId, params.id]);
 
   return (
     <div style={{ padding: "0 16px" }}>
