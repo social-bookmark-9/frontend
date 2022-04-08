@@ -10,7 +10,7 @@ import { getReminderAxios } from "../../redux/modules/Reminder";
 import styled from "styled-components";
 
 import Navbar from "../../components/common/Navbar";
-import MyFolder from "../../components/folderpage/MyFolder";
+import ArticleFolder from "../../components/folderpage/ArticleFolder";
 import UserProfile from "../../components/mypage/UserProfile";
 import AddCollection from "../../components/mypage/AddCollection";
 import MyPageRemind from "../../components/mypage/MyPageRemind";
@@ -64,7 +64,7 @@ const MyPage = props => {
         {folderList &&
           folderList.map((folder, idx) => (
             <FolderContainer key={idx}>
-              <MyFolder
+              <ArticleFolder
                 key={idx}
                 folder={folder}
                 {...folder}
