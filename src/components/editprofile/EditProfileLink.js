@@ -200,15 +200,7 @@ const EditProfileLink = props => {
               </Text>
               <InputBox>
                 {initialUrl.instagramUrl ? (
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "98px 60% 18px",
-                      alignItems: "center",
-                      borderRadius: "8px",
-                      margin: "0 8px 8px 0",
-                    }}
-                  >
+                  <SingleUrlBox>
                     <div style={{ display: "flex" }}>
                       <ProfileChannel>
                         <img
@@ -227,18 +219,10 @@ const EditProfileLink = props => {
                     <CloseBox onClick={deleteUrl}>
                       x
                     </CloseBox>
-                  </div>
+                  </SingleUrlBox>
                 ) : null}
                 {initialUrl.githubUrl ? (
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "98px 60% 18px",
-                      alignItems: "center",
-                      borderRadius: "8px",
-                      margin: "0 8px 8px 0",
-                    }}
-                  >
+                  <SingleUrlBox>
                     <div style={{ display: "flex" }}>
                       <ProfileChannel>
                         <img
@@ -257,18 +241,10 @@ const EditProfileLink = props => {
                     <CloseBox onClick={deleteUrl}>
                       x
                     </CloseBox>
-                  </div>
+                  </SingleUrlBox>
                 ) : null}
                 {initialUrl.brunchUrl ? (
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "98px 60% 18px",
-                      alignItems: "center",
-                      borderRadius: "8px",
-                      margin: "0 8px 8px 0",
-                    }}
-                  >
+                  <SingleUrlBox>
                     <div style={{ display: "flex" }}>
                       <ProfileChannel>
                         <img
@@ -287,18 +263,10 @@ const EditProfileLink = props => {
                     <CloseBox onClick={deleteUrl}>
                       x
                     </CloseBox>
-                  </div>
+                  </SingleUrlBox>
                 ) : null}
                 {initialUrl.blogUrl ? (
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "98px 60% 18px",
-                      alignItems: "center",
-                      borderRadius: "8px",
-                      margin: "0 8px 8px 0",
-                    }}
-                  >
+                  <SingleUrlBox>
                     <div style={{ display: "flex" }}>
                       <ProfileChannel>
                         <img
@@ -317,18 +285,10 @@ const EditProfileLink = props => {
                     <CloseBox onClick={deleteUrl}>
                       x
                     </CloseBox>
-                  </div>
+                  </SingleUrlBox>
                 ) : null}
                 {initialUrl.websiteUrl ? (
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "98px 60% 18px",
-                      alignItems: "center",
-                      borderRadius: "8px",
-                      margin: "0 8px 8px 0",
-                    }}
-                  >
+                  <SingleUrlBox>
                     <div style={{ display: "flex" }}>
                       <ProfileChannel>
                         <img
@@ -347,7 +307,7 @@ const EditProfileLink = props => {
                     <CloseBox onClick={deleteUrl}>
                       x
                     </CloseBox>
-                  </div>
+                  </SingleUrlBox>
                 ) : null}
                 {addUrl &&
                   addUrl.map((url, idx) => {
@@ -508,6 +468,14 @@ const UserUrlBox = styled.div`
   text-overflow: ellipsis;
   height: 14px;
   padding: 0px 8px;
+`;
+
+const SingleUrlBox = styled.div`
+  display: grid;
+  grid-template-columns: 98px 60% 18px;
+  align-items: center;
+  border-radius: 8px;
+  margin: 0 8px 8px 0;
 `;
 
 const CloseBox = styled.div`
