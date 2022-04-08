@@ -10,6 +10,7 @@ import { Button, Image, Title } from "../../elements";
 
 import NavbarD from "../../components/common/NavbarD";
 import EditFavoritesD from "../../components/setting/EditFavoritesD";
+import Swal from "sweetalert2";
 
 const SettingD = props => {
   const navigate = useNavigate();
@@ -22,7 +23,17 @@ const SettingD = props => {
   };
 
   const handleLogout = () => {
-    dispatch(kakaoLogoutAxios(navigate));
+    Swal.fire({
+      text: "로그아웃 하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "확인",
+      cancelButtonText: "취소",
+    }).then(result => {
+      if (result.isConfirmed) {
+        navigate(KAKAO_AUTH_LOGOUT_URL);
+        dispatch(kakaoLogoutAxios(navigate));
+      }
+    });
   };
 
   return (
@@ -72,15 +83,13 @@ const SettingD = props => {
               </Li>
             </Ul>
             <ButtonBox onClick={handleLogout}>
-              <a href={KAKAO_AUTH_LOGOUT_URL}>
-                <Button
-                  bgColor={({ theme }) => theme.colors.gray03}
-                  _color={({ theme }) => theme.colors.fontColor04}
-                  _padding="15px"
-                >
-                  로그아웃
-                </Button>
-              </a>
+              <Button
+                bgColor={({ theme }) => theme.colors.gray03}
+                _color={({ theme }) => theme.colors.fontColor04}
+                _padding="15px"
+              >
+                로그아웃
+              </Button>
             </ButtonBox>
           </UlBottom>
         </Container>
@@ -102,7 +111,7 @@ const UlTop = styled.div`
     const { colors } = theme;
     return css`
       background-color: ${colors.white};
-      height: 40vh;
+      height: 35vh;
     `;
   }}
 `;
@@ -116,7 +125,7 @@ const UlBottom = styled.div`
 
 const Ul = styled.ul`
   width: 1119px;
-  padding-top: 82px;
+  padding-top: 42px;
   margin: 0 auto;
 `;
 

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 
 import { kakaoLogoutAxios } from "../../redux/modules/User";
+import { KAKAO_AUTH_LOGOUT_URL } from "../../shared/OAuth";
 
 import styled, { css } from "styled-components";
 import { Button, Image } from "../../elements";
@@ -31,6 +32,7 @@ const Setting = props => {
       cancelButtonText: "취소",
     }).then(result => {
       if (result.isConfirmed) {
+        navigate(KAKAO_AUTH_LOGOUT_URL, { replace: true });
         dispatch(kakaoLogoutAxios(navigate));
       }
     });
