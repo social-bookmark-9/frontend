@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 import styled from "styled-components";
@@ -13,6 +13,8 @@ const EditProfileLink = props => {
   const { memberId, isDeskTop } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const initialUrl = useSelector(state => state.profile.memberInfo);
   // 채널
   const channelList = [
     {
@@ -197,6 +199,156 @@ const EditProfileLink = props => {
                 추가된 링크
               </Text>
               <InputBox>
+                {initialUrl.instagramUrl ? (
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "98px 60% 18px",
+                      alignItems: "center",
+                      borderRadius: "8px",
+                      margin: "0 8px 8px 0",
+                    }}
+                  >
+                    <div style={{ display: "flex" }}>
+                      <ProfileChannel>
+                        <img
+                          src={`/images/icon100.png`}
+                          width={"12px"}
+                          alt={`icon100`}
+                        />
+                        <span
+                          style={{ fontSize: "12px", marginLeft: "8px" }}
+                        >
+                          instagram
+                        </span>
+                      </ProfileChannel>
+                    </div>
+                    <UserUrlBox>{initialUrl.instagramUrl}</UserUrlBox>
+                    <CloseBox onClick={deleteUrl}>
+                      x
+                    </CloseBox>
+                  </div>
+                ) : null}
+                {initialUrl.githubUrl ? (
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "98px 60% 18px",
+                      alignItems: "center",
+                      borderRadius: "8px",
+                      margin: "0 8px 8px 0",
+                    }}
+                  >
+                    <div style={{ display: "flex" }}>
+                      <ProfileChannel>
+                        <img
+                          src={`/images/icon101.png`}
+                          width={"12px"}
+                          alt={`icon101`}
+                        />
+                        <span
+                          style={{ fontSize: "12px", marginLeft: "8px" }}
+                        >
+                          Github
+                        </span>
+                      </ProfileChannel>
+                    </div>
+                    <UserUrlBox>{initialUrl.githubUrl}</UserUrlBox>
+                    <CloseBox onClick={deleteUrl}>
+                      x
+                    </CloseBox>
+                  </div>
+                ) : null}
+                {initialUrl.brunchUrl ? (
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "98px 60% 18px",
+                      alignItems: "center",
+                      borderRadius: "8px",
+                      margin: "0 8px 8px 0",
+                    }}
+                  >
+                    <div style={{ display: "flex" }}>
+                      <ProfileChannel>
+                        <img
+                          src={`/images/icon102.png`}
+                          width={"12px"}
+                          alt={`icon102`}
+                        />
+                        <span
+                          style={{ fontSize: "12px", marginLeft: "8px" }}
+                        >
+                          Brunch
+                        </span>
+                      </ProfileChannel>
+                    </div>
+                    <UserUrlBox>{initialUrl.brunchUrl}</UserUrlBox>
+                    <CloseBox onClick={deleteUrl}>
+                      x
+                    </CloseBox>
+                  </div>
+                ) : null}
+                {initialUrl.blogUrl ? (
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "98px 60% 18px",
+                      alignItems: "center",
+                      borderRadius: "8px",
+                      margin: "0 8px 8px 0",
+                    }}
+                  >
+                    <div style={{ display: "flex" }}>
+                      <ProfileChannel>
+                        <img
+                          src={`/images/icon103.png`}
+                          width={"12px"}
+                          alt={`icon103`}
+                        />
+                        <span
+                          style={{ fontSize: "12px", marginLeft: "8px" }}
+                        >
+                          블로그
+                        </span>
+                      </ProfileChannel>
+                    </div>
+                    <UserUrlBox>{initialUrl.blogUrl}</UserUrlBox>
+                    <CloseBox onClick={deleteUrl}>
+                      x
+                    </CloseBox>
+                  </div>
+                ) : null}
+                {initialUrl.websiteUrl ? (
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "98px 60% 18px",
+                      alignItems: "center",
+                      borderRadius: "8px",
+                      margin: "0 8px 8px 0",
+                    }}
+                  >
+                    <div style={{ display: "flex" }}>
+                      <ProfileChannel>
+                        <img
+                          src={`/images/icon104.png`}
+                          width={"12px"}
+                          alt={`icon104`}
+                        />
+                        <span
+                          style={{ fontSize: "12px", marginLeft: "8px" }}
+                        >
+                          웹사이트
+                        </span>
+                      </ProfileChannel>
+                    </div>
+                    <UserUrlBox>{initialUrl.websiteUrl}</UserUrlBox>
+                    <CloseBox onClick={deleteUrl}>
+                      x
+                    </CloseBox>
+                  </div>
+                ) : null}
                 {addUrl &&
                   addUrl.map((url, idx) => {
                     return (
