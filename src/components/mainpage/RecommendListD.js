@@ -164,6 +164,7 @@ const Card = styled.div`
   border: 1px solid #f2f4f6;
   border-radius: 20px;
   overflow: hidden;
+  cursor: pointer;
   ${props =>
     props.bgImage
       ? `background: rgba(0, 0, 0, 0.46)
