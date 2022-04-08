@@ -14,8 +14,10 @@ const SelectFolder = props => {
   const navigate = useNavigate();
 
   const folderList = useSelector(state => state.folder.myFolderList);
-  const myFolderList =
-    folderList && folderList.map(list => list.articleFolderName);
+  let myFolderList;
+  if (folderList) {
+    myFolderList = folderList.map(list => list.articleFolderName);
+  }
 
   const [isOpen, setIsOpen] = useState(false);
   const [folder, setFolder] = useState("미분류 컬렉션");
