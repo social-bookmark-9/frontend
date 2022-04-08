@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -17,8 +18,10 @@ import AddCollectionD from "../../components/mypage/AddCollectionD";
 import ArticleFolderD from "../../components/folderpage/ArticleFolderD";
 
 const MyPageD = props => {
-  const { isLogin, memberId } = props;
+  const { isLogin } = props;
   const dispatch = useDispatch();
+  const params = useParams();
+  const memberId = params.id;
 
   useEffect(() => {
     if (isLogin) {
@@ -64,8 +67,6 @@ const MyPageD = props => {
             folderColor="default"
             folder={defaultFolder}
             {...defaultFolder}
-            memberId={userInfo.memberId}
-            myId={myInfo.memberId}
           />
           {folderList &&
             folderList.map((folder, idx) => (
@@ -77,8 +78,6 @@ const MyPageD = props => {
                   folderColor={
                     idx % 3 === 0 ? "green" : idx % 3 === 1 ? "purple" : "blue"
                   }
-                  memberId={userInfo.memberId}
-                  myId={myInfo.memberId}
                 />
               </div>
             ))}

@@ -1,22 +1,22 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Image, Text, Title } from "../../elements";
-
+import { useParams } from "react-router";
 import RemindCard from "./RemindCard";
 
 const MyPageSuggest = props => {
   const { userInfo, memberId, isLogin, isTablet, openModal } = props;
-
+  const params = useParams();
   const [myOwnPage, setMyOwnPage] = useState(false);
   const isNew = true;
 
   useEffect(() => {
-    if (memberId === userInfo.memberId) {
+    if (parseInt(params.id) === parseInt(memberId)) {
       setMyOwnPage(true);
-    } else if (memberId !== userInfo.memberId) {
+    } else if (parseInt(params.id) !== parseInt(memberId)) {
       setMyOwnPage(false);
     }
-  }, [memberId, userInfo.memberId]);
+  }, [memberId, params.id]);
 
   return (
     <>

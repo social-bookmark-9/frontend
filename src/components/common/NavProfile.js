@@ -7,14 +7,14 @@ import { Title, Text } from "../../elements";
 import { Circle } from "../../elements/ImageObj";
 
 const NavProfile = props => {
-  const { nickName, profileImageUrl } = props;
+  const { memberId, nickName, profileImageUrl } = props;
   const isLogin = useSelector(state => state.user.isLogin);
 
   const navigate = useNavigate();
 
   const onMypage = () => {
     if (isLogin) {
-      navigate(`/${nickName}`);
+      navigate(`/mypage/${memberId}`);
     } else {
       navigate("/login");
     }

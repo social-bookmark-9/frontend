@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { useParams } from "react-router";
 import styled, { css } from "styled-components";
 import { Label, Title, Image, Text } from "../../elements";
 import { Flexbox } from "../../styles/flexbox";
@@ -16,16 +16,16 @@ const MyPageRemind = props => {
     memberId,
     openModal,
   } = props;
-
+  const params = useParams();
   const [myOwnPage, setMyOwnPage] = useState(false);
 
   useEffect(() => {
-    if (memberId === userInfo.memberId) {
+    if (parseInt(params.id) === parseInt(memberId)) {
       setMyOwnPage(true);
-    } else if (memberId !== userInfo.memberId) {
+    } else if (parseInt(params.id) !== parseInt(memberId)) {
       setMyOwnPage(false);
     }
-  }, [memberId, userInfo.memberId]);
+  }, [memberId, params.id]);
 
   return (
     <>

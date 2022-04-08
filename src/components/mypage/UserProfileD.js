@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 import styled from "styled-components";
 import { Title, Text } from "../../elements";
@@ -8,16 +8,16 @@ import { Circle } from "../../elements/ImageObj";
 const UserProfileD = props => {
   const { userInfo, memberId } = props;
   const navigate = useNavigate();
-
+  const params = useParams();
   const [myOwnPage, setMyOwnPage] = useState(false);
 
   useEffect(() => {
-    if (userInfo.memberId === memberId) {
+    if (parseInt(params.id) === parseInt(memberId)) {
       setMyOwnPage(true);
-    } else if (userInfo.memberId !== memberId) {
+    } else if (parseInt(params.id) !== parseInt(memberId)) {
       setMyOwnPage(false);
     }
-  }, [memberId, userInfo.memberId]);
+  }, [memberId, params.id]);
 
   const goEditProfile = () => {
     navigate("/editprofile", { state: { memberId } });
