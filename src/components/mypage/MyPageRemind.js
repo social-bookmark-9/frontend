@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-
+import { useParams } from "react-router";
 import styled, { css } from "styled-components";
 import { Label, Title, Image, Text } from "../../elements";
 import { Flexbox } from "../../styles/flexbox";
 
 import RemindCard from "./RemindCard";
-import MyFolder from "../folderpage/MyFolder";
+import ArticleFolder from "../folderpage/ArticleFolder";
 
 const MyPageRemind = props => {
   const {
@@ -16,16 +16,16 @@ const MyPageRemind = props => {
     memberId,
     openModal,
   } = props;
-
+  const params = useParams();
   const [myOwnPage, setMyOwnPage] = useState(false);
 
   useEffect(() => {
-    if (memberId === userInfo.memberId) {
+    if (parseInt(params.id) === parseInt(memberId)) {
       setMyOwnPage(true);
-    } else if (memberId !== userInfo.memberId) {
+    } else if (parseInt(params.id) !== parseInt(memberId)) {
       setMyOwnPage(false);
     }
-  }, [memberId, userInfo.memberId]);
+  }, [memberId, params.id]);
 
   return (
     <>
@@ -54,7 +54,7 @@ const MyPageRemind = props => {
             </LabelBox>
           </Qheader>
           <FolderContainer>
-            <MyFolder
+            <ArticleFolder
               folderColor="default"
               folder={defaultFolder}
               {...defaultFolder}

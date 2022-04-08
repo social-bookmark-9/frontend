@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-
+import { useParams } from "react-router";
 import styled, { css } from "styled-components";
 import { Label, Title, Image, Text } from "../../elements";
 import { Flexbox } from "../../styles/flexbox";
@@ -9,16 +9,16 @@ import RemindCard from "./RemindCard";
 
 const MyPageRemindD = props => {
   const { userInfo, completeRate, memberId } = props;
-
+  const params = useParams();
   const [myOwnPage, setMyOwnPage] = useState(false);
 
   useEffect(() => {
-    if (userInfo.memberId === memberId) {
+    if (parseInt(params.id) === parseInt(memberId)) {
       setMyOwnPage(true);
-    } else if (userInfo.memberId !== memberId) {
+    } else if (parseInt(params.id) !== parseInt(memberId)) {
       setMyOwnPage(false);
     }
-  }, [memberId, userInfo.memberId]);
+  }, [memberId, params.id]);
 
   const reminderData = useSelector(state => state.reminder);
 

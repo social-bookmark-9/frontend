@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -14,11 +15,13 @@ import UserProfileD from "../../components/mypage/UserProfileD";
 import MyPageRemindD from "../../components/mypage/MyPageRemindD";
 import MyPageSuggest from "../../components/mypage/MyPageSuggest";
 import AddCollectionD from "../../components/mypage/AddCollectionD";
-import MyFolderD from "../../components/folderpage/MyFolderD";
+import ArticleFolderD from "../../components/folderpage/ArticleFolderD";
 
 const MyPageD = props => {
-  const { isLogin, memberId } = props;
+  const { isLogin } = props;
   const dispatch = useDispatch();
+  const params = useParams();
+  const memberId = params.id;
 
   useEffect(() => {
     if (isLogin) {
@@ -60,25 +63,21 @@ const MyPageD = props => {
         />
         {/* 폴더리스트 시작 */}
         <FolderListContainer>
-          <MyFolderD
+          <ArticleFolderD
             folderColor="default"
             folder={defaultFolder}
             {...defaultFolder}
-            memberId={userInfo.memberId}
-            myId={myInfo.memberId}
           />
           {folderList &&
             folderList.map((folder, idx) => (
               <div key={idx}>
-                <MyFolderD
+                <ArticleFolderD
                   folder={folder}
                   {...folder}
                   key={idx}
                   folderColor={
                     idx % 3 === 0 ? "green" : idx % 3 === 1 ? "purple" : "blue"
                   }
-                  memberId={userInfo.memberId}
-                  myId={myInfo.memberId}
                 />
               </div>
             ))}

@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { Image, Text, Title } from "../../elements";
 
 const NavbarD = props => {
-  const { isLogin, bgColor, profileImageUrl, isRemindEmail, nickName } = props;
+  const { isLogin, bgColor, profileImageUrl, isRemindEmail, memberId } = props;
   console.log(props);
   const navigate = useNavigate();
 
@@ -52,7 +52,7 @@ const NavbarD = props => {
 
   const handleMyPage = () => {
     if (isLogin) {
-      navigate(`/${nickName}`);
+      navigate(`/mypage/${memberId}`);
     } else {
       Swal.fire({
         title: "잠깐!",
