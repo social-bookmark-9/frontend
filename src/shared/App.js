@@ -99,7 +99,7 @@ function App(props) {
               <Route path="/user/nickname" element={<UserNicknameD />} />
               <Route path="/setting" element={<SettingD {...myInfo} />} />
               <Route path="/user/favorites" element={<UserFavoritesD />} />
-              <Route path="/:name" element={<MyPageD {...myInfo} />} />
+              <Route path="/mypage/:id" element={<MyPageD {...myInfo} />} />
               <Route
                 path="/api/users/login"
                 element={<OAuthRedirectHandler />}
@@ -136,7 +136,7 @@ function App(props) {
               <Route path="/setting/reminder" element={<MyReminderT />} />
               <Route path="/search" element={<SearchPage {...myInfo} />} />
               <Route path="/user/favorites" element={<UserFavoritesT />} />
-              <Route path="/:name" element={<MyPageT {...myInfo} />} />
+              <Route path="/mypage/:id" element={<MyPageT {...myInfo} />} />
               <Route path="/myreview" element={<MyReviewT {...myInfo} />} />
               <Route
                 path="/api/users/login"
@@ -170,7 +170,7 @@ function App(props) {
               <Route path="/setting/reminder" element={<MyReminder />} />
               <Route path="/setting" element={<Setting {...myInfo} />} />
               <Route path="/user/favorites" element={<UserFavorites />} />
-              <Route path="/:name" element={<MyPage {...myInfo} />} />
+              <Route path="/mypage/:id" element={<MyPage {...myInfo} />} />
               <Route path="/search" element={<SearchPage {...myInfo} />} />
               <Route
                 path="/api/users/login"
