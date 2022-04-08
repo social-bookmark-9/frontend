@@ -126,10 +126,6 @@ ArticleFolder.defaultProps = {
 
 const Container = styled.div`
   width: 100%;
-  cursor: pointer;
-  &:hover {
-    box-shadow: 0px 4px 35px 12px rgba(149, 151, 185, 0.08);
-  }
 `;
 
 const CurationBox = styled.div`
@@ -143,6 +139,11 @@ const CurationBox = styled.div`
   ${props => props.folderColor === "green" && "background-color: #F2FDFA"};
   ${props => props.folderColor === "purple" && "background-color: #F7F7FD"};
   ${props => props.folderColor === "default" && "background-color: #fafbfb"};
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0px 4px 35px 12px rgba(149, 151, 185, 0.08);
+    border-radius: 20px;
+  }
 `;
 
 const LabelBox = styled.div`
