@@ -121,12 +121,12 @@ const RecommendContainer = styled.div`
 `;
 
 const SliderBox = styled.div`
-  margin-left: -320px;
+  margin-left: -170px;
   @media screen and (min-width: 769px) and (max-width: 899px) {
-    margin-left: -370px;
+    margin-left: -220px;
   }
   @media screen and (min-width: 900px) and (max-width: 1194px) {
-    margin-left: -630px;
+    margin-left: -430px;
   }
 `;
 
