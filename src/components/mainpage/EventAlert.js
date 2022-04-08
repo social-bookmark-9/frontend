@@ -14,7 +14,7 @@ const EventAlert = props => {
     <React.Fragment>
       <Container id="alertBox">
         <AlertBox>
-          <div />
+          <EmptyBox />
           <TextBox
             href="https://docs.google.com/forms/d/1a8-aYpDY8tdUg9Gyva-w9xfTDB2qHvfV4S1lprffIyA/edit"
             target="_blank"
@@ -50,8 +50,13 @@ const AlertBox = styled.div`
   ${FlexboxSpace};
   align-items: center;
 `;
+const EmptyBox = styled.div`
+  padding: 0px 32px;
+`;
 
-const TextBox = styled.a``;
+const TextBox = styled.a`
+  padding: 0px 32px;
+`;
 
 const CloseBox = styled.div`
   padding: 0px 32px;

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { lazy, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -17,7 +17,7 @@ import SelectFolder from "../../components/folderpage/SelectFolder";
 import FolderNavbar from "../../components/folderpage/FolderNavbar";
 
 import Swal from "sweetalert2";
-import NoContent from "../../components/common/NoContent";
+const NoContent = lazy(() => import("../../components/common/NoContent"));
 
 const ArticleList = props => {
   const { isLogin } = props;
