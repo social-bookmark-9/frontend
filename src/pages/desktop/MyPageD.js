@@ -39,6 +39,8 @@ const MyPageD = props => {
   const userInfo = useSelector(state => state.profile.memberInfo);
   const myInfo = useSelector(state => state.user.myInfo);
 
+  const isMe = myInfo.memberId === memberId;
+
   // 모달 열고 닫기
   const [modalOpen, setModalOpen] = useState(false);
   // 모달 열고 닫기 펑션
@@ -52,7 +54,6 @@ const MyPageD = props => {
       <Container>
         {/* ----- 프로필+이름 부분 ----- */}
         <UserProfileD userInfo={userInfo} {...myInfo} />
-
         {/* ----- 리마인드, 디폴트 폴더 ----- */}
         <MyPageRemindD
           defaultFolder={defaultFolder}
@@ -63,11 +64,14 @@ const MyPageD = props => {
         />
         {/* 폴더리스트 시작 */}
         <FolderListContainer>
-          <ArticleFolderD
-            folderColor="default"
-            folder={defaultFolder}
-            {...defaultFolder}
-          />
+          {isMe ? (
+            <ArticleFolderD
+              folderColor="default"
+              folder={defaultFolder}
+              {...defaultFolder}
+            />
+          ) : null}
+
           {folderList &&
             folderList.map((folder, idx) => (
               <div key={idx}>

@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { Title, Image, Text } from "../../elements";
 
 const MyPageRemindT = props => {
-  const { userInfo, remindData, memberId, openModal } = props;
+  const { remindData, memberId, openModal } = props;
   const params = useParams();
   const [myOwnPage, setMyOwnPage] = useState(false);
 
