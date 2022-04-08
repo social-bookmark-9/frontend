@@ -5,7 +5,7 @@ import { Label, Title, Image, Text } from "../../elements";
 import { Flexbox } from "../../styles/flexbox";
 
 import RemindCard from "./RemindCard";
-import MyFolder from "../folderpage/MyFolder";
+import ArticleFolder from "../folderpage/ArticleFolder";
 
 const MyPageRemind = props => {
   const {
@@ -54,7 +54,7 @@ const MyPageRemind = props => {
             </LabelBox>
           </Qheader>
           <FolderContainer>
-            <MyFolder
+            <ArticleFolder
               folderColor="default"
               folder={defaultFolder}
               {...defaultFolder}

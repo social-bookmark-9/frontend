@@ -11,7 +11,7 @@ import styled from "styled-components";
 import { Title } from "../../elements";
 
 import Navbar from "../../components/common/Navbar";
-import MyFolder from "../../components/folderpage/MyFolder";
+import ArticleFolder from "../../components/folderpage/ArticleFolder";
 import UserProfile from "../../components/mypage/UserProfile";
 import MyPageRemindT from "../../components/mypage/MyPageRemindT";
 import ModalD from "../../components/modal/ModalD";
@@ -66,7 +66,7 @@ const MyPageT = props => {
 
         <FolderListContainer>
           <FolderContainer>
-            <MyFolder
+            <ArticleFolder
               folderColor="default"
               folder={defaultFolder}
               {...defaultFolder}
@@ -78,7 +78,7 @@ const MyPageT = props => {
           {folderList &&
             folderList.slice(0, 1).map((folder, idx) => (
               <FolderContainer key={idx}>
-                <MyFolder
+                <ArticleFolder
                   folder={folder}
                   {...folder}
                   key={idx}
@@ -106,7 +106,7 @@ const MyPageT = props => {
           {folderList &&
             folderList.slice(1, 3).map((folder, idx) => (
               <FolderContainer key={idx}>
-                <MyFolder
+                <ArticleFolder
                   folder={folder}
                   {...folder}
                   key={idx}
