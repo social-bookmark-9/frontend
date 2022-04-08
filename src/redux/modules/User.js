@@ -77,11 +77,10 @@ export const kakaoLogoutAxios = createAsyncThunk(
   async (navigate, { dispatch }) => {
     const user = await UserApi.kakaoLogout(navigate);
     dispatch(deleteUserFromSession());
+    navigate("/", { replace: true });
     Swal.fire({
       text: "로그아웃 되었습니다",
       confirmButtonText: "확인",
-    }).then(() => {
-      navigate("/", { replace: true });
     });
     return user;
   },
@@ -111,6 +110,7 @@ export const userSlice = createSlice({
     deleteUserFromSession: (state, action) => {
       sessionStorage.removeItem("accessToken");
       sessionStorage.removeItem("refreshToken");
+      state.myInfo = initialState.myInfo;
     },
     setUser: (state, action) => {
       const myInfo = action.payload.myInfo;

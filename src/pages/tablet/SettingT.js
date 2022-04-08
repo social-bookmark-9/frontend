@@ -10,6 +10,7 @@ import { Button, Image, Title } from "../../elements";
 
 import Navbar from "../../components/common/Navbar";
 import EditFavoritesT from "../../components/setting/EditFavoritesT";
+import Swal from "sweetalert2";
 
 const SettingT = props => {
   const navigate = useNavigate();
@@ -22,7 +23,17 @@ const SettingT = props => {
   };
 
   const handleLogout = () => {
-    dispatch(kakaoLogoutAxios(navigate));
+    Swal.fire({
+      text: "로그아웃 하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "확인",
+      cancelButtonText: "취소",
+    }).then(result => {
+      if (result.isConfirmed) {
+        navigate(KAKAO_AUTH_LOGOUT_URL);
+        dispatch(kakaoLogoutAxios(navigate));
+      }
+    });
   };
 
   return (
@@ -71,16 +82,15 @@ const SettingT = props => {
                 문의하기
               </Li>
             </Ul>
-            <ButtonBox onClick={handleLogout}>
-              <a href={KAKAO_AUTH_LOGOUT_URL}>
-                <Button
-                  bgColor={({ theme }) => theme.colors.gray03}
-                  _color={({ theme }) => theme.colors.fontColor04}
-                  _padding="15px"
-                >
-                  로그아웃
-                </Button>
-              </a>
+            <ButtonBox>
+              <Button
+                bgColor={({ theme }) => theme.colors.gray03}
+                _color={({ theme }) => theme.colors.fontColor04}
+                _padding="15px"
+                _onClick={handleLogout}
+              >
+                로그아웃
+              </Button>
             </ButtonBox>
           </UlBottom>
         </Container>

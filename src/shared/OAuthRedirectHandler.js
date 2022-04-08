@@ -12,7 +12,9 @@ const OAuthRedirectHandler = props => {
   // sessionStorage.setItem("kakaoToken", code);
 
   useEffect(() => {
-    dispatch(kakaoLoginAxios({ code, navigate }));
+    if (code) {
+      dispatch(kakaoLoginAxios({ code, navigate }));
+    }
   });
 
   return <Spinner />;
