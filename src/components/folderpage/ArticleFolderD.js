@@ -197,10 +197,6 @@ const ArticleFolderD = props => {
 const Container = styled.div`
   width: 100%;
   height: 450px;
-  cursor: pointer;
-  &:hover {
-    box-shadow: 0px 4px 35px 12px rgba(149, 151, 185, 0.08);
-  }
 `;
 
 const CurationBox = styled.div`
@@ -215,6 +211,10 @@ const CurationBox = styled.div`
   ${props => props.folderColor === "purple" && "background-color: #F7F7FD"};
   ${props => props.folderColor === "blue" && "background-color: #F0F7FB"};
   ${props => props.folderColor === "default" && "background-color: #F2F3F4"};
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0px 4px 35px 12px rgba(149, 151, 185, 0.08);
+  }
 `;
 
 const LabelBox = styled.div`
