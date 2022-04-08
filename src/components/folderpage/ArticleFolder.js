@@ -126,6 +126,10 @@ ArticleFolder.defaultProps = {
 
 const Container = styled.div`
   width: 100%;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0px 4px 35px 12px rgba(149, 151, 185, 0.08);
+  }
 `;
 
 const CurationBox = styled.div`
