@@ -28,6 +28,7 @@ const MyPage = props => {
   // ----- 유저 정보 ----- //
   const userInfo = useSelector(state => state.profile.memberInfo);
   const myInfo = useSelector(state => state.user.myInfo);
+
   useEffect(() => {
     if (isLogin) {
       dispatch(getProfileWithAxios(memberId));
