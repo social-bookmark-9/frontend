@@ -114,16 +114,14 @@ const DetailNavbar = props => {
       <NavbarContainer>
         <NavBox>
           <Title>{title}</Title>
-          {isMe ? (
-            <NavMenu onClick={openFolderModal}>
-              <Image
-                _src="/images/editMenu.png"
-                _width="24px"
-                _height="24px"
-                _marginR="0px"
-              />
-            </NavMenu>
-          ) : null}
+          <NavMenu onClick={openFolderModal}>
+            <Image
+              _src="/images/editMenu.png"
+              _width="24px"
+              _height="24px"
+              _marginR="0px"
+            />
+          </NavMenu>
         </NavBox>
         {folderModalOpen ? (
           <Section>
