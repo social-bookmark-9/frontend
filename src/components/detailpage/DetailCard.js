@@ -29,7 +29,7 @@ const DetailCard = props => {
         </CircleBox>
         <ImageBox>
           <Image
-            _src={`/images/link.png`}
+            _src={`/images/link.webp`}
             _width="25px"
             _height="24px"
             _marginR="none"

@@ -130,7 +130,7 @@ const ArticleListT = props => {
                   isBorder
                 >
                   <Image
-                    _src="/images/icon7.png"
+                    _src="/images/icon7.webp"
                     _width="19px"
                     _height="19px"
                   />
@@ -145,7 +145,7 @@ const ArticleListT = props => {
                   _onClick={addLike}
                 >
                   <Image
-                    _src="/images/icon7.png"
+                    _src="/images/icon7.webp"
                     _width="19px"
                     _height="19px"
                   />

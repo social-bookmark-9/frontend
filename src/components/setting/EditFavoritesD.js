@@ -64,11 +64,13 @@ const EditFavoritesD = props => {
   return (
     <React.Fragment>
       <BaseDiv>
-        <div style={{backgroundColor:"#c4c4c4", height:"100vh", width:"45vw"}} />
+        <div
+          style={{ backgroundColor: "#c4c4c4", height: "100vh", width: "45vw" }}
+        />
         <UserBox>
           <CloseButtonBox onClick={handleExit}>
             <Image
-              _src="/images/close.png"
+              _src="/images/close.webp"
               _width="30px"
               _height="30px"
               _marginR="0px"

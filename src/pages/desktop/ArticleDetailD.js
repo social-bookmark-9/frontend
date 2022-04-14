@@ -138,7 +138,7 @@ const ArticleDetailD = props => {
                     <Image
                       _src={`/images/${
                         reviewHide && reviewHide ? "hide" : "show"
-                      }.png`}
+                      }.webp`}
                       _width="20px"
                       _height="20px"
                     />

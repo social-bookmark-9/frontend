@@ -107,7 +107,10 @@ const EditProfileLink = props => {
       }
     });
   };
-  const deleteUrl = e => {};
+  const deleteUrl = e => {
+    console.log(e.target.id);
+    console.log(addUrl.filter((url, idx) => console.log(idx !== e.target.id)));
+  };
 
   return (
     <InnerDiv>
@@ -148,7 +151,7 @@ const EditProfileLink = props => {
                     >
                       <ProfileChannel htmlFor={idx}>
                         <Image
-                          _src={`/images/icon10${idx}.png`}
+                          _src={`/images/icon10${idx}.webp`}
                           _width="12px"
                           _height="12px"
                           _marginR="0px"
@@ -189,7 +192,6 @@ const EditProfileLink = props => {
               </Button>
             </div>
           </ProfileLink>
-
           {/* 추가된 링크 부분 */}
           <ProfileLink>
             <div style={{ height: "270" }}>
@@ -201,6 +203,7 @@ const EditProfileLink = props => {
                   addUrl.map((url, idx) => {
                     return (
                       <div
+                        id={idx}
                         key={idx}
                         style={{
                           display: "grid",
@@ -213,7 +216,7 @@ const EditProfileLink = props => {
                         <div style={{ display: "flex" }}>
                           <ProfileChannel htmlFor={url.img}>
                             <img
-                              src={`/images/icon10${url.img}.png`}
+                              src={`/images/icon10${url.img}.webp`}
                               width={"12px"}
                               alt={`icon10${url.img}`}
                             />

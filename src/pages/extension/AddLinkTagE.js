@@ -77,7 +77,7 @@ const AddLinkTagE = props => {
         <FavoritesBox>
           <NotiBox>
             <Image
-              _src="/images/DesktopMain1.png"
+              _src="/images/DesktopMain1.webp"
               _width="16px"
               _height="16px"
             />

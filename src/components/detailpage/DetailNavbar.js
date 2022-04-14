@@ -116,7 +116,7 @@ const DetailNavbar = props => {
           <Title>{title}</Title>
           <NavMenu onClick={openFolderModal}>
             <Image
-              _src="/images/editMenu.png"
+              _src="/images/editMenu.webp"
               _width="24px"
               _height="24px"
               _marginR="0px"
@@ -130,7 +130,7 @@ const DetailNavbar = props => {
               <ImageContainer>
                 <ImageBox onClick={handleDelete}>
                   <Image
-                    _src="/images/delete.png"
+                    _src="/images/delete.webp"
                     _width="24px"
                     _height="24px"
                     _marginR="0px"
@@ -138,7 +138,7 @@ const DetailNavbar = props => {
                 </ImageBox>
                 <ImageBox onClick={openFolderModal}>
                   <Image
-                    _src="/images/close.png"
+                    _src="/images/close.webp"
                     _width="24px"
                     _height="24px"
                     _marginR="0px"

@@ -81,7 +81,7 @@ const ArticleFolderD = props => {
               isDefault ? (
                 <Label bgColor="white" _padding="7px" borderColor="white">
                   <Image
-                    _src={`/images/${props.hide ? "hide" : "show"}.png`}
+                    _src={`/images/${props.hide ? "hide" : "show"}.webp`}
                     _marginR="0px"
                     _width="20px"
                     _height="20px"
@@ -99,10 +99,10 @@ const ArticleFolderD = props => {
                 <Image
                   _src={
                     folderColor === "blue"
-                      ? "/images/thumbsUpBlue.png"
+                      ? "/images/thumbsUpBlue.webp"
                       : folderColor === "purple"
-                      ? "/images/thumbsUpPurple.png"
-                      : "/images/thumbsUpGreen.png"
+                      ? "/images/thumbsUpPurple.webp"
+                      : "/images/thumbsUpGreen.webp"
                   }
                   _width="11px"
                   _height="11px"

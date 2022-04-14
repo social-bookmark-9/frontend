@@ -50,12 +50,12 @@ const Setting = props => {
                   navigate("/setting/remindEmail");
                 }}
               >
-                <Image _src="/images/email.png" _width="22px" _height="22px" />
+                <Image _src="/images/email.webp" _width="22px" _height="22px" />
                 리마인드 메일 변경
               </Li>
               <Li onClick={toggleEdit}>
                 <Image
-                  _src="/images/favorite.png"
+                  _src="/images/favorite.webp"
                   _width="22px"
                   _height="22px"
                 />
@@ -65,12 +65,16 @@ const Setting = props => {
             <UlBackground>
               <Ul>
                 <Li>
-                  <Image _src="/images/team.png" _width="22px" _height="22px" />
+                  <Image
+                    _src="/images/team.webp"
+                    _width="22px"
+                    _height="22px"
+                  />
                   버블드 팀 소개
                 </Li>
                 <Li>
                   <Image
-                    _src="/images/notice.png"
+                    _src="/images/notice.webp"
                     _width="22px"
                     _height="22px"
                   />
@@ -78,7 +82,7 @@ const Setting = props => {
                 </Li>
                 <Li>
                   <Image
-                    _src="/images/request.png"
+                    _src="/images/request.webp"
                     _width="22px"
                     _height="22px"
                   />

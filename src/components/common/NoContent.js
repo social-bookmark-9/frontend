@@ -7,7 +7,7 @@ const NoContent = props => {
   const { isMe } = props;
   return (
     <Container>
-      <Image _src="/images/bubbledLight.png" _width="56px" _height="45px" />
+      <Image _src="/images/bubbledLight.webp" _width="56px" _height="45px" />
       {isMe ? (
         <>
           <Title textAlign="center" _padding="25px" _lineHeight="28px">

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 const Circle = props => {
   const { _width, _height, bgColor } = props;
+
   const styles = {
     _width,
     _height,
@@ -22,7 +23,7 @@ const Logo = props => {
   return (
     <React.Fragment>
       <Link to="/">
-        <Image _src="/images/bubbled.png" _width="26px" _height="21px" />
+        <Image _src="/images/bubbled.webp" _width="26px" _height="21px" />
       </Link>
     </React.Fragment>
   );
@@ -30,11 +31,11 @@ const Logo = props => {
 
 const DesignObj = props => {
   const objList = [
-    "/images/obj01.png",
-    "/images/obj02.png",
-    "/images/obj03.png",
-    "/images/obj04.png",
-    "/images/obj05.png",
+    "/images/obj01.webp",
+    "/images/obj02.webp",
+    "/images/obj03.webp",
+    "/images/obj04.webp",
+    "/images/obj05.webp",
   ];
   return (
     <React.Fragment>

@@ -152,7 +152,7 @@ const ModalD = props => {
                 style={{ display: "flex", width: "20%", justifyContent: "end" }}
                 onClick={openModal}
               >
-                <Image _src="/images/close.png" _width="24px" _height="24px" />
+                <Image _src="/images/close.webp" _width="24px" _height="24px" />
               </div>
             </div>
             <Main>

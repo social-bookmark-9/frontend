@@ -83,7 +83,7 @@ const EditProfileD = props => {
 
             {/* 프로필사진 옆 검은 동그라미 */}
             <CircleBox>
-              <CameraImage src="/images/camera.png" alt="editImage" />
+              <CameraImage src="/images/camera.webp" alt="editImage" />
             </CircleBox>
 
             {/* 프로필 이미지 */}
@@ -98,7 +98,7 @@ const EditProfileD = props => {
             <Title _padding="23px 15px 30px 23px">@{newNickname}</Title>
           </NicknameBox>
           <ImageBox onClick={toggleEdit}>
-            <Image _src="/images/edit.png" _width="20px" _height="20px" />
+            <Image _src="/images/edit.webp" _width="20px" _height="20px" />
           </ImageBox>
         </EditNicknameBox>
 

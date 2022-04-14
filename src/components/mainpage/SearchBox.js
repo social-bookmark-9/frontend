@@ -49,7 +49,7 @@ const SearchBox = props => {
             />
             <ImageBox onClick={handleSearchPage}>
               <Image
-                _src="/images/search.png"
+                _src="/images/search.webp"
                 _width="24px"
                 _height="24px"
                 _marginR="0px"
