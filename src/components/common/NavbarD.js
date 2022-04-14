@@ -90,7 +90,7 @@ const NavbarD = props => {
               <Image
                 _src={`/images/${
                   isRemindEmail ? "bubbledWhite" : "bubbled"
-                }.png`}
+                }.webp`}
                 _width="26px"
                 _height="21px"
               />
@@ -112,7 +112,7 @@ const NavbarD = props => {
               <Line />
               <ImageBox onClick={handleMemoPage}>
                 <Image
-                  _src={`/images/${isRemindEmail ? "memoWhite" : "memo"}.png`}
+                  _src={`/images/${isRemindEmail ? "memoWhite" : "memo"}.webp`}
                   _width="24px"
                   _height="24px"
                 />
@@ -121,14 +121,14 @@ const NavbarD = props => {
                 <Image
                   _src={`/images/${
                     isRemindEmail ? "settingWhite" : "setting"
-                  }.png`}
+                  }.webp`}
                   _width="24px"
                   _height="24px"
                 />
               </ImageBox>
               <ImageBox onClick={handleMyPage}>
                 <Image
-                  _src={isLogin ? profileImageUrl : "/images/user.png"}
+                  _src={isLogin ? profileImageUrl : "/images/user.webp"}
                   _width="30px"
                   _height="30px"
                 />

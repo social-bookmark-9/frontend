@@ -98,7 +98,7 @@ const SearchPageD = props => {
           <ImageBox>
             <ImageAlign>
               <Image
-                _src="/images/search.png"
+                _src="/images/search.webp"
                 _width="24px"
                 _height="24px"
                 _marginR="0px"
@@ -194,7 +194,7 @@ const SearchPageD = props => {
               }}
             >
               <Image
-                _src="/images/bubbledLight.png"
+                _src="/images/bubbledLight.webp"
                 _width="56px"
                 _height="45px"
               />

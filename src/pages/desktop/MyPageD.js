@@ -39,7 +39,7 @@ const MyPageD = props => {
   const userInfo = useSelector(state => state.profile.memberInfo);
   const myInfo = useSelector(state => state.user.myInfo);
 
-  const isMe = myInfo.memberId === memberId;
+  const isMe = myInfo.memberId === memberId ? true : false;
 
   // 모달 열고 닫기
   const [modalOpen, setModalOpen] = useState(false);
@@ -71,7 +71,6 @@ const MyPageD = props => {
               {...defaultFolder}
             />
           ) : null}
-
           {folderList &&
             folderList.map((folder, idx) => (
               <div key={idx}>

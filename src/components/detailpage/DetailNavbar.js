@@ -114,16 +114,14 @@ const DetailNavbar = props => {
       <NavbarContainer>
         <NavBox>
           <Title>{title}</Title>
-          {isMe ? (
-            <NavMenu onClick={openFolderModal}>
-              <Image
-                _src="/images/editMenu.png"
-                _width="24px"
-                _height="24px"
-                _marginR="0px"
-              />
-            </NavMenu>
-          ) : null}
+          <NavMenu onClick={openFolderModal}>
+            <Image
+              _src="/images/editMenu.webp"
+              _width="24px"
+              _height="24px"
+              _marginR="0px"
+            />
+          </NavMenu>
         </NavBox>
         {folderModalOpen ? (
           <Section>
@@ -132,7 +130,7 @@ const DetailNavbar = props => {
               <ImageContainer>
                 <ImageBox onClick={handleDelete}>
                   <Image
-                    _src="/images/delete.png"
+                    _src="/images/delete.webp"
                     _width="24px"
                     _height="24px"
                     _marginR="0px"
@@ -140,7 +138,7 @@ const DetailNavbar = props => {
                 </ImageBox>
                 <ImageBox onClick={openFolderModal}>
                   <Image
-                    _src="/images/close.png"
+                    _src="/images/close.webp"
                     _width="24px"
                     _height="24px"
                     _marginR="0px"

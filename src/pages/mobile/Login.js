@@ -14,7 +14,7 @@ const Login = () => {
       <LoginBox>
         <Topdiv>
           <Image
-            _src="/images/bubbled.png"
+            _src="/images/bubbled.webp"
             _width="65px"
             _height="52px"
             _marginR="0px"
@@ -46,7 +46,12 @@ const Login = () => {
               _fontSize={({ theme }) => theme.fontSizes.font12}
               borderRadius="3px"
             >
-              <img src="/images/kakao.png" width={20} height={17} alt="kakao" />
+              <img
+                src="/images/kakao.webp"
+                width={20}
+                height={17}
+                alt="kakao"
+              />
               카카오로 로그인
             </Button>
           </a>

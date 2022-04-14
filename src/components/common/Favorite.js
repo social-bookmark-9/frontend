@@ -29,7 +29,7 @@ const Favorite = props => {
           />
           <FavoriteLabel htmlFor={idx}>
             <img
-              src={`/images/icon${idx}.png`}
+              src={`/images/icon${idx}.webp`}
               width={"20px"}
               alt={`icon${idx}`}
             />

@@ -68,7 +68,7 @@ const MyPageRemind = props => {
                 <RemindAlert>
                   <ImageBox>
                     <Image
-                      _src="/images/remind.png"
+                      _src="/images/remind.webp"
                       _width="20px"
                       _height="19px"
                     />
@@ -95,7 +95,7 @@ const MyPageRemind = props => {
             <AlertBox onClick={openModal}>
               <RemindAlert>
                 <ImageBox>
-                  <Image _src="/images/add.png" _width="20px" _height="20px" />
+                  <Image _src="/images/add.webp" _width="20px" _height="20px" />
                 </ImageBox>
                 <TextBox>
                   <Title

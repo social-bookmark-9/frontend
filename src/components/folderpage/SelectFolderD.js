@@ -48,7 +48,7 @@ const SelectFolderD = props => {
         <MainModal>
           <CloseBox onClick={openModal}>
             <Image
-              _src="/images/close.png"
+              _src="/images/close.webp"
               _width="24px"
               _height="24px"
               _marginR="0px"

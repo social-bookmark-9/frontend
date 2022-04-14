@@ -27,7 +27,7 @@ const RecommendUserD = props => {
           }}
         >
           <div style={{ marginTop: "-46px" }}>
-            <img src="/images/DesktopMain3.png" width={"44px"} alt="" />
+            <img src="/images/DesktopMain3.webp" width={"44px"} alt="" />
           </div>
           <Title _fontSize="34px" _lineHeight="41px" _padding="0 0 20px 0">
             <div>추천 유저</div>

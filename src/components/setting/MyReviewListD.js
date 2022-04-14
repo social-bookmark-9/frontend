@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Title } from "../../elements";
 
-const MyReviewListD = (props) => {
-  const {reviewList} = props;
+const MyReviewListD = props => {
+  const { reviewList } = props;
 
   return (
     <React.Fragment>
@@ -15,58 +15,66 @@ const MyReviewListD = (props) => {
         내가 작성한 리뷰
       </Title>
       <Container>
-      {reviewList && reviewList.map((memo, idx) => (
-        <div key={idx}>
-          {idx !== 0 && idx % 3 === 0 ? (<Hr />) : null}
-          <ReviewContainer>
-            <TopDiv>
-              <div  
-                style={{
-                  display: "flex",
-                  width: "70%",
-                  justifyContent: "start",
-                }}
-              >
-              <Title
-                _fontSize={({ theme }) => theme.fontSizes.font18}
-                _lineHeight="24px"
-              >
-                {memo.titleOg}
-              </Title>
-              </div>
-              <div
-                style={{ display: "flex", width: "30%", justifyContent: "end" }}
-              >
-                {memo.reviewHide ? (
-                  <img
-                    src="./images/hide.png"
-                    alt=""
-                    style={{ float: "right", width: "25px" }}
-                  />
-                ) : (
-                  <img
-                    src="./images/show.png"
-                    alt=""
-                    style={{ float: "right", width: "25px" }}
-                  />
-                )}
-              </div>
-            </TopDiv>
-            
-            <Content>
-              <div
-                style={{ width: "100%", textAlign: "center", fontSize: "13px" }}
-              >
-                {memo.review}
-              </div>
-            </Content>
-          </ReviewContainer>
-        </div>
-      ))}
+        {reviewList &&
+          reviewList.map((memo, idx) => (
+            <div key={idx}>
+              {idx !== 0 && idx % 3 === 0 ? <Hr /> : null}
+              <ReviewContainer>
+                <TopDiv>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "70%",
+                      justifyContent: "start",
+                    }}
+                  >
+                    <Title
+                      _fontSize={({ theme }) => theme.fontSizes.font18}
+                      _lineHeight="24px"
+                    >
+                      {memo.titleOg}
+                    </Title>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "30%",
+                      justifyContent: "end",
+                    }}
+                  >
+                    {memo.reviewHide ? (
+                      <img
+                        src="./images/hide.webp"
+                        alt=""
+                        style={{ float: "right", width: "25px" }}
+                      />
+                    ) : (
+                      <img
+                        src="./images/show.webp"
+                        alt=""
+                        style={{ float: "right", width: "25px" }}
+                      />
+                    )}
+                  </div>
+                </TopDiv>
+
+                <Content>
+                  <div
+                    style={{
+                      width: "100%",
+                      textAlign: "center",
+                      fontSize: "13px",
+                    }}
+                  >
+                    {memo.review}
+                  </div>
+                </Content>
+              </ReviewContainer>
+            </div>
+          ))}
       </Container>
     </React.Fragment>
   );
-
 };
 
 const Container = styled.div`
