@@ -7,7 +7,7 @@ const Spinner = props => {
     <React.Fragment>
       <Section>
         <Image
-          _src="/images/bubbled.png"
+          _src="/images/bubbled.webp"
           _width="65px"
           _height="52px"
           _marginR="0px"

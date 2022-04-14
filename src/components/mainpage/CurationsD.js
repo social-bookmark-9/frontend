@@ -14,7 +14,7 @@ const CurationsD = props => {
     <CurationContainer>
       <CurationExplain>
         <div style={{ marginTop: "-46px" }}>
-          <img src="/images/DesktopMain2.png" width={"44px"} alt="icon" />
+          <img src="/images/DesktopMain2.webp" width={"44px"} alt="icon" />
         </div>
         <Title _fontSize="34px" _lineHeight="41px" _padding="0 0 20px 0">
           <div>추천 큐레이션</div>

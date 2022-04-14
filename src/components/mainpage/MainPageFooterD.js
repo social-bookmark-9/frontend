@@ -52,7 +52,7 @@ const MainPageFooterD = props => {
             </LeftFloatDiv>
             <RightFloatDiv>
               <div style={{ padding: "50px 0 0 0" }}>
-                <img src="/images/MainDLogin.png" width="319px" alt="" />
+                <img src="/images/MainDLogin.webp" width="319px" alt="" />
               </div>
             </RightFloatDiv>
           </FooterContainer>
@@ -92,7 +92,7 @@ const MainPageFooterD = props => {
             </LeftFloatDiv>
             <RightFloatDiv>
               <div style={{ padding: "50px 0 0 0" }}>
-                <img src="/images/MainDNoLogin.png" width="319px" alt="" />
+                <img src="/images/MainDNoLogin.webp" width="319px" alt="" />
               </div>
             </RightFloatDiv>
           </FooterContainer>
@@ -108,7 +108,7 @@ const MainPageFooterD = props => {
         <FooterContainer>
           <LeftFloatDiv>
             <div style={{ paddingTop: "102px" }}>
-              <img src="/images/bubbledBanner.png" width="223px" alt="" />
+              <img src="/images/bubbledBanner.webp" width="223px" alt="" />
             </div>
             <Text _fontSize="14px" _lineHeight="18px">
               내가 읽은 것으로 나를 표현하는 공간, 버블드

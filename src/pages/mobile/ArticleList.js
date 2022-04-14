@@ -110,7 +110,7 @@ const ArticleList = props => {
                 _onClick={cancelLike}
                 isBorder
               >
-                <Image _src="/images/icon7.png" _width="19px" _height="19px" />
+                <Image _src="/images/icon7.webp" _width="19px" _height="19px" />
                 유용해요 {likeCnt}
               </Button>
             ) : (
@@ -121,7 +121,7 @@ const ArticleList = props => {
                 isBorder
                 _onClick={addLike}
               >
-                <Image _src="/images/icon7.png" _width="19px" _height="19px" />
+                <Image _src="/images/icon7.webp" _width="19px" _height="19px" />
                 유용해요 {likeCnt}
               </Button>
             )}

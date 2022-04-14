@@ -16,7 +16,7 @@ const LoginD = () => {
           <LoginBox>
             <Topdiv>
               <Image
-                _src="/images/bubbled.png"
+                _src="/images/bubbled.webp"
                 _width="65px"
                 _height="52px"
                 _marginR="0px"
@@ -47,7 +47,7 @@ const LoginD = () => {
                   borderRadius="3px"
                 >
                   <img
-                    src="/images/kakao.png"
+                    src="/images/kakao.webp"
                     width={20}
                     height={17}
                     alt="kakao"

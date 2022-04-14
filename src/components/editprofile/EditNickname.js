@@ -98,7 +98,7 @@ const EditNickname = props => {
             }}
           >
             <img
-              src="/images/close.png"
+              src="/images/close.webp"
               width="24px"
               height="24px"
               alt=""

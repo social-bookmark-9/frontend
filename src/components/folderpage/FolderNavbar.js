@@ -82,7 +82,7 @@ const FolderNavbar = props => {
           {isMe ? (
             <NavMenu onClick={openModal}>
               <Image
-                _src="/images/editMenu.png"
+                _src="/images/editMenu.webp"
                 _width="24px"
                 _height="24px"
                 _marginR="0px"
@@ -97,7 +97,7 @@ const FolderNavbar = props => {
               <ImageContainer>
                 <ImageBox onClick={handleDelete}>
                   <Image
-                    _src="/images/delete.png"
+                    _src="/images/delete.webp"
                     _width="24px"
                     _height="24px"
                     _marginR="0px"
@@ -105,7 +105,7 @@ const FolderNavbar = props => {
                 </ImageBox>
                 <ImageBox onClick={openModal}>
                   <Image
-                    _src="/images/close.png"
+                    _src="/images/close.webp"
                     _width="24px"
                     _height="24px"
                     _marginR="0px"

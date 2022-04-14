@@ -81,7 +81,7 @@ const FolderNavbarD = props => {
           {isMe && folderName !== "미분류 컬렉션" ? (
             <NavMenu onClick={openModal}>
               <Image
-                _src="/images/editMenu.png"
+                _src="/images/editMenu.webp"
                 _width="24px"
                 _height="24px"
                 _marginR="0px"
@@ -95,7 +95,7 @@ const FolderNavbarD = props => {
               <ImageContainer>
                 <ImageBox onClick={handleDelete}>
                   <Image
-                    _src="/images/delete.png"
+                    _src="/images/delete.webp"
                     _width="24px"
                     _height="24px"
                     _marginR="0px"
@@ -103,7 +103,7 @@ const FolderNavbarD = props => {
                 </ImageBox>
                 <ImageBox onClick={openModal}>
                   <Image
-                    _src="/images/close.png"
+                    _src="/images/close.webp"
                     _width="24px"
                     _height="24px"
                     _marginR="0px"

@@ -28,7 +28,7 @@ const MainTopIsLoginD = props => {
           >
             빠르게 링크를 저장하고 분류하세요!
             <span style={{ verticalAlign: "middle" }}>
-              <Image _src="/images/emoji2.png" _width="40px" _height="40px" />
+              <Image _src="/images/emoji2.webp" _width="40px" _height="40px" />
             </span>
           </Title>
           <Text

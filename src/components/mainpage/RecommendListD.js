@@ -45,7 +45,7 @@ const RecommendListD = () => {
       <LeftDiv>
         <Title _fontSize="34px" _lineHeight="41px" _padding="0 0 20px 0">
           <div style={{ marginTop: "-46px" }}>
-            <img src="/images/DesktopMain1.png" width={"44px"} alt="icon" />
+            <img src="/images/DesktopMain1.webp" width={"44px"} alt="icon" />
           </div>
           <div>이번달 버블러들이</div>
           <div>모은 글</div>
@@ -63,7 +63,7 @@ const RecommendListD = () => {
               >
                 <FavoriteLabel htmlFor={idx}>
                   <img
-                    src={`/images/icon${idx}.png`}
+                    src={`/images/icon${idx}.webp`}
                     width={"20px"}
                     alt={`icon${idx}`}
                   />

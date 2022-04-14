@@ -11,6 +11,7 @@ const initialState = {
   articleList: [],
   likeStatus: false,
   likeCount: 0,
+  readCount: 0,
 };
 
 export const getFolderAxios = createAsyncThunk(
@@ -94,6 +95,7 @@ export const folderSlice = createSlice({
     setFolder: (state, action) => {
       state.folderInfo = action.payload;
       state.likeCount = action.payload.likeCount;
+      state.readCount = action.payload.readCount;
     },
     setFolderList: (state, action) => {
       state.myFolderList = action.payload;

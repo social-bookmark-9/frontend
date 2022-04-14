@@ -117,7 +117,7 @@ const DetailNavbarD = props => {
           {isMe ? (
             <NavMenu onClick={openFolderModal}>
               <Image
-                _src="/images/editMenu.png"
+                _src="/images/editMenu.webp"
                 _width="24px"
                 _height="24px"
                 _marginR="0px"
@@ -132,7 +132,7 @@ const DetailNavbarD = props => {
               <ImageContainer>
                 <ImageBox onClick={handleDelete}>
                   <Image
-                    _src="/images/delete.png"
+                    _src="/images/delete.webp"
                     _width="24px"
                     _height="24px"
                     _marginR="0px"
@@ -140,7 +140,7 @@ const DetailNavbarD = props => {
                 </ImageBox>
                 <ImageBox onClick={openFolderModal}>
                   <Image
-                    _src="/images/close.png"
+                    _src="/images/close.webp"
                     _width="24px"
                     _height="24px"
                     _marginR="0px"
@@ -177,7 +177,11 @@ const DetailNavbarD = props => {
                       </Dropdown>
                     </EditBox>
                     <EditBox>
-                      <Text _fontSize="14px" _lineHeight="20px" _padding="0 0 8px 0">
+                      <Text
+                        _fontSize="14px"
+                        _lineHeight="20px"
+                        _padding="0 0 8px 0"
+                      >
                         링크 타이틀 변경
                       </Text>
                       <Input

@@ -27,7 +27,7 @@ const MyPageRemindT = props => {
                   <div style={{ margin: "0 auto 0 auto", display: "flex" }}>
                     <ImageBox>
                       <Image
-                        _src="/images/remind.png"
+                        _src="/images/remind.webp"
                         _width="20px"
                         _height="19px"
                       />
@@ -56,7 +56,7 @@ const MyPageRemindT = props => {
                   <div style={{ margin: "0 auto 0 auto", display: "flex" }}>
                     <ImageBox>
                       <Image
-                        _src="/images/add.png"
+                        _src="/images/add.webp"
                         _width="20px"
                         _height="20px"
                       />

@@ -95,12 +95,12 @@ const Navbar = props => {
           {title ? <Title>{title}</Title> : <Logo />}
           {props.inDetail ? (
             <EditBox>
-              <Image _src="/images/edit.png" _width="30px" _height="30px" />
+              <Image _src="/images/edit.webp" _width="30px" _height="30px" />
             </EditBox>
           ) : null}
           <NavMenu onClick={menuOpen}>
             <Image
-              _src="/images/menu.png"
+              _src="/images/menu.webp"
               _width="24px"
               _height="24px"
               _marginR="0px"
@@ -111,7 +111,7 @@ const Navbar = props => {
               <div>
                 <NavMenu onClick={menuOpen}>
                   <Image
-                    _src="/images/close.png"
+                    _src="/images/close.webp"
                     _width="24px"
                     _height="24px"
                   />

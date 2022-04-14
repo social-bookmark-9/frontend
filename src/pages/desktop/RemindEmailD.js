@@ -36,7 +36,7 @@ const RemindEmailD = props => {
               </TitleBox>
               <ImageBox>
                 <Image
-                  _src="/images/remindImg01.png"
+                  _src="/images/remindImg01.webp"
                   _width="395px"
                   _height="290px"
                 />
@@ -56,7 +56,7 @@ const RemindEmailD = props => {
               </TitleBox>
               <ReImageBox>
                 <Image
-                  _src="/images/remindImg02.png"
+                  _src="/images/remindImg02.webp"
                   _width="596px"
                   _height="379px"
                 />
@@ -65,7 +65,7 @@ const RemindEmailD = props => {
             <KeyframeTipBox>
               <TipTitle>
                 <Image
-                  _src="/images/DesktopMain1.png"
+                  _src="/images/DesktopMain1.webp"
                   _width="16px"
                   _height="16px"
                 />

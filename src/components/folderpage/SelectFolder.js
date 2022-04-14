@@ -46,7 +46,7 @@ const SelectFolder = props => {
       <Section>
         <MainModal>
           <CloseBox onClick={openModal}>
-            <Image _src="/images/close.png" _width="24px" _height="24px" />
+            <Image _src="/images/close.webp" _width="24px" _height="24px" />
           </CloseBox>
           <Main>
             <LinkBox>
