@@ -16,7 +16,7 @@ import ChangeTag from "./ChangeTag";
 import Swal from "sweetalert2";
 
 const DetailNavbar = props => {
-  const { title, article, articleId, isMe } = props;
+  const { title, article, articleId } = props;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
