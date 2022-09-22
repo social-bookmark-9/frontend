@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getSearchArticleResultAxios,
-} from "../../redux/modules/Search";
+import { getSearchArticleResultAxios } from "../../redux/modules/Search";
 
 import styled, { css } from "styled-components";
 import { Image, Title } from "../../elements";
@@ -20,6 +18,15 @@ const SearchPage = props => {
   const paging = useSelector(state => state.search.paging);
   const page = paging.page;
   const articleList = useSelector(state => state.search.articleList);
+  const hashtag = categoryType !== "카테고리" ? categoryType : "";
+  const titleOg = keyword;
+
+  let sort = "";
+  if (sortByType === "최신순") {
+    sort = "createdAt";
+  } else if (sortByType === "좋아요순") {
+    sort = "likeCount";
+  }
 
   // 메인에서 넘어온 검색값
   useEffect(() => {
@@ -75,10 +82,6 @@ const SearchPage = props => {
   };
   const sortByList = ["최신순", "좋아요순"];
 
-  const handleSearch = () => {
-    dispatch(getSearchArticleResultAxios({ hashtag, titleOg, page, sort }));
-  };
-  
   // 키워드 입력
   const [keyword, setKeyword] = useState(location.state ? location.state : "");
   const handleTitleOg = e => {
@@ -87,15 +90,9 @@ const SearchPage = props => {
 
   const isLoaded = false;
 
-  const hashtag = categoryType !== "카테고리" ? categoryType : "";
-  const titleOg = keyword;
-  let sort = '';
-  if (sortByType === "최신순") {
-    sort = "createdAt";
-  } else if (sortByType === "좋아요순") {
-    sort = "likeCount";
-  }
-
+  const handleSearch = () => {
+    dispatch(getSearchArticleResultAxios({ hashtag, titleOg, page, sort }));
+  };
 
   return (
     <React.Fragment>
