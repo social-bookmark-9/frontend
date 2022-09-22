@@ -18,6 +18,31 @@ const SearchPage = props => {
   const paging = useSelector(state => state.search.paging);
   const page = paging.page;
   const articleList = useSelector(state => state.search.articleList);
+  // 카테고리 선택
+  const [categoryOpen, setCategoryOpen] = useState(false);
+  const toggleCategoryDropdown = () => {
+    setCategoryOpen(!categoryOpen);
+  };
+  const [categoryType, setCategoryType] = useState("카테고리");
+  const handleCategoryType = e => {
+    setCategoryType(e.target);
+  };
+  const categoryList = [
+    "전체",
+    "커리어",
+    "업무스킬",
+    "IT",
+    "디자인",
+    "마케팅",
+    "투자",
+    "장소",
+    "동기부여",
+    "인간관계",
+    "패션",
+    "예술",
+    "기타",
+  ];
+  
   const hashtag = categoryType !== "카테고리" ? categoryType : "";
   const titleOg = keyword;
 
@@ -46,30 +71,7 @@ const SearchPage = props => {
   };
   const searchList = ["아티클", "컬렉션"];
 
-  // 카테고리 선택
-  const [categoryOpen, setCategoryOpen] = useState(false);
-  const toggleCategoryDropdown = () => {
-    setCategoryOpen(!categoryOpen);
-  };
-  const [categoryType, setCategoryType] = useState("카테고리");
-  const handleCategoryType = e => {
-    setCategoryType(e.target);
-  };
-  const categoryList = [
-    "전체",
-    "커리어",
-    "업무스킬",
-    "IT",
-    "디자인",
-    "마케팅",
-    "투자",
-    "장소",
-    "동기부여",
-    "인간관계",
-    "패션",
-    "예술",
-    "기타",
-  ];
+  
 
   // 최신순/좋아요순 선택
   const [sortByOpen, setSortByOpen] = useState(false);
