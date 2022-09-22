@@ -42,10 +42,11 @@ const SearchPage = props => {
     "예술",
     "기타",
   ];
-  
-  const hashtag = categoryType !== "카테고리" ? categoryType : "";
-  const titleOg = keyword;
 
+  const hashtag = categoryType !== "카테고리" ? categoryType : "";
+  const [keyword, setKeyword] = useState(location.state ? location.state : "");
+  const titleOg = keyword;
+  const [sortByType, setSortByType] = useState("최신순");
   let sort = "";
   if (sortByType === "최신순") {
     sort = "createdAt";
@@ -71,21 +72,17 @@ const SearchPage = props => {
   };
   const searchList = ["아티클", "컬렉션"];
 
-  
-
   // 최신순/좋아요순 선택
   const [sortByOpen, setSortByOpen] = useState(false);
   const toggleSortByDropdown = () => {
     setSortByOpen(!sortByOpen);
   };
-  const [sortByType, setSortByType] = useState("최신순");
   const handleSortByType = e => {
     setSortByType(e.target);
   };
   const sortByList = ["최신순", "좋아요순"];
 
   // 키워드 입력
-  const [keyword, setKeyword] = useState(location.state ? location.state : "");
   const handleTitleOg = e => {
     setKeyword(e.target.value);
   };
